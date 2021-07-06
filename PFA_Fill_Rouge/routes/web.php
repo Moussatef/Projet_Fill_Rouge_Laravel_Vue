@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PagesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/githubp', 'PagesController@githubProfil');
+// Route::get('/githubp', 'PagesController@githubProfil');
+Route::get('/githubp/{id}', [PagesController::class, 'githubProfil']);
 Route::get('/about', 'PagesController@about');
 
 Route::resource('personne', 'PersonneController');

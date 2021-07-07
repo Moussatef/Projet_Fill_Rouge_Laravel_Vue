@@ -16,18 +16,19 @@ class CreatePersonnesTable extends Migration
         Schema::create('personnes', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id('id_personne');
-            $table->string('nom')->nullable();
-            $table->string('prenom')->nullable();
-            $table->string('telephon');
+            $table->string('nom');
+            $table->string('prenom');
+            $table->string('telephon')->nullable()->default(' ');
             $table->date('date_N');
-            $table->string('adresse');
-            $table->string('email')->nullable()->unique();
-            $table->string('github');
-            $table->string('linkedin');
-            $table->string('facebook');
-            $table->string('instagram');
-            $table->string('password')->nullable();
-            $table->string('img');
+            $table->string('adresse')->nullable()->default(' ');
+            $table->string('email')->unique();
+            $table->string('github')->nullable()->default(' ');
+            $table->string('linkedin')->nullable()->default(' ');
+            $table->string('facebook')->nullable()->default(' ');
+            $table->string('instagram')->nullable()->default(' ');
+            $table->string('password');
+            $table->string('img')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

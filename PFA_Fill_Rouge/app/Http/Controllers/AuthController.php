@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    static  function register(Request $request)
     {
         $fields = $request->validate([
             'prenom' => 'required|string',
@@ -41,6 +41,10 @@ class AuthController extends Controller
             'password' => bcrypt($fields['password']),
             'img' => $fields['img']
         ]);
+
+
+
+
         $token = $personne->createToken('moussatefToken')->plainTextToken;
         $response = [
             'Personne' => $personne,

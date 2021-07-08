@@ -29,9 +29,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     // Route::put('/products/{id}', [ProductController::class, 'update']);
     // Route::delete('/products/{id}', [ProductController::class, 'destroy']);
     Route::get('/index', [PersonneController::class, 'index']);
-    Route::get('/personne/{id}', [PersonneController::class, 'show']);
-    Route::put('/personne/update/{id}', [PersonneController::class, 'update']);
-    Route::delete('/personne/delete/{id}', [PersonneController::class, 'destroy']);
+    Route::get('/personne/id/{id}', [PersonneController::class, 'show'])->whereNumber('id');
+    Route::put('/personne/update/{id}', [PersonneController::class, 'update'])->whereNumber('id');
+    Route::delete('/personne/delete/{id}', [PersonneController::class, 'destroy'])->whereNumber('id');
     Route::post('/logout', [AuthController::class, 'logout']);
 });
 

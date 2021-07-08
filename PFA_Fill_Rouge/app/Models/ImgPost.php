@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ImgPost extends Model
 {
     use HasFactory;
+    public function post()
+    {
+        return $this->belongsTo(Post::class, 'foreign_key');
+    }
 }

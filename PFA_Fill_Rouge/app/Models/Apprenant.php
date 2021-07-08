@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Apprenant extends Model
 {
     use HasFactory;
+
+
+    public function personne()
+    {
+        return $this->belongsTo(Personne::class, 'foreign_key');
+    }
 }

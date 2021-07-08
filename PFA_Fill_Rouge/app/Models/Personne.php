@@ -45,4 +45,13 @@ class Personne extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function apprenant()
+    {
+        return $this->hasOne(Apprenant::class , 'foreign_key');
+    }
+    public function responsable()
+    {
+        return $this->hasOne(Responsable::class , 'foreign_key');
+    }
 }

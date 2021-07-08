@@ -33,7 +33,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/personne/update/{id}', [PersonneController::class, 'update']);
     Route::delete('/personne/delete/{id}', [PersonneController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
-
 });
 
 

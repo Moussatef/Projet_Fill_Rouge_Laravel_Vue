@@ -15,9 +15,8 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id('id_post');
-            $table->unsignedBigInteger('id_personne')->nullable();
-            $table->foreign('id_personne')->references('id_personne')->on('Personnes')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('id_personne')->constrained('Personnes')->onDelete('cascade');
             $table->string('titre');
             $table->text('description');
             $table->integer('public')->default(0);

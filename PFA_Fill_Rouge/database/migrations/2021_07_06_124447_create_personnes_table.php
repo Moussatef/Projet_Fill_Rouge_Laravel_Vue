@@ -15,7 +15,7 @@ class CreatePersonnesTable extends Migration
     {
         Schema::create('personnes', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id('id_personne');
+            $table->id();
             $table->string('nom');
             $table->string('prenom');
             $table->string('telephon')->nullable()->default(' ');

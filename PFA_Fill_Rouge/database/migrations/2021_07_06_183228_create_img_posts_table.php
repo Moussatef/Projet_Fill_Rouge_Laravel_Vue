@@ -15,8 +15,7 @@ class CreateImgPostsTable extends Migration
     {
         Schema::create('img_posts', function (Blueprint $table) {
             $table->id('id_img');
-            $table->unsignedBigInteger('id_post')->nullable();
-            $table->foreign('id_post')->references('id_post')->on('Posts')->onDelete('cascade');
+            $table->foreignId('id_post')->constrained('Posts')->onDelete('cascade');
             $table->string('path');
             $table->timestamps();
         });

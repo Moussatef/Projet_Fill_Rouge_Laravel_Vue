@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Personne;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Hash;
+
 
 class PersonneController extends Controller
 {
@@ -16,52 +15,11 @@ class PersonneController extends Controller
      */
     public function index()
     {
-        //
+        //return all personnes
+        return Personne::all();
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function register(Request $request)
-    {
-        $fields = $request->validate([
-            'nom' => 'required|string',
-            'prenom' => 'required|string',
-            'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed',
-            'telephon' => 'string',
-            'date_N' => 'date',
-            'adresse' => 'string',
-            'github' => 'string',
-            'linkedin' => 'string',
-            'facebook' => 'string',
-            'instagram' => 'string',
-            'img' => 'string'
-        ]);
-
-        $personne = Personne::create([
-            'nom' => $fields['nom'],
-            'prenom' => $fields['prenom'],
-            'telephon' => $fields['telephon'],
-            'date_N' => $fields['date_N'],
-            'adresse' => $fields['adresse'],
-            'email' => $fields['email'],
-            'github' => $fields['github'],
-            'linkedin' => $fields['linkedin'],
-            'facebook' => $fields['facebook'],
-            'instagram' => $fields['instagram'],
-            'password' => bcrypt($fields['password']),
-            'img' => $fields['img']
-        ]);
-        $token = $personne->createToken('moussatefToken@')->plainTextToken;
-        $response = [
-            'Personne' => $personne,
-            'token' => $token
-        ];
-        return response($response, 201);
-    }
     /**
      * Store a newly created resource in storage.
      *
@@ -82,17 +40,7 @@ class PersonneController extends Controller
     public function show($id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Personne::find($id);
     }
 
     /**
@@ -105,6 +53,9 @@ class PersonneController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $personne = Personne::find($id);
+        $personne->update($request->all());
+        return $personne;
     }
 
     /**
@@ -115,6 +66,7 @@ class PersonneController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //Delete personne from data base
+        return personne::destroy($id);
     }
 }

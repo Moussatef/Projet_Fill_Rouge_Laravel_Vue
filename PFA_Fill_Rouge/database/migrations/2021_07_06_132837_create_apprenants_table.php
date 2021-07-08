@@ -16,9 +16,9 @@ class CreateApprenantsTable extends Migration
         Schema::create('apprenants', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id('id_apprenant');
-            $table->unsignedBigInteger('id_personne')->nullable();
-            $table->foreign('id_personne')->references('id_personne')->on('Personnes')->onDelete('cascade');
-            // $table->foreignId('id_personne')->constrained('Personnes')->onDelete('cascade');
+            // $table->unsignedBigInteger('id_personne')->nullable();
+            // $table->foreign('id_personne')->references('id')->on('Personnes')->onDelete('cascade');
+            $table->foreignId('id_personne')->constrained('Personnes')->onDelete('cascade');
             $table->timestamps();
         });
     }

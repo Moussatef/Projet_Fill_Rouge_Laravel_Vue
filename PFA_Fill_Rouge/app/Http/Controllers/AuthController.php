@@ -41,7 +41,7 @@ class AuthController extends Controller
             'password' => bcrypt($fields['password']),
             'img' => $fields['img']
         ]);
-        $token = $personne->createToken('moussatefToken@')->plainTextToken;
+        $token = $personne->createToken('moussatefToken')->plainTextToken;
         $response = [
             'Personne' => $personne,
             'token' => $token
@@ -66,7 +66,7 @@ class AuthController extends Controller
             'password' => bcrypt($fields['password'])
         ]);
 
-        $token = $user->createToken('moussatefTokenUser@')->plainTextToken;
+        $token = $user->createToken('moussatefTokenUser')->plainTextToken;
 
         $response = [
             'user' => $user,
@@ -77,32 +77,32 @@ class AuthController extends Controller
     }
 
 
-    // public function loginU(Request $request)
-    // {
-    //     $fields = $request->validate([
-    //         'email' => 'required|email',
-    //         'password' => 'required|string'
-    //     ]);
+    public function loginU(Request $request)
+    {
+        $fields = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string'
+        ]);
 
-    //     // Check email
-    //     $user = User::where('email', $fields['email'])->first();
+        // Check email
+        $user = User::where('email', $fields['email'])->first();
 
-    //     // Check password
-    //     if (!$user || !Hash::check($fields['password'], $user->password)) {
-    //         return response([
-    //             'message' => 'error in sign up'
-    //         ], 401);
-    //     }
+        // Check password
+        if (!$user || !Hash::check($fields['password'], $user->password)) {
+            return response([
+                'message' => 'error in sign up'
+            ], 401);
+        }
 
-    //     $token = $user->createToken('moussatefTokenUser@')->plainTextToken;
+        $token = $user->createToken('moussatefTokenUser')->plainTextToken;
 
-    //     $response = [
-    //         'user' => $user,
-    //         'token' => $token
-    //     ];
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
 
-    //     return response($response, 201);
-    // }
+        return response($response, 201);
+    }
 
     public function login(Request $request)
     {
@@ -131,11 +131,12 @@ class AuthController extends Controller
         return response($response, 201);
     }
 
-    // public function logout(Request $request) {
-    //     auth()->user()->tokens()->delete();
+    public function logout(Request $request)
+    {
+        auth()->user()->tokens()->delete();
 
-    //     return [
-    //         'message' => 'Logged out'
-    //     ];
-    // }
+        return [
+            'message' => 'Logged out'
+        ];
+    }
 }

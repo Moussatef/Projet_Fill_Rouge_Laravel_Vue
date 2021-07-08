@@ -16,9 +16,7 @@ class CreatePostProfilsTable extends Migration
         Schema::create('post_profils', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id('id_profilPost');
-            $table->unsignedBigInteger('id_post')->nullable();
-            $table->foreign('id_post')->references('id_post')->on('Posts')->onDelete('cascade');
-            // $table->foreignId('id_post')->constrained('Posts')->onDelete('cascade');
+            $table->foreignId('id_post')->constrained('Posts')->onDelete('cascade');
             $table->timestamps();
         });
     }

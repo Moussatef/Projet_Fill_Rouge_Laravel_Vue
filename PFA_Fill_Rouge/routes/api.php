@@ -17,10 +17,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Public routes
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/registerU', [AuthController::class, 'registerU']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/loginU', [AuthController::class, 'loginU']);
+Route::post('/personne/register', [AuthController::class, 'register']);
+Route::post('/user/registerU', [AuthController::class, 'registerU']);
+Route::post('/personne/login', [AuthController::class, 'login']);
+Route::post('/user/loginU', [AuthController::class, 'loginU']);
+// Route::get('/index', [PersonneController::class, 'index']);
+
+// Protected routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    // Route::post('/products', [ProductController::class, 'store']);
+    // Route::put('/products/{id}', [ProductController::class, 'update']);
+    // Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+    Route::get('/index', [PersonneController::class, 'index']);
+    Route::get('/personne/{id}', [PersonneController::class, 'show']);
+    Route::put('/personne/update/{id}', [PersonneController::class, 'update']);
+    Route::delete('/personne/delete/{id}', [PersonneController::class, 'destroy']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+});
 
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

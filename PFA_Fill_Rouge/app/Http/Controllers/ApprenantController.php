@@ -71,20 +71,7 @@ class ApprenantController extends Controller
     {
         //
         $fields = $request->validate([
-            'prenom' => 'required|string',
-            'nom' => 'required|string',
-            'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed',
-            'telephon' => 'nullable|string',
-            'date_N' => 'date',
-            'adresse' => 'nullable|string',
-            'github' => 'nullable|string',
-            'linkedin' => 'nullable|string',
-            'facebook' => 'nullable|string',
-            'instagram' => 'nullable|string',
-            'img' => 'nullable|string',
             'id' => 'required|integer'
-
         ]);
 
         $personne = new PersonneController();
@@ -103,13 +90,18 @@ class ApprenantController extends Controller
     {
         $fields = $request->validate([
             'id_personne' => 'required|integer',
-            'id_apprenant' => 'required|integer'
         ]);
         //
         $personne = new PersonneController();
 
-        $personne->destroy($request);
-
-        return Apprenant::destroy($fields['id_apprenant']);
+        $stmt =  $personne->destroy($request);
+        $res = [];
+        if ($stmt) {
+            $res = ['message' => 'personne is deleted'];
+            return response(json_encode($res));
+        } else {
+            $res = ['message' => 'personne is not found'];
+            return response(json_encode($res));
+        }
     }
 }

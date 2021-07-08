@@ -36,12 +36,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/index', [PersonneController::class, 'index']);
     Route::get('/personne/id/{id}', [PersonneController::class, 'show'])->whereNumber('id');
     Route::put('/personne/update/{id}', [PersonneController::class, 'update'])->whereNumber('id');
-    Route::delete('/personne/delete/{id}', [PersonneController::class, 'destroy'])->whereNumber('id');
+    Route::post('/personne/delete', [PersonneController::class, 'destroy'])->whereNumber('id');
     Route::post('/logout', [AuthController::class, 'logout']);
 
     //Route ApprenantController
 
     Route::post('/apprenant/update', [ApprenantController::class, 'update'])->whereNumber('id');
+    Route::post('/apprenant/delete', [ApprenantController::class, 'destroy'])->whereNumber('id');
 });
 
 

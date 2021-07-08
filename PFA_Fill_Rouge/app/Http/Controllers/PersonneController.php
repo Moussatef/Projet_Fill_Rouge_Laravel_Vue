@@ -69,7 +69,6 @@ class PersonneController extends Controller
     {
         $fields = $request->validate([
             'id_personne' => 'required|integer',
-            'id_apprenant' => 'required|integer'
         ]);
         //Delete personne from data base
         return personne::destroy($fields['id_personne']);

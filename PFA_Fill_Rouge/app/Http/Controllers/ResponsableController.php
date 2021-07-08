@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Responsable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ResponsableController extends Controller
 {
@@ -24,7 +26,24 @@ class ResponsableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //register Personne
+        $personne = AuthController::register($request);
+
+        $lastpersenne = DB::table('personnes')
+            ->selectRaw('id')
+            ->orderByRaw('id DESC')
+            ->first();
+        //register Apprenant
+        $apprenant = Responsable::create([
+            'id_personne' => $lastpersenne->id
+        ]);
+
+        $res = array(
+            'lastpersenne' => $lastpersenne,
+            'personne' => $personne,
+            'Responsable' => $apprenant
+        );
+        return response($res);
     }
 
     /**

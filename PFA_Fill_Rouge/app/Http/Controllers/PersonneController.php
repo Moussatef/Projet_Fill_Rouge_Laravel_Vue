@@ -61,12 +61,17 @@ class PersonneController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request  $request)
     {
+        $fields = $request->validate([
+            'id_personne' => 'required|integer',
+            'id_apprenant' => 'required|integer'
+        ]);
         //Delete personne from data base
-        return personne::destroy($id);
+        return personne::destroy($fields['id_personne']);
     }
 }

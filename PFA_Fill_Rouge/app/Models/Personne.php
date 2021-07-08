@@ -48,10 +48,10 @@ class Personne extends Model
 
     public function apprenant()
     {
-        return $this->hasOne(Apprenant::class , 'foreign_key');
+        return $this->hasOne(Apprenant::class );
     }
     public function responsable()
     {
-        return $this->hasOne(Responsable::class , 'foreign_key');
+        return $this->hasOne(Responsable::class );
     }
 }

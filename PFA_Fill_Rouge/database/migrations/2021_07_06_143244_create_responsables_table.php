@@ -15,7 +15,7 @@ class CreateResponsablesTable extends Migration
     {
         Schema::create('responsables', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id('id_responsable');
+            $table->id();
             $table->foreignId('id_personne')->constrained('Personnes')->onDelete('cascade');
 
             $table->timestamps();

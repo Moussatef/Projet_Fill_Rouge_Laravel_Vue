@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Responsable extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'id_personne'
+    ];
 
     public function personne()
     {

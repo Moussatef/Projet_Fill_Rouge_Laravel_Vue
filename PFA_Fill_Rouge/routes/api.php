@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PersonneController;
+use App\Http\Controllers\ApprenantController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,10 @@ Route::post('/personne/register', [AuthController::class, 'register']);
 Route::post('/user/registerU', [AuthController::class, 'registerU']);
 Route::post('/personne/login', [AuthController::class, 'login']);
 Route::post('/user/loginU', [AuthController::class, 'loginU']);
+
+Route::post('/apprenant/register',[ApprenantController::class,'store']);
+Route::get('/apprenant/id/{id}',[ApprenantController::class,'show']);
+
 // Route::get('/index', [PersonneController::class, 'index']);
 
 // Protected routes
@@ -33,6 +38,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/personne/update/{id}', [PersonneController::class, 'update'])->whereNumber('id');
     Route::delete('/personne/delete/{id}', [PersonneController::class, 'destroy'])->whereNumber('id');
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    //Route ApprenantController
+
+    Route::post('/apprenant/update', [ApprenantController::class, 'update'])->whereNumber('id');
 });
 
 

@@ -29,6 +29,8 @@
           <AppPost
             v-for="post in posts"
             :key="post.id"
+            :post_id="post.id"
+            :personne_id="apprenant.id"
             :title="post.titre"
             :description="post.description"
             :path="post.path"

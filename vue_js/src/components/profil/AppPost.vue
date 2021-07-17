@@ -164,7 +164,17 @@
           placeholder="Write something to Roland…"
           v-model="cmp"
         />
-        <button v-if="cmp">
+        <button
+          v-if="cmp"
+          @click="
+            commentPost(
+              user_id,
+              post_id,
+              cmp,
+              token
+            )
+          "
+        >
           <svg
             class="w-5 h-5 "
             height="512pt"
@@ -202,6 +212,8 @@
 <script>
 export default {
   props: [
+    "personne_id",
+    "post_id",
     "title",
     "description",
     "path",
@@ -219,6 +231,9 @@ export default {
       comment_desc: this.comment,
       comments: this.comment.length,
       cmp: "",
+      user_id : this.personne_id,
+      post_id : this.post_id,
+      token: localStorage.getItem("user_token"),
     };
   },
   methods: {
@@ -245,18 +260,18 @@ export default {
         body: raw,
         redirect: "follow",
       };
-
-      var requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: urlencoded,
-        redirect: "follow",
-      };
-
-      fetch("http://127.0.0.1:8000/api/comment/store", requestOptions)
-        .then((response) => response.text())
-        .then((result) => console.log(result))
-        .catch((error) => console.log("error", error));
+      var res = await fetch(
+        "http://127.0.0.1:8000/api/comment/store",
+        requestOptions
+      );
+      if (res.status === 200) {
+        const result = await res.json();
+        console.log(result);
+        
+      } else {
+        var error = res;
+        console.log("error", error);
+      }
     },
   },
 

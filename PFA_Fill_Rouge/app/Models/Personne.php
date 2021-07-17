@@ -24,7 +24,9 @@ class Personne extends Model
         'facebook',
         'instagram',
         'password',
-        'img'
+        'img',
+        'img_cover',
+        'bio'
     ];
 
     /**
@@ -48,10 +50,33 @@ class Personne extends Model
 
     public function apprenant()
     {
-        return $this->hasOne(Apprenant::class );
+        return $this->hasOne(Apprenant::class);
     }
     public function responsable()
     {
-        return $this->hasOne(Responsable::class );
+        return $this->hasOne(Responsable::class);
+    }
+
+    public function post()
+    {
+        return $this->hasMany(Post::class);
+    }
+    public function comment()
+    {
+        return $this->hasMany(Commente::class);
+    }
+    public function like()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function receivedLikes()
+    {
+        return $this->hasManyThrough(Like::class,Post::class);
+    }
+
+    public function receivedComments()
+    {
+        return $this->hasManyThrough(Comment::class,Post::class);
     }
 }

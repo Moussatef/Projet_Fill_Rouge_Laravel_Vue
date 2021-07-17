@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateApprenantsTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateApprenantsTable extends Migration
      */
     public function up()
     {
-        Schema::create('apprenants', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            // $table->unsignedBigInteger('id_personne')->nullable();
-            // $table->foreign('id_personne')->references('id')->on('Personnes')->onDelete('cascade');
-            $table->foreignId('personne_id')->constrained()->onDelete('cascade');
+            $table->string('admin_name');
+            $table->string('email');
+            $table->string('password');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateApprenantsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('apprenants');
+        Schema::dropIfExists('admins');
     }
 }

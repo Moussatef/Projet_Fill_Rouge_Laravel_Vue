@@ -28,6 +28,8 @@ class CreatePersonnesTable extends Migration
             $table->string('instagram')->nullable()->default(' ');
             $table->string('password');
             $table->string('img')->nullable();
+            $table->string('img_cover')->nullable();
+            $table->string('bio')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

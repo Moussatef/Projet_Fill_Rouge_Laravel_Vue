@@ -9,18 +9,32 @@ class Post extends Model
 {
     use HasFactory;
 
+    public function personne()
+    {
+        return $this->hasOne(Personne::class );
+    }
     public function imgPost()
     {
-        return $this->hasMany(ImgPost::class , 'foreign_key');
+        return $this->hasMany(ImgPost::class );
     }
 
     public function postProblem()
     {
-        return $this->hasOne(PostProblem::class, 'foreign_key');
+        return $this->hasOne(PostProblem::class);
     }
 
     public function postProfil()
     {
-        return $this->hasOne(PostProfil::class, 'foreign_key');
+        return $this->hasOne(PostProfil::class);
+    }
+
+    public function comment(){
+        return $this->hasMany(Commente::class);
+    }
+    public function like(){
+        return $this->hasMany(Like::class);
+    }
+    public function checkLike(Personne $personne){
+        return $this->likes->contains('user_id',$personne->id);
     }
 }

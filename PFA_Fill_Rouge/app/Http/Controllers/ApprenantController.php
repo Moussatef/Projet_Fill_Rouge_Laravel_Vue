@@ -37,9 +37,8 @@ class ApprenantController extends Controller
             ->first();
         //register Apprenant
         $apprenant = Apprenant::create([
-            'id_personne' => $lastpersenne->id
+            'personne_id' => $lastpersenne->id
         ]);
-
         $res = array(
             'lastpersenne' => $lastpersenne,
             'personne' => $personne,
@@ -58,6 +57,7 @@ class ApprenantController extends Controller
     {
         //
         return Apprenant::find($id)->personne()->first();
+        // return 'SALAM';
     }
 
     /**

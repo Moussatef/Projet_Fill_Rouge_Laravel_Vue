@@ -121,14 +121,14 @@ class AuthController extends Controller
         // Check password
         if (!$personne || !Hash::check($fields['password'], $personne->password)) {
             return response([
-                'message' => 'error in sign up'
+                'message' => 'Emial or password is incorrect'
             ], 401);
         }
 
         $token = $personne->createToken('moussatefTokenUser@')->plainTextToken;
 
         $response = [
-            'personne' => $personne,
+            'apprenant_id' => $personne->apprenant->id,
             'token' => $token
         ];
 

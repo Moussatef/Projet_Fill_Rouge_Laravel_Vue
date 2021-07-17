@@ -17,7 +17,6 @@ class PersonneController extends Controller
     {
         //return all personnes
         return Personne::all();
-
     }
 
     /**
@@ -39,7 +38,6 @@ class PersonneController extends Controller
      */
     public function show($id)
     {
-        //
         return Personne::find($id);
     }
 
@@ -71,6 +69,9 @@ class PersonneController extends Controller
             'id_personne' => 'required|integer',
         ]);
         //Delete personne from data base
-        return personne::destroy($fields['id_personne']);
+        if (personne::destroy($fields['id_personne']))
+            return "Perssone successfuly deleted";
+        else
+            "persson not found";
     }
 }

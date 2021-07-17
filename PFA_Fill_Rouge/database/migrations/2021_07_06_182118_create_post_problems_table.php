@@ -16,8 +16,8 @@ class CreatePostProblemsTable extends Migration
         Schema::create('post_problems', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->foreignId('id_post')->constrained('Posts')->onDelete('cascade');
-            $table->foreignId('id_categorie')->constrained('Categories')->onDelete('cascade');
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');
+            $table->foreignId('categorie_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

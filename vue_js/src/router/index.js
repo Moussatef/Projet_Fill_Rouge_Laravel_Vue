@@ -1,12 +1,33 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/login.vue'
+import UserProfile from '../views/profile.vue'
+import Register from '../views/signup.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/user/register',
+    name: 'Register',
+    component: Register
+  },
+  {
+    path: '/user/profile',
+    name: 'UserProfile',
+    component: UserProfile,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('user_token') != "undefined") {
+        next();
+      } else {
+        next('/login');
+      }
+
+      next();
+    }
   },
   {
     path: '/login',

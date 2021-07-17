@@ -29,14 +29,13 @@ class PostController extends Controller
         // , 'likes.id', DB::raw('count(posts.id) as total_likes')
 
 
-        $posts =  Personne::find($personne_id)->post()->get();
+        $posts =  Personne::find($personne_id)->post()
+        ->orderByDesc('created_at')
+        ->get();
         // $like =  Personne::find($personne_id)->receivedLikes()->get();
 
         $posts = $posts->fresh('like', 'comment');
-        return
-            [
-                "post" => $posts,
-            ];
+        return $posts ;
     }
 
     /**

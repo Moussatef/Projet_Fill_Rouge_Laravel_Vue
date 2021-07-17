@@ -35,6 +35,8 @@
             :created_at="post.created_at"
             :nom="apprenant.nom"
             :prenom="apprenant.prenom"
+            :like="post.like"
+            :comment="post.comment"
           />
         </div>
         <!-- <MainPost />

@@ -3,6 +3,7 @@
 use App\Http\Controllers\PersonneController;
 use App\Http\Controllers\ApprenantController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //get posts personne authenticate
     Route::get('/profile/post/{id}', [PostController::class, 'getPostProfile']);
+    //comment save
+    Route::post('/comment/store', [CommentController::class, 'store']);
+
 });
 
 

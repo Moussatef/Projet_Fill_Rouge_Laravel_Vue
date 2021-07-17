@@ -11,7 +11,7 @@
             class="h-10 w-10 rounded-full"
           />
           <div class="ml-4">
-            <span class="cursor-pointer font-bold">{{nom}} {{prenom}}</span>
+            <span class="cursor-pointer font-bold">{{ nom }} {{ prenom }}</span>
             <span class="text-grey text-opacity-50 text-sm mx-3">{{
               date.fromNow()
             }}</span>
@@ -75,36 +75,22 @@
               <stop offset="0" stop-color="#fd3a84" />
               <stop offset="1" stop-color="#ffa68d" />
             </linearGradient>
-            <linearGradient
-              id="SVGID_2_"
-              gradientUnits="userSpaceOnUse"
-              x1="256"
-              x2="256"
-              y1="421"
-              y2="121"
-            >
-              <stop offset="0" stop-color="#ffc2cc" />
-              <stop offset="1" stop-color="#fff2f4" />
-            </linearGradient>
             <g>
               <g>
-                <g>
-                  <circle cx="256" cy="256" fill="url(#SVGID_1_)" r="256" />
-                </g>
-              </g>
-              <g>
-                <g>
-                  <path
-                    d="m331 121c-32.928 0-58.183 18.511-75 46.058-16.82-27.552-42.077-46.058-75-46.058-25.511 0-48.788 10.768-65.541 30.32-15.772 18.409-24.459 42.993-24.459 69.225 0 28.523 10.698 54.892 33.666 82.986 20.138 24.632 49.048 49.971 82.524 79.313 12.376 10.848 25.174 22.065 38.775 34.306 2.853 2.567 6.444 3.85 10.035 3.85s7.182-1.283 10.035-3.851c13.601-12.241 26.398-23.458 38.775-34.306 33.476-29.341 62.386-54.681 82.524-79.313 22.968-28.092 33.666-54.462 33.666-82.985 0-53.637-36.748-99.545-90-99.545z"
-                    fill="url(#SVGID_2_)"
-                  />
-                </g>
+                <path
+                  d="m256 0c-140.959 0-256 115.049-256 256 0 140.959 115.049 256 256 256 140.959 0 256-115.05 256-256 0-140.959-115.049-256-256-256zm0 482c-124.617 0-226-101.383-226-226s101.383-226 226-226 226 101.383 226 226-101.383 226-226 226zm75-361c-32.923 0-58.18 18.506-75 46.058-16.817-27.547-42.072-46.058-75-46.058-53.252 0-90 45.908-90 99.545 0 64.594 57.624 110.966 116.19 162.298 12.376 10.848 25.174 22.065 38.775 34.306 2.853 2.568 6.444 3.851 10.035 3.851s7.182-1.283 10.035-3.851c13.601-12.241 26.398-23.458 38.775-34.306 63.286-55.469 116.19-99.611 116.19-162.298 0-53.739-36.839-99.545-90-99.545zm-45.964 239.283c-9.375 8.216-18.988 16.643-29.036 25.587-10.047-8.944-19.661-17.371-29.036-25.587-66.079-57.918-105.964-92.877-105.964-139.738 0-39.647 25.794-69.545 60-69.545 32.707 0 53.643 31.628 60.516 56.399 1.763 6.548 7.701 11.101 14.484 11.101 6.796 0 12.743-4.569 14.494-11.135.15-.564 15.55-56.365 60.506-56.365 34.206 0 60 29.898 60 69.545 0 46.861-39.885 81.82-105.964 139.738z"
+                  fill="url(#SVGID_1_)"
+                />
               </g>
             </g>
           </svg>
-          26 Likes
+          <!-- <div v-for="lik in like" :key="lik.id">
+            <h1 >{{lik.id}}</h1>
+          </div> -->
+
+          {{ likess }} Likes
         </div>
-        <div>1 Comment</div>
+        <div>{{ comments }} Comment</div>
       </div>
       <div class="border border-fGray border-opacity-10 mt-4" />
       <div class="flex justify-between items-center mt-4">
@@ -166,17 +152,48 @@
           <span class="ml-1">Comment </span>
         </button>
       </div>
-      <div class="border border-fGray border-opacity-10 mt-4" />
-      <div class="flex space-x-2 mt-4">
+      <div class="border border-gray-500 border-opacity-20 mt-4" />
+      <div class="flex space-x-2 my-4">
         <img
-          src="https://picsum.photos/id/1015/500"
+          src="../../assets/ms.jpg"
           alt="img"
-          class="h-10 w-10 rounded-full"
+          class="h-10 w-10 mt-2 rounded-full"
         />
         <input
-          class="bg-fFill px-4 py-3 w-full focus:outline-none rounded-full"
+          class="border-2 px-4 py-3 w-full focus:outline-none rounded-full"
           placeholder="Write something to Roland…"
+          v-model="cmp"
         />
+        <button v-if="cmp">
+          <svg
+            class="w-5 h-5 "
+            height="512pt"
+            viewBox="0 -16 512 512"
+            width="512pt"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="m512 239.601562-511.667969-239.601562 27.695313 197.558594-28.027344 42.042968 28.027344 42.039063-27.695313 197.558594zm-457.015625-28.332031 139.769531 28.332031-139.769531 28.328126-18.886719-28.328126zm386.191406 28.332031-403.40625 188.902344 18.242188-130.136718 289.929687-58.765626-289.929687-58.769531-18.242188-130.136719zm0 0"
+            />
+          </svg>
+        </button>
+      </div>
+      <div class="text-left " v-for="comme in comment_desc" :key="comme.id">
+        <div
+          class="inline-block w-full  bg-gray-200 rounded-tl-lg rounded-br-lg px-3 py-1 text-sm  text-gray-700 mr-2 my-2"
+        >
+          <h3
+            class="inline-flex text-base items-center md:mb-2 lg:mb-0 ml-4 border-b-2 border-gray-600 "
+          >
+            Yassine Bissaoui
+          </h3>
+          <p class="leading-relaxed md:mb-2 lg:mb-0 ml-4">
+            {{ comme.comment }}
+          </p>
+          <p class="leading-relaxed text-xs text-gray-500 md:mb-2 lg:mb-0 ml-4">
+            {{ convertTime(created_at) }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -184,12 +201,69 @@
 
 <script>
 export default {
-  props: ["title", "description", "path", "created_at","nom","prenom"],
+  props: [
+    "title",
+    "description",
+    "path",
+    "created_at",
+    "nom",
+    "prenom",
+    "like",
+    "comment",
+  ],
   name: "AppPost",
   data() {
     return {
-      date : moment(this.created_at, "YYYY-MM-DD HH:mm:ss"),
+      date: moment(this.created_at, "YYYY-MM-DD HH:mm:ss"),
+      likess: this.like.length,
+      comment_desc: this.comment,
+      comments: this.comment.length,
+      cmp: "",
     };
   },
+  methods: {
+    convertTime(time) {
+      let res = moment(time, "YYYY-MM-DD HH:mm:ss");
+      return res.fromNow();
+    },
+
+    async commentPost(id_person, id_post, comment, token) {
+      var myHeaders = new Headers();
+      myHeaders.append("Accept", "application/json");
+      myHeaders.append("Authorization", "Bearer " + token);
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        personne_id: id_person,
+        post_id: id_post,
+        comment: comment,
+      });
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: urlencoded,
+        redirect: "follow",
+      };
+
+      fetch("http://127.0.0.1:8000/api/comment/store", requestOptions)
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.log("error", error));
+    },
+  },
+
+  // provide() {
+  //   return {
+  //     tile : this.like.length// this will result in error `Cannot read property 'length' of undefined`
+  //   }
+  // },
 };
 </script>

@@ -24,7 +24,7 @@
       <div class="absolute -bottom-14">
         <img
           src="../../assets/ms.jpg"
-          class="object-cover border-4 border-white w-40 h-40 rounded-full"
+          class="object-cover border-2 border-blue-600   w-40 h-40 rounded-full"
           alt="cover"
         />
         <label  class="cursor-pointer absolute left-36 bottom-2">
@@ -69,6 +69,7 @@
 </template>
 
 <script>
+
 export default {
   props: ["nom", "prenom", "img", "img_cover"],
   name: "AppProfile",

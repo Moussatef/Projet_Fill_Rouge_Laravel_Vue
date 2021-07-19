@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/index', [PersonneController::class, 'index']);
     Route::get('/personne/id/{id}', [PersonneController::class, 'show'])->whereNumber('id');
+    Route::get('/personne/fullname/id/{id}', [PersonneController::class, 'show_n'])->whereNumber('id');
     Route::put('/personne/update/{id}', [PersonneController::class, 'update'])->whereNumber('id');
     Route::post('/personne/delete', [PersonneController::class, 'destroy'])->whereNumber('id');
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -53,7 +54,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile/post/{id}', [PostController::class, 'getPostProfile']);
     //comment save
     Route::post('/comment/store', [CommentController::class, 'store']);
-
 });
 
 

@@ -1,6 +1,7 @@
 <template>
   <div>
     <div
+      v-if="postProfile"
       class="w-full shadow-fb rounded-3xl border-r-2 border-l-2 border-blue-400 bg-white p-4 my-5"
     >
       <div class="flex justify-between items-center">
@@ -11,7 +12,9 @@
             class="h-10 w-10 rounded-full"
           />
           <div class="ml-4">
-            <span class="cursor-pointer font-bold">{{ nom }} {{ prenom }}</span>
+            <span class="cursor-pointer font-bold"
+              >{{ nom }} {{ prenom }}
+            </span>
             <span class="text-grey text-opacity-50 text-sm mx-3">{{
               date.fromNow()
             }}</span>
@@ -90,7 +93,7 @@
 
           {{ likess }} Likes
         </div>
-        <div>{{ comments }} Comment</div>
+        <div>{{ comments_length }} Comment</div>
       </div>
       <div class="border border-fGray border-opacity-10 mt-4" />
       <div class="flex justify-between items-center mt-4">
@@ -162,18 +165,11 @@
         <input
           class="border-2 px-4 py-3 w-full focus:outline-none rounded-full"
           placeholder="Write something to Roland…"
-          v-model="cmp"
+          v-model="inp_cpmment"
         />
         <button
-          v-if="cmp"
-          @click="
-            commentPost(
-              user_id,
-              post_id,
-              cmp,
-              token
-            )
-          "
+          v-if="inp_cpmment"
+          @click="storcomment(user_id, post_id, inp_cpmment, token)"
         >
           <svg
             class="w-5 h-5 "
@@ -188,28 +184,23 @@
           </svg>
         </button>
       </div>
-      <div class="text-left " v-for="comme in comment_desc" :key="comme.id">
-        <div
-          class="inline-block w-full  bg-gray-200 rounded-tl-lg rounded-br-lg px-3 py-1 text-sm  text-gray-700 mr-2 my-2"
-        >
-          <h3
-            class="inline-flex text-base items-center md:mb-2 lg:mb-0 ml-4 border-b-2 border-gray-600 "
-          >
-            Yassine Bissaoui
-          </h3>
-          <p class="leading-relaxed md:mb-2 lg:mb-0 ml-4">
-            {{ comme.comment }}
-          </p>
-          <p class="leading-relaxed text-xs text-gray-500 md:mb-2 lg:mb-0 ml-4">
-            {{ convertTime(created_at) }}
-          </p>
-        </div>
+      <div class="text-left ">
+        <AppComment
+          v-for="cmt in comments"
+          :key="cmt.id"
+          :postProfile="postProfile"
+          :comment_body="cmt.comment"
+          :personne_id="cmt.personne_id"
+          :comment_id="cmt.id"
+          :created_at="cmt.created_at"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import AppComment from "@/components/profil/AppComment";
 export default {
   props: [
     "personne_id",
@@ -222,18 +213,24 @@ export default {
     "prenom",
     "like",
     "comment",
+    "post_profil",
+    "storcomment",
   ],
+  components: {
+    AppComment,
+  },
   name: "AppPost",
   data() {
     return {
       date: moment(this.created_at, "YYYY-MM-DD HH:mm:ss"),
       likess: this.like.length,
-      comment_desc: this.comment,
-      comments: this.comment.length,
-      cmp: "",
-      user_id : this.personne_id,
-      post_id : this.post_id,
+      comments: this.comment,
+      comments_length: this.comment.length,
+      inp_cpmment: "",
+      user_id: this.personne_id,
+      data_post_id: this.post_id,
       token: localStorage.getItem("user_token"),
+      postProfile: this.post_profil,
     };
   },
   methods: {
@@ -241,39 +238,8 @@ export default {
       let res = moment(time, "YYYY-MM-DD HH:mm:ss");
       return res.fromNow();
     },
-
-    async commentPost(id_person, id_post, comment, token) {
-      var myHeaders = new Headers();
-      myHeaders.append("Accept", "application/json");
-      myHeaders.append("Authorization", "Bearer " + token);
-      myHeaders.append("Content-Type", "application/json");
-
-      var raw = JSON.stringify({
-        personne_id: id_person,
-        post_id: id_post,
-        comment: comment,
-      });
-
-      var requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow",
-      };
-      var res = await fetch(
-        "http://127.0.0.1:8000/api/comment/store",
-        requestOptions
-      );
-      if (res.status === 200) {
-        const result = await res.json();
-        console.log(result);
-        
-      } else {
-        var error = res;
-        console.log("error", error);
-      }
-    },
   },
+  computed: {},
 
   // provide() {
   //   return {

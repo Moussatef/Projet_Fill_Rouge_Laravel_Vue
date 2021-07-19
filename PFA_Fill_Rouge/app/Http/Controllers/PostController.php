@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Personne;
 use App\Models\Post;
+use App\Models\PostProfil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -30,12 +31,13 @@ class PostController extends Controller
 
 
         $posts =  Personne::find($personne_id)->post()
-        ->orderByDesc('created_at')
-        ->get();
+            ->orderByDesc('created_at')
+            ->get();
         // $like =  Personne::find($personne_id)->receivedLikes()->get();
 
-        $posts = $posts->fresh('like', 'comment');
-        return $posts ;
+        $posts = $posts->fresh('postProfil', 'comment', 'like', 'imgPost');
+        // $test = $posts->fresh('personne');
+        return $posts;
     }
 
     /**

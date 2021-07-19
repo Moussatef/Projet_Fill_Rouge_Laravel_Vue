@@ -42,6 +42,25 @@ class PersonneController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show_n($id)
+    {
+        $personne = Personne::find($id);
+
+
+        $rusel = [
+            "id" => $personne->id,
+            "nom" => $personne->nom,
+            "prenom" => $personne->prenom,
+        ];
+        return $rusel;
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

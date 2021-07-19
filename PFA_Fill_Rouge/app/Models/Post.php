@@ -35,6 +35,6 @@ class Post extends Model
         return $this->hasMany(Like::class);
     }
     public function checkLike(Personne $personne){
-        return $this->likes->contains('user_id',$personne->id);
+        return $this->likes->contains('personne_id',$personne->id);
     }
 }

@@ -11,11 +11,11 @@ class Post extends Model
 
     public function personne()
     {
-        return $this->hasOne(Personne::class );
+        return $this->hasOne(Personne::class);
     }
     public function imgPost()
     {
-        return $this->hasMany(ImgPost::class );
+        return $this->hasMany(ImgPost::class);
     }
 
     public function postProblem()
@@ -28,13 +28,16 @@ class Post extends Model
         return $this->hasOne(PostProfil::class);
     }
 
-    public function comment(){
+    public function comment()
+    {
         return $this->hasMany(Commente::class);
     }
-    public function like(){
+    public function like()
+    {
         return $this->hasMany(Like::class);
     }
-    public function checkLike(Personne $personne){
-        return $this->likes->contains('personne_id',$personne->id);
+    public function checkLike(Personne $personne)
+    {
+        return $this->like->contains('personne_id', $personne->id);
     }
 }

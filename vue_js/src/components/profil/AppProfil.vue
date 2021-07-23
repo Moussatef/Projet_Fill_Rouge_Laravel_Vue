@@ -69,7 +69,6 @@
 </template>
 
 <script>
-
 export default {
   props: ["nom", "prenom", "img", "img_cover"],
   name: "AppProfile",

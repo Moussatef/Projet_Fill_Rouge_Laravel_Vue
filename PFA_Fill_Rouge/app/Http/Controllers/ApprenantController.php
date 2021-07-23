@@ -40,11 +40,11 @@ class ApprenantController extends Controller
             'personne_id' => $lastpersenne->id
         ]);
         $res = array(
-            'lastpersenne' => $lastpersenne,
-            'personne' => $personne,
-            'apprenant' => $apprenant
+            'personne' => $personne->original,
+            'apprenant' => $apprenant->id
+
         );
-        return response($res);
+        return response($res, 201);
     }
 
     /**
@@ -88,7 +88,7 @@ class ApprenantController extends Controller
      */
     public function destroy(Request  $request)
     {
-        $fields = $request->validate([
+        $this->validate($request, [
             'id_personne' => 'required|integer',
         ]);
         //

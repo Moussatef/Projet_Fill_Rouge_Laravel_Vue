@@ -1,16 +1,16 @@
 <template>
   <div
-    class="inline-block w-full  bg-gray-200 rounded-tl-lg rounded-br-lg px-3 py-1 text-sm  text-gray-700 mr-2 my-2"
+    class="inline-block w-full text-justify overflow-hidden bg-gray-200 rounded-tl-lg rounded-br-lg px-3 py-1 text-sm  text-gray-700 mr-2 my-2"
   >
     <h3
       class="inline-flex text-base items-center md:mb-2 lg:mb-0 ml-4 border-b-2 border-gray-400 "
     >
-      {{ comments }} {{ comments.prenom }}
+      {{ user_name }} {{ lastname }}
     </h3>
-    <p class="leading-relaxed md:mb-2 lg:mb-0 ml-4">
+    <p class="leading-relaxed break-words  overflow-ellipsis overflow-y-auto  md:mb-2 lg:mb-0 ml-4 w-96 md:truncate">
       {{ comment_body }}
     </p>
-    <p class="leading-relaxed text-xs text-gray-500 md:mb-2 lg:mb-0 ml-4">
+    <p class="leading-relaxed text-xs  text-gray-500 md:mb-2 lg:mb-0 ml-4">
       {{ convertTime(created_at) }}
     </p>
   </div>
@@ -30,8 +30,6 @@ export default {
       user_name: undefined,
       lastname: undefined,
       token: localStorage.getItem("user_token"),
-
-      //   date: moment(this.created_at, "YYYY-MM-DD HH:mm:ss"),
     };
   },
   methods: {
@@ -59,7 +57,7 @@ export default {
       );
       if (res.status === 200) {
         const result = await res.json();
-        console.log(result);
+        // console.log(result);
         this.user_name = result.nom;
         this.lastname = result.prenom;
       } else {
@@ -71,13 +69,12 @@ export default {
   computed: {
     ...mapGetters(["comments"]),
   },
-
   created() {
-    // this.fetchComments([this.id_personne, this.token]);
+    this.fetchComments([this.id_personne, this.token]);
   },
   beforeMount() {
-    // this.getCommentUserName(this.id_personne, this.token);
-    this.fetchComments([this.id_personne, this.token]);
+    this.getCommentUserName(this.id_personne, this.token);
+    // this.fetchComments([this.id_personne, this.token]);
   },
 };
 </script>

@@ -314,7 +314,7 @@
               </div>
               <div class="relative">
                 <button
-                  @click="authent"
+                  @click="authent([inp_email,inp_password])"
                   class="bg-blue-500 text-white rounded-md  px-10 py-1"
                 >
                   Login
@@ -349,6 +349,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "login",
   data() {
@@ -360,41 +361,46 @@ export default {
   },
 
   methods: {
-    async authent() {
-      var myHeaders = new Headers();
-      myHeaders.append("Accept", "application/json");
-      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    ...mapActions(["authent"]),
+    // async authent() {
+    //   var myHeaders = new Headers();
+    //   myHeaders.append("Accept", "application/json");
+    //   myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-      var urlencoded = new URLSearchParams();
-      urlencoded.append("email", this.inp_email);
-      urlencoded.append("password", this.inp_password);
+    //   var urlencoded = new URLSearchParams();
+    //   urlencoded.append("email", this.inp_email);
+    //   urlencoded.append("password", this.inp_password);
 
-      var requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: urlencoded,
-        redirect: "follow",
-      };
-      var selfe = this;
+    //   var requestOptions = {
+    //     method: "POST",
+    //     headers: myHeaders,
+    //     body: urlencoded,
+    //     redirect: "follow",
+    //   };
+    //   var selfe = this;
 
-      fetch("http://127.0.0.1:8000/api/personne/login", requestOptions)
-        .then((response) => response.json())
-        .then(function(result) {
-          localStorage.setItem("user_token", result.token);
-          localStorage.setItem("user_id", result.apprenant_id);
-          // console.log(result);
-          if (result.message) {
-            // localStorage.setItem("error", result.message);
-            selfe.err = result.message;
-            console.log(selfe.err);
-          }
-          // console.log(localStorage.getItem("user_token"));
-          else location.replace("/user/profile");
-        })
-        .catch(function(error) {
-          console.log("error", error);
-        });
-    },
+    //   fetch("http://127.0.0.1:8000/api/personne/login", requestOptions)
+    //     .then((response) => response.json())
+    //     .then(function(result) {
+    //       localStorage.setItem("user_token", result.token);
+    //       localStorage.setItem("user_id", result.apprenant_id);
+    //       // console.log(result);
+    //       if (result.message) {
+    //         // localStorage.setItem("error", result.message);
+    //         selfe.err = result.message;
+    //         console.log(selfe.err);
+    //       }
+    //       // console.log(localStorage.getItem("user_token"));
+    //       else location.replace("/user/profile");
+    //     })
+    //     .catch(function(error) {
+    //       console.log("error", error);
+    //     });
+    // },
   },
+  computed:{
+    
+  },
+
 };
 </script>

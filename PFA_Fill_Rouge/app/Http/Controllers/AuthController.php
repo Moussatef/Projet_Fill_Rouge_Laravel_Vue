@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    static  function register(Request $request)
+    public static  function register(Request $request)
     {
         $fields = $request->validate([
             'prenom' => 'required|string',
@@ -24,7 +24,9 @@ class AuthController extends Controller
             'linkedin' => 'nullable|string',
             'facebook' => 'nullable|string',
             'instagram' => 'nullable|string',
-            'img' => 'nullable|string'
+            'img' => 'nullable|string',
+            'img_cover' => 'nullable|string',
+            'bio' => 'nullable|string',
         ]);
 
         $personne = Personne::create([
@@ -39,21 +41,18 @@ class AuthController extends Controller
             'facebook' => $fields['facebook'],
             'instagram' => $fields['instagram'],
             'password' => bcrypt($fields['password']),
-            'img' => $fields['img']
+            'img' => $fields['img'],
+            'img_cover' =>  $fields['img_cover'],
+            'bio' =>  $fields['bio'],
         ]);
-
-
-
 
         $token = $personne->createToken('moussatefToken')->plainTextToken;
         $response = [
-            'Personne' => $personne,
+            'personne_id' => $personne->id,
             'token' => $token
         ];
         return response($response, 201);
     }
-
-
 
     public function registerU(Request $request)
     {

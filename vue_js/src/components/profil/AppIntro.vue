@@ -1,97 +1,91 @@
 <template>
   <div
-    class="shadow-fb  w-full px-20 bg-white rounded-lg py-6 border-l-2 border-blue-500"
+    class="shadow-fb  w-full px-20 bg-white rounded-lg py-6 border-r-2 border-l-2 border-blue-500"
   >
     <div class="text-xl  font-bold text-fBlack">Intro</div>
     <div class="mt-4  flex items-center">
-      <svg 
-      class="h-5 w-5"
-      version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<g>
-	<g>
-		<path d="M256,0C161.896,0,85.333,76.563,85.333,170.667c0,28.25,7.063,56.26,20.49,81.104L246.667,506.5
+      <svg
+        class="h-5 w-5"
+        version="1.1"
+        id="Layer_1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        x="0px"
+        y="0px"
+        viewBox="0 0 512 512"
+        style="enable-background:new 0 0 512 512;"
+        xml:space="preserve"
+      >
+        <g>
+          <g>
+            <path
+              d="M256,0C161.896,0,85.333,76.563,85.333,170.667c0,28.25,7.063,56.26,20.49,81.104L246.667,506.5
 			c1.875,3.396,5.448,5.5,9.333,5.5s7.458-2.104,9.333-5.5l140.896-254.813c13.375-24.76,20.438-52.771,20.438-81.021
 			C426.667,76.563,350.104,0,256,0z M256,256c-47.052,0-85.333-38.281-85.333-85.333c0-47.052,38.281-85.333,85.333-85.333
-			s85.333,38.281,85.333,85.333C341.333,217.719,303.052,256,256,256z"/>
-	</g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-</svg>
+			s85.333,38.281,85.333,85.333C341.333,217.719,303.052,256,256,256z"
+            />
+          </g>
+        </g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+      </svg>
 
       <span class="ml-2">
         {{ adresse }}
       </span>
     </div>
     <div class="mt-4  flex items-center">
-    <svg
-    class="h-5 w-5" 
-      version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<rect x="64" y="64" style="fill:#ECEFF1;" width="384" height="384"/>
-<polygon style="fill:#CFD8DC;" points="256,296.384 448,448 448,148.672 "/>
-<path style="fill:#F44336;" d="M464,64h-16L256,215.616L64,64H48C21.504,64,0,85.504,0,112v288c0,26.496,21.504,48,48,48h16V148.672
-	l192,147.68L448,148.64V448h16c26.496,0,48-21.504,48-48V112C512,85.504,490.496,64,464,64z"/>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-</svg>
+      <svg
+        class="h-5 w-5"
+        version="1.1"
+        id="Capa_1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        x="0px"
+        y="0px"
+        viewBox="0 0 512 512"
+        style="enable-background:new 0 0 512 512;"
+        xml:space="preserve"
+      >
+        <rect x="64" y="64" style="fill:#ECEFF1;" width="384" height="384" />
+        <polygon
+          style="fill:#CFD8DC;"
+          points="256,296.384 448,448 448,148.672 "
+        />
+        <path
+          style="fill:#F44336;"
+          d="M464,64h-16L256,215.616L64,64H48C21.504,64,0,85.504,0,112v288c0,26.496,21.504,48,48,48h16V148.672
+	l192,147.68L448,148.64V448h16c26.496,0,48-21.504,48-48V112C512,85.504,490.496,64,464,64z"
+        />
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+        <g></g>
+      </svg>
       <span class="ml-2">
         {{ email }}
       </span>
@@ -113,7 +107,24 @@
       <span class="ml-2">{{ github }}</span>
     </div>
     <div class="mt-4 flex items-center">
-        <svg class="h-5 w-5" enable-background="new 0 0 24 24" height="512" viewBox="0 0 24 24" width="512" xmlns="http://www.w3.org/2000/svg"><g fill="#0077b5"><path d="m23.994 24v-.001h.006v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07v-2.185h-4.773v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243v7.801z"/><path d="m.396 7.977h4.976v16.023h-4.976z"/><path d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z"/></g></svg>
+      <svg
+        class="h-5 w-5"
+        enable-background="new 0 0 24 24"
+        height="512"
+        viewBox="0 0 24 24"
+        width="512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g fill="#0077b5">
+          <path
+            d="m23.994 24v-.001h.006v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07v-2.185h-4.773v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243v7.801z"
+          />
+          <path d="m.396 7.977h4.976v16.023h-4.976z" />
+          <path
+            d="m2.882 0c-1.591 0-2.882 1.291-2.882 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909c-.001-1.591-1.292-2.882-2.882-2.882z"
+          />
+        </g>
+      </svg>
 
       <span class="ml-2">{{ linkedin }} </span>
     </div>

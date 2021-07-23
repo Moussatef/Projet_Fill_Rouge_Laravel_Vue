@@ -10,6 +10,7 @@ const routes = [
     name: 'Home',
     component: Home
   },
+
   {
     path: '/user/register',
     name: 'Register',
@@ -20,7 +21,7 @@ const routes = [
     name: 'UserProfile',
     component: UserProfile,
     beforeEnter: (to, from, next) => {
-      if (localStorage.getItem('user_token') != "undefined") {
+      if (localStorage.getItem('user_token')) {
         next();
       } else {
         next('/login');

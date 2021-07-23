@@ -5,6 +5,7 @@ use App\Http\Controllers\ApprenantController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostLikeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile/post/{id}', [PostController::class, 'getPostProfile']);
     //comment save
     Route::post('/comment/store', [CommentController::class, 'store']);
+    //add like
+    Route::post('/like/store', [PostLikeController::class, 'store']);
+    //delete like
+    Route::delete('/like/destroy', [PostLikeController::class, 'destroy']);
 });
 
 

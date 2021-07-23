@@ -106,6 +106,7 @@
                     >Name <abbr title="required">*</abbr></label
                   >
                   <input
+                    v-model="inp_nom"
                     placeholder="Name"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                     required="required"
@@ -122,6 +123,7 @@
                     >Last Name <abbr title="required">*</abbr></label
                   >
                   <input
+                    v-model="inp_prenom"
                     placeholder="last Name"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                     required="required"
@@ -141,6 +143,7 @@
                     >Email <abbr title="required">*</abbr></label
                   >
                   <input
+                    v-model="inp_email"
                     placeholder="Email "
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                     required="required"
@@ -160,6 +163,7 @@
                     >Password <abbr title="required">*</abbr></label
                   >
                   <input
+                    v-model="inp_password"
                     placeholder="Email "
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                     required="required"
@@ -177,6 +181,7 @@
                     <abbr title="required">*</abbr></label
                   >
                   <input
+                    v-model="inp_password_confirmation"
                     placeholder="Password Confirmation "
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                     required="required"
@@ -196,6 +201,7 @@
                     >Telephone <abbr title="required">*</abbr></label
                   >
                   <input
+                    v-model="inp_telephon"
                     placeholder="Telephon +212..."
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                     required="required"
@@ -212,6 +218,7 @@
                     >Date of Birth <abbr title="required">*</abbr></label
                   >
                   <input
+                    v-model="inp_date_N"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                     required="required"
                     type="date"
@@ -222,16 +229,17 @@
                     Please fill out this field.
                   </p>
                 </div>
-            </div>
-                <div>
-                    <label for="">Info Optionile</label>
-                </div>
-            <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
+              </div>
+              <div>
+                <label for="">Info Optionile</label>
+              </div>
+              <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
                 <div class="w-full flex flex-col mb-3">
                   <label class="font-semibold text-gray-600 py-2"
                     >Address</label
                   >
                   <input
+                    v-model="inp_adresse"
                     placeholder="Address"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                     type="text"
@@ -239,12 +247,12 @@
                     id="integration_street_address"
                   />
                 </div>
-               
               </div>
               <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
                 <div class="w-full flex flex-col mb-3">
                   <label class="font-semibold text-gray-600 py-2">GitHub</label>
                   <input
+                    v-model="inp_github"
                     placeholder="GitHub"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                     type="text"
@@ -254,8 +262,11 @@
                 </div>
 
                 <div class="w-full flex flex-col mb-3">
-                  <label class="font-semibold text-gray-600 py-2">LinkedIn</label>
+                  <label class="font-semibold text-gray-600 py-2"
+                    >LinkedIn</label
+                  >
                   <input
+                    v-model="inp_linkedin"
                     placeholder="LinkedIn"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                     type="text"
@@ -267,9 +278,12 @@
 
               <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
                 <div class="w-full flex flex-col mb-3">
-                  <label class="font-semibold text-gray-600 py-2">Facebook</label>
+                  <label class="font-semibold text-gray-600 py-2"
+                    >Facebook</label
+                  >
                   <input
-                    placeholder="GitHub"
+                    v-model="inp_facebook"
+                    placeholder="Facebook"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                     type="text"
                     name="link_face"
@@ -278,9 +292,12 @@
                 </div>
 
                 <div class="w-full flex flex-col mb-3">
-                  <label class="font-semibold text-gray-600 py-2">Instagram</label>
+                  <label class="font-semibold text-gray-600 py-2"
+                    >Instagram</label
+                  >
                   <input
-                    placeholder="LinkedIn"
+                    v-model="inp_instagram"
+                    placeholder="Instagram"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                     type="text"
                     name="link_insta"
@@ -289,12 +306,10 @@
                 </div>
               </div>
 
-
               <div class="flex-auto w-full mb-1 text-xs space-y-2">
-                <label class="font-semibold text-gray-600 py-2"
-                  >Bio</label
-                >
+                <label class="font-semibold text-gray-600 py-2">Bio</label>
                 <textarea
+                  v-model="inp_bio"
                   required=""
                   name="bio"
                   id="bio"
@@ -302,7 +317,6 @@
                   placeholder="Enter your comapny info"
                   spellcheck="false"
                 ></textarea>
-                
               </div>
               <p class="text-xs text-red-500 text-right my-3">
                 Required fields are marked with an asterisk
@@ -317,6 +331,25 @@
                   Cancel
                 </button>
                 <button
+                  @click="
+                    registerApprenant([
+                      inp_nom,
+                      inp_prenom,
+                      inp_email,
+                      inp_password,
+                      inp_password_confirmation,
+                      inp_telephon,
+                      inp_date_N,
+                      inp_adresse,
+                      inp_github,
+                      inp_linkedin,
+                      inp_facebook,
+                      inp_instagram,
+                      inp_img,
+                      inp_img_cover,
+                      inp_bio,
+                    ])
+                  "
                   class="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
                 >
                   Save
@@ -331,7 +364,30 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "AppRegister",
+  data() {
+    return {
+      inp_nom: " ",
+      inp_prenom: " ",
+      inp_email: " ",
+      inp_password: " ",
+      inp_password_confirmation: " ",
+      inp_telephon: " ",
+      inp_date_N: " ",
+      inp_adresse: " ",
+      inp_github: " ",
+      inp_linkedin: " ",
+      inp_facebook: " ",
+      inp_instagram: " ",
+      inp_img: " ",
+      inp_img_cover: " ",
+      inp_bio: " ",
+    };
+  },
+  methods: {
+    ...mapActions(["registerApprenant"]),
+  },
 };
 </script>

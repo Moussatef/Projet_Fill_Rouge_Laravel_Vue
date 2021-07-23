@@ -95,10 +95,12 @@
         </div>
         <div>{{ comments_length }} Comment</div>
       </div>
-      <div class="border border-fGray border-opacity-10 mt-4" />
+      <div class="border border-gray-500 border-opacity-10 mt-4" />
       <div class="flex justify-between items-center mt-4">
         <button
-          class="w-1/2 flex items-center justify-center focus:outline-none"
+          @click="clickLike(post_id, user_id, token)"
+          class="w-1/2 flex items-center justify-center border-r-2 focus:outline-none"
+          v-if="checkLike"
         >
           <svg
             class="h-6 w-6 mx-3"
@@ -115,6 +117,45 @@
 
           <span class="ml-1">Like</span>
         </button>
+        <button
+          @click="clickUnLike(post_id, user_id, token)"
+          class="w-1/2 flex items-center justify-center border-r-2 focus:outline-none"
+          v-else
+        >
+          <svg
+            class="h-6 w-6 mx-3"
+            id="Capa_1"
+            enable-background="new 0 0 512 512"
+            height="512"
+            viewBox="0 0 512 512"
+            width="512"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <linearGradient
+              id="SVGID_1_"
+              gradientUnits="userSpaceOnUse"
+              x1="256"
+              x2="256"
+              y1="512"
+              y2="0"
+            >
+              <stop offset="0" stop-color="#fd3a84" />
+              <stop offset="1" stop-color="#ffa68d" />
+            </linearGradient>
+            <g>
+              <g>
+                <path
+                  d="m256 0c-140.959 0-256 115.049-256 256 0 140.959 115.049 256 256 256 140.959 0 256-115.05 256-256 0-140.959-115.049-256-256-256zm0 482c-124.617 0-226-101.383-226-226s101.383-226 226-226 226 101.383 226 226-101.383 226-226 226zm75-361c-32.923 0-58.18 18.506-75 46.058-16.817-27.547-42.072-46.058-75-46.058-53.252 0-90 45.908-90 99.545 0 64.594 57.624 110.966 116.19 162.298 12.376 10.848 25.174 22.065 38.775 34.306 2.853 2.568 6.444 3.851 10.035 3.851s7.182-1.283 10.035-3.851c13.601-12.241 26.398-23.458 38.775-34.306 63.286-55.469 116.19-99.611 116.19-162.298 0-53.739-36.839-99.545-90-99.545zm-45.964 239.283c-9.375 8.216-18.988 16.643-29.036 25.587-10.047-8.944-19.661-17.371-29.036-25.587-66.079-57.918-105.964-92.877-105.964-139.738 0-39.647 25.794-69.545 60-69.545 32.707 0 53.643 31.628 60.516 56.399 1.763 6.548 7.701 11.101 14.484 11.101 6.796 0 12.743-4.569 14.494-11.135.15-.564 15.55-56.365 60.506-56.365 34.206 0 60 29.898 60 69.545 0 46.861-39.885 81.82-105.964 139.738z"
+                  fill="url(#SVGID_1_)"
+                />
+              </g>
+            </g>
+          </svg>
+
+          <span class="ml-1">Unlike</span>
+        </button>
+
         <button
           class="w-1/2 flex items-center justify-center focus:outline-none"
         >
@@ -169,7 +210,7 @@
         />
         <button
           v-if="inp_cpmment"
-          @click="storcomment(user_id, post_id, inp_cpmment, token)"
+          @click="postComment([user_id, post_id, inp_cpmment, token])"
         >
           <svg
             class="w-5 h-5 "
@@ -201,6 +242,7 @@
 
 <script>
 import AppComment from "@/components/profil/AppComment";
+import { mapActions, mapGetters } from "vuex";
 export default {
   props: [
     "personne_id",
@@ -215,6 +257,7 @@ export default {
     "comment",
     "post_profil",
     "storcomment",
+    "post",
   ],
   components: {
     AppComment,
@@ -224,6 +267,7 @@ export default {
     return {
       date: moment(this.created_at, "YYYY-MM-DD HH:mm:ss"),
       likess: this.like.length,
+      like_id: this.like,
       comments: this.comment,
       comments_length: this.comment.length,
       inp_cpmment: "",
@@ -231,20 +275,42 @@ export default {
       data_post_id: this.post_id,
       token: localStorage.getItem("user_token"),
       postProfile: this.post_profil,
+      checkLike: true,
+      post_p: this.post,
     };
   },
   methods: {
+    checkLikesId(likes) {
+      var selfe = this;
+      likes.forEach(function(element) {
+        if (element.personne_id == selfe.user_id) {
+          selfe.checkLike = false;
+        }
+      });
+    },
     convertTime(time) {
       let res = moment(time, "YYYY-MM-DD HH:mm:ss");
       return res.fromNow();
     },
+    ...mapActions(["postComment", "addLike", "UnLike"]),
+    clickLike(post_id, personne_id, token) {
+      if (this.addLike([post_id, personne_id, token])) {
+        this.checkLike = false;
+        this.likess++;
+      }
+    },
+    clickUnLike(post_id, personne_id, token) {
+      if (this.UnLike([post_id, personne_id, token])) {
+        this.checkLike = true;
+        this.likess--;
+      }
+    },
   },
-  computed: {},
-
-  // provide() {
-  //   return {
-  //     tile : this.like.length// this will result in error `Cannot read property 'length' of undefined`
-  //   }
-  // },
+  computed: {
+    ...mapGetters(["user_token"]),
+  },
+  beforeMount() {
+    this.checkLikesId(this.like_id);
+  },
 };
 </script>

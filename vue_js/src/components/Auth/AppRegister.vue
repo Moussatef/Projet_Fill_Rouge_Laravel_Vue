@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="bg-gray-300 py-10">
     <div
-      class="w-2/4 mx-auto my-7  space-y-8 p-10 bg-white rounded-xl shadow-lg z-10   border-r-2 border-l-2 border-blue-500"
+      class="w-2/4 mx-auto my-8  space-y-8 p-10 bg-white rounded-xl shadow-lg z-10   border-r-2 border-l-2 border-blue-500"
     >
       <div class="grid  gap-8 grid-cols-1">
         <div class="flex flex-col ">
@@ -12,6 +12,7 @@
           <div class="mt-5">
             <div class="form">
               <div class="md:space-y-2 mb-3">
+                <br />
                 <!-- <label class="text-xs font-semibold text-gray-700 py-2">Profile Image<abbr class="hidden" title="required">*</abbr></label>
 						    <div class="flex items-center py-6">
 							    <div class="w-12 h-12 mr-4 flex-none rounded-xl border overflow-hidden">
@@ -26,12 +27,14 @@
                   <label class="block text-sm font-medium text-gray-700">
                     Photo Profile
                   </label>
-                  <div class="mt-1 flex items-center">
-                    <span
-                      class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100"
+                  <div class="mt-1  items-center">
+                    <div
+                      class=" relative my-4 h-20 w-20 mx-auto rounded-full border-2 border-blue-400 overflow-hidden bg-gray-100"
                     >
+                      <img id="myImg" src="#" />
                       <svg
-                        class="h-full w-full text-gray-300"
+                        v-if="!img_src"
+                        class="h-20 w-20 absolute rounded-full  -top-1 bg-gray-100 text-gray-300"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -39,21 +42,21 @@
                           d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
                         />
                       </svg>
-                    </span>
+                    </div>
+                    <input
+                      type="file"
+                      ref="profil_img"
+                      class="hidden"
+                      id="img_profile"
+                      @change="onfileSelected"
+                    />
 
-                    <label class="cursor-pointer ">
-                      <span
-                        class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >Browse</span
-                      >
-                      <input
-                        type="file"
-                        class="hidden"
-                        :multiple="multiple"
-                        name="img"
-                        :accept="accept"
-                      />
-                    </label>
+                    <button
+                      @click="$refs.profil_img.click()"
+                      class="mx-auto bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                      Browse
+                    </button>
                   </div>
                 </div>
               </div>
@@ -81,23 +84,30 @@
                     </svg>
                     <div class="flex text-sm text-gray-600">
                       <label
-                        for="file-upload"
+                        for="cover_img"
                         class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                       >
                         <span>Upload a file</span>
                         <input
-                          id="file-upload"
+                          id="cover_img"
                           name="img_cover"
                           type="file"
                           class="sr-only"
                         />
                       </label>
-                      <p class="pl-1">or drag and drop</p>
                     </div>
                     <p class="text-xs text-gray-500">
                       PNG, JPG, GIF up to 10MB
                     </p>
                   </div>
+                </div>
+                <div class="h-56 w-full my-4 bg-gray-200 overflow-hidden">
+                  <img
+                    class=" object-scale-down"
+                    src="#"
+                    id="img_cover"
+                    alt=""
+                  />
                 </div>
               </div>
               <div class="md:flex flex-row md:space-x-4 w-full text-xs">
@@ -108,7 +118,7 @@
                   <input
                     v-model="inp_nom"
                     placeholder="Name"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
                     required="required"
                     type="text"
                     name="name"
@@ -125,7 +135,7 @@
                   <input
                     v-model="inp_prenom"
                     placeholder="last Name"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
                     required="required"
                     type="text"
                     name="lastname"
@@ -145,7 +155,7 @@
                   <input
                     v-model="inp_email"
                     placeholder="Email "
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
                     required="required"
                     type="email"
                     name="email"
@@ -165,7 +175,7 @@
                   <input
                     v-model="inp_password"
                     placeholder="Email "
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
                     required="required"
                     type="password"
                     name="password"
@@ -183,7 +193,7 @@
                   <input
                     v-model="inp_password_confirmation"
                     placeholder="Password Confirmation "
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
                     required="required"
                     type="password"
                     name="password_confirmation"
@@ -203,7 +213,7 @@
                   <input
                     v-model="inp_telephon"
                     placeholder="Telephon +212..."
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
                     required="required"
                     type="text"
                     name="tele"
@@ -219,7 +229,7 @@
                   >
                   <input
                     v-model="inp_date_N"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
                     required="required"
                     type="date"
                     name="dateBirth"
@@ -241,7 +251,7 @@
                   <input
                     v-model="inp_adresse"
                     placeholder="Address"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
                     type="text"
                     name="integration[street_address]"
                     id="integration_street_address"
@@ -254,7 +264,7 @@
                   <input
                     v-model="inp_github"
                     placeholder="GitHub"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
                     type="text"
                     name="link_Git"
                     id="integration_street_address"
@@ -268,7 +278,7 @@
                   <input
                     v-model="inp_linkedin"
                     placeholder="LinkedIn"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
                     type="text"
                     name="link_linkedin"
                     id="integration_street_address"
@@ -284,7 +294,7 @@
                   <input
                     v-model="inp_facebook"
                     placeholder="Facebook"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
                     type="text"
                     name="link_face"
                     id="integration_street_address"
@@ -298,7 +308,7 @@
                   <input
                     v-model="inp_instagram"
                     placeholder="Instagram"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
                     type="text"
                     name="link_insta"
                     id="integration_street_address"
@@ -313,7 +323,7 @@
                   required=""
                   name="bio"
                   id="bio"
-                  class="w-full min-h-[100px] max-h-[300px] h-28 appearance-none block  bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4"
+                  class="w-full min-h-[100px] max-h-[300px] h-28 appearance-none block  bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg   p74 px-4"
                   placeholder="Enter your comapny info"
                   spellcheck="false"
                 ></textarea>
@@ -369,25 +379,79 @@ export default {
   name: "AppRegister",
   data() {
     return {
-      inp_nom: " ",
-      inp_prenom: " ",
-      inp_email: " ",
-      inp_password: " ",
-      inp_password_confirmation: " ",
-      inp_telephon: " ",
-      inp_date_N: " ",
-      inp_adresse: " ",
-      inp_github: " ",
-      inp_linkedin: " ",
-      inp_facebook: " ",
-      inp_instagram: " ",
-      inp_img: " ",
-      inp_img_cover: " ",
-      inp_bio: " ",
+      img_src: false,
+      hidden: "hidden",
+      inp_nom: "",
+      inp_prenom: "",
+      inp_email: "",
+      inp_password: "",
+      inp_password_confirmation: "",
+      inp_telephon: "",
+      inp_date_N: "",
+      inp_adresse: "",
+      inp_github: "",
+      inp_linkedin: "",
+      inp_facebook: "",
+      inp_instagram: "",
+      inp_img: "",
+      inp_img_cover: "",
+      inp_bio: "",
+      selectedFile: null,
     };
   },
   methods: {
     ...mapActions(["registerApprenant"]),
+
+    uploadImg() {
+      var selfe = this;
+      window.addEventListener("load", function() {
+        document
+          .querySelector("#img_profile")
+          .addEventListener("change", function() {
+            if (this.files && this.files[0]) {
+              var img = document.querySelector("#myImg");
+              img.onload = () => {
+                URL.revokeObjectURL(img.src); // no longer needed, free memory
+              };
+              selfe.img_src = true;
+              img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+            } else {
+              selfe.img_src = false;
+            }
+          });
+      });
+    },
+    uploadCoverImg() {
+      var selfe = this;
+      window.addEventListener("load", function() {
+        document
+          .querySelector("#cover_img")
+          .addEventListener("change", function() {
+            if (this.files && this.files[0]) {
+              var img = document.querySelector("#img_cover");
+              img.onload = () => {
+                URL.revokeObjectURL(img.src); // no longer needed, free memory
+              };
+              selfe.hidden = "visible";
+              img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+            } else {
+              selfe.hidden = "hidden";
+            }
+          });
+      });
+    },
+    onfileSelected(event){
+
+      this.selectedFile = event
+      console.log( event);
+    },
+    onUpload(){
+
+    }
+  },
+  created() {
+    this.uploadImg();
+    this.uploadCoverImg();
   },
 };
 </script>

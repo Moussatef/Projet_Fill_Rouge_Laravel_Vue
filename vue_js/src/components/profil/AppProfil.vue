@@ -23,7 +23,7 @@
 
       <div class="absolute -bottom-14">
         <img
-          src="../../assets/ms.jpg"
+          src="../../../../PFA_Fill_Rouge/public/uploads/ot.jpg"
           class="object-cover border-2 border-blue-600   w-40 h-40 rounded-full"
           alt="cover"
         />

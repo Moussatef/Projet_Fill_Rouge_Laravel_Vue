@@ -118,7 +118,7 @@
                   <input
                     v-model="inp_nom"
                     placeholder="Name"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
                     required="required"
                     type="text"
                     name="name"
@@ -135,7 +135,7 @@
                   <input
                     v-model="inp_prenom"
                     placeholder="last Name"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
                     required="required"
                     type="text"
                     name="lastname"
@@ -155,7 +155,7 @@
                   <input
                     v-model="inp_email"
                     placeholder="Email "
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
                     required="required"
                     type="email"
                     name="email"
@@ -175,7 +175,7 @@
                   <input
                     v-model="inp_password"
                     placeholder="Email "
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
                     required="required"
                     type="password"
                     name="password"
@@ -193,7 +193,7 @@
                   <input
                     v-model="inp_password_confirmation"
                     placeholder="Password Confirmation "
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
                     required="required"
                     type="password"
                     name="password_confirmation"
@@ -213,7 +213,7 @@
                   <input
                     v-model="inp_telephon"
                     placeholder="Telephon +212..."
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
                     required="required"
                     type="text"
                     name="tele"
@@ -229,7 +229,7 @@
                   >
                   <input
                     v-model="inp_date_N"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
                     required="required"
                     type="date"
                     name="dateBirth"
@@ -251,7 +251,7 @@
                   <input
                     v-model="inp_adresse"
                     placeholder="Address"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
                     type="text"
                     name="integration[street_address]"
                     id="integration_street_address"
@@ -264,7 +264,7 @@
                   <input
                     v-model="inp_github"
                     placeholder="GitHub"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
                     type="text"
                     name="link_Git"
                     id="integration_street_address"
@@ -278,7 +278,7 @@
                   <input
                     v-model="inp_linkedin"
                     placeholder="LinkedIn"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
                     type="text"
                     name="link_linkedin"
                     id="integration_street_address"
@@ -294,7 +294,7 @@
                   <input
                     v-model="inp_facebook"
                     placeholder="Facebook"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
                     type="text"
                     name="link_face"
                     id="integration_street_address"
@@ -308,7 +308,7 @@
                   <input
                     v-model="inp_instagram"
                     placeholder="Instagram"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-7 px-4"
+                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
                     type="text"
                     name="link_insta"
                     id="integration_street_address"
@@ -341,25 +341,7 @@
                   Cancel
                 </button>
                 <button
-                  @click="
-                    registerApprenant([
-                      inp_nom,
-                      inp_prenom,
-                      inp_email,
-                      inp_password,
-                      inp_password_confirmation,
-                      inp_telephon,
-                      inp_date_N,
-                      inp_adresse,
-                      inp_github,
-                      inp_linkedin,
-                      inp_facebook,
-                      inp_instagram,
-                      inp_img,
-                      inp_img_cover,
-                      inp_bio,
-                    ])
-                  "
+                  @click="onUpload()"
                   class="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
                 >
                   Save
@@ -375,6 +357,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import axios from 'axios'
 export default {
   name: "AppRegister",
   data() {
@@ -397,10 +380,12 @@ export default {
       inp_img_cover: "",
       inp_bio: "",
       selectedFile: null,
+      nameImg:null
+      
     };
   },
   methods: {
-    ...mapActions(["registerApprenant"]),
+    ...mapActions(["registerApprenant", "uploadfile"]),
 
     uploadImg() {
       var selfe = this;
@@ -440,14 +425,76 @@ export default {
           });
       });
     },
-    onfileSelected(event){
-
-      this.selectedFile = event
-      console.log( event);
+    onfileSelected(event) {
+      this.selectedFile = event.target.files[0];
+      console.log(event.target.files[0]);
     },
-    onUpload(){
+    async uploadfile(param) {
 
-    }
+        const data = new FormData();
+        data.append(
+            "img",
+            param[0],
+        );
+
+        const response = await axios.post(`http://127.0.0.1:8000/api/user/upload`, data, {
+            headers: {
+                Accept: "application/json",
+            }
+
+        });
+        if (response.status == 200) {
+            const result = await response;
+            console.log(result.data);
+            this.nameImg = result.data
+
+        } else {
+            console.log(error);
+        }
+    },
+    onUpload() {
+      if (this.selectedFile) {
+        // this.uploadfile([this.selectedFile]);
+        
+          this.registerApprenant([
+            this.inp_nom,
+            this.inp_prenom,
+            this.inp_email,
+            this.inp_password,
+            this.inp_password_confirmation,
+            this.inp_telephon,
+            this.inp_date_N,
+            this.inp_adresse,
+            this.inp_github,
+            this.inp_linkedin,
+            this.inp_facebook,
+            this.inp_instagram,
+            this.selectedFile,
+            this.inp_img_cover,
+            this.inp_bio,
+          ]);
+        } else
+          this.registerApprenant([
+            this.inp_nom,
+            this.inp_prenom,
+            this.inp_email,
+            this.inp_password,
+            this.inp_password_confirmation,
+            this.inp_telephon,
+            this.inp_date_N,
+            this.inp_adresse,
+            this.inp_github,
+            this.inp_linkedin,
+            this.inp_facebook,
+            this.inp_instagram,
+            this.inp_img,
+            this.inp_img_cover,
+            this.inp_bio,
+          ]);
+      
+    },
+  },
+  computed: {
   },
   created() {
     this.uploadImg();

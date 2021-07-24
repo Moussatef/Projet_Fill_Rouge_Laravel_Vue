@@ -27,7 +27,11 @@ const actions = {
     },
 
     async registerApprenant({ commit }, param) {
-
+        const data = new FormData();
+        data.append(
+            "img",
+            param[12],
+        );
         const response = await axios.post(`http://127.0.0.1:8000/api/apprenant/register`, {
             prenom: param[0],
             nom: param[1],
@@ -41,7 +45,7 @@ const actions = {
             linkedin: param[9],
             facebook: param[10],
             instagram: param[11],
-            img: param[12],
+            data,
             img_cover: param[13],
             bio: param[14],
 

@@ -7,14 +7,20 @@ use App\Helpers\Helper;
 
 class FileUploadController extends Controller
 {
-    function upload($file)
+    function upload(Request $request)
     {
+        $this->validate($request,[
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
         $path = 'uploads/';
-        // dd($request->file('_file'));
-        $newname = Helper::renameFile($path, $file->getClientOriginalName());
-        $upload = $file->move(public_path($path), $newname);
+        // dd($request->file('inp_img'));
+        $image = $request->file('img');
+        $imgName =  $image->getClientOriginalName();
+        $newname = time().'_'.$imgName;
+        $upload = $image->move(public_path($path), $newname);
         if ($upload) {
             return $newname;
-        }
+        }else
+        return response('is not save in backends ' , 440);
     }
 }

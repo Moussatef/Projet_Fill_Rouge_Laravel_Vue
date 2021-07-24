@@ -4,6 +4,7 @@ use App\Http\Controllers\PersonneController;
 use App\Http\Controllers\ApprenantController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
 use Illuminate\Http\Request;
@@ -29,8 +30,8 @@ Route::post('/apprenant/register', [ApprenantController::class, 'store']);
 
 // Check posts
 
-
-
+//upload file
+Route::post('/user/upload', [FileUploadController::class, 'upload']);
 
 
 
@@ -59,6 +60,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/like/store', [PostLikeController::class, 'store']);
     //delete like
     Route::delete('/like/destroy', [PostLikeController::class, 'destroy']);
+
 });
 
 

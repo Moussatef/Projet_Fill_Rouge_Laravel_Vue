@@ -24,27 +24,49 @@ class AuthController extends Controller
             'linkedin' => 'nullable|string',
             'facebook' => 'nullable|string',
             'instagram' => 'nullable|string',
-            'img' => 'nullable|string',
-            'img_cover' => 'nullable|string',
+            'img_cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'bio' => 'nullable|string',
+            'data' => 'nullable'
         ]);
 
-        $personne = Personne::create([
-            'prenom' => $fields['prenom'],
-            'nom' => $fields['nom'],
-            'telephon' => $fields['telephon'],
-            'date_N' => $fields['date_N'],
-            'adresse' => $fields['adresse'],
-            'email' => $fields['email'],
-            'github' => $fields['github'],
-            'linkedin' => $fields['linkedin'],
-            'facebook' => $fields['facebook'],
-            'instagram' => $fields['instagram'],
-            'password' => bcrypt($fields['password']),
-            'img' => $fields['img'],
-            'img_cover' =>  $fields['img_cover'],
-            'bio' =>  $fields['bio'],
-        ]);
+        if ($fields['data']) {
+            $fileUpload = new FileUploadController;
+            $newname = $fileUpload->upload($request);
+
+            $personne = Personne::create([
+                'prenom' => $fields['prenom'],
+                'nom' => $fields['nom'],
+                'telephon' => $fields['telephon'],
+                'date_N' => $fields['date_N'],
+                'adresse' => $fields['adresse'],
+                'email' => $fields['email'],
+                'github' => $fields['github'],
+                'linkedin' => $fields['linkedin'],
+                'facebook' => $fields['facebook'],
+                'instagram' => $fields['instagram'],
+                'password' => bcrypt($fields['password']),
+                'img' => '../../../../PFA_Fill_Rouge/public/uploads/' . $newname,
+                'img_cover' =>  $fields['img_cover'],
+                'bio' =>  $fields['bio'],
+            ]);
+        } else {
+            $personne = Personne::create([
+                'prenom' => $fields['prenom'],
+                'nom' => $fields['nom'],
+                'telephon' => $fields['telephon'],
+                'date_N' => $fields['date_N'],
+                'adresse' => $fields['adresse'],
+                'email' => $fields['email'],
+                'github' => $fields['github'],
+                'linkedin' => $fields['linkedin'],
+                'facebook' => $fields['facebook'],
+                'instagram' => $fields['instagram'],
+                'password' => bcrypt($fields['password']),
+                'img' => "",
+                'img_cover' =>  $fields['img_cover'],
+                'bio' =>  $fields['bio'],
+            ]);
+        }
 
         $token = $personne->createToken('moussatefToken')->plainTextToken;
         $response = [

@@ -23,11 +23,12 @@
 
       <div class="absolute -bottom-14">
         <img
-          src="../../../../PFA_Fill_Rouge/public/uploads/ot.jpg"
+          :src="img"
           class="object-cover border-2 border-blue-600   w-40 h-40 rounded-full"
           alt="cover"
         />
         <label  class="cursor-pointer absolute left-36 bottom-2">
+          {{}}
           <svg
             class="h-5 w-5 "
             height="512pt"

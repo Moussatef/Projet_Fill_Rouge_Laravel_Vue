@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Personne extends Model
 {
@@ -28,6 +29,8 @@ class Personne extends Model
         'img_cover',
         'bio'
     ];
+
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -72,11 +75,15 @@ class Personne extends Model
 
     public function receivedLikes()
     {
-        return $this->hasManyThrough(Like::class,Post::class);
+        return $this->hasManyThrough(Like::class, Post::class);
     }
 
     public function receivedComments()
     {
-        return $this->hasManyThrough(Comment::class,Post::class);
+        return $this->hasManyThrough(Comment::class, Post::class);
+    }
+    public function getImageAttribute($value)
+    {
+        return Storage::url("image/" . $value);
     }
 }

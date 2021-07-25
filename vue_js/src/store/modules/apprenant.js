@@ -45,7 +45,7 @@ const actions = {
             linkedin: param[9],
             facebook: param[10],
             instagram: param[11],
-            data,
+            img:param[12],
             img_cover: param[13],
             bio: param[14],
 

@@ -16,7 +16,7 @@ class PersonneController extends Controller
     public function index()
     {
         //return all personnes
-        return Personne::all();
+        return Personne::get()->toArray();
     }
 
     /**

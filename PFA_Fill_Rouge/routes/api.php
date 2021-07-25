@@ -38,7 +38,7 @@ Route::post('/user/upload', [FileUploadController::class, 'upload']);
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
-    Route::get('/index', [PersonneController::class, 'index']);
+    Route::get('/personne/index', [PersonneController::class, 'index']);
     Route::get('/personne/id/{id}', [PersonneController::class, 'show'])->whereNumber('id');
     Route::get('/personne/fullname/id/{id}', [PersonneController::class, 'show_n'])->whereNumber('id');
     Route::put('/personne/update/{id}', [PersonneController::class, 'update'])->whereNumber('id');

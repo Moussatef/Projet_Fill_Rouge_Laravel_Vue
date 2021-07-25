@@ -45,6 +45,7 @@
                     </div>
                     <input
                       type="file"
+                      accept="image/*"
                       ref="profil_img"
                       class="hidden"
                       id="img_profile"
@@ -92,6 +93,7 @@
                           id="cover_img"
                           name="img_cover"
                           type="file"
+                          accept="image/*"
                           class="sr-only"
                         />
                       </label>
@@ -357,7 +359,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import axios from 'axios'
+import axios from "axios";
 export default {
   name: "AppRegister",
   data() {
@@ -380,8 +382,7 @@ export default {
       inp_img_cover: "",
       inp_bio: "",
       selectedFile: null,
-      nameImg:null
-      
+      nameImg: null,
     };
   },
   methods: {
@@ -430,72 +431,82 @@ export default {
       console.log(event.target.files[0]);
     },
     async uploadfile(param) {
+      const data = new FormData();
+      data.append("prenom", param[0]);
+      data.append("nom", param[1]);
+      data.append("email", param[2]);
+      data.append("password", param[3]);
+      data.append("password_confirmation", param[4]);
+      data.append("telephon", param[5]);
+      data.append("date_N", param[6]);
+      data.append("adresse", param[7]);
+      data.append("github", param[8]);
+      data.append("linkedin", param[9]);
+      data.append("facebook", param[10]);
+      data.append("instagram", param[11]);
+      data.append("img", param[12]);
+      data.append("img_cover", param[13]);
+      data.append("bio", param[14]);
 
-        const data = new FormData();
-        data.append(
-            "img",
-            param[0],
-        );
-
-        const response = await axios.post(`http://127.0.0.1:8000/api/user/upload`, data, {
-            headers: {
-                Accept: "application/json",
-            }
-
-        });
-        if (response.status == 200) {
-            const result = await response;
-            console.log(result.data);
-            this.nameImg = result.data
-
-        } else {
-            console.log(error);
+      const response = await axios.post(
+        `http://127.0.0.1:8000/api/apprenant/register`,
+        data,
+        {
+          headers: {
+            Accept: "application/json",
+          },
         }
+      );
+      if (response.status == 201) {
+        const result = await response;
+        console.log(result.data);
+        localStorage.setItem("user_token", result.data.personne.token);
+        localStorage.setItem("user_id", result.data.apprenant);
+        location.replace("/user/profile");
+      } else {
+        console.log(result);
+      }
     },
     onUpload() {
       if (this.selectedFile) {
-        // this.uploadfile([this.selectedFile]);
-        
-          this.registerApprenant([
-            this.inp_nom,
-            this.inp_prenom,
-            this.inp_email,
-            this.inp_password,
-            this.inp_password_confirmation,
-            this.inp_telephon,
-            this.inp_date_N,
-            this.inp_adresse,
-            this.inp_github,
-            this.inp_linkedin,
-            this.inp_facebook,
-            this.inp_instagram,
-            this.selectedFile,
-            this.inp_img_cover,
-            this.inp_bio,
-          ]);
-        } else
-          this.registerApprenant([
-            this.inp_nom,
-            this.inp_prenom,
-            this.inp_email,
-            this.inp_password,
-            this.inp_password_confirmation,
-            this.inp_telephon,
-            this.inp_date_N,
-            this.inp_adresse,
-            this.inp_github,
-            this.inp_linkedin,
-            this.inp_facebook,
-            this.inp_instagram,
-            this.inp_img,
-            this.inp_img_cover,
-            this.inp_bio,
-          ]);
-      
+        this.uploadfile([
+          this.inp_nom,
+          this.inp_prenom,
+          this.inp_email,
+          this.inp_password,
+          this.inp_password_confirmation,
+          this.inp_telephon,
+          this.inp_date_N,
+          this.inp_adresse,
+          this.inp_github,
+          this.inp_linkedin,
+          this.inp_facebook,
+          this.inp_instagram,
+          this.selectedFile,
+          this.inp_img_cover,
+          this.inp_bio,
+        ]);
+      } else
+        this.registerApprenant([
+          this.inp_nom,
+          this.inp_prenom,
+          this.inp_email,
+          this.inp_password,
+          this.inp_password_confirmation,
+          this.inp_telephon,
+          this.inp_date_N,
+          this.inp_adresse,
+          this.inp_github,
+          this.inp_linkedin,
+          this.inp_facebook,
+          this.inp_instagram,
+          this.inp_img,
+          this.inp_img_cover,
+          this.inp_bio,
+        ]);
     },
   },
-  computed: {
-  },
+  computed: {},
   created() {
     this.uploadImg();
     this.uploadCoverImg();

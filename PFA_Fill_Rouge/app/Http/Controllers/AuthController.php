@@ -24,12 +24,12 @@ class AuthController extends Controller
             'linkedin' => 'nullable|string',
             'facebook' => 'nullable|string',
             'instagram' => 'nullable|string',
+            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'img_cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
             'bio' => 'nullable|string',
-            'data' => 'nullable'
         ]);
 
-        if ($fields['data']) {
+        if ($fields['img']) {
             $fileUpload = new FileUploadController;
             $newname = $fileUpload->upload($request);
 
@@ -45,7 +45,7 @@ class AuthController extends Controller
                 'facebook' => $fields['facebook'],
                 'instagram' => $fields['instagram'],
                 'password' => bcrypt($fields['password']),
-                'img' => '../../../../PFA_Fill_Rouge/public/uploads/' . $newname,
+                'img' =>  $newname,
                 'img_cover' =>  $fields['img_cover'],
                 'bio' =>  $fields['bio'],
             ]);
@@ -70,7 +70,7 @@ class AuthController extends Controller
 
         $token = $personne->createToken('moussatefToken')->plainTextToken;
         $response = [
-            'personne_id' => $personne->id,
+            'personne' => $personne->img,
             'token' => $token
         ];
         return response($response, 201);

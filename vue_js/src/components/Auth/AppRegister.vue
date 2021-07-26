@@ -95,6 +95,7 @@
                           type="file"
                           accept="image/*"
                           class="sr-only"
+                          @change="onCoverImgSelected"
                         />
                       </label>
                     </div>
@@ -103,13 +104,15 @@
                     </p>
                   </div>
                 </div>
-                <div class="h-56 w-full my-4 bg-gray-200 overflow-hidden">
-                  <img
-                    class=" object-scale-down"
-                    src="#"
-                    id="img_cover"
-                    alt=""
-                  />
+                <div :class="hidden">
+                  <div class="h-56 w-full my-4 bg-gray-200 overflow-hidden">
+                    <img
+                      class=" object-scale-down"
+                      src="#"
+                      id="img_cover"
+                      alt=""
+                    />
+                  </div>
                 </div>
               </div>
               <div class="md:flex flex-row md:space-x-4 w-full text-xs">
@@ -382,7 +385,7 @@ export default {
       inp_img_cover: "",
       inp_bio: "",
       selectedFile: null,
-      nameImg: null,
+      selectedCover: null,
     };
   },
   methods: {
@@ -428,7 +431,9 @@ export default {
     },
     onfileSelected(event) {
       this.selectedFile = event.target.files[0];
-      console.log(event.target.files[0]);
+    },
+    onCoverImgSelected(event) {
+      this.selectedCover = event.target.files[0];
     },
     async uploadfile(param) {
       const data = new FormData();
@@ -445,7 +450,7 @@ export default {
       data.append("facebook", param[10]);
       data.append("instagram", param[11]);
       data.append("img", param[12]);
-      data.append("img_cover", param[13]);
+      data.append("cover", param[13]);
       data.append("bio", param[14]);
 
       const response = await axios.post(
@@ -468,7 +473,9 @@ export default {
       }
     },
     onUpload() {
-      if (this.selectedFile) {
+      if (this.selectedFile || this.selectedCover) {
+        this.inp_img = this.selectedFile;
+        this.inp_img_cover = this.selectedCover;
         this.uploadfile([
           this.inp_nom,
           this.inp_prenom,
@@ -482,7 +489,7 @@ export default {
           this.inp_linkedin,
           this.inp_facebook,
           this.inp_instagram,
-          this.selectedFile,
+          this.inp_img,
           this.inp_img_cover,
           this.inp_bio,
         ]);

@@ -2,48 +2,150 @@
   <div
     class="w-full shadow-fb  bg-white p-4 rounded-lg py-4 border-l-2 border-r-2 border-blue-400"
   >
-    <div class="flex space-x-2">
-      <img src="../../assets/ms.jpg" alt="img" class="h-10 w-10 rounded-full" />
-      <input
-        class="bg-fFill px-4 py-4 w-full focus:outline-none rounded-full"
-        placeholder="Write something to Roland…"
-      />
-      <hr />
+    <div class=" block">
+      <div class="flex space-x-2">
+        <img
+          :src="img_avatar + user_info.img"
+          alt="img"
+          class="h-10 w-10 rounded-full"
+        />
+        <input
+          class="bg-fFill px-4 py-4 w-full focus:outline-none rounded-full"
+          placeholder="Write something to Roland…"
+        />
+        <hr />
+      </div>
+      <div class=" w-full  ">
+        <textarea
+          class="border-b-2 w-full  focus:outline-none rounded-md"
+          name="description"
+          id=""
+          cols="30"
+          rows="10"
+          placeholder="Write description"
+        ></textarea>
+
+        <div class="flex">
+          <div class="flex" id="div_post">
+            <div
+              class="space-y-1 w-32 text-center border-2 border-dashed  py-5 "
+            >
+              <svg
+                class="mx-auto h-12 w-12 text-gray-400"
+                stroke="currentColor"
+                fill="none"
+                viewBox="0 0 48 48"
+                aria-hidden="true"
+              >
+                <path
+                  d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <div class="flex text-sm  text-gray-600">
+                <label
+                  for="cover_img"
+                  class="relative cursor-pointer mx-auto  bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                >
+                  <span class="">Upload a file</span>
+                  <input
+                    id="cover_img"
+                    name="img_cover"
+                    type="file"
+                    accept="image/*"
+                    class="sr-only"
+                  />
+                </label>
+              </div>
+              <p class="text-xs text-center text-gray-500">
+                PNG, JPG, GIF
+              </p>
+            </div>
+          </div>
+          <div class="w-32 text-center border-2 border-dashed mx-2 py-5">
+            <button >
+            <svg
+              class="h-20 w-14 mx-auto opacity-30 "
+              version="1.1"
+              id="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 477.867 477.867"
+              style="enable-background:new 0 0 0.867 0.867;  "
+              xml:space="preserve"
+            >
+              <g>
+                <g>
+                  <path
+                    d="M392.533,0h-307.2C38.228,0.056,0.056,38.228,0,85.333v307.2c0.056,47.105,38.228,85.277,85.333,85.333h307.2
+			c47.105-0.056,85.277-38.228,85.333-85.333v-307.2C477.81,38.228,439.638,0.056,392.533,0z M443.733,392.533
+			c0,28.277-22.923,51.2-51.2,51.2h-307.2c-28.277,0-51.2-22.923-51.2-51.2v-307.2c0-28.277,22.923-51.2,51.2-51.2h307.2
+			c28.277,0,51.2,22.923,51.2,51.2V392.533z"
+                  />
+                </g>
+              </g>
+              <g>
+                <g>
+                  <path
+                    d="M324.267,221.867H256V153.6c0-9.426-7.641-17.067-17.067-17.067s-17.067,7.641-17.067,17.067v68.267H153.6
+			c-9.426,0-17.067,7.641-17.067,17.067S144.174,256,153.6,256h68.267v68.267c0,9.426,7.641,17.067,17.067,17.067
+			S256,333.692,256,324.267V256h68.267c9.426,0,17.067-7.641,17.067-17.067S333.692,221.867,324.267,221.867z"
+                  />
+                </g>
+              </g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+              <g></g>
+            </svg>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="border border-gray-900 border-opacity-20 mt-2 " />
-
-    <button
-      class="flex justify-center items-center text-gray-900 w-full focus:outline-none mx-auto mt-2 py-3 rounded-lg transition duration-700 ease-in-out hover:bg-gray-200 hover:text-gray-700 "
-    >
-      <!-- <Image /> --><svg
-        class="h-6 w-6"
-        height="511pt"
-        viewBox="0 -21 511.98744 511"
-        width="511pt"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="m133.320312 373.828125c-34.152343 0-64.53125-21.867187-75.5625-54.421875l-.746093-2.453125c-2.601563-8.621094-3.691407-15.871094-3.691407-23.125v-145.453125l-51.753906 172.757812c-6.65625 25.410157 8.511719 51.753907 33.960938 58.773438l329.878906 88.34375c4.117188 1.066406 8.234375 1.578125 12.289062 1.578125 21.246094 0 40.660157-14.101563 46.101563-34.882813l19.21875-61.117187zm0 0"
-        />
-        <path
-          d="m191.988281 149.828125c23.53125 0 42.664063-19.136719 42.664063-42.667969s-19.132813-42.667968-42.664063-42.667968-42.667969 19.136718-42.667969 42.667968 19.136719 42.667969 42.667969 42.667969zm0 0"
-        />
-        <path
-          d="m458.652344.492188h-320c-29.394532 0-53.332032 23.9375-53.332032 53.335937v234.664063c0 29.398437 23.9375 53.335937 53.332032 53.335937h320c29.398437 0 53.335937-23.9375 53.335937-53.335937v-234.664063c0-29.398437-23.9375-53.335937-53.335937-53.335937zm-320 42.667968h320c5.890625 0 10.667968 4.777344 10.667968 10.667969v151.445313l-67.390624-78.636719c-7.148438-8.382813-17.496094-12.863281-28.609376-13.117188-11.050781.0625-21.417968 4.96875-28.5 13.460938l-79.234374 95.101562-25.8125-25.75c-14.589844-14.589843-38.335938-14.589843-52.90625 0l-58.878907 58.859375v-201.363281c0-5.890625 4.777344-10.667969 10.664063-10.667969zm0 0"
-        />
-      </svg>
-
-      <span class=" text-opacity-50 font-medium ml-2">
-        Photo/Video
-      </span>
-    </button>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "AppCreatePost",
+  data() {
+    return {
+      img_avatar: "http://127.0.0.1:8000",
+      cmp : 0
+    };
+  },
+  methods:{
+    addInput(){
+      var div_post = document.getElementById("div_post")
+      div_post.innerHTML += 
+      `
+        
+      `
+
+
+    }
+
+  },
   components: {},
+  computed: {
+    ...mapGetters(["user_info"]),
+  },
 };
 </script>

@@ -44,7 +44,7 @@
       </svg>
 
       <span class="ml-2">
-        {{ adresse }}
+        {{ user_info.adresse }}
       </span>
     </div>
     <div class="mt-4  flex items-center">
@@ -87,7 +87,7 @@
         <g></g>
       </svg>
       <span class="ml-2">
-        {{ email }}
+        {{ user_info.email }}
       </span>
     </div>
     <div class="mt-4 flex items-center">
@@ -104,7 +104,7 @@
           fill="#212121"
         />
       </svg>
-      <span class="ml-2">{{ github }}</span>
+      <span class="ml-2">{{ user_info.github }}</span>
     </div>
     <div class="mt-4 flex items-center">
       <svg
@@ -126,7 +126,7 @@
         </g>
       </svg>
 
-      <span class="ml-2">{{ linkedin }} </span>
+      <span class="ml-2">{{ user_info.linkedin }} </span>
     </div>
     <div class="mt-4 flex items-center">
       <svg
@@ -167,7 +167,7 @@
         <g></g>
         <g></g>
       </svg>
-      <span class="ml-2"> {{ facebook }} </span>
+      <span class="ml-2"> {{ user_info.facebook }} </span>
     </div>
     <div class="mt-4 flex items-center">
       <svg
@@ -251,7 +251,7 @@
         <g></g>
       </svg>
 
-      <span class="ml-2"> {{ instagram }} </span>
+      <span class="ml-2"> {{ user_info.instagram }} </span>
     </div>
     <div class="mt-4 flex items-center">
       <svg
@@ -303,8 +303,11 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
-  props: ["github", "email", "linkedin", "facebook", "instagram", "adresse"],
   name: "AppIntro",
+  computed: {
+    ...mapGetters(["user_info"]),
+  },
 };
 </script>

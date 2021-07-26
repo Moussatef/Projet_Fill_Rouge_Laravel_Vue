@@ -46,7 +46,7 @@ const actions = {
             facebook: param[10],
             instagram: param[11],
             img:param[12],
-            img_cover: param[13],
+            cover: param[13],
             bio: param[14],
 
         }, {
@@ -69,6 +69,8 @@ const actions = {
 
 
     },
+
+    
 
 }
 

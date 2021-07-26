@@ -6,7 +6,7 @@
       :nom="user_info.nom"
       :prenom="user_info.prenom"
       :img="user_info.img"
-      :img_cover="user_info.img_cover"
+      :imgCover="user_info.cover"
     />
     <div
       class="my-5 justify-center w-4/5 z-0 flex  flex-row flex-wrap pb-56 mx-auto  "
@@ -24,7 +24,7 @@
         <AppPhoto />
       </div>
       <div class=" w-3/6 space-y-4">
-        <AppCreatePost />
+        <AppCreatePost  />
 
         <AppPost
           v-for="post in posts_personne"

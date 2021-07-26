@@ -4,11 +4,22 @@
       class="relative h-96 rounded-xl flex justify-center sm:w-full md:w-full"
     >
       <img
-        src="../../assets/cover.jpg"
+        v-if="
+          cover != 'http://127.0.0.1:8000/storage/cover/' && img_src == false
+        "
+        :src="cover"
         class="object-cover w-full h-full rounded-3xl"
         alt="cover"
       />
+      <img
+        v-if="img_src == true"
+        :src="imagepreview"
+        class="object-cover w-full h-full rounded-3xl"
+        alt="cover need"
+        id="cover"
+      />
       <label
+        @click="$refs.cover_img.click()"
         class="cursor-pointer h-5 w-5 p-2 rounded-full border-2 border-gray-500  bg-indigo-600 "
       >
         <svg
@@ -22,12 +33,29 @@
             d="m512 80v106c0 11.046875-8.953125 20-20 20s-20-8.953125-20-20v-106c0-22.054688-17.945312-40-40-40h-352c-22.054688 0-40 17.945312-40 40v280c0 22.054688 17.945312 40 40 40h140c11.046875 0 20 8.953125 20 20s-8.953125 20-20 20h-140c-44.113281 0-80-35.886719-80-80v-280c0-44.113281 35.886719-80 80-80h352c44.113281 0 80 35.886719 80 80zm-428.105469 245.933594c8.800781 6.675781 21.34375 4.957031 28.023438-3.84375l28.40625-37.433594 52.773437 66.746094c3.792969 4.800781 9.574219 7.597656 15.6875 7.597656h.023438c6.125-.007812 11.90625-2.820312 15.695312-7.632812l153.859375-195.488282 31.207031 37.84375c7.023438 8.523438 19.628907 9.734375 28.152344 2.707032 8.523438-7.027344 9.734375-19.632813 2.707032-28.152344l-47-57c-3.851563-4.671875-9.601563-7.355469-15.65625-7.277344-6.050782.070312-11.746094 2.875-15.492188 7.628906l-153.53125 195.078125-53.0625-67.113281c-3.835938-4.851562-9.683594-7.621094-15.886719-7.59375-6.183593.0625-11.992187 2.980469-15.734375 7.910156l-44.011718 58c-6.679688 8.796875-4.957032 21.34375 3.839843 28.023438zm-3.894531-193.933594c0-33.085938 26.914062-60 60-60s60 26.914062 60 60-26.914062 60-60 60-60-26.914062-60-60zm40 0c0 11.027344 8.972656 20 20 20s20-8.972656 20-20-8.972656-20-20-20-20 8.972656-20 20zm374.425781 121.574219c23.394531 23.394531 23.394531 61.457031 0 84.851562l-109.570312 109.367188c-2.441407 2.4375-5.46875 4.199219-8.792969 5.117187l-80.722656 22.363282c-1.765625.488281-3.558594.726562-5.339844.726562-5.316406 0-10.5-2.121094-14.316406-6.035156-5.09375-5.21875-6.941406-12.800782-4.820313-19.777344l23.914063-78.726562c.957031-3.152344 2.675781-6.019532 5.007812-8.34375l109.804688-109.5625c23.378906-23.375 61.441406-23.375 84.835937.019531zm-60.457031 88.679687-28.289062-28.289062-74.089844 73.925781-11.882813 39.128906 40.609375-11.25zm32.171875-60.394531c-7.796875-7.800781-20.484375-7.800781-28.28125 0l-3.863281 3.851563 28.285156 28.285156 3.875-3.867188c7.785156-7.785156 7.785156-20.472656-.015625-28.269531zm0 0"
           />
         </svg>
-        <input type="file" name="img_cover" class="hidden" id="" />
+        <input
+          type="file"
+          accept="image/*"
+          name="inp_cover"
+          class="hidden"
+          id="inp_cover"
+          ref="cover_img"
+          @change="imageSelected"
+        />
       </label>
+
       <!-- ../../../../PFA_Fill_Rouge/public/uploads/ot.jpg -->
       <div class="absolute -bottom-14">
         <img
+          v-if="!!profile && img_profil == false"
           :src="profile"
+          class="object-cover border-2 border-blue-600   w-40 h-40 rounded-full"
+          alt="cover"
+          id="profile"
+        />
+        <img
+          v-else
+          :src="Profilepreview"
           class="object-cover border-2 border-blue-600   w-40 h-40 rounded-full"
           alt="cover"
         />
@@ -46,13 +74,21 @@
           <input
             type="file"
             class="hidden"
-            :multiple="multiple"
+            accept="image/*"
             name="img_profile"
-            :accept="accept"
+            id="inp_profile"
+            @change="profileSelected"
           />
         </label>
       </div>
     </div>
+    <button
+      v-if="img_src || img_profil"
+      @click="updateImage()"
+      class="my-2  h-9 w-20 inline-block float-right  bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
+    >
+      Save
+    </button>
     <div class="text-center mt-16 text-3xl font-bold text-fBlack">
       {{ nom }} {{ prenom }} <br />
     </div>
@@ -77,13 +113,83 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  props: ["nom", "prenom", "img", "img_cover"],
+  props: ["nom", "prenom", "img", "imgCover"],
   name: "AppProfile",
   data() {
     return {
-      profile: this.img,
+      profile: "http://127.0.0.1:8000" + this.img,
+      cover: "http://127.0.0.1:8000" + this.imgCover,
+      img_src: false,
+      img_profil: false,
+      selectedProfile: null,
+      image: null,
+      imagepreview: "../../assets/cover.jpg",
+      Profilepreview: "../../assets/ycc.jpg",
     };
+  },
+  methods: {
+    imageSelected(e) {
+      this.img_src = true;
+      this.image = e.target.files[0];
+
+      let reader = new FileReader();
+      reader.readAsDataURL(this.image);
+      reader.onload = (e) => {
+        this.imagepreview = e.target.result;
+      };
+    },
+    profileSelected(e) {
+      this.img_profil = true;
+      this.selectedProfile = e.target.files[0];
+
+      let reader = new FileReader();
+      reader.readAsDataURL(this.selectedProfile);
+      reader.onload = (e) => {
+        this.Profilepreview = e.target.result;
+      };
+    },
+    async updateImage() {
+      if (
+        this.img_src == true &&
+        this.img_profil == true &&
+        this.selectedProfile &&
+        this.image
+      ) {
+        var data = new FormData();
+        data.append("img", this.selectedProfile);
+        data.append("cover", this.image);
+
+        const result = await axios.post(
+          "http://127.0.0.1:8000/api/personne/update/img/" +
+            localStorage.getItem("personne_id"),
+          data,
+          {
+            headers: {
+              Accept: "application/json",
+              Authorization: "Bearer " + localStorage.getItem("user_token"),
+            },
+          }
+        );
+
+        if (result.status === 200) {
+          console.log(result);
+          this.img_profil = false;
+          this.img_src = false;
+          this.profile = "http://127.0.0.1:8000" + result.data.img;
+          this.cover = "http://127.0.0.1:8000" + result.data.cover;
+        } else {
+          console.log(result);
+        }
+      }
+    },
+  },
+  watch: {
+    selectedCover: function(value) {
+      if (value) {
+      }
+    },
   },
 };
 </script>

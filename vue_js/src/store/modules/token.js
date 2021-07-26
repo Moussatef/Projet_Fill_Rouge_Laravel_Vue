@@ -23,8 +23,9 @@ const actions = {
 
         });
         console.log(response.data)
-        localStorage.setItem("user_token",response.data.token)
-        localStorage.setItem("user_id",response.data.apprenant_id)
+        localStorage.setItem("user_token", response.data.token)
+        localStorage.setItem("user_id", response.data.apprenant_id)
+        localStorage.setItem("personne_id", response.data.id_personne)
 
         commit('setToken', response.data);
         location.replace("/user/profile")

@@ -7,7 +7,7 @@
       <div class="flex justify-between items-center">
         <div class="flex items-center">
           <img
-            src="../../assets/ms.jpg"
+            :src="img_avatar + user_info.img"
             alt="img"
             class="h-10 w-10 rounded-full"
           />
@@ -199,7 +199,7 @@
       <div class="border border-gray-500 border-opacity-20 mt-4" />
       <div class="flex space-x-2 my-4">
         <img
-          src="../../assets/ms.jpg"
+          :src="img_avatar + user_info.img"
           alt="img"
           class="h-10 w-10 mt-2 rounded-full"
         />
@@ -265,6 +265,7 @@ export default {
   name: "AppPost",
   data() {
     return {
+       img_avatar: "http://127.0.0.1:8000" ,
       date: moment(this.created_at, "YYYY-MM-DD HH:mm:ss"),
       likess: this.like.length,
       like_id: this.like,
@@ -307,7 +308,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["user_token"]),
+    ...mapGetters(["user_token","user_info"]),
   },
   beforeMount() {
     this.checkLikesId(this.like_id);

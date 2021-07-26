@@ -10,6 +10,7 @@
           class="h-10 w-10 rounded-full"
         />
         <input
+          v-model="title"
           class="bg-fFill px-4 py-4 w-full focus:outline-none rounded-full"
           placeholder="Write something to Roland…"
         />
@@ -17,6 +18,7 @@
       </div>
       <div class=" w-full  ">
         <textarea
+          v-model="description"
           class="border-b-2 w-full  focus:outline-none rounded-md"
           name="description"
           id=""
@@ -25,10 +27,38 @@
           placeholder="Write description"
         ></textarea>
 
-        <div class="flex">
-          <div class="flex" id="div_post">
+        <div class="flex items-center  h-46 w-full">
+          <div v-if="imagepreview[0]" class="w-30 h-40 overflow-hidden m-1">
+            <img
+              :src="imagepreview[0]"
+              class="py-2 h-30 w-36 object-center object-contain "
+              alt=""
+            />
+          </div>
+          <div v-if="imagepreview[1]" class="w-30 h-40 overflow-hidden m-1">
+            <img
+              :src="imagepreview[1]"
+              class="py-2 h-30 w-36 object-center object-contain "
+              alt=""
+            />
+          </div>
+          <div v-if="imagepreview[2]" class="w-30 h-40 overflow-hidden m-1">
+            <img
+              :src="imagepreview[2]"
+              class="py-2 h-30 w-36 object-center object-contain "
+              alt=""
+            />
+          </div>
+          <div v-if="imagepreview[3]" class="w-30 h-40 overflow-hidden m-1">
+            <img
+              :src="imagepreview[3]"
+              class="py-2 h-30 w-36 object-center object-contain "
+              alt=""
+            />
+          </div>
+          <div class="flex " id="div_post">
             <div
-              class="space-y-1 w-32 text-center border-2 border-dashed  py-5 "
+              class="space-y-1 w-36 object-center text-center border-2 border-dashed m-2  py-5 "
             >
               <svg
                 class="mx-auto h-12 w-12 text-gray-400"
@@ -56,6 +86,8 @@
                     type="file"
                     accept="image/*"
                     class="sr-only"
+                    @change="imageSelected"
+                    multiple
                   />
                 </label>
               </div>
@@ -64,57 +96,9 @@
               </p>
             </div>
           </div>
-          <div class="w-32 text-center border-2 border-dashed mx-2 py-5">
-            <button >
-            <svg
-              class="h-20 w-14 mx-auto opacity-30 "
-              version="1.1"
-              id="Capa_1"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              x="0px"
-              y="0px"
-              viewBox="0 0 477.867 477.867"
-              style="enable-background:new 0 0 0.867 0.867;  "
-              xml:space="preserve"
-            >
-              <g>
-                <g>
-                  <path
-                    d="M392.533,0h-307.2C38.228,0.056,0.056,38.228,0,85.333v307.2c0.056,47.105,38.228,85.277,85.333,85.333h307.2
-			c47.105-0.056,85.277-38.228,85.333-85.333v-307.2C477.81,38.228,439.638,0.056,392.533,0z M443.733,392.533
-			c0,28.277-22.923,51.2-51.2,51.2h-307.2c-28.277,0-51.2-22.923-51.2-51.2v-307.2c0-28.277,22.923-51.2,51.2-51.2h307.2
-			c28.277,0,51.2,22.923,51.2,51.2V392.533z"
-                  />
-                </g>
-              </g>
-              <g>
-                <g>
-                  <path
-                    d="M324.267,221.867H256V153.6c0-9.426-7.641-17.067-17.067-17.067s-17.067,7.641-17.067,17.067v68.267H153.6
-			c-9.426,0-17.067,7.641-17.067,17.067S144.174,256,153.6,256h68.267v68.267c0,9.426,7.641,17.067,17.067,17.067
-			S256,333.692,256,324.267V256h68.267c9.426,0,17.067-7.641,17.067-17.067S333.692,221.867,324.267,221.867z"
-                  />
-                </g>
-              </g>
-              <g></g>
-              <g></g>
-              <g></g>
-              <g></g>
-              <g></g>
-              <g></g>
-              <g></g>
-              <g></g>
-              <g></g>
-              <g></g>
-              <g></g>
-              <g></g>
-              <g></g>
-              <g></g>
-              <g></g>
-            </svg>
-            </button>
-          </div>
+        </div>
+        <div class="w-full text-right">
+        <button class="bg-blue-500 text-white py-1 px-4 border-b-2 border-gray-800 rounded-lg w-20  m-3 hover:bg-gray-50 hover:text-gray-600 hover:border-blue-500 transition duration-500 ease-in-out">Post</button>
         </div>
       </div>
     </div>
@@ -127,21 +111,33 @@ export default {
   name: "AppCreatePost",
   data() {
     return {
+      title: "",
+      description: "",
       img_avatar: "http://127.0.0.1:8000",
-      cmp : 0
+      img_src: [],
+
+      imagepreview: [],
+
+      image: [],
+
+      cmp: 0,
     };
   },
-  methods:{
-    addInput(){
-      var div_post = document.getElementById("div_post")
-      div_post.innerHTML += 
-      `
-        
-      `
+  methods: {
+    imageSelected(e) {
+      // console.log(e.target.files.length);
+      for (let i = 0; i < e.target.files.length; i++) {
+        this.img_src[i] = true;
+        this.image[i] = e.target.files[i];
 
-
-    }
-
+        let reader = new FileReader();
+        reader.readAsDataURL(this.image[i]);
+        reader.onload = (e) => {
+          this.imagepreview[i] = e.target.result;
+        };
+        this.cmp++;
+      }
+    },
   },
   components: {},
   computed: {

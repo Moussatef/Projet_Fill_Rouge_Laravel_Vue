@@ -314,7 +314,7 @@
               </div>
               <div class="relative">
                 <button
-                  @click="authent([inp_email,inp_password])"
+                  @click="authent([inp_email, inp_password])"
                   class="bg-blue-500 text-white rounded-md  px-10 py-1"
                 >
                   Login
@@ -323,6 +323,7 @@
               <div class="relative">
                 <p>Don't have account ?</p>
                 <button
+                  @click="register"
                   class="text-indigo-300 inline-flex items-center md:mb-2 lg:mb-0  "
                 >
                   Sign Up
@@ -362,6 +363,9 @@ export default {
 
   methods: {
     ...mapActions(["authent"]),
+    register() {
+      location.replace("/user/register");
+    },
     // async authent() {
     //   var myHeaders = new Headers();
     //   myHeaders.append("Accept", "application/json");
@@ -398,9 +402,6 @@ export default {
     //     });
     // },
   },
-  computed:{
-    
-  },
-
+  computed: {},
 };
 </script>

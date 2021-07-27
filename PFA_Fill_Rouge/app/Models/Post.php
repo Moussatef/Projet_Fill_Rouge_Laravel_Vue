@@ -9,6 +9,12 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'personne_id',
+        'titre',
+        'description',
+    ];
+
     public function personne()
     {
         return $this->hasOne(Personne::class);

@@ -8,14 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class PostProblem extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'post_id',
+        'categorie_id'
+    ];
     public function post()
     {
-        return $this->belongsTo(Post::class, 'foreign_key');
+        return $this->belongsTo(Post::class);
     }
 
     public function category()
     {
-        return $this->belongsTo(Categorie::class, 'foreign_key');
+        return $this->belongsTo(Categorie::class);
     }
 
 

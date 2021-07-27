@@ -11,6 +11,6 @@ class Categorie extends Model
 
     public function PostProblem()
     {
-        return $this->hasMany(PostProblem::class , 'foreign_key');
+        return $this->hasMany(PostProblem::class );
     }
 }

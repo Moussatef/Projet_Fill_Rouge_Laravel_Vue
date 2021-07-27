@@ -5,6 +5,7 @@
       :key="user_info.id"
       :nom="user_info.nom"
       :prenom="user_info.prenom"
+      :bio="user_info.bio"
       :img="user_info.img"
       :imgCover="user_info.cover"
     />
@@ -24,7 +25,7 @@
         <AppPhoto />
       </div>
       <div class=" w-3/6 space-y-4">
-        <AppCreatePost  />
+        <AppCreatePost />
 
         <AppPost
           v-for="post in posts_personne"
@@ -42,7 +43,9 @@
           :comment="post.comment"
           :post_profil="post.post_profil"
           :storcomment="commentPost"
+          :image="post.img_post"
         />
+
       </div>
     </div>
   </div>
@@ -89,8 +92,6 @@ export default {
     this.fetchUser([this.id_apprenant, this.token]);
     this.fetchPosts([this.id_apprenant, this.token]);
   },
-  beforeMount() {
-    
-  },
+  beforeMount() {},
 };
 </script>

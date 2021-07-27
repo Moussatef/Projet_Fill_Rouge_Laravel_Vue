@@ -215,7 +215,7 @@
       <router-link
         v-if="!token"
         class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
-        to="/signup"
+        to="/user/register"
         >Sign up</router-link
       >
       <div class="flex">
@@ -424,14 +424,14 @@
           <div class="pt-6">
             <router-link
               v-if="!token"
-              class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
+              class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold  bg-gray-50 hover:bg-gray-100 rounded-xl"
               to="/login"
               >Login</router-link
             >
             <router-link
               v-if="!token"
               class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl"
-              to="/signup"
+              to="/user/register"
               >Sign Up</router-link
             >
           </div>

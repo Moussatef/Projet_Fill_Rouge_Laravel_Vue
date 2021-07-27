@@ -12,7 +12,9 @@
     "core-js": "^3.6.5",
     "es6-promise": "^4.2.8",
     "vue": "^3.0.0",
+    "vue-carousel-card": "^2.0.0",
     "vue-router": "^4.0.0-0",
+    "vue-slick-carousel": "^1.0.6",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

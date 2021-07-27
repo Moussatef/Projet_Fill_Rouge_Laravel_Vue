@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class PostProfil extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'post_id'
+    ];
+
     public function post()
     {
-        return $this->belongsTo(Post::class, 'foreign_key');
+        return $this->belongsTo(Post::class);
     }
 }

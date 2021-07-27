@@ -48,11 +48,15 @@
         <p class="text-lg text-gray-900 mx-3">{{ title }}</p>
         <p class=" text-gray-900 mx-5">{{ description }}</p>
       </div>
-      <img
-        src="../../assets/black.jpg"
-        alt="img"
-        class="w-4/5  object-contain md:object-scale-down mx-auto mt-4 rounded"
-      />
+      <div class="grid  gap-4  w-full  " :class="gridNumber">
+        <div v-for="img in image_post" :key="img.id" class=" ">
+          <img
+            :src="'http://127.0.0.1:8000' + img.path"
+            alt="img"
+            class=" w-3/5  object-fill md:object-scale-down mx-auto mt-4 rounded"
+          />
+        </div>
+      </div>
       <div
         class="flex justify-between mt-4 items-center text-fGrey text-opacity-50"
       >
@@ -258,6 +262,7 @@ export default {
     "post_profil",
     "storcomment",
     "post",
+    "image",
   ],
   components: {
     AppComment,
@@ -265,7 +270,7 @@ export default {
   name: "AppPost",
   data() {
     return {
-       img_avatar: "http://127.0.0.1:8000" ,
+      img_avatar: "http://127.0.0.1:8000",
       date: moment(this.created_at, "YYYY-MM-DD HH:mm:ss"),
       likess: this.like.length,
       like_id: this.like,
@@ -278,6 +283,8 @@ export default {
       postProfile: this.post_profil,
       checkLike: true,
       post_p: this.post,
+      image_post: this.image,
+      gridNumber: "grid-cols-1",
     };
   },
   methods: {
@@ -306,12 +313,20 @@ export default {
         this.likess--;
       }
     },
+    checkImg() {
+      var lengthImg = this.image_post.length;
+      console.log(lengthImg);
+      if (lengthImg >= 2) {
+        this.gridNumber = "grid-cols-2";
+      }
+    },
   },
   computed: {
-    ...mapGetters(["user_token","user_info"]),
+    ...mapGetters(["user_token", "user_info", "posts_personne"]),
   },
   beforeMount() {
     this.checkLikesId(this.like_id);
+    this.checkImg();
   },
 };
 </script>

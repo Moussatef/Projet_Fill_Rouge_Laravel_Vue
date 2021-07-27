@@ -45,7 +45,7 @@ const actions = {
             linkedin: param[9],
             facebook: param[10],
             instagram: param[11],
-            img:param[12],
+            img: param[12],
             cover: param[13],
             bio: param[14],
 
@@ -61,6 +61,7 @@ const actions = {
             commit('newUser', response.data);
             localStorage.setItem("user_token", result.data.personne.token)
             localStorage.setItem("user_id", result.data.apprenant)
+            localStorage.setItem("personne_id", response.data.id_personne)
             location.replace("/user/profile")
         } else {
             console.log(error);
@@ -70,7 +71,7 @@ const actions = {
 
     },
 
-    
+
 
 }
 

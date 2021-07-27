@@ -93,6 +93,7 @@
       {{ nom }} {{ prenom }} <br />
     </div>
     <div>
+      <p class="text-md">{{bio}}</p>
       <p class="text-md">Apprenant</p>
       <p class="text-md">
         <strong>2K</strong> followers <strong>120</strong> following
@@ -115,7 +116,7 @@
 <script>
 import axios from "axios";
 export default {
-  props: ["nom", "prenom", "img", "imgCover"],
+  props: ["nom", "prenom", "img", "imgCover","bio"],
   name: "AppProfile",
   data() {
     return {
@@ -177,7 +178,7 @@ export default {
 
     async fetchdata(imgP, imgC, api) {
       var data = new FormData();
-  
+
       data.append("img", imgP);
       data.append("cover", imgC);
 

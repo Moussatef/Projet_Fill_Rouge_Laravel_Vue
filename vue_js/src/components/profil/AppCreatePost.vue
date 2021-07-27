@@ -11,15 +11,15 @@
         />
         <input
           v-model="title"
-          class="bg-fFill px-4 py-4 w-full focus:outline-none rounded-full"
+          class="bg-fFill px-4 py-4 w-full border-b-2 my-2 focus:outline-none "
           placeholder="Write something to Roland…"
         />
         <hr />
       </div>
-      <div class=" w-full  ">
+      <div v-if="title" class="w-full post-div">
         <textarea
           v-model="description"
-          class="border-b-2 w-full  focus:outline-none rounded-md"
+          class="border-b-2 w-full my-3 focus:outline-none rounded-md"
           name="description"
           id=""
           cols="30"
@@ -97,8 +97,13 @@
             </div>
           </div>
         </div>
-        <div class="w-full text-right">
-        <button class="bg-blue-500 text-white py-1 px-4 border-b-2 border-gray-800 rounded-lg w-20  m-3 hover:bg-gray-50 hover:text-gray-600 hover:border-blue-500 transition duration-500 ease-in-out">Post</button>
+        <div v-if="title && description" class="w-full text-right ">
+          <button
+            @click="sendData"
+            class="bg-blue-500 text-white py-1 px-4 border-b-2 border-gray-800 rounded-lg w-20  m-3 hover:bg-gray-50 hover:text-gray-600 hover:border-blue-500 transition duration-500 ease-in-out"
+          >
+            Post
+          </button>
         </div>
       </div>
     </div>
@@ -115,15 +120,28 @@ export default {
       description: "",
       img_avatar: "http://127.0.0.1:8000",
       img_src: [],
-
       imagepreview: [],
-
       image: [],
-
       cmp: 0,
     };
   },
   methods: {
+    ...mapActions(["newPost"]),
+    sendData() {
+      let data = {
+        personne_id: localStorage.getItem("personne_id"),
+        titre: this.title,
+        description: this.description,
+        img_one: this.image[0],
+        img_two: this.image[1],
+        img_three: this.image[2],
+        img_fore: this.image[3],
+      };
+      this.newPost(data);
+      this.imagepreview[0] = null;
+      this.title = "";
+      this.description = "";
+    },
     imageSelected(e) {
       // console.log(e.target.files.length);
       for (let i = 0; i < e.target.files.length; i++) {
@@ -145,3 +163,9 @@ export default {
   },
 };
 </script>
+
+<style lang="css" scoped>
+.post-div {
+  transition: 0.3s ease-in-out;
+}
+</style>

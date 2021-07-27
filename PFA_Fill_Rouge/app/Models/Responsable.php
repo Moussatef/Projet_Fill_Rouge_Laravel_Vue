@@ -14,6 +14,6 @@ class Responsable extends Model
 
     public function personne()
     {
-        return $this->belongsTo(Personne::class, 'foreign_key');
+        return $this->belongsTo(Personne::class);
     }
 }

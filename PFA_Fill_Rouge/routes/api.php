@@ -57,6 +57,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //get posts personne authenticate
     Route::get('/profile/post/{id}', [PostController::class, 'getPostProfile']);
+    //add new post profile
+    Route::post('/profile/post/add', [PostController::class, 'storeProfile']);
+    //add new post problem
+    Route::post('/problem/post/add', [PostController::class, 'storeProblem']);
     //comment save
     Route::post('/comment/store', [CommentController::class, 'store']);
     //add like

@@ -26,7 +26,7 @@ class Personne extends Model
         'instagram',
         'password',
         'img',
-        'img_cover',
+        'cover',
         'bio'
     ];
 
@@ -82,8 +82,12 @@ class Personne extends Model
     {
         return $this->hasManyThrough(Comment::class, Post::class);
     }
-    public function getImageAttribute($value)
+    public function getImgAttribute($value)
     {
         return Storage::url("image/" . $value);
+    }
+    public function getCoverAttribute($value)
+    {
+        return Storage::url("cover/" . $value);
     }
 }

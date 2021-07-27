@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+
     public static  function register(Request $request)
     {
+        $fileUpload = new FileUploadController;
+
         $fields = $request->validate([
             'prenom' => 'required|string',
             'nom' => 'required|string',
@@ -24,53 +27,32 @@ class AuthController extends Controller
             'linkedin' => 'nullable|string',
             'facebook' => 'nullable|string',
             'instagram' => 'nullable|string',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
-            'img_cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'img' =>       'nullable|image|mimes:jpeg,png,jpg,gif,svg,JPG,PNG,JPEG,GIF,SVG',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,JPG,PNG,JPEG,GIF,SVG',
             'bio' => 'nullable|string',
         ]);
+        $newnameProfile = !empty($fields['img']) ?  $fileUpload->upload($fields['img'], 'public/image') : '';
+        $newnameCover = !empty($fields['cover']) ?  $fileUpload->upload($fields['cover'], 'public/cover') : '';
 
-        if ($fields['img']) {
-            $fileUpload = new FileUploadController;
-            $newname = $fileUpload->upload($request);
-
-            $personne = Personne::create([
-                'prenom' => $fields['prenom'],
-                'nom' => $fields['nom'],
-                'telephon' => $fields['telephon'],
-                'date_N' => $fields['date_N'],
-                'adresse' => $fields['adresse'],
-                'email' => $fields['email'],
-                'github' => $fields['github'],
-                'linkedin' => $fields['linkedin'],
-                'facebook' => $fields['facebook'],
-                'instagram' => $fields['instagram'],
-                'password' => bcrypt($fields['password']),
-                'img' =>  $newname,
-                'img_cover' =>  $fields['img_cover'],
-                'bio' =>  $fields['bio'],
-            ]);
-        } else {
-            $personne = Personne::create([
-                'prenom' => $fields['prenom'],
-                'nom' => $fields['nom'],
-                'telephon' => $fields['telephon'],
-                'date_N' => $fields['date_N'],
-                'adresse' => $fields['adresse'],
-                'email' => $fields['email'],
-                'github' => $fields['github'],
-                'linkedin' => $fields['linkedin'],
-                'facebook' => $fields['facebook'],
-                'instagram' => $fields['instagram'],
-                'password' => bcrypt($fields['password']),
-                'img' => "",
-                'img_cover' =>  $fields['img_cover'],
-                'bio' =>  $fields['bio'],
-            ]);
-        }
-
+        $personne = Personne::create([
+            'prenom' => $fields['prenom'],
+            'nom' => $fields['nom'],
+            'telephon' => $fields['telephon'],
+            'date_N' => $fields['date_N'],
+            'adresse' => $fields['adresse'],
+            'email' => $fields['email'],
+            'github' => $fields['github'],
+            'linkedin' => $fields['linkedin'],
+            'facebook' => $fields['facebook'],
+            'instagram' => $fields['instagram'],
+            'password' => bcrypt($fields['password']),
+            'img' =>  $newnameProfile,
+            'cover' =>  $newnameCover,
+            'bio' =>  $fields['bio'],
+        ]);
         $token = $personne->createToken('moussatefToken')->plainTextToken;
         $response = [
-            'personne' => $personne->img,
+            'personne_id' => $personne->id,
             'token' => $token
         ];
         return response($response, 201);
@@ -150,6 +132,7 @@ class AuthController extends Controller
 
         $response = [
             'apprenant_id' => $personne->apprenant->id,
+            'id_personne' => $personne->id,
             'token' => $token
         ];
 

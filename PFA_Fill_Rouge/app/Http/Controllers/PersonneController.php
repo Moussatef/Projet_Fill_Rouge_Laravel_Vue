@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apprenant;
 use App\Models\Personne;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class PersonneController extends Controller
     public function index()
     {
         //return all personnes
-        return Personne::get()->toArray();
+        return Personne::all();
     }
 
     /**
@@ -72,6 +73,67 @@ class PersonneController extends Controller
         //
         $personne = Personne::find($id);
         $personne->update($request->all());
+        return $personne;
+    }
+
+    public function updateImg(Request $request, $id)
+    {
+        $fields = $request->validate([
+            'img' =>  'required|image|mimes:jpeg,png,jpg,gif,svg,JPG,PNG,JPEG,GIF,SVG',
+            'cover' => 'required|image|mimes:jpeg,png,jpg,gif,svg,JPG,PNG,JPEG,GIF,SVG',
+        ]);
+        $fileUpload = new FileUploadController;
+        $newnameProfile = !empty($fields['img']) ?  $fileUpload->upload($fields['img'], 'public/image') : '';
+        $newnameCover = !empty($fields['cover']) ?  $fileUpload->upload($fields['cover'], 'public/cover') : '';
+        $personne = Personne::find($id);
+        // $personne->update([
+        //     'img' => $newnameProfile,
+        //     'cover' => $newnameCover
+
+        // ]);
+
+        $personne->img = $newnameProfile;
+        $personne->cover = $newnameCover;
+        $personne->save();
+
+        return $personne;
+    }
+    public function updateImgProfile(Request $request, $id)
+    {
+        $fields = $request->validate([
+            'img' =>  'required|image|mimes:jpeg,png,jpg,gif,svg,JPG,PNG,JPEG,GIF,SVG',
+        ]);
+        $fileUpload = new FileUploadController;
+        $newnameProfile = !empty($fields['img']) ?  $fileUpload->upload($fields['img'], 'public/image') : '';
+        $personne = Personne::find($id);
+        // $personne->update([
+        //     'img' => $newnameProfile,
+        //     'cover' => $newnameCover
+
+        // ]);
+
+        $personne->img = $newnameProfile;
+        $personne->save();
+
+        return $personne;
+    }
+    public function updateImgCover(Request $request, $id)
+    {
+        $fields = $request->validate([
+            'cover' => 'required|image|mimes:jpeg,png,jpg,gif,svg,JPG,PNG,JPEG,GIF,SVG',
+        ]);
+        $fileUpload = new FileUploadController;
+        $newnameCover = !empty($fields['cover']) ?  $fileUpload->upload($fields['cover'], 'public/cover') : '';
+        $personne = Personne::find($id);
+        // $personne->update([
+        //     'img' => $newnameProfile,
+        //     'cover' => $newnameCover
+
+        // ]);
+
+        $personne->cover = $newnameCover;
+        $personne->save();
+
         return $personne;
     }
 

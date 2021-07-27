@@ -42,6 +42,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/personne/id/{id}', [PersonneController::class, 'show'])->whereNumber('id');
     Route::get('/personne/fullname/id/{id}', [PersonneController::class, 'show_n'])->whereNumber('id');
     Route::put('/personne/update/{id}', [PersonneController::class, 'update'])->whereNumber('id');
+    Route::post('/personne/update/img/both/{id}', [PersonneController::class, 'updateImg'])->whereNumber('id');
+    Route::post('/personne/update/img/profile/{id}', [PersonneController::class, 'updateImgProfile'])->whereNumber('id');
+    Route::post('/personne/update/img/cover/{id}', [PersonneController::class, 'updateImgCover'])->whereNumber('id');
     Route::post('/personne/delete', [PersonneController::class, 'destroy'])->whereNumber('id');
     Route::post('/logout', [AuthController::class, 'logout']);
 

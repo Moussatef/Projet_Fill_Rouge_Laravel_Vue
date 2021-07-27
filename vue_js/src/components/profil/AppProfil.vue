@@ -150,38 +150,59 @@ export default {
         this.Profilepreview = e.target.result;
       };
     },
-    async updateImage() {
+    updateImage() {
       if (
         this.img_src == true &&
         this.img_profil == true &&
         this.selectedProfile &&
         this.image
       ) {
-        var data = new FormData();
-        data.append("img", this.selectedProfile);
-        data.append("cover", this.image);
+        this.fetchdata(this.selectedProfile, this.image, "both");
+      } else if (
+        this.img_src == true &&
+        this.img_profil == false &&
+        !this.selectedProfile &&
+        this.image
+      ) {
+        this.fetchdata(this.selectedProfile, this.image, "cover");
+      } else if (
+        this.img_src == false &&
+        this.img_profil == true &&
+        this.selectedProfile &&
+        !this.image
+      ) {
+        this.fetchdata(this.selectedProfile, this.image, "profile");
+      }
+    },
 
-        const result = await axios.post(
-          "http://127.0.0.1:8000/api/personne/update/img/" +
-            localStorage.getItem("personne_id"),
-          data,
-          {
-            headers: {
-              Accept: "application/json",
-              Authorization: "Bearer " + localStorage.getItem("user_token"),
-            },
-          }
-        );
+    async fetchdata(imgP, imgC, api) {
+      var data = new FormData();
+  
+      data.append("img", imgP);
+      data.append("cover", imgC);
 
-        if (result.status === 200) {
-          console.log(result);
-          this.img_profil = false;
-          this.img_src = false;
-          this.profile = "http://127.0.0.1:8000" + result.data.img;
-          this.cover = "http://127.0.0.1:8000" + result.data.cover;
-        } else {
-          console.log(result);
+      const result = await axios.post(
+        "http://127.0.0.1:8000/api/personne/update/img/" +
+          api +
+          "/" +
+          localStorage.getItem("personne_id"),
+        data,
+        {
+          headers: {
+            Accept: "application/json",
+            Authorization: "Bearer " + localStorage.getItem("user_token"),
+          },
         }
+      );
+
+      if (result.status === 200) {
+        console.log(result);
+        this.img_profil = false;
+        this.img_src = false;
+        this.profile = "http://127.0.0.1:8000" + result.data.img;
+        this.cover = "http://127.0.0.1:8000" + result.data.cover;
+      } else {
+        console.log(result);
       }
     },
   },

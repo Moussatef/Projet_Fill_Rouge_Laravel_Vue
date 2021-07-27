@@ -45,7 +45,6 @@
           :storcomment="commentPost"
           :image="post.img_post"
         />
-
       </div>
     </div>
   </div>
@@ -64,6 +63,7 @@ export default {
   data() {
     return {
       token: localStorage.getItem("user_token"),
+      personne_id: localStorage.getItem("personne_id"),
       id_apprenant: localStorage.getItem("user_id"),
       apprenant: undefined,
       posts: undefined,
@@ -90,7 +90,7 @@ export default {
   },
   created() {
     this.fetchUser([this.id_apprenant, this.token]);
-    this.fetchPosts([this.id_apprenant, this.token]);
+    this.fetchPosts([this.personne_id, this.token]);
   },
   beforeMount() {},
 };

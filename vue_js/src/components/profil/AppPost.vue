@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="postProfile"
-      class="w-full shadow-fb rounded-3xl border-r-2 border-l-2 border-blue-400 bg-white p-4 my-5"
+      class="w-4/5 shadow-fb rounded-3xl border-r-2 border-l-2 border-blue-400 bg-white p-4 my-5"
     >
       <div class="flex justify-between items-center">
         <div class="flex items-center">

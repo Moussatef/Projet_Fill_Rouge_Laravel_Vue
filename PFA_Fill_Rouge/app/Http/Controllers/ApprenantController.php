@@ -41,7 +41,8 @@ class ApprenantController extends Controller
         ]);
         $res = array(
             'personne' => $personne->original,
-            'apprenant' => $apprenant->id
+            'apprenant' => $apprenant->id,
+            'personne_id' => $apprenant->personne_id,
 
         );
         return response($res, 201);

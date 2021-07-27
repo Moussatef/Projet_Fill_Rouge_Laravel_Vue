@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Personne;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ImageController extends Controller
 {
@@ -13,7 +15,6 @@ class ImageController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -30,12 +31,30 @@ class ImageController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $this->validate($request, [
+            'personne_id' => 'required'
+        ]);
+        // $image = Personne::find($request->personne_id)->post()->imgPost;
+        // SELECT i.* FROM personnes p INNER JOIN posts ps ON p.id=ps.personne_id INNER JOIN img_posts i on ps.id = i.post_id WHERE p.id =1
+        $image = DB::table('personnes')
+            ->join('posts', 'personnes.id', '=', 'posts.personne_id')
+            ->join('img_posts', 'posts.id', '=', 'img_posts.post_id')
+            ->where('personnes.id', '=', $request->personne_id)
+            ->select('img_posts.*')
+            ->limit(4)
+            ->get();
+
+
+        if ($image)
+            return response($image, 200);
+        else
+            return response('no photo is here now', 404);
     }
 
     /**

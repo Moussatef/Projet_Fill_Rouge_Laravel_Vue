@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full shadow-fb  bg-white p-4 rounded-lg py-4 border-l-2 border-r-2 border-blue-400"
+    class="w-4/5  shadow-fb  bg-white p-4 rounded-lg py-4 border-l-2 border-r-2 border-blue-400"
   >
     <div class=" block">
       <div class="flex space-x-2">

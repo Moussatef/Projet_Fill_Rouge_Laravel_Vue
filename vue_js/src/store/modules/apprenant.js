@@ -61,7 +61,7 @@ const actions = {
             commit('newUser', response.data);
             localStorage.setItem("user_token", result.data.personne.token)
             localStorage.setItem("user_id", result.data.apprenant)
-            localStorage.setItem("personne_id", response.data.id_personne)
+            localStorage.setItem("personne_id", response.data.personne_id)
             location.replace("/user/profile")
         } else {
             console.log(error);

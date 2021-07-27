@@ -1,9 +1,9 @@
 <template>
   <div
-    class="shadow-fb  w-full px-20 bg-white rounded-lg py-6 border-r-2 border-l-2 border-blue-500"
+    class="shadow-fb  w-8/12 px-4 bg-white rounded-lg py-6 border-r-2 border-l-2 border-blue-500"
   >
-    <div class="text-xl  font-bold text-fBlack">Intro</div>
-    <div class="mt-4  flex items-center">
+    <div class="text-xl   font-bold text-fBlack">Intro</div>
+    <div class="mt-5 mx-auto w-4/5  flex items-center">
       <svg
         class="h-5 w-5"
         version="1.1"
@@ -47,7 +47,7 @@
         {{ user_info.adresse }}
       </span>
     </div>
-    <div class="mt-4  flex items-center">
+    <div class="mt-4 mx-auto w-4/5  flex items-center">
       <svg
         class="h-5 w-5"
         version="1.1"
@@ -90,7 +90,7 @@
         {{ user_info.email }}
       </span>
     </div>
-    <div class="mt-4 flex items-center">
+    <div class="mt-4 mx-auto w-4/5 flex items-center">
       <svg
         class="h-5 w-5"
         enable-background="new 0 0 24 24"
@@ -106,7 +106,7 @@
       </svg>
       <span class="ml-2">{{ user_info.github }}</span>
     </div>
-    <div class="mt-4 flex items-center">
+    <div class="mt-4 mx-auto w-4/5 flex items-center">
       <svg
         class="h-5 w-5"
         enable-background="new 0 0 24 24"
@@ -128,7 +128,7 @@
 
       <span class="ml-2">{{ user_info.linkedin }} </span>
     </div>
-    <div class="mt-4 flex items-center">
+    <div class="mt-4 mx-auto w-4/5 flex items-center">
       <svg
         class="h-5 w-5"
         version="1.1"
@@ -169,7 +169,7 @@
       </svg>
       <span class="ml-2"> {{ user_info.facebook }} </span>
     </div>
-    <div class="mt-4 flex items-center">
+    <div class="mt-4 mx-auto w-4/5 flex items-center">
       <svg
         class="h-6 w-6"
         version="1.1"
@@ -253,7 +253,7 @@
 
       <span class="ml-2"> {{ user_info.instagram }} </span>
     </div>
-    <div class="mt-4 flex items-center">
+    <div class="mt-4 mx-auto w-4/5 flex items-center">
       <svg
         class="h-5 w-5"
         version="1.1"

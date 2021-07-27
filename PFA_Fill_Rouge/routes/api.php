@@ -5,6 +5,7 @@ use App\Http\Controllers\ApprenantController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
 use Illuminate\Http\Request;
@@ -61,6 +62,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/profile/post/add', [PostController::class, 'storeProfile']);
     //add new post problem
     Route::post('/problem/post/add', [PostController::class, 'storeProblem']);
+    //show photos
+    Route::post('/profile/image', [ImageController::class, 'show']);
     //comment save
     Route::post('/comment/store', [CommentController::class, 'store']);
     //add like

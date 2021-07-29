@@ -2,7 +2,7 @@
   <div>
     <div
       v-if="postProfile"
-      class="w-4/5 shadow-fb rounded-3xl border-r-2 border-l-2 border-blue-400 bg-white p-4 my-5"
+      class="w-full shadow-xl rounded-3xl border-r-2 border-l-2 border-blue-400 bg-white p-4 my-5"
     >
       <div class="flex justify-between items-center">
         <div class="flex items-center">
@@ -13,7 +13,7 @@
           />
           <div class="ml-4">
             <span class="cursor-pointer font-bold"
-              >{{ nom }} {{ prenom }}
+              >{{ user_info.nom }} {{ user_info.prenom }}
             </span>
             <span class="text-grey text-opacity-50 text-sm mx-3">{{
               date.fromNow()
@@ -45,23 +45,19 @@
         </button>
       </div>
       <div class="w-full mt-4 text-justify">
-        <p class="text-lg text-gray-900 mx-3">{{ title }}</p>
-        <p class=" text-gray-900 mx-5">{{ description }}</p>
+        <p class="text-lg text-gray-900 ">{{ title }}</p>
+        <p class=" text-gray-900 ">{{ description }}</p>
       </div>
       <div
-        class="grid  gap-4  w-full "
+        class="grid  gap-4  w-full cursor-pointer "
         :class="gridNumber"
         @click="$emit('showPost', post_p)"
       >
-        <div
-          v-for="img in image_post"
-          :key="img.id"
-          class="bg-gradient-to-r from-gray-300 via-blue-500 to-gray-300   "
-        >
+        <div v-for="img in image_post" :key="img.id" class="  ">
           <img
             :src="'http://127.0.0.1:8000' + img.path"
             alt="img"
-            class=" w-4/5  object-fill md:object-scale-down mx-auto my-4 rounded"
+            class="object-cover h-96 w-full  mx-auto my-4 rounded"
           />
         </div>
       </div>
@@ -99,9 +95,6 @@
               </g>
             </g>
           </svg>
-          <!-- <div v-for="lik in like" :key="lik.id">
-            <h1 >{{lik.id}}</h1>
-          </div> -->
           {{ likess }} Likes
         </div>
         <div>{{ comments_length }} Comment</div>

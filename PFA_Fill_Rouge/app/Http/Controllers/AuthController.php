@@ -31,8 +31,8 @@ class AuthController extends Controller
             'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,JPG,PNG,JPEG,GIF,SVG',
             'bio' => 'nullable|string',
         ]);
-        $newnameProfile = !empty($fields['img']) ?  $fileUpload->upload($fields['img'], 'public/image') : '';
-        $newnameCover = !empty($fields['cover']) ?  $fileUpload->upload($fields['cover'], 'public/cover') : '';
+        $newnameProfile = !empty($fields['img']) ?  $fileUpload->upload($fields['img'], 'public/image') : 'ycc.jpg';
+        $newnameCover = !empty($fields['cover']) ?  $fileUpload->upload($fields['cover'], 'public/cover') : 'cover.jpg';
 
         $personne = Personne::create([
             'prenom' => $fields['prenom'],

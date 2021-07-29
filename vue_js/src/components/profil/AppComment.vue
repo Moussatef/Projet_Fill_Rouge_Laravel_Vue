@@ -7,7 +7,9 @@
     >
       {{ user_name }} {{ lastname }}
     </h3>
-    <p class="leading-relaxed break-words  overflow-ellipsis overflow-y-auto  md:mb-2 lg:mb-0 ml-4 w-96 md:truncate">
+    <p
+      class="leading-relaxed break-words  overflow-ellipsis overflow-y-auto  md:mb-2 lg:mb-0 ml-4 w-96 md:truncate"
+    >
       {{ comment_body }}
     </p>
     <p class="leading-relaxed text-xs  text-gray-500 md:mb-2 lg:mb-0 ml-4">

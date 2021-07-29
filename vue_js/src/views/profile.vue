@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-300">
+  <div class="bg-gray-100">
     <AppProfile
       v-if="user_info.id"
       :key="user_info.id"
@@ -10,9 +10,9 @@
       :imgCover="user_info.cover"
     />
     <div
-      class="my-5 justify-center lg:w-10/12 md:4/6 z-0 flex  flex-wrap pb-56 mx-auto "
+      class="my-5 justify-center max-w-screen-2xl md:4/6 z-0 flex lg:grid lg:gap-12 grid-cols-3 pb-56 mx-auto "
     >
-      <div class=" mb-5 w-5/12 space-y-4">
+      <div class=" mb-5 space-y-4 col-span-1">
         <AppIntro
           :key="user_info.id"
           :github="user_info.github"
@@ -24,7 +24,7 @@
         />
         <AppPhoto />
       </div>
-      <div class=" w-7/12  space-y-4">
+      <div class=" w-full col-start-2 col-span-3 space-y-4">
         <AppCreatePost />
 
         <AppPost

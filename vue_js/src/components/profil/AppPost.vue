@@ -48,12 +48,20 @@
         <p class="text-lg text-gray-900 mx-3">{{ title }}</p>
         <p class=" text-gray-900 mx-5">{{ description }}</p>
       </div>
-      <div class="grid  gap-4  w-full  " :class="gridNumber">
-        <div v-for="img in image_post" :key="img.id" class=" ">
+      <div
+        class="grid  gap-4  w-full  "
+        :class="gridNumber"
+        @click="$emit('showPost', post_p)"
+      >
+        <div
+          v-for="img in image_post"
+          :key="img.id"
+          class="bg-gradient-to-r from-gray-300 via-blue-500 to-gray-300   "
+        >
           <img
             :src="'http://127.0.0.1:8000' + img.path"
             alt="img"
-            class=" w-3/5  object-fill md:object-scale-down mx-auto mt-4 rounded"
+            class=" w-4/5  object-fill md:object-scale-down mx-auto my-4 rounded"
           />
         </div>
       </div>
@@ -94,7 +102,6 @@
           <!-- <div v-for="lik in like" :key="lik.id">
             <h1 >{{lik.id}}</h1>
           </div> -->
-
           {{ likess }} Likes
         </div>
         <div>{{ comments_length }} Comment</div>
@@ -264,6 +271,7 @@ export default {
     "post",
     "image",
   ],
+  emits: ["showPost"],
   components: {
     AppComment,
   },

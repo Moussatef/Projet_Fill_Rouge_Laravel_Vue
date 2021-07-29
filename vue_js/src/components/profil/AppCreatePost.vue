@@ -10,13 +10,15 @@
           class="h-10 w-10 rounded-full"
         />
         <input
+          @focus="onfocusin"
+          @blur="onlivein"
           v-model="title"
           class="bg-fFill px-4 py-4 w-full border-b-2 my-2 focus:outline-none "
           placeholder="Write something to Roland…"
         />
         <hr />
       </div>
-      <div v-if="title" class="w-full post-div">
+      <div v-if="addImg || title" class="w-full post-div">
         <textarea
           v-model="description"
           class="border-b-2 w-full my-3 focus:outline-none rounded-md"
@@ -123,6 +125,7 @@ export default {
       imagepreview: [],
       image: [],
       cmp: 0,
+      addImg: false,
     };
   },
   methods: {
@@ -155,6 +158,12 @@ export default {
         };
         this.cmp++;
       }
+    },
+    onfocusin() {
+      this.addImg = true;
+    },
+    onlivein() {
+      this.addImg = false;
     },
   },
   components: {},

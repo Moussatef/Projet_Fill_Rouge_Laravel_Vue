@@ -10,9 +10,9 @@
       :imgCover="user_info.cover"
     />
     <div
-      class="my-5 justify-center w-4/5 z-0 flex  flex-row flex-wrap pb-56 mx-auto  "
+      class="my-5 justify-center lg:w-10/12 md:4/6 z-0 flex  flex-wrap pb-56 mx-auto "
     >
-      <div class="mx-6 mb-5 w-2/6  space-y-4">
+      <div class=" mb-5 w-5/12 space-y-4">
         <AppIntro
           :key="user_info.id"
           :github="user_info.github"
@@ -24,7 +24,7 @@
         />
         <AppPhoto />
       </div>
-      <div class=" w-3/6 space-y-4">
+      <div class=" w-7/12  space-y-4">
         <AppCreatePost />
 
         <AppPost
@@ -44,9 +44,11 @@
           :post_profil="post.post_profil"
           :storcomment="commentPost"
           :image="post.img_post"
+          @showPost="getPost"
         />
       </div>
     </div>
+    <AppShowPost v-if="show_post" :postinfo="post" @disablePost="disable" />
   </div>
 </template>
 
@@ -57,6 +59,7 @@ import AppIntro from "@/components/profil/AppIntro";
 import AppCreatePost from "@/components/profil/AppCreatePost";
 import AppPost from "@/components/profil/AppPost";
 import AppPhoto from "@/components/profil/AppPhoto";
+import AppShowPost from "@/components/profil/AppShowPost";
 
 export default {
   name: "UserProfile",
@@ -65,8 +68,8 @@ export default {
       token: localStorage.getItem("user_token"),
       personne_id: localStorage.getItem("personne_id"),
       id_apprenant: localStorage.getItem("user_id"),
-      apprenant: undefined,
-      posts: undefined,
+      show_post: false,
+      post: null,
     };
   },
   components: {
@@ -75,9 +78,21 @@ export default {
     AppCreatePost,
     AppPost,
     AppPhoto,
+    AppShowPost,
   },
   methods: {
     ...mapActions(["fetchPosts", "fetchUser"]),
+
+    getPost(param) {
+      console.log(param);
+      this.post = param;
+      if (this.post) {
+        this.show_post = true;
+      }
+    },
+    disable() {
+      this.show_post = false;
+    },
   },
   computed: {
     ...mapGetters([

@@ -46,6 +46,7 @@ class ImageController extends Controller
             ->join('posts', 'personnes.id', '=', 'posts.personne_id')
             ->join('img_posts', 'posts.id', '=', 'img_posts.post_id')
             ->where('personnes.id', '=', $request->personne_id)
+            ->orderByDesc('img_posts.created_at')
             ->select('img_posts.*')
             ->limit(4)
             ->get();

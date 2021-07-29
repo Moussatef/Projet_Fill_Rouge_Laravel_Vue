@@ -49,7 +49,7 @@
         <p class=" text-gray-900 mx-5">{{ description }}</p>
       </div>
       <div
-        class="grid  gap-4  w-full  "
+        class="grid  gap-4  w-full "
         :class="gridNumber"
         @click="$emit('showPost', post_p)"
       >

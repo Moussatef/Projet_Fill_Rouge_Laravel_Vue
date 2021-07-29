@@ -4,9 +4,7 @@
       class="relative h-96 rounded-xl flex justify-center sm:w-full md:w-full"
     >
       <img
-        v-if="
-          cover != 'http://127.0.0.1:8000/storage/cover/' && img_src == false
-        "
+        v-if=" cover != 'http://127.0.0.1:8000/storage/cover/' && cover != 'http://127.0.0.1:8000/storage/cover' && img_src == false "
         :src="cover"
         class="object-cover w-full h-full rounded-3xl"
         alt="cover"

@@ -15,7 +15,8 @@
     <div
       class="my-5 justify-center max-w-screen-2xl md:4/6 z-0 flex lg:grid lg:gap-12 grid-cols-3 pb-56 mx-auto sm:flex flex-wrap "
     >
-      <div class=" mb-5 space-y-4 col-span-1">
+      <div class=" mb-5 space-y-4 col-span-1 overflow-y-auto   h-screen">
+        
         <AppIntro
           :key="user_info.id"
           :github="user_info.github"

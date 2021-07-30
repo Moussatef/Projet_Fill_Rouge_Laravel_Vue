@@ -101,6 +101,7 @@
         <strong>2K</strong> followers <strong>120</strong> following
       </p>
     </div>
+    
     <div class="flex flex-wrap -mx-6">
       <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
         <div class="flex items-center px-5 py-6 shadow-xl rounded-md bg-white">
@@ -186,6 +187,8 @@
           </div>
         </div>
       </div>
+
+      
 
       <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
         <div class="flex items-center px-5 py-6 shadow-xl rounded-md bg-white">

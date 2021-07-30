@@ -1,10 +1,14 @@
 <template>
-  <div class="bg-white px-44 shadow">
+  <div class="bg-white lg:px-44 sm:px-2 shadow">
     <div
-      class="relative h-96 rounded-xl flex justify-center sm:w-full md:w-full"
+      class="relative h-96 rounded-xl flex justify-center sm:max-w-screen-sm     md:max-w-full"
     >
       <img
-        v-if=" cover != 'http://127.0.0.1:8000/storage/cover/' && cover != 'http://127.0.0.1:8000/storage/cover' && img_src == false "
+        v-if="
+          cover != 'http://127.0.0.1:8000/storage/cover/' &&
+            cover != 'http://127.0.0.1:8000/storage/cover' &&
+            img_src == false
+        "
         :src="cover"
         class="object-cover w-full h-full rounded-3xl"
         alt="cover"
@@ -18,7 +22,7 @@
       />
       <label
         @click="$refs.cover_img.click()"
-        class="cursor-pointer h-5 w-5 p-2 rounded-full border-2 border-gray-500  bg-indigo-600 "
+        class="sm:absolute cursor-pointer h-5 w-5 p-2 rounded-full border-2 border-gray-500  bg-indigo-600 "
       >
         <svg
           class="h-5 w-5 "
@@ -91,20 +95,131 @@
       {{ nom }} {{ prenom }} <br />
     </div>
     <div>
-      <p class="text-md">{{bio}}</p>
+      <p class="text-md">{{ bio }}</p>
       <p class="text-md">Apprenant</p>
       <p class="text-md">
         <strong>2K</strong> followers <strong>120</strong> following
       </p>
     </div>
-    <div class="border border-fGrey mt-10 border-opacity-10" />
+    <div class="flex flex-wrap -mx-6">
+      <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
+        <div class="flex items-center px-5 py-6 shadow-xl rounded-md bg-white">
+          <div class="p-3 rounded-full bg-indigo-600 bg-opacity-75">
+            <svg
+              class="h-8 w-8 text-white"
+              viewBox="0 0 28 30"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18.2 9.08889C18.2 11.5373 16.3196 13.5222 14 13.5222C11.6804 13.5222 9.79999 11.5373 9.79999 9.08889C9.79999 6.64043 11.6804 4.65556 14 4.65556C16.3196 4.65556 18.2 6.64043 18.2 9.08889Z"
+                fill="currentColor"
+              ></path>
+              <path
+                d="M25.2 12.0444C25.2 13.6768 23.9464 15 22.4 15C20.8536 15 19.6 13.6768 19.6 12.0444C19.6 10.4121 20.8536 9.08889 22.4 9.08889C23.9464 9.08889 25.2 10.4121 25.2 12.0444Z"
+                fill="currentColor"
+              ></path>
+              <path
+                d="M19.6 22.3889C19.6 19.1243 17.0927 16.4778 14 16.4778C10.9072 16.4778 8.39999 19.1243 8.39999 22.3889V26.8222H19.6V22.3889Z"
+                fill="currentColor"
+              ></path>
+              <path
+                d="M8.39999 12.0444C8.39999 13.6768 7.14639 15 5.59999 15C4.05359 15 2.79999 13.6768 2.79999 12.0444C2.79999 10.4121 4.05359 9.08889 5.59999 9.08889C7.14639 9.08889 8.39999 10.4121 8.39999 12.0444Z"
+                fill="currentColor"
+              ></path>
+              <path
+                d="M22.4 26.8222V22.3889C22.4 20.8312 22.0195 19.3671 21.351 18.0949C21.6863 18.0039 22.0378 17.9556 22.4 17.9556C24.7197 17.9556 26.6 19.9404 26.6 22.3889V26.8222H22.4Z"
+                fill="currentColor"
+              ></path>
+              <path
+                d="M6.64896 18.0949C5.98058 19.3671 5.59999 20.8312 5.59999 22.3889V26.8222H1.39999V22.3889C1.39999 19.9404 3.2804 17.9556 5.59999 17.9556C5.96219 17.9556 6.31367 18.0039 6.64896 18.0949Z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
+
+          <div class="mx-5">
+            <h4 class="text-2xl font-semibold text-gray-700">8,282</h4>
+            <div class="text-gray-500">New Users</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
+        <div class="flex items-center px-5 py-6 shadow-xl rounded-md bg-white">
+          <div class="p-3 rounded-full bg-orange-600 bg-opacity-75">
+            <svg
+            class="h-12 w-12 mx-3"
+            id="Capa_1"
+            enable-background="new 0 0 512 512"
+            height="512"
+            viewBox="0 0 512 512"
+            width="512"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <linearGradient
+              id="SVGID_1_"
+              gradientUnits="userSpaceOnUse"
+              x1="256"
+              x2="256"
+              y1="512"
+              y2="0"
+            >
+              <stop offset="0" stop-color="#fd3a84" />
+              <stop offset="1" stop-color="#ffa68d" />
+            </linearGradient>
+            <g>
+              <g>
+                <path
+                  d="m256 0c-140.959 0-256 115.049-256 256 0 140.959 115.049 256 256 256 140.959 0 256-115.05 256-256 0-140.959-115.049-256-256-256zm0 482c-124.617 0-226-101.383-226-226s101.383-226 226-226 226 101.383 226 226-101.383 226-226 226zm75-361c-32.923 0-58.18 18.506-75 46.058-16.817-27.547-42.072-46.058-75-46.058-53.252 0-90 45.908-90 99.545 0 64.594 57.624 110.966 116.19 162.298 12.376 10.848 25.174 22.065 38.775 34.306 2.853 2.568 6.444 3.851 10.035 3.851s7.182-1.283 10.035-3.851c13.601-12.241 26.398-23.458 38.775-34.306 63.286-55.469 116.19-99.611 116.19-162.298 0-53.739-36.839-99.545-90-99.545zm-45.964 239.283c-9.375 8.216-18.988 16.643-29.036 25.587-10.047-8.944-19.661-17.371-29.036-25.587-66.079-57.918-105.964-92.877-105.964-139.738 0-39.647 25.794-69.545 60-69.545 32.707 0 53.643 31.628 60.516 56.399 1.763 6.548 7.701 11.101 14.484 11.101 6.796 0 12.743-4.569 14.494-11.135.15-.564 15.55-56.365 60.506-56.365 34.206 0 60 29.898 60 69.545 0 46.861-39.885 81.82-105.964 139.738z"
+                  fill="url(#SVGID_1_)"
+                />
+              </g>
+            </g>
+          </svg>
+          </div>
+
+          <div class="mx-5">
+            <h4 class="text-2xl font-semibold text-gray-700">200,521</h4>
+            <div class="text-gray-500">Total Likes</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full mt-6 px-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
+        <div class="flex items-center px-5 py-6 shadow-xl rounded-md bg-white">
+          <div class="p-3 rounded-full  bg-opacity-75">
+            <svg
+            class="w-8 h-8 mr-1 "
+            stroke="currentColor"
+            stroke-width="2"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
+            ></path>
+          </svg>
+          </div>
+
+          <div class="mx-5">
+            <h4 class="text-2xl font-semibold text-gray-700">215,542</h4>
+            <div class="text-gray-500">Available Products</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="border border-gray-400 mt-10 border-opacity-10" />
     <div class="flex justify-between px-8">
       <div class="flex items-center  mx-auto">
         <div class="px-4 py-5 text-blue-500 border-b-4 border-blue-500">
           Posts
         </div>
         <div class="px-4 py-5 text-fGrey">Photos</div>
-        <div class="px-4 py-5 text-fGrey">Videos</div>
         <div class="px-4 py-5 text-fGrey">My Post Problems</div>
       </div>
     </div>
@@ -114,7 +229,7 @@
 <script>
 import axios from "axios";
 export default {
-  props: ["nom", "prenom", "img", "imgCover","bio"],
+  props: ["nom", "prenom", "img", "imgCover", "bio"],
   name: "AppProfile",
   data() {
     return {

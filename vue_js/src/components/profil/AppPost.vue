@@ -9,7 +9,7 @@
           <img
             :src="img_avatar + user_info.img"
             alt="img"
-            class="h-10 w-10 rounded-full"
+            class="h-10 w-10 rounded-full border  border-blue-500"
           />
           <div class="ml-4">
             <span class="cursor-pointer font-bold"
@@ -20,10 +20,14 @@
             }}</span>
           </div>
         </div>
-        <button
-          class="w-9 h-9 rounded-full bg-fill flex items-center justify-center  focus:outline-none"
-        >
-          <svg
+     
+
+        <div  class="relative">
+          <button
+            @click="dropdownOpen = !dropdownOpen"
+            class="relative block  w-9 h-9 rounded-full bg-fill  items-center justify-center  focus:outline-none"
+          >
+           <svg
             class="w-6 h-6"
             id="Capa_1"
             enable-background="new 0 0 515.555 515.555"
@@ -42,7 +46,35 @@
               d="m110.014 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"
             />
           </svg>
-        </button>
+          </button>
+
+          <div
+            v-if="dropdownOpen"
+            @click="dropdownOpen = false"
+            class="fixed inset-0 h-full w-full z-10 border border-gray-500"
+          ></div>
+
+          <div
+            v-if="dropdownOpen"
+            class="absolute right-0 mt-1 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10 border border-gray-200"
+          >
+            <a
+              href="#"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+              >Edit</a>
+            
+            <a
+              href="#"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+              >Public</a
+            >
+            <a
+              href="/login"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+              >Delete</a
+            >
+          </div>
+        </div>
       </div>
       <div class="w-full mt-4 text-justify">
         <p class="text-lg text-gray-900 ">{{ title }}</p>
@@ -51,7 +83,7 @@
       <div
         class="grid  gap-4  w-full cursor-pointer "
         :class="gridNumber"
-        @click="$emit('showPost', post_p)"
+        @click="$emit('showPost', [post_p, likess])"
       >
         <div v-for="img in image_post" :key="img.id" class="  ">
           <img
@@ -205,7 +237,7 @@
         <img
           :src="img_avatar + user_info.img"
           alt="img"
-          class="h-10 w-10 mt-2 rounded-full"
+          class="h-10 w-10 mt-2 rounded-full border  border-blue-500"
         />
         <input
           class="border-2 px-4 py-3 w-full focus:outline-none rounded-full"
@@ -286,6 +318,7 @@ export default {
       post_p: this.post,
       image_post: this.image,
       gridNumber: "grid-cols-1",
+      dropdownOpen: false,
     };
   },
   methods: {
@@ -316,7 +349,7 @@ export default {
     },
     checkImg() {
       var lengthImg = this.image_post.length;
-      console.log(lengthImg);
+      // console.log(lengthImg);
       if (lengthImg >= 2) {
         this.gridNumber = "grid-cols-2";
       }

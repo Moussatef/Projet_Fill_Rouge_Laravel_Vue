@@ -1,14 +1,22 @@
 <template>
   <div
-    class="inline-block w-full text-justify overflow-hidden bg-gray-200 rounded-tl-lg rounded-br-lg px-3 py-1 text-sm  text-gray-700 mr-2 my-2"
+    class="inline-block w-full text-justify overflow-hidden bg-gray-300 rounded-tl-lg rounded-br-lg px-3 py-1 text-sm  text-gray-700 mr-2 my-2"
   >
-    <h3
-      class="inline-flex text-base items-center md:mb-2 lg:mb-0 ml-4 border-b-2 border-gray-400 "
-    >
-      {{ user_name }} {{ lastname }}
-    </h3>
+        <div class="flex items-center">
+          <img
+            :src="'http://127.0.0.1:8000' + img"
+            alt="img"
+            class="h-10 w-10 rounded-full border border-blue-500"
+          />
+          <div class="ml-4">
+            <span class="cursor-pointer font-bold"
+              >{{ user_name }} {{ lastname }}
+            </span>
+          </div>
+        </div>
+   
     <p
-      class="leading-relaxed break-words  overflow-ellipsis overflow-y-auto  md:mb-2 lg:mb-0 ml-4 w-96 md:truncate"
+      class="leading-relaxed break-words  overflow-ellipsis overflow-y-auto x  md:mb-2 lg:mb-0 ml-14 w-96 md:truncate"
     >
       {{ comment_body }}
     </p>
@@ -32,6 +40,7 @@ export default {
       user_name: undefined,
       lastname: undefined,
       token: localStorage.getItem("user_token"),
+      img: null,
     };
   },
   methods: {
@@ -62,6 +71,7 @@ export default {
         // console.log(result);
         this.user_name = result.nom;
         this.lastname = result.prenom;
+        this.img = result.img;
       } else {
         var error = res;
         console.log("error", error);

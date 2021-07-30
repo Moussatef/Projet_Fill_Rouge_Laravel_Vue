@@ -22,7 +22,7 @@ const actions = {
             }
 
         });
-        console.log(response.data[0].path)
+        // console.log(response.data[0].path)
         commit('setImageFore', response.data);
     },
 }

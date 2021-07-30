@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full shadow-fb bg-white rounded-lg border-r-2 border-l-2 border-blue-500 p-4"
+    class="w-full shadow-xl bg-white rounded-lg border-r-2 border-l-2 border-blue-500 p-4"
   >
     <div class="flex justify-between items-center">
       <div class="text-xl font-bold text-fBlack">Photos</div>

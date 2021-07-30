@@ -4,14 +4,14 @@
     @click="$emit('disablePost')"
   ></div>
   <div
-    class="flex justify-center fixed top-0 transform translate-x-1/4  bg-gray-100 z-50 w-8/12  h-4/5 mt-20 overflow-hidden"
+    class="flex justify-center fixed top-0 transform translate-x-1/4  bg-gradient-to-r from-purple-500 via-gray-1c00 to-blue-500 z-50 w-8/12  h-4/5 mt-20 overflow-scroll  "
   >
     <div class="bg-gray-200 w-1/2">
       <div class="flex items-center m-6">
         <img
           :src="'http://127.0.0.1:8000' + user_info.img"
           alt=""
-          class="h-10 w-10 rounded-full border-2 border-rounded-full border-blue-500"
+          class="h-10 w-10 rounded-full border  border-blue-500"
         />
         <div class="ml-4">
           <span class="cursor-pointer font-bold"
@@ -31,7 +31,7 @@
         </p>
         <hr />
       </div>
-      <div class="flex border-b-2 border-t-2 border-gray-400 my-4">
+      <div class="flex border-b-2 border-t-2 border-gray-300 my-4">
         <div class="flex items-center m-2">
           <svg
             class="h-6 w-6 mx-3"
@@ -63,7 +63,7 @@
               </g>
             </g>
           </svg>
-          {{ like.length }}
+          {{ likein }}
         </div>
         <div class="flex items-center  m-2">
           <svg
@@ -94,7 +94,7 @@
         />
       </div>
     </div>
-    <div class=" w-1/2  grid  gap-4   p-2 my-auto " :class="gridNumber">
+    <div class=" w-1/2  grid  gap-4   p-2 my-auto  " :class="gridNumber">
       <img
         v-for="img in postinfo.img_post"
         :key="img.id"
@@ -110,7 +110,7 @@ import AppComment from "@/components/profil/AppComment";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "AppShowPost",
-  props: ["postinfo"],
+  props: ["postinfo", "likein"],
   data() {
     return {
       gridNumber: "grid-cols-1",
@@ -123,13 +123,9 @@ export default {
   methods: {
     checkImg() {
       var lengthImg = this.image_post.length;
-      console.log(lengthImg);
       if (lengthImg >= 2) {
         this.gridNumber = "grid-cols-2";
       }
-    },
-    components: {
-      AppComment,
     },
   },
   computed: {
@@ -137,6 +133,9 @@ export default {
   },
   created() {
     this.checkImg();
+  },
+  components: {
+    AppComment,
   },
 };
 </script>

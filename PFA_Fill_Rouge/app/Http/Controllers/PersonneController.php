@@ -57,6 +57,7 @@ class PersonneController extends Controller
             "id" => $personne->id,
             "nom" => $personne->nom,
             "prenom" => $personne->prenom,
+            "img" => $personne->img,
         ];
         return $rusel;
     }

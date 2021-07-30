@@ -1,13 +1,13 @@
 <template>
   <div
-    class="w-full  shadow-fb  bg-white p-4 rounded-lg py-4 border-l-2 border-r-2 border-blue-400"
+    class="w-full  shadow-xl  bg-white p-4 rounded-lg py-4 border-l-2 border-r-2 border-blue-400"
   >
     <div class=" block">
       <div class="flex space-x-2">
         <img
           :src="img_avatar + user_info.img"
           alt="img"
-          class="h-10 w-10 rounded-full"
+          class="h-10 w-10 rounded-full border  border-blue-500"
         />
         <input
           @focus="onfocusin"

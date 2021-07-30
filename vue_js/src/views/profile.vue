@@ -1,5 +1,8 @@
 <template>
   <div class="bg-gray-100">
+    <div x-data="scrollProgress" class="fixed inset-x-0 top-0 z-50">
+      <div class="h-1 bg-blue-500" :style="`width: ${percent}%`"></div>
+    </div>
     <AppProfile
       v-if="user_info.id"
       :key="user_info.id"
@@ -10,7 +13,7 @@
       :imgCover="user_info.cover"
     />
     <div
-      class="my-5 justify-center max-w-screen-2xl md:4/6 z-0 flex lg:grid lg:gap-12 grid-cols-3 pb-56 mx-auto "
+      class="my-5 justify-center max-w-screen-2xl md:4/6 z-0 flex lg:grid lg:gap-12 grid-cols-3 pb-56 mx-auto sm:flex flex-wrap "
     >
       <div class=" mb-5 space-y-4 col-span-1">
         <AppIntro
@@ -23,6 +26,40 @@
           :adresse="user_info.adresse"
         />
         <AppPhoto />
+        <div
+          :x-data="scrol()"
+          class="fixed inline-flex items-center justify-center overflow-hidden rounded-full bottom-5 left-5"
+        >
+          <svg class="w-20 h-20">
+            <circle
+              class="text-gray-300"
+              stroke-width="5"
+              stroke="currentColor"
+              fill="transparent"
+              r="30"
+              cx="40"
+              cy="40"
+            />
+            <circle
+              class="text-blue-600"
+              stroke-width="5"
+              :stroke-dasharray="circumference"
+              :stroke-dashoffset="
+                circumference - (percent / 100) * circumference
+              "
+              stroke-linecap="round"
+              stroke="currentColor"
+              fill="transparent"
+              r="30"
+              cx="40"
+              cy="40"
+            />
+          </svg>
+          <span
+            class="absolute text-xl text-blue-700"
+            x-text="`${percent}%`"
+          ></span>
+        </div>
       </div>
       <div class=" w-full col-start-2 col-span-3 space-y-4">
         <AppCreatePost />
@@ -48,7 +85,12 @@
         />
       </div>
     </div>
-    <AppShowPost v-if="show_post" :postinfo="post" @disablePost="disable" />
+    <AppShowPost
+      v-if="show_post"
+      :likein="like"
+      :postinfo="post"
+      @disablePost="disable"
+    />
   </div>
 </template>
 
@@ -70,6 +112,7 @@ export default {
       id_apprenant: localStorage.getItem("user_id"),
       show_post: false,
       post: null,
+      like: null,
     };
   },
   components: {
@@ -84,14 +127,31 @@ export default {
     ...mapActions(["fetchPosts", "fetchUser"]),
 
     getPost(param) {
-      console.log(param);
-      this.post = param;
+      // console.log(param);
+      this.post = param[0];
+      this.like = param[1];
       if (this.post) {
         this.show_post = true;
       }
     },
     disable() {
       this.show_post = false;
+    },
+    scrol() {
+        return {
+          init() {
+            window.addEventListener("scroll", () => {
+              let winScroll =
+                document.body.scrollTop || document.documentElement.scrollTop;
+              let height =
+                document.documentElement.scrollHeight -
+                document.documentElement.clientHeight;
+              this.percent = Math.round((winScroll / height) * 100);
+            });
+          },
+          circumference: 30 * 2 * Math.PI,
+          percent: 0,
+        };
     },
   },
   computed: {
@@ -104,6 +164,7 @@ export default {
     ]),
   },
   created() {
+    // this.scrol();
     this.fetchUser([this.id_apprenant, this.token]);
     this.fetchPosts([this.personne_id, this.token]);
   },

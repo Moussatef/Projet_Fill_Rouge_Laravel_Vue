@@ -17,7 +17,6 @@ const actions = {
                 Authorization: `Bearer ${param[1]}`
             }
         };
-
         const response = await axios.get(`http://127.0.0.1:8000/api/profile/post/${param[0]}`, config);
         // console.log(response)
 

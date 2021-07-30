@@ -1,6 +1,6 @@
 <template>
   <div
-    class="shadow-fb  w-full px-4 bg-white rounded-lg py-6 border-r-2 border-l-2 border-blue-500"
+    class="shadow-xl  w-full px-4 bg-white rounded-lg py-6 border-r-2 border-l-2 border-blue-500"
   >
     <div class="text-xl   font-bold text-fBlack">Intro</div>
     <div class="mt-5 mx-auto w-4/5  flex items-center">

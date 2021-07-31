@@ -4,9 +4,9 @@
     @click="$emit('disablePost')"
   ></div>
   <div
-    class="flex justify-center fixed top-0 transform translate-x-1/4  bg-gradient-to-r from-purple-500 via-gray-1c00 to-blue-500 z-50 w-8/12  h-4/5 mt-20 overflow-scroll  "
+    class="flex justify-center fixed top-0 transform translate-x-1/4  bg-gradient-to-r from-white via-gray-300 to-blue-700 z-50 w-8/12  h-4/5 mt-20 overflow-scroll  "
   >
-    <div class="bg-gray-200 w-1/2">
+    <div class=" w-1/2">
       <div class="flex items-center m-6">
         <img
           :src="'http://127.0.0.1:8000' + user_info.img"
@@ -31,7 +31,7 @@
         </p>
         <hr />
       </div>
-      <div class="flex border-b-2 border-t-2 border-gray-300 my-4">
+      <div class="flex border-b-2 mx-3 rounded-lg  border-blue-300 my-4">
         <div class="flex items-center m-2">
           <svg
             class="h-6 w-6 mx-3"

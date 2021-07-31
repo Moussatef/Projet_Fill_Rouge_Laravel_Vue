@@ -80,7 +80,7 @@ class Personne extends Model
 
     public function receivedComments()
     {
-        return $this->hasManyThrough(Comment::class, Post::class);
+        return $this->hasManyThrough(Commente::class, Post::class);
     }
     public function getImgAttribute($value)
     {

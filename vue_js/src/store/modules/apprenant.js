@@ -3,6 +3,7 @@ import axios from "axios";
 const state = {
     user_info: [],
     new_user: [],
+    autrUser:[],
 }
 
 const getters = {
@@ -12,6 +13,20 @@ const getters = {
 }
 
 const actions = {
+    async fetchAllUser({ commit }, param) {
+        const config = {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${param[1]}`
+            }
+        };
+
+        const response = await axios.get(`http://127.0.0.1:8000/api/apprenant/id/${param[0]}`, config);
+        // console.log(response)
+
+        commit('setUser', response.data);
+    },
+
     async fetchUser({ commit }, param) {
         const config = {
             headers: {

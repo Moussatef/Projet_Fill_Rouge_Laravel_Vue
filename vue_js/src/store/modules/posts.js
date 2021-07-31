@@ -2,10 +2,12 @@ import axios from "axios";
 
 const state = {
     postsProfile: [],
+    allPostProfile: [],
 }
 
 const getters = {
     posts_personne: state => state.postsProfile,
+    allPostProfile:  state => state.allPostProfile,
 }
 
 const actions = {
@@ -40,7 +42,7 @@ const actions = {
         const response = await axios.post(`http://127.0.0.1:8000/api/profile/post/add`, data, {
             headers: {
                 Accept: "application/json",
-                Authorization: `Bearer 106|hXKRyrpbE5l8sSReFWv5DiXp6FmixIF9n9VkRyvD`
+                Authorization: `Bearer  ${token}`
             }
         });
         if (response.status === 200) {
@@ -49,10 +51,23 @@ const actions = {
         } else {
             console.log(response);
         }
+    },
 
-
-
-
+    async AllPost({ commit }) {
+        let token = localStorage.getItem('user_token')
+       
+        const response = await axios.get(`http://127.0.0.1:8000/api/home/post/all`, {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer  ${token}`
+            }
+        });
+        if (response.status === 200) {
+            console.log(response);
+            commit('addPosts', response.data);
+        } else {
+            console.log(response);
+        }
     }
 }
 
@@ -61,6 +76,8 @@ const mutations = {
     addPosts: function (state, postsProfile) {
         state.postsProfile.unshift(postsProfile)
     },
+    setAllPosts:(state, allPostProfile) => (state.allPostProfile = allPostProfile),
+
 }
 
 export default {

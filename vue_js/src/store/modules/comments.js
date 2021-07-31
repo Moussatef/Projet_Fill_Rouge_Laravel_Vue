@@ -48,7 +48,7 @@ const actions = {
 }
 
 const mutations = {
-   setComments: (state, comments) => (state.comments = comments),
+   setComments: (state, comments) => (state.comments.unshift(comments)),
    newComment: function (state, comments) {
       state.comments.unshift(comments)
    },

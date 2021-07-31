@@ -48,12 +48,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/personne/update/img/cover/{id}', [PersonneController::class, 'updateImgCover'])->whereNumber('id');
     Route::post('/personne/delete', [PersonneController::class, 'destroy'])->whereNumber('id');
     Route::post('/logout', [AuthController::class, 'logout']);
+    //test get personne with al info likes and also comments
+    Route::get('/personne/test/id/{id}', [PersonneController::class, 'test'])->whereNumber('id');
 
     //Route ApprenantController
     Route::get('/apprenant/id/{id}', [ApprenantController::class, 'show']);
     Route::post('/apprenant/update', [ApprenantController::class, 'update'])->whereNumber('id');
     Route::post('/apprenant/delete', [ApprenantController::class, 'destroy'])->whereNumber('id');
-
 
 
     //get posts personne authenticate
@@ -70,6 +71,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/like/store', [PostLikeController::class, 'store']);
     //delete like
     Route::delete('/like/destroy', [PostLikeController::class, 'destroy']);
+    //update post info
+    Route::post('/profile/post/update/{id}', [PostController::class, 'update']);
+    //get all posts
+    Route::get('/home/post/all', [PostController::class, 'index']);
 
 });
 

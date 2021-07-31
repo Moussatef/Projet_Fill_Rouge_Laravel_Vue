@@ -26,7 +26,7 @@ const actions = {
 
         }).then(res => {
             commit('newLike', raw)
-            console.log(response)
+            // console.log(res)
         }).catch(err => console.log(err));
 
 
@@ -59,7 +59,6 @@ const actions = {
         );
         if (res.status === 200) {
             const result = await res.json();
-            console.log(result);
             commit('removeLike', res)
         } else {
             var error = res;

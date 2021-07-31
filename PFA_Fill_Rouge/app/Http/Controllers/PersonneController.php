@@ -62,6 +62,22 @@ class PersonneController extends Controller
         return $rusel;
     }
 
+
+    public function test($id)
+    {
+        $personne = Personne::find($id);
+
+
+        $rusel = [
+            'personne' => $personne,
+            'likes ' => $personne->receivedLikes,
+            'comment ' => $personne->receivedComments,
+
+
+        ];
+        return $rusel;
+    }
+
     /**
      * Update the specified resource in storage.
      *

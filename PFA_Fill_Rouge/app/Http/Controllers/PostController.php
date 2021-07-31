@@ -10,6 +10,31 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $posts =  Post::orderByDesc('created_at')
+            ->get();
+        // $like =  Personne::find($personne_id)->receivedLikes()->get();
+
+        $posts = $posts->fresh('postProfil', 'comment', 'like', 'imgPost');
+        // $test = $posts->fresh('personne');
+        // $posts = Post::latest()->with(['like', 'comment'])->paginate(5);
+
+        if ($posts) {
+            $response = [
+                "post" => $posts,
+            ];
+            return  ($response);
+        } else
+            return response('No posts found', 440);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,19 +42,6 @@ class PostController extends Controller
      */
     public function getPostProfile($personne_id)
     {
-        // $posts =  DB::table('posts')
-        //     ->join('post_profils', 'posts.id', '=', 'post_profils.post_id')
-        //     ->leftJoin('img_posts', 'posts.id', '=', 'img_posts.post_id')
-        //     ->leftJoin('likes', 'posts.id', '=', 'likes.post_id')
-        //     ->where('posts.personne_id', '=', $personne_id)
-        //     ->groupBy('posts.id', 'img_posts.path')
-        //     ->orderByDesc('posts.created_at')
-        //     ->select('posts.*', 'img_posts.path', DB::raw('count(likes.id) as total_likes'))
-        //     ->get();
-        // ->groupBy('posts.id', 'img_posts.path', 'likes.id')
-        // , 'likes.id', DB::raw('count(posts.id) as total_likes')
-
-
         $posts =  Personne::find($personne_id)->post()
             ->orderByDesc('created_at')
             ->get();
@@ -39,6 +51,7 @@ class PostController extends Controller
         // $test = $posts->fresh('personne');
         return $posts;
     }
+
     public function uploadsImg($img, $post)
     {
         $fileUpload = new FileUploadController;
@@ -139,7 +152,6 @@ class PostController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -149,7 +161,17 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|string',
+            'description' => 'required|string',
+        ]);
+        $post = Post::find($id);
+        $post->titre = $request->title;
+        $post->description = $request->description;
+        if ($post->save()) {
+            return $post;
+        } else
+            return response('noting do ');
     }
 
     /**

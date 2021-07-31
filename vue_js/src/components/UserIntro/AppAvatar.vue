@@ -18,18 +18,18 @@
 </template>
 
 <script>
+
 export default {
     name: "AppAvatare",
-    data() {
-        return{
-            user_info : null,
-
-
-        }
+    props:["personne_id"],
+    data(){
+        return {
+          user_info : null,
+          personne : this.personne_id,
+        };
     },
     methods:{
     async fetchAllUser(param) {
-      
     var myHeaders = new Headers();
       myHeaders.append("Accept", "application/json");
       myHeaders.append("Authorization", "Bearer 	" + param[1]);
@@ -53,6 +53,10 @@ export default {
         console.log("error", error);
       }
     },
+    },
+    created() {
+      this.fetchAllUser(param)
+
     }
     
 }

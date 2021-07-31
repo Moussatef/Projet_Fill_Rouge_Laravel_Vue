@@ -64,7 +64,7 @@ const actions = {
         });
         if (response.status === 200) {
             console.log(response);
-            commit('addPosts', response.data);
+            commit('setAllPosts', response.data);
         } else {
             console.log(response);
         }

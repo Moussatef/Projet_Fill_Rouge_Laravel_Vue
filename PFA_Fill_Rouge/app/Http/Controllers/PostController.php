@@ -27,10 +27,8 @@ class PostController extends Controller
         // $posts = Post::latest()->with(['like', 'comment'])->paginate(5);
 
         if ($posts) {
-            $response = [
-                "post" => $posts,
-            ];
-            return  ($response);
+           
+            return  $posts;
         } else
             return response('No posts found', 440);
     }

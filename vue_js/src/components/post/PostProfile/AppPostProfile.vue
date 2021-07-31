@@ -5,33 +5,33 @@
       class="w-full shadow-xl rounded-3xl border-r-2 border-l-2 border-blue-400 bg-white p-4 my-5"
     >
       <div class="flex justify-between items-center">
-        <AppAvatare :personne_id="post.personne_id" />
-     
+        <AppAvatare :personne_id="post_p.personne_id" :date="date" />
 
-        <div  class="relative">
+        <div class="relative" v-if="checkEditPost">
           <button
+            
             @click="dropdownOpen = !dropdownOpen"
             class="relative block  w-9 h-9 rounded-full bg-fill  items-center justify-center  focus:outline-none"
           >
-           <svg
-            class="w-6 h-6"
-            id="Capa_1"
-            enable-background="new 0 0 515.555 515.555"
-            height="512"
-            viewBox="0 0 515.555 515.555"
-            width="512"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="m496.679 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"
-            />
-            <path
-              d="m303.347 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"
-            />
-            <path
-              d="m110.014 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"
-            />
-          </svg>
+            <svg
+              class="w-6 h-6"
+              id="Capa_1"
+              enable-background="new 0 0 515.555 515.555"
+              height="512"
+              viewBox="0 0 515.555 515.555"
+              width="512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m496.679 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"
+              />
+              <path
+                d="m303.347 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"
+              />
+              <path
+                d="m110.014 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"
+              />
+            </svg>
           </button>
 
           <div
@@ -47,8 +47,9 @@
             <a
               href="#"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
-              >Edit</a>
-            
+              >Edit</a
+            >
+
             <a
               href="#"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
@@ -63,8 +64,8 @@
         </div>
       </div>
       <div class="w-full mt-4 text-justify">
-        <p class="text-lg text-gray-900 ">{{ title }}</p>
-        <p class=" text-gray-900 ">{{ description }}</p>
+        <p class="text-lg text-gray-900 ">{{ post.titre }}</p>
+        <p class=" text-gray-900 ">{{ post.description }}</p>
       </div>
       <div
         class="grid  gap-4  w-full cursor-pointer "
@@ -120,7 +121,7 @@
       <div class="border border-gray-500 border-opacity-10 mt-4" />
       <div class="flex justify-between items-center mt-4">
         <button
-          @click="clickLike(post_id, user_id, token)"
+          @click="clickLike(post.id, user_id, token)"
           class="w-1/2 flex items-center justify-center border-r-2 focus:outline-none"
           v-if="checkLike"
         >
@@ -232,7 +233,7 @@
         />
         <button
           v-if="inp_cpmment"
-          @click="postComment([user_id, post_id, inp_cpmment, token])"
+          @click="postComment([user_id, post.id, inp_cpmment, token])"
         >
           <svg
             class="w-5 h-5 "
@@ -247,7 +248,9 @@
           </svg>
         </button>
       </div>
-      <div class="text-left ">
+      <div class="text-left h-96 " v-if="comments_length">
+      <div class="h-full overflow-y-scroll">
+
         <AppComment
           v-for="cmt in comments"
           :key="cmt.id"
@@ -258,24 +261,27 @@
           :created_at="cmt.created_at"
         />
       </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import AppComment from "@/components/profil/AppComment";
+import AppAvatare from "@/components/UserIntro/AppAvatar";
 import { mapActions, mapGetters } from "vuex";
 export default {
-  props: ["personne_id", "storcomment", "post"],
+  props: ["personne_id", "storcomment", "post", "posts"],
   emits: ["showPost"],
   components: {
     AppComment,
+    AppAvatare,
   },
   name: "AppPostProfile",
   data() {
     return {
       img_avatar: "http://127.0.0.1:8000",
       date: moment(this.post.created_at, "YYYY-MM-DD HH:mm:ss"),
-      likes: this.post.like,
+      likess: this.post.like.length,
       like_id: this.post.like,
       comments: this.post.comment,
       comments_length: this.post.comment.length,
@@ -288,7 +294,9 @@ export default {
       post_p: this.post,
       image_post: this.post.img_post,
       gridNumber: "grid-cols-1",
+      Allpost: this.posts,
       dropdownOpen: false,
+      checkEditPost: false,
     };
   },
   methods: {
@@ -299,6 +307,14 @@ export default {
           selfe.checkLike = false;
         }
       });
+    },
+    checkEdit(post) {
+      var selfe = this;
+      if (post.personne_id == selfe.user_id) {
+        selfe.checkEditPost = true;
+      } else {
+        selfe.checkEditPost = false;
+      }
     },
     convertTime(time) {
       let res = moment(time, "YYYY-MM-DD HH:mm:ss");
@@ -329,8 +345,10 @@ export default {
     ...mapGetters(["user_token", "user_info", "posts_personne"]),
   },
   beforeMount() {
+    this.checkEdit(this.post_p);
     this.checkLikesId(this.like_id);
     this.checkImg();
   },
+  created() {},
 };
 </script>

@@ -60,6 +60,7 @@ class ApprenantController extends Controller
         return Apprenant::find($id)->personne()->first();
         // return 'SALAM';
     }
+    
 
     /**
      * Update the specified resource in storage.

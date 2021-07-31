@@ -5,13 +5,18 @@
         class="md:w-6/12 text-white bg-blue-500 p-8 sm:rounded-tr-lg md:rounded-tr-none md:rounded-bl-lg rounded-tl-lg flex items-center"
       >
         <div>
+           
           <h1 class="text-4xl mb-5 font-bold">
-            Lorem <span class="text-gray-800">ipsum</span> is simply dummy text.
+            Formation  en programmation informatique <span class="text-gray-800">100%</span>  Gratuite.
           </h1>
           <h2 class="text-sm mb-12">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the
+            Le numérique et les nouvelles technologies sont partout autour de
+            nous, mais leurs codes et leurs langages ne sont pas toujours
+            naturels et innés pour tous. La fracture entre ceux qui parlent le «
+            numérique » et le manipulent avec aisance et les autres est souvent
+            très grande. C’est pourquoi YouCode veut mettre le code entre toutes
+            les mains pour réduire les inégalités numériques et donner sa chance
+            à tout un chacun.
           </h2>
           <div class="flex">
             <div class="mr-8">

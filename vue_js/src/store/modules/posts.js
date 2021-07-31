@@ -7,7 +7,7 @@ const state = {
 
 const getters = {
     posts_personne: state => state.postsProfile,
-    allPostProfile:  state => state.allPostProfile,
+    allPostProfile: state => state.allPostProfile,
 }
 
 const actions = {
@@ -55,7 +55,7 @@ const actions = {
 
     async AllPost({ commit }) {
         let token = localStorage.getItem('user_token')
-       
+
         const response = await axios.get(`http://127.0.0.1:8000/api/home/post/all`, {
             headers: {
                 Accept: "application/json",
@@ -65,6 +65,7 @@ const actions = {
         if (response.status === 200) {
             console.log(response);
             commit('setAllPosts', response.data);
+
         } else {
             console.log(response);
         }
@@ -75,8 +76,10 @@ const mutations = {
     setPosts: (state, postsProfile) => (state.postsProfile = postsProfile),
     addPosts: function (state, postsProfile) {
         state.postsProfile.unshift(postsProfile)
+        state.allPostProfile.unshift(postsProfile)
+
     },
-    setAllPosts:(state, allPostProfile) => (state.allPostProfile = allPostProfile),
+    setAllPosts: (state, allPostProfile) => (state.allPostProfile = allPostProfile),
 
 }
 

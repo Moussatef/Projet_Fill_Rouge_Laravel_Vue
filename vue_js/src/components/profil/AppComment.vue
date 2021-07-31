@@ -1,6 +1,6 @@
 <template>
   <div
-    class="inline-block w-full text-justify overflow-hidden bg-gray-300 rounded-tl-lg rounded-br-lg px-3 py-1 text-sm  text-gray-700 mr-2 my-2"
+    class="inline-block w-4/5 text-justify overflow-hidden bg-gray-300 rounded-tl-lg rounded-br-lg px-3 py-1 text-sm  text-gray-800 ml-5 mb-1"
   >
         <div class="flex items-center">
           <img

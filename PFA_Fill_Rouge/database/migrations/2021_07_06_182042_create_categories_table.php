@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('libelle');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

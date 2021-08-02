@@ -18,6 +18,7 @@ class CreateHashtagesTable extends Migration
             $table->id();
             $table->String('hashtag');
             $table->foreignId('post_id')->constrained()->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

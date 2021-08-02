@@ -20,32 +20,31 @@
             }}</span>
           </div>
         </div>
-     
 
-        <div  class="relative">
+        <div class="relative">
           <button
             @click="dropdownOpen = !dropdownOpen"
             class="relative block  w-9 h-9 rounded-full bg-fill  items-center justify-center  focus:outline-none"
           >
-           <svg
-            class="w-6 h-6"
-            id="Capa_1"
-            enable-background="new 0 0 515.555 515.555"
-            height="512"
-            viewBox="0 0 515.555 515.555"
-            width="512"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="m496.679 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"
-            />
-            <path
-              d="m303.347 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"
-            />
-            <path
-              d="m110.014 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"
-            />
-          </svg>
+            <svg
+              class="w-6 h-6"
+              id="Capa_1"
+              enable-background="new 0 0 515.555 515.555"
+              height="512"
+              viewBox="0 0 515.555 515.555"
+              width="512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="m496.679 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"
+              />
+              <path
+                d="m303.347 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"
+              />
+              <path
+                d="m110.014 212.208c25.167 25.167 25.167 65.971 0 91.138s-65.971 25.167-91.138 0-25.167-65.971 0-91.138 65.971-25.167 91.138 0"
+              />
+            </svg>
           </button>
 
           <div
@@ -58,27 +57,61 @@
             v-if="dropdownOpen"
             class="absolute right-0 mt-1 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10 border border-gray-200"
           >
-            <a
-              href="#"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
-              >Edit</a>
-            
-            <a
-              href="#"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
-              >Public</a
+            <button
+              class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+              @click="edit"
             >
-            <a
-              href="/login"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
-              >Delete</a
+              Edit
+            </button>
+
+            <button
+              class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
             >
+              Public
+            </button>
+            <button
+              class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>
-      <div class="w-full mt-4 text-justify">
+      <div v-if="!editProc" class="w-full mt-4 text-justify">
         <p class="text-lg text-gray-900 ">{{ title }}</p>
         <p class=" text-gray-900 ">{{ description }}</p>
+      </div>
+      <div v-else class="w-full mt-4 text-justify">
+        <input
+          v-model="inp_title"
+          class="bg-fFill px-4 py-4 w-full border-b-2 my-2 focus:outline-none "
+          placeholder="Write something to Roland…"
+        />
+        <hr />
+
+        <div class="w-full post-div">
+          <textarea
+            v-model="inp_description"
+            class="border-b-2 w-full my-3 focus:outline-none rounded-md"
+            name="description"
+            id=""
+            cols="30"
+            rows="10"
+            placeholder="Write description"
+          ></textarea>
+          <button
+            @click="showAlert"
+            class="my-2  h-9 w-20 inline-block float-right  bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
+          >
+            Save
+          </button>
+          <button
+            @click="editCancel"
+            class="my-2  h-9 w-20 inline-block float-right  bg-gray-300 px-5 py-2 mx-2 text-sm shadow-sm font-medium tracking-wider text-gray-800 rounded-full hover:shadow-lg hover:bg-yellow-400"
+          >
+            cancel
+          </button>
+        </div>
       </div>
       <div
         class="grid  gap-4  w-full cursor-pointer "
@@ -129,7 +162,7 @@
           </svg>
           {{ likess }} Likes
         </div>
-        <div>{{ comments_length }} Comment</div>
+        <div>{{ comments.length }} Comment</div>
       </div>
       <div class="border border-gray-500 border-opacity-10 mt-4" />
       <div class="flex justify-between items-center mt-4">
@@ -261,7 +294,8 @@
           </svg>
         </button>
       </div>
-      <div class="text-left ">
+      <button @click="showAlert">Hello world</button>
+      <div class="text-left max-h-96 overflow-y-scroll">
         <AppComment
           v-for="cmt in comments"
           :key="cmt.id"
@@ -277,6 +311,7 @@
 </template>
 
 <script>
+import Swal from "sweetalert2";
 import AppComment from "@/components/profil/AppComment";
 import { mapActions, mapGetters } from "vuex";
 export default {
@@ -308,7 +343,6 @@ export default {
       likess: this.like.length,
       like_id: this.like,
       comments: this.comment,
-      comments_length: this.comment.length,
       inp_cpmment: "",
       user_id: this.personne_id,
       data_post_id: this.post_id,
@@ -319,9 +353,44 @@ export default {
       image_post: this.image,
       gridNumber: "grid-cols-1",
       dropdownOpen: false,
+      editProc: false,
+      inp_title: this.title,
+      inp_description: this.description,
     };
   },
   methods: {
+    ...mapActions(["postComment", "addLike", "UnLike", "updatePost"]),
+
+    showAlert() {
+      // Use sweetalert2
+      if (this.inp_title.length > 3 && this.inp_description.length > 5) {
+        this.updatePost([this.post_p.id, this.inp_title, this.inp_description]);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.editProc = false;
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "check title or description is not enough !",
+        });
+      }
+    },
+
+    edit() {
+      this.editProc = true;
+      this.dropdownOpen = false;
+    },
+    editCancel() {
+      this.editProc = false;
+      inp_title = this.title;
+      inp_description = this.description;
+    },
     checkLikesId(likes) {
       var selfe = this;
       likes.forEach(function(element) {
@@ -334,7 +403,7 @@ export default {
       let res = moment(time, "YYYY-MM-DD HH:mm:ss");
       return res.fromNow();
     },
-    ...mapActions(["postComment", "addLike", "UnLike"]),
+
     clickLike(post_id, personne_id, token) {
       if (this.addLike([post_id, personne_id, token])) {
         this.checkLike = false;

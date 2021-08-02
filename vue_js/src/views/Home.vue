@@ -2,7 +2,9 @@
   <div class="home bg-gray-100 ">
     <AppCardOne />
     <div class="w-3/6 mx-auto my-2">
+   
       <AppCreatePost v-if="token" />
+      <Appload v-if="loading" class="my-2" />
       <AppPostProfile
         v-for="post in allPostProfile"
         :key="post.id"
@@ -12,6 +14,7 @@
         :storcomment="commentPost"
         @showPost="getPost"
       />
+
     </div>
     <AppShowPost
       v-if="show_post"
@@ -28,6 +31,7 @@ import AppCardOne from "@/components/cards/appCardOne";
 import AppCreatePost from "@/components/profil/AppCreatePost";
 import AppShowPost from "@/components/profil/AppShowPost";
 import AppPostProfile from "@/components/post/PostProfile/AppPostProfile";
+import Appload from "@/components/dataload/ApploadCard";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -44,6 +48,7 @@ export default {
     AppCreatePost,
     AppPostProfile,
     AppShowPost,
+    Appload,
   },
   methods: {
     ...mapActions(["AllPost", "fetchUser"]),
@@ -60,7 +65,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["allPostProfile", "user_info"]),
+    ...mapGetters(["allPostProfile", "user_info", "loading"]),
   },
   created() {
     this.fetchUser([this.id_apprenant, this.token]);

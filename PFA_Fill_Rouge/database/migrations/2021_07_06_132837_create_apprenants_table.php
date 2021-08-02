@@ -19,6 +19,7 @@ class CreateApprenantsTable extends Migration
             // $table->unsignedBigInteger('id_personne')->nullable();
             // $table->foreign('id_personne')->references('id')->on('Personnes')->onDelete('cascade');
             $table->foreignId('personne_id')->constrained()->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

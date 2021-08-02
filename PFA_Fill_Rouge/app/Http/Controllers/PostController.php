@@ -27,7 +27,7 @@ class PostController extends Controller
         // $posts = Post::latest()->with(['like', 'comment'])->paginate(5);
 
         if ($posts) {
-           
+
             return  $posts;
         } else
             return response('No posts found', 440);
@@ -72,6 +72,7 @@ class PostController extends Controller
             'personne_id' => 'required',
 
         ]);
+
         $post = new Post;
         $post->titre = $request->titre;
         $post->description = $request->description;

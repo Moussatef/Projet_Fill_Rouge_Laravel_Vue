@@ -17,7 +17,7 @@ class CreateResponsablesTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->foreignId('personne_id')->constrained()->onDelete('cascade');
-
+            $table->softDeletes();
             $table->timestamps();
         });
     }

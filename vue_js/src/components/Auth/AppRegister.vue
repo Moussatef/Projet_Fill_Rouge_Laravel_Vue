@@ -464,10 +464,11 @@ export default {
       );
       if (response.status == 201) {
         const result = await response;
-        console.log(result.data);
-        localStorage.setItem("user_token", result.data.personne.token);
-        localStorage.setItem("user_id", result.data.apprenant);
-        location.replace("/user/profile");
+        // console.log(result.data);
+        // localStorage.setItem("user_token", result.data.personne.token);
+        // localStorage.setItem("user_id", result.data.apprenant);
+        // localStorage.setItem("personne_id", result.data.personne_id);
+        location.replace("/login");
       } else {
         console.log(result);
       }

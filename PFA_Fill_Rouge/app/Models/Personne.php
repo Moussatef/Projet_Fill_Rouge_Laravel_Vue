@@ -27,7 +27,8 @@ class Personne extends Model
         'password',
         'img',
         'cover',
-        'bio'
+        'bio',
+        'validation'
     ];
 
 

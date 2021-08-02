@@ -42,6 +42,7 @@ class ImageController extends Controller
         ]);
         // $image = Personne::find($request->personne_id)->post()->imgPost;
         // SELECT i.* FROM personnes p INNER JOIN posts ps ON p.id=ps.personne_id INNER JOIN img_posts i on ps.id = i.post_id WHERE p.id =1
+        
         $image = DB::table('personnes')
             ->join('posts', 'personnes.id', '=', 'posts.personne_id')
             ->join('img_posts', 'posts.id', '=', 'img_posts.post_id')

@@ -50,10 +50,10 @@ class AuthController extends Controller
             'cover' =>  $newnameCover,
             'bio' =>  $fields['bio'],
         ]);
-        $token = $personne->createToken('moussatefToken')->plainTextToken;
+        // $token = $personne->createToken('moussatefToken')->plainTextToken;
         $response = [
             'personne_id' => $personne->id,
-            'token' => $token
+            // 'token' => $token
         ];
         return response($response, 201);
     }
@@ -128,11 +128,19 @@ class AuthController extends Controller
             ], 401);
         }
 
+        if($personne->validation == "false"){
+            return response([
+                'message' => 'You are not validate sorry !!!'
+            ], 401);
+
+        }
+
         $token = $personne->createToken('moussatefTokenUser@')->plainTextToken;
 
         $response = [
             'apprenant_id' => $personne->apprenant->id,
             'id_personne' => $personne->id,
+
             'token' => $token
         ];
 

@@ -36,11 +36,11 @@
       </div>
       <div class="md:w-6/12 relative">
         <div
-          class="bg-gray-500 w-full h-96 opacity-60 absolute sm:rounded-bl-lg md:rounded-bl-none md:rounded-tr-lg rounded-br-lg"
+          class="bg-gray-300 w-full h-96 opacity-20 absolute sm:rounded-bl-lg md:rounded-bl-none md:rounded-tr-lg rounded-br-lg"
         ></div>
         <img
           class="h-96 w-full object-cover sm:rounded-bl-lg md:rounded-bl-none md:rounded-tr-lg rounded-br-lg"
-          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=550&q=80"
+          src="../../assets/s1.jpg"
           alt="Banner Desktop"
         />
       </div>

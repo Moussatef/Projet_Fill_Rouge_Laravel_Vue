@@ -8,19 +8,8 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-basic-styles": "^29.0.0",
-    "@ckeditor/ckeditor5-build-classic": "^29.0.0",
-    "@ckeditor/ckeditor5-dev-utils": "^25.3.0",
-    "@ckeditor/ckeditor5-dev-webpack-plugin": "^25.3.0",
-    "@ckeditor/ckeditor5-editor-classic": "^29.0.0",
-    "@ckeditor/ckeditor5-essentials": "^29.0.0",
-    "@ckeditor/ckeditor5-export-pdf": "^29.0.0",
-    "@ckeditor/ckeditor5-image": "^29.0.0",
-    "@ckeditor/ckeditor5-link": "^29.0.0",
-    "@ckeditor/ckeditor5-paragraph": "^29.0.0",
-    "@ckeditor/ckeditor5-theme-lark": "^29.0.0",
-    "@ckeditor/ckeditor5-vue": "^2.0.1",
     "axios": "^0.21.1",
+    "ckeditor4-vue": "^1.3.1",
     "core-js": "^3.6.5",
     "es6-promise": "^4.2.8",
     "postcss-loader": "^3.0.0",
@@ -30,6 +19,7 @@
     "vue-carousel-card": "^2.0.0",
     "vue-router": "^4.0.0-0",
     "vue-slick-carousel": "^1.0.6",
+    "vue-sweetalert2": "^5.0.2",
     "vuex": "^4.0.2"
   },
   "devDependencies": {

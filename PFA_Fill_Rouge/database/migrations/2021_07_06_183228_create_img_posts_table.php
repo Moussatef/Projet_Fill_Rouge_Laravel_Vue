@@ -16,8 +16,9 @@ class CreateImgPostsTable extends Migration
         Schema::create('img_posts', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->foreignId('id_post')->constrained('Posts')->onDelete('cascade');
+            $table->foreignId('post_id')->constrained('Posts')->onDelete('cascade');
             $table->string('path');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

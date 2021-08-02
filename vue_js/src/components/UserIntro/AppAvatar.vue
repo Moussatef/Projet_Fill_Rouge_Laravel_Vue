@@ -14,17 +14,24 @@
       }}</span>
     </div>
   </div>
+  <AppProfileLoad v-else />
 </template>
 
 <script>
+import AppProfileLoad from "@/components/dataload/AppProfilLoad";
 export default {
   name: "AppAvatare",
   props: ["personne_id", "date"],
+  emits: ["loading"],
+  components: {
+    AppProfileLoad,
+  },
   data() {
     return {
       user_info: undefined,
       personne: this.personne_id,
       token: localStorage.getItem("user_token"),
+      loading: true,
     };
   },
   methods: {
@@ -44,6 +51,7 @@ export default {
       );
 
       if (res.status === 200) {
+        this.loading = false;
         const result = await res.json();
         // console.log(result);
         this.user_info = result;

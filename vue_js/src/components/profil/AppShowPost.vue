@@ -1,14 +1,17 @@
 <template>
-  <div>
+  <div class="">
     <div
-      class="w-screen h-screen z-10  top-0 fixed bg-black opacity-90 "
+      class="w-screen h-screen z-10  top-0 fixed  p-40 bg-black opacity-90 "
       @click="$emit('disablePost')"
     ></div>
     <div
-      class="flex justify-center fixed top-0 transform translate-x-1/4  bg-gradient-to-r from-white via-gray-200 to-yellow-100 z-50 w-8/12  h-4/5 mt-20 overflow-hidden  "
+      class="justify-between fixed  top-0 left-auto right-auto   z-50  w-full mt-40    overflow-hidden "
+      
     >
-      <div class=" w-1/2">
-        <div class="flex items-center m-6">
+    <div class="max-w-7xl  flex mx-auto  bg-gradient-to-r from-white via-gray-200 to-gray-200" style=" max-height:850px;  ">
+
+      <div class=" w-3/6">
+        <div class="flex items-center m-4">
           <img
             :src="'http://127.0.0.1:8000' + user_info.img"
             alt=""
@@ -95,15 +98,21 @@
           />
         </div>
       </div>
-      <div class=" w-1/2  grid  gap-4   p-2 my-auto h-full  " :class="gridNumber">
+      <div
+        class=" w-full  grid  gap-4   p-2 mx-auto h-full  "
+        
+        :class="gridNumber"
+      >
         <img
+          style=" min-width:400px; min-height:600px; max-height:700px;  "
           v-for="img in postinfo.img_post"
           :key="img.id"
           :src="'http://127.0.0.1:8000' + img.path"
-          class="object-cover w-full h-full"
+          class="object-cover  mx-auto "
           alt=""
         />
       </div>
+    </div>
     </div>
   </div>
 </template>

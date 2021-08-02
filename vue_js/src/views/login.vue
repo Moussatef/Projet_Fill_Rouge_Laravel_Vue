@@ -269,10 +269,9 @@
 
             <div
               v-if="err != undefined"
-              class="bg-red-100 border border-red-400 text-red-700 px-6 py-3 rounded relative"
+              class="bg-red-100 border border-red-400 text-red-700 p-2 rounded relative"
               role="alert"
             >
-              <strong class="font-bold">Error !</strong>
               <span class="block sm:inline">{{ err }}</span>
             </div>
           </div>
@@ -362,45 +361,50 @@ export default {
   },
 
   methods: {
-    ...mapActions(["authent"]),
+    // ...mapActions(["authent"]),
     register() {
       location.replace("/user/register");
     },
-    // async authent() {
-    //   var myHeaders = new Headers();
-    //   myHeaders.append("Accept", "application/json");
-    //   myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    async authent() {
+      var myHeaders = new Headers();
+      myHeaders.append("Accept", "application/json");
+      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-    //   var urlencoded = new URLSearchParams();
-    //   urlencoded.append("email", this.inp_email);
-    //   urlencoded.append("password", this.inp_password);
+      var urlencoded = new URLSearchParams();
+      urlencoded.append("email", this.inp_email);
+      urlencoded.append("password", this.inp_password);
 
-    //   var requestOptions = {
-    //     method: "POST",
-    //     headers: myHeaders,
-    //     body: urlencoded,
-    //     redirect: "follow",
-    //   };
-    //   var selfe = this;
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: urlencoded,
+        redirect: "follow",
+      };
+      var selfe = this;
 
-    //   fetch("http://127.0.0.1:8000/api/personne/login", requestOptions)
-    //     .then((response) => response.json())
-    //     .then(function(result) {
-    //       localStorage.setItem("user_token", result.token);
-    //       localStorage.setItem("user_id", result.apprenant_id);
-    //       // console.log(result);
-    //       if (result.message) {
-    //         // localStorage.setItem("error", result.message);
-    //         selfe.err = result.message;
-    //         console.log(selfe.err);
-    //       }
-    //       // console.log(localStorage.getItem("user_token"));
-    //       else location.replace("/user/profile");
-    //     })
-    //     .catch(function(error) {
-    //       console.log("error", error);
-    //     });
-    // },
+      fetch("http://127.0.0.1:8000/api/personne/login", requestOptions)
+        .then((response) => response.json())
+        .then(function(result) {
+          // console.log(result);
+          if (result.message) {
+            // localStorage.setItem("error", result.message);
+            selfe.err = result.message;
+            console.log(selfe.err);
+          }
+          // console.log(localStorage.getItem("user_token"));
+          else {
+            localStorage.removeItem("error");
+            selfe.err = undefined;
+            localStorage.setItem("user_token", result.token);
+            localStorage.setItem("user_id", result.apprenant_id);
+            localStorage.setItem("personne_id", result.id_personne);
+            location.replace("/user/profile");
+          }
+        })
+        .catch(function(error) {
+          console.log("error", error);
+        });
+    },
   },
   computed: {},
 };

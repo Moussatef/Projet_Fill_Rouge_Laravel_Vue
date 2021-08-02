@@ -28,6 +28,7 @@
           rows="10"
           placeholder="Write description"
         ></textarea>
+        
 
         <div class="flex items-center  h-46 w-full">
           <div v-if="imagepreview[0]" class="w-30 h-40 overflow-hidden m-1">
@@ -99,6 +100,7 @@
             </div>
           </div>
         </div>
+      
         <div v-if="title && description" class="w-full text-right ">
           <button
             @click="sendData"
@@ -126,6 +128,10 @@ export default {
       image: [],
       cmp: 0,
       addImg: false,
+      editorData: '<p>Content of the editor.</p>',
+        editorConfig: {
+            // The configuration of the editor.
+        }
     };
   },
   methods: {
@@ -165,10 +171,16 @@ export default {
     onlivein() {
       this.addImg = false;
     },
+    test() {
+      CKEDITOR.replace("description");
+    },
   },
   components: {},
   computed: {
     ...mapGetters(["user_info"]),
+  },
+  created() {
+    // this.test();
   },
 };
 </script>

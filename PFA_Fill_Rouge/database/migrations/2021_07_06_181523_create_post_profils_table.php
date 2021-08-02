@@ -17,6 +17,7 @@ class CreatePostProfilsTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->foreignId('post_id')->constrained()->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

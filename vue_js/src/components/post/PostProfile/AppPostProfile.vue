@@ -9,7 +9,6 @@
 
         <div class="relative" v-if="checkEditPost">
           <button
-            
             @click="dropdownOpen = !dropdownOpen"
             class="relative block  w-9 h-9 rounded-full bg-fill  items-center justify-center  focus:outline-none"
           >
@@ -248,26 +247,28 @@
           </svg>
         </button>
       </div>
-      <div class="text-left h-96 " v-if="comments_length">
-      <div class="h-full overflow-y-scroll">
-
-        <AppComment
-          v-for="cmt in comments"
-          :key="cmt.id"
-          :postProfile="postProfile"
-          :comment_body="cmt.comment"
-          :personne_id="cmt.personne_id"
-          :comment_id="cmt.id"
-          :created_at="cmt.created_at"
-        />
-      </div>
+      <div v-if="comments_length" class="text-left max-h-96 overflow-y-scroll ">
+        <div class="h-full">
+          <AppComment
+            v-for="cmt in comments"
+            :key="cmt.id"
+            :postProfile="postProfile"
+            :comment_body="cmt.comment"
+            :personne_id="cmt.personne_id"
+            :comment_id="cmt.id"
+            :created_at="cmt.created_at"
+          />
+        </div>
       </div>
     </div>
+    <Appload v-else class="my-2" />
   </div>
 </template>
 <script>
 import AppComment from "@/components/profil/AppComment";
 import AppAvatare from "@/components/UserIntro/AppAvatar";
+import AppProfileLoad from "@/components/dataload/AppProfilLoad";
+import Appload from "@/components/dataload/ApploadCard";
 import { mapActions, mapGetters } from "vuex";
 export default {
   props: ["personne_id", "storcomment", "post", "posts"],
@@ -275,10 +276,13 @@ export default {
   components: {
     AppComment,
     AppAvatare,
+    AppProfileLoad,
+    Appload,
   },
   name: "AppPostProfile",
   data() {
     return {
+      loading: undefined,
       img_avatar: "http://127.0.0.1:8000",
       date: moment(this.post.created_at, "YYYY-MM-DD HH:mm:ss"),
       likess: this.post.like.length,

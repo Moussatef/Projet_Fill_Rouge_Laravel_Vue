@@ -7,16 +7,14 @@ const state = {
     nb_like: null,
     nb_comment: null,
     nb_post: null,
-    loadingInfoInfo: true,
+    
 }
 
 const getters = {
     user_info: state => state.user_info,
     new_user: state => state.new_user,
-    loadingInfo: state => state.loadingInfo,
-    nb_like: state => state.nb_like,
-    nb_comment: state => state.nb_comment,
-    nb_post: state => state.nb_post,
+    
+   
 
 
 
@@ -53,20 +51,7 @@ const actions = {
     },
 
 
-    async getStatistics({ commit }) {
-        const config = {
-            headers: {
-                Accept: "application/json",
-                Authorization: `Bearer ${localStorage.getItem('user_token')}`
-            }
-        };
-
-        const response = await axios.get(`http://127.0.0.1:8000/api/profile/static/${localStorage.getItem('personne_id')}`, config);
-        console.log(response)
-        commit('setStatistic', response.data);
-        state.loadingInfo = false;
-
-    },
+    
 
     async registerApprenant({ commit }, param) {
         const data = new FormData();
@@ -98,7 +83,7 @@ const actions = {
         });
         if (response.status == 201) {
             const result = await response;
-            console.log(result.data.apprenant);
+            // console.log(result.data.apprenant)
             commit('newUser', response.data);
             localStorage.setItem("user_token", result.data.personne.token)
             localStorage.setItem("user_id", result.data.apprenant)
@@ -130,11 +115,7 @@ const actions = {
             }
         );
         if (result.status === 200) {
-            console.log(result);
-            // this.img_profil = false;
-            // this.img_src = false;
-            // this.profile = "http://127.0.0.1:8000" + result.data.img;
-            // this.cover = "http://127.0.0.1:8000" + result.data.cover;
+            //console.log(result);
             commit("setUser", result.data);
         } else {
             console.log(result);
@@ -151,15 +132,7 @@ const mutations = {
         state.new_user = new_user
     },
 
-    setStatistic: (state, Statistic) => {
-        console.log(Statistic);
-
-        (state.nb_like = Statistic.nb_Like);
-        (state.nb_comment = Statistic.nb_Comment);
-        (state.nb_post = Statistic.nb_Posts);
-        state.loadingInfo = false;
-
-    },
+   
 
 }
 

@@ -30,6 +30,7 @@ class AuthController extends Controller
             'img' =>       'nullable|image|mimes:jpeg,png,jpg,gif,svg,JPG,PNG,JPEG,GIF,SVG',
             'cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,JPG,PNG,JPEG,GIF,SVG',
             'bio' => 'nullable|string',
+            'campus_id' => 'required'
         ]);
         $newnameProfile = !empty($fields['img']) ?  $fileUpload->upload($fields['img'], 'public/image') : 'ycc.jpg';
         $newnameCover = !empty($fields['cover']) ?  $fileUpload->upload($fields['cover'], 'public/cover') : 'cover.jpg';
@@ -49,6 +50,7 @@ class AuthController extends Controller
             'img' =>  $newnameProfile,
             'cover' =>  $newnameCover,
             'bio' =>  $fields['bio'],
+            'campus_id' => $fields['campus_id'],
         ]);
         // $token = $personne->createToken('moussatefToken')->plainTextToken;
         $response = [

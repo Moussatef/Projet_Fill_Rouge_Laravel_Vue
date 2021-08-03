@@ -163,16 +163,17 @@ class PostController extends Controller
         $this->validate($request, [
             'title' => 'required|string',
             'description' => 'required|string',
-            'public' => 'required'
+            // 'public' => 'required'
         ]);
         $post = Post::find($id);
         $post->titre = $request->title;
         $post->description = $request->description;
-        if ($request->public == 0 || $request->public == 1)
-            $post->public = $request->public;
-        else
-            $post->public = 0;
+        // if ($request->public == 0 || $request->public == 1)
+        //     $post->public = $request->public;
+        // else
+        //     $post->public = 0;
         if ($post->save()) {
+            // $post = $post->fresh(['comment', 'like','imgPost']);
             return $post;
         } else
             return response('noting do ');

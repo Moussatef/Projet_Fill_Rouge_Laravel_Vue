@@ -284,6 +284,8 @@
             <div class="text-gray-500">Total comments</div>
           </div>
           <AppProfileLoad v-else />
+
+         
         </div>
       </div>
     </div>
@@ -298,6 +300,7 @@
         <div class="px-4 py-5 text-fGrey">My Post Problems</div>
       </div>
     </div>
+      
   </div>
 </template>
 
@@ -314,6 +317,8 @@ export default {
   },
   data() {
     return {
+     
+    
       profile: "http://127.0.0.1:8000" + this.img,
       cover: "http://127.0.0.1:8000" + this.imgCover,
       img_src: false,

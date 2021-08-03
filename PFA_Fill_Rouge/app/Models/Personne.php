@@ -28,7 +28,8 @@ class Personne extends Model
         'img',
         'cover',
         'bio',
-        'validation'
+        'validation',
+        'campus_id',
     ];
 
 
@@ -52,6 +53,10 @@ class Personne extends Model
         'email_verified_at' => 'datetime',
     ];
 
+    public function campus()
+    {
+        return $this->belongsTo(Campus::class);
+    }
     public function apprenant()
     {
         return $this->hasOne(Apprenant::class);

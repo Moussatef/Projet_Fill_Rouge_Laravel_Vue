@@ -9,6 +9,7 @@
           alt="img"
           class="h-10 w-10 rounded-full border  border-blue-500"
         />
+        <AppEditeur />
         <input
           @focus="onfocusin"
           @blur="onlivein"
@@ -17,6 +18,7 @@
           placeholder="Write something to Roland…"
         />
         <hr />
+        
       </div>
       <div v-if="addImg || title" class="w-full post-div">
         <textarea
@@ -28,7 +30,6 @@
           rows="10"
           placeholder="Write description"
         ></textarea>
-        
 
         <div class="flex items-center  h-46 w-full">
           <div v-if="imagepreview[0]" class="w-30 h-40 overflow-hidden m-1">
@@ -100,7 +101,7 @@
             </div>
           </div>
         </div>
-      
+
         <div v-if="title && description" class="w-full text-right ">
           <button
             @click="sendData"
@@ -116,8 +117,12 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import AppEditeur from "@/components/post/postProblem/AppEditor";
 export default {
   name: "AppCreatePost",
+  components: {
+    AppEditeur,
+  },
   data() {
     return {
       title: "",
@@ -128,10 +133,10 @@ export default {
       image: [],
       cmp: 0,
       addImg: false,
-      editorData: '<p>Content of the editor.</p>',
-        editorConfig: {
-            // The configuration of the editor.
-        }
+      editorData: "<p>Content of the editor.</p>",
+      editorConfig: {
+        // The configuration of the editor.
+      },
     };
   },
   methods: {

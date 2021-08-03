@@ -3,6 +3,7 @@
 use App\Http\Controllers\PersonneController;
 use App\Http\Controllers\ApprenantController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CampusController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\ImageController;
@@ -28,6 +29,10 @@ Route::post('/user/registerU', [AuthController::class, 'registerU']);
 Route::post('/personne/login', [AuthController::class, 'login']);
 Route::post('/user/loginU', [AuthController::class, 'loginU']);
 Route::post('/apprenant/register', [ApprenantController::class, 'store']);
+
+//get campus
+Route::get('/campus', [CampusController::class, 'index']);
+
 
 // Check posts
 

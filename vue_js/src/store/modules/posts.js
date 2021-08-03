@@ -4,13 +4,21 @@ const state = {
     postsProfile: [],
     allPostProfile: [],
     loading: true,
-    err: false
+    err: false,
+    nb_like: null,
+    nb_comment: null,
+    nb_post: null,
+    loadingInfo: true,
 }
 
 const getters = {
     posts_personne: state => state.postsProfile,
     allPostProfile: state => state.allPostProfile,
     loading: state => state.loading,
+    nb_like: state => state.nb_like,
+    nb_comment: state => state.nb_comment,
+    nb_post: state => state.nb_post,
+    loadingInfo: state => state.loadingInfo,
 }
 
 const actions = {
@@ -31,6 +39,22 @@ const actions = {
             });
     },
 
+
+    async getStatistics({ commit }) {
+        const config = {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem('user_token')}`
+            }
+        };
+
+        const response = await axios.get(`http://127.0.0.1:8000/api/profile/static/${localStorage.getItem('personne_id')}`, config);
+        // console.log(response)
+        commit('setStatistic', response.data);
+        state.loadingInfo = false;
+
+    },
+
     async newPost({ commit }, params) {
         let token = localStorage.getItem('user_token')
         var data = new FormData()
@@ -44,7 +68,7 @@ const actions = {
             }
         });
         if (response.status === 200) {
-            console.log(response);
+            // console.log(response);
             commit('addPosts', response.data);
         } else {
             console.log(response);
@@ -61,7 +85,7 @@ const actions = {
             }
         });
         if (response.status === 200) {
-            console.log(response);
+            // console.log(response);
             commit('setAllPosts', response.data);
             state.loading = false;
         } else {
@@ -77,13 +101,9 @@ const actions = {
     async updatePost({ commit }, params) {
         let token = localStorage.getItem('user_token')
 
-
-
         var data = new FormData()
-
         data.append('title', params[1])
         data.append('description', params[2])
-        data.append('public', params[3])
 
         const response = await axios.post(`http://127.0.0.1:8000/api/profile/post/update/${params[0]}`, data, {
             headers: {
@@ -93,7 +113,7 @@ const actions = {
         });
         if (response.status === 200) {
             console.log(response);
-            commit('updatePost', response.data);
+            commit('updatePostData', response.data);
         } else {
             console.log(response);
         }
@@ -109,14 +129,29 @@ const mutations = {
     addPosts: function (state, postsProfile) {
         state.postsProfile.unshift(postsProfile)
         state.allPostProfile.unshift(postsProfile)
-
+        state.nb_post += state.nb_post;
     },
+
+    updatePostData: function (state, putPost) {
+        state.postsProfile.splice(state.postsProfile.findIndex(el => el.id == putPost.id), 1, putPost);
+    },
+
+
+
     setAllPosts: (state, allPostProfile) => {
         state.loading = false;
         (state.allPostProfile = allPostProfile);
     },
-    updatePost: (state, updatePost) => {
-        state.postsProfile.splice(state.postsProfile.findIndex(el => el.id == updatePost.id), 1, updatePost);
+
+
+    setStatistic: (state, Statistic) => {
+        console.log(Statistic);
+
+        (state.nb_like = Statistic.nb_Like);
+        (state.nb_comment = Statistic.nb_Comment);
+        (state.nb_post = Statistic.nb_Posts);
+        state.loadingInfo = false;
+
     },
 
 }

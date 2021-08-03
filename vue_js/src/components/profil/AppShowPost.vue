@@ -6,113 +6,163 @@
     ></div>
     <div
       class="justify-between fixed  top-0 left-auto right-auto   z-50  w-full mt-40    overflow-hidden "
-      
     >
-    <div class="max-w-7xl  flex mx-auto  bg-gradient-to-r from-white via-gray-200 to-gray-200" style=" max-height:850px;  ">
-
-      <div class=" w-3/6">
-        <div class="flex items-center m-4">
-          <img
-            :src="'http://127.0.0.1:8000' + user_info.img"
-            alt=""
-            class="h-10 w-10 rounded-full border  border-blue-500"
-          />
-          <div class="ml-4">
-            <span class="cursor-pointer font-bold"
-              >{{ user_info.nom }} {{ user_info.prenom }}
-            </span>
-            <span class="text-grey text-opacity-50 text-sm mx-3">{{
-              date.fromNow()
-            }}</span>
-          </div>
-        </div>
-        <div>
-          <h2 class="text-2xl text-gray-900">
-            {{ postinfo.titre }}
-          </h2>
-          <p>
-            {{ postinfo.description }}
-          </p>
-          <hr />
-        </div>
-        <div class="flex border-b-2 mx-3 rounded-lg  border-blue-300 my-4">
-          <div class="flex items-center m-2">
-            <svg
-              class="h-6 w-6 mx-3"
-              id="Capa_1"
-              enable-background="new 0 0 512 512"
-              height="512"
-              viewBox="0 0 512 512"
-              width="512"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-            >
-              <linearGradient
-                id="SVGID_1_"
-                gradientUnits="userSpaceOnUse"
-                x1="256"
-                x2="256"
-                y1="512"
-                y2="0"
-              >
-                <stop offset="0" stop-color="#fd3a84" />
-                <stop offset="1" stop-color="#ffa68d" />
-              </linearGradient>
-              <g>
-                <g>
-                  <path
-                    d="m256 0c-140.959 0-256 115.049-256 256 0 140.959 115.049 256 256 256 140.959 0 256-115.05 256-256 0-140.959-115.049-256-256-256zm0 482c-124.617 0-226-101.383-226-226s101.383-226 226-226 226 101.383 226 226-101.383 226-226 226zm75-361c-32.923 0-58.18 18.506-75 46.058-16.817-27.547-42.072-46.058-75-46.058-53.252 0-90 45.908-90 99.545 0 64.594 57.624 110.966 116.19 162.298 12.376 10.848 25.174 22.065 38.775 34.306 2.853 2.568 6.444 3.851 10.035 3.851s7.182-1.283 10.035-3.851c13.601-12.241 26.398-23.458 38.775-34.306 63.286-55.469 116.19-99.611 116.19-162.298 0-53.739-36.839-99.545-90-99.545zm-45.964 239.283c-9.375 8.216-18.988 16.643-29.036 25.587-10.047-8.944-19.661-17.371-29.036-25.587-66.079-57.918-105.964-92.877-105.964-139.738 0-39.647 25.794-69.545 60-69.545 32.707 0 53.643 31.628 60.516 56.399 1.763 6.548 7.701 11.101 14.484 11.101 6.796 0 12.743-4.569 14.494-11.135.15-.564 15.55-56.365 60.506-56.365 34.206 0 60 29.898 60 69.545 0 46.861-39.885 81.82-105.964 139.738z"
-                    fill="url(#SVGID_1_)"
-                  />
-                </g>
-              </g>
-            </svg>
-            {{ likein }}
-          </div>
-          <div class="flex items-center  m-2">
-            <svg
-              class="w-6 h-6 mr-1 "
-              stroke="currentColor"
-              stroke-width="2"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              viewBox="0 0 24 24"
-            >
+      <div
+        class="bg-white w-10 h-9  float-right mr-10 rounded-full cursor-pointer p-1 hover:bg-gray-300 hover:text-white"
+        @click="$emit('disablePost')"
+      >
+        <svg
+          class="h-7 w-7 mx-auto "
+          version="1.1"
+          id="Capa_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          viewBox="0 0 340.8 340.8"
+          style="enable-background:new 0 0 340.8 340.8;"
+          xml:space="preserve"
+        >
+          <g>
+            <g>
               <path
-                d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
-              ></path>
-            </svg>
-            {{ comments.length }}
-          </div>
-          <div></div>
-        </div>
-        <div class="text-left h-full overflow-scroll ">
-          <AppComment
-            v-for="cmt in comments"
-            :key="cmt.id"
-            :comment_body="cmt.comment"
-            :personne_id="cmt.personne_id"
-            :comment_id="cmt.id"
-            :created_at="cmt.created_at"
-          />
-        </div>
+                d="M170.4,0C76.4,0,0,76.4,0,170.4s76.4,170.4,170.4,170.4s170.4-76.4,170.4-170.4S264.4,0,170.4,0z M170.4,323.6
+			c-84.4,0-153.2-68.8-153.2-153.2S86,17.2,170.4,17.2S323.6,86,323.6,170.4S254.8,323.6,170.4,323.6z"
+              />
+            </g>
+          </g>
+          <g>
+            <g>
+              <path
+                d="M182.4,169.6l50-50c3.2-3.2,3.2-8.8,0-12c-3.2-3.2-8.8-3.2-12,0l-50,50l-50-50c-3.2-3.2-8.8-3.2-12,0
+			c-3.2,3.2-3.2,8.8,0,12l50,50l-50,49.6c-3.2,3.2-3.2,8.8,0,12c1.6,1.6,4,2.4,6,2.4s4.4-0.8,6-2.4l50-50l50,50c1.6,1.6,4,2.4,6,2.4
+			s4.4-0.8,6-2.4c3.2-3.2,3.2-8.8,0-12L182.4,169.6z"
+              />
+            </g>
+          </g>
+          <g></g>
+          <g></g>
+          <g></g>
+          <g></g>
+          <g></g>
+          <g></g>
+          <g></g>
+          <g></g>
+          <g></g>
+          <g></g>
+          <g></g>
+          <g></g>
+          <g></g>
+          <g></g>
+          <g></g>
+        </svg>
       </div>
       <div
-        class=" w-full  grid  gap-4   p-2 mx-auto h-full  "
-        
-        :class="gridNumber"
+        class="max-w-7xl  flex mx-auto  bg-gradient-to-r from-white via-gray-200 to-gray-200"
+        style=" max-height:850px;  "
       >
-        <img
-          style=" min-width:400px; min-height:600px; max-height:700px;  "
-          v-for="img in postinfo.img_post"
-          :key="img.id"
-          :src="'http://127.0.0.1:8000' + img.path"
-          class="object-cover  mx-auto "
-          alt=""
-        />
+        <div class=" w-3/6">
+          <div class="flex items-center m-4">
+            <img
+              :src="'http://127.0.0.1:8000' + user_info.img"
+              alt=""
+              class="h-10 w-10 rounded-full border  border-blue-500"
+            />
+            <div class="ml-4">
+              <span class="cursor-pointer font-bold"
+                >{{ user_info.nom }} {{ user_info.prenom }}
+              </span>
+              <span class="text-grey text-opacity-50 text-sm mx-3">{{
+                date.fromNow()
+              }}</span>
+            </div>
+          </div>
+          <div>
+            <h2 class="text-2xl text-gray-900">
+              {{ postinfo.titre }}
+            </h2>
+            <p>
+              {{ postinfo.description }}
+            </p>
+            <hr />
+          </div>
+          <div class="flex border-b-2 mx-3 rounded-lg  border-blue-300 my-4">
+            <div class="flex items-center m-2">
+              <svg
+                class="h-6 w-6 mx-3"
+                id="Capa_1"
+                enable-background="new 0 0 512 512"
+                height="512"
+                viewBox="0 0 512 512"
+                width="512"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+              >
+                <linearGradient
+                  id="SVGID_1_"
+                  gradientUnits="userSpaceOnUse"
+                  x1="256"
+                  x2="256"
+                  y1="512"
+                  y2="0"
+                >
+                  <stop offset="0" stop-color="#fd3a84" />
+                  <stop offset="1" stop-color="#ffa68d" />
+                </linearGradient>
+                <g>
+                  <g>
+                    <path
+                      d="m256 0c-140.959 0-256 115.049-256 256 0 140.959 115.049 256 256 256 140.959 0 256-115.05 256-256 0-140.959-115.049-256-256-256zm0 482c-124.617 0-226-101.383-226-226s101.383-226 226-226 226 101.383 226 226-101.383 226-226 226zm75-361c-32.923 0-58.18 18.506-75 46.058-16.817-27.547-42.072-46.058-75-46.058-53.252 0-90 45.908-90 99.545 0 64.594 57.624 110.966 116.19 162.298 12.376 10.848 25.174 22.065 38.775 34.306 2.853 2.568 6.444 3.851 10.035 3.851s7.182-1.283 10.035-3.851c13.601-12.241 26.398-23.458 38.775-34.306 63.286-55.469 116.19-99.611 116.19-162.298 0-53.739-36.839-99.545-90-99.545zm-45.964 239.283c-9.375 8.216-18.988 16.643-29.036 25.587-10.047-8.944-19.661-17.371-29.036-25.587-66.079-57.918-105.964-92.877-105.964-139.738 0-39.647 25.794-69.545 60-69.545 32.707 0 53.643 31.628 60.516 56.399 1.763 6.548 7.701 11.101 14.484 11.101 6.796 0 12.743-4.569 14.494-11.135.15-.564 15.55-56.365 60.506-56.365 34.206 0 60 29.898 60 69.545 0 46.861-39.885 81.82-105.964 139.738z"
+                      fill="url(#SVGID_1_)"
+                    />
+                  </g>
+                </g>
+              </svg>
+              {{ likein }}
+            </div>
+            <div class="flex items-center  m-2">
+              <svg
+                class="w-6 h-6 mr-1 "
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"
+                ></path>
+              </svg>
+              {{ comments.length }}
+            </div>
+            <div></div>
+          </div>
+          <div class="text-left h-full overflow-scroll ">
+            <AppComment
+              v-for="cmt in comments"
+              :key="cmt.id"
+              :comment_body="cmt.comment"
+              :personne_id="cmt.personne_id"
+              :comment_id="cmt.id"
+              :created_at="cmt.created_at"
+            />
+          </div>
+        </div>
+        <div
+          class=" w-full  grid  gap-4   p-2 mx-auto h-full  "
+          :class="gridNumber"
+        >
+          <img
+            style=" min-width:400px; min-height:600px; max-height:700px;  "
+            v-for="img in postinfo.img_post"
+            :key="img.id"
+            :src="'http://127.0.0.1:8000' + img.path"
+            class="object-cover  mx-auto "
+            alt=""
+          />
+        </div>
       </div>
-    </div>
     </div>
   </div>
 </template>

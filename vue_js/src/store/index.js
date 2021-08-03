@@ -6,6 +6,7 @@ import apprenant from './modules/apprenant';
 import comments from './modules/comments';
 import likes from './modules/likes';
 import Image from './modules/image';
+import campus from './modules/campus';
 
 
 // create store 
@@ -16,7 +17,8 @@ export default createStore({
         comments,
         likes,
         token,
-        Image
+        Image,
+        campus,
     }
 
 })

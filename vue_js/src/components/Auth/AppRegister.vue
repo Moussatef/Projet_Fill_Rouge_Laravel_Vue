@@ -31,7 +31,7 @@
                     <div
                       class=" relative my-4 h-20 w-20 mx-auto rounded-full border-2 border-blue-400 overflow-hidden bg-gray-100"
                     >
-                      <img id="myImg" src="#" />
+                      <img id="myImg" :src="imagepreview" />
                       <svg
                         v-if="!img_src"
                         class="h-20 w-20 absolute rounded-full  -top-1 bg-gray-100 text-gray-300"
@@ -108,7 +108,7 @@
                   <div class="h-56 w-full my-4 bg-gray-200 overflow-hidden">
                     <img
                       class=" object-scale-down"
-                      src="#"
+                      :src="coverpreview"
                       id="img_cover"
                       alt=""
                     />
@@ -152,8 +152,8 @@
                 </div>
               </div>
 
-              <div>
-                <div class="mb-3 space-y-2 w-full text-xs">
+              <div class="md:flex flex-row md:space-x-4 w-full text-xs">
+                <div class="mb-3 space-y-2 w-1/2 text-xs">
                   <label class="font-semibold text-gray-600 py-2"
                     >Email <abbr title="required">*</abbr></label
                   >
@@ -169,6 +169,22 @@
                   <p class="text-red text-xs hidden">
                     Please fill out this field.
                   </p>
+                </div>
+                <div class="mb-3 space-y-2 w-1/2 text-xs">
+                  <label class="font-semibold text-gray-600 py-2"
+                    >Campus <abbr title="required">*</abbr></label
+                  >
+                  <select
+                    id="campus_form"
+                    class="form-select  block w-full border border-gray-400 rounded-lg  h-10 px-4"
+                  >
+                    <option
+                      v-for="cmp in campus"
+                      :key="cmp.id"
+                      :value="cmp.id"
+                      >{{ cmp.campus_nom }}</option
+                    >
+                  </select>
                 </div>
               </div>
 
@@ -361,7 +377,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import axios from "axios";
 export default {
   name: "AppRegister",
@@ -386,56 +402,50 @@ export default {
       inp_bio: "",
       selectedFile: null,
       selectedCover: null,
+      inp_compus: "YouCode Safi",
+      imagepreview : null,
+      coverpreview : null,
     };
   },
   methods: {
-    ...mapActions(["registerApprenant", "uploadfile"]),
+    ...mapActions(["registerApprenant", "uploadfile", "fetchCampus"]),
 
-    uploadImg() {
-      var selfe = this;
-      window.addEventListener("load", function() {
-        document
-          .querySelector("#img_profile")
-          .addEventListener("change", function() {
-            if (this.files && this.files[0]) {
-              var img = document.querySelector("#myImg");
-              img.onload = () => {
-                URL.revokeObjectURL(img.src); // no longer needed, free memory
-              };
-              selfe.img_src = true;
-              img.src = URL.createObjectURL(this.files[0]); // set src to blob url
-            } else {
-              selfe.img_src = false;
-            }
-          });
-      });
+    
+   imageSelected(e) {
+      this.img_src = true;
+      this.image = e.target.files[0];
+
+      let reader = new FileReader();
+      reader.readAsDataURL(this.image);
+      reader.onload = (e) => {
+        this.imagepreview = e.target.result;
+      };
     },
-    uploadCoverImg() {
-      var selfe = this;
-      window.addEventListener("load", function() {
-        document
-          .querySelector("#cover_img")
-          .addEventListener("change", function() {
-            if (this.files && this.files[0]) {
-              var img = document.querySelector("#img_cover");
-              img.onload = () => {
-                URL.revokeObjectURL(img.src); // no longer needed, free memory
-              };
-              selfe.hidden = "visible";
-              img.src = URL.createObjectURL(this.files[0]); // set src to blob url
-            } else {
-              selfe.hidden = "hidden";
-            }
-          });
-      });
-    },
+
     onfileSelected(event) {
+      let selfe = this
       this.selectedFile = event.target.files[0];
+
+      let reader = new FileReader();
+      reader.readAsDataURL(this.selectedFile);
+      reader.onload = (event) => {
+        selfe.img_src = true;
+        this.imagepreview = event.target.result;
+      };
     },
     onCoverImgSelected(event) {
+      let selfe = this
       this.selectedCover = event.target.files[0];
+
+      let reader = new FileReader();
+      reader.readAsDataURL(this.selectedCover);
+      reader.onload = (event) => {
+        selfe.hidden = 'bloc'
+        this.coverpreview = event.target.result;
+      };
     },
     async uploadfile(param) {
+      var campus = document.getElementById("campus_form").value;
       const data = new FormData();
       data.append("prenom", param[0]);
       data.append("nom", param[1]);
@@ -452,6 +462,7 @@ export default {
       data.append("img", param[12]);
       data.append("cover", param[13]);
       data.append("bio", param[14]);
+      data.append("campus_id", campus);
 
       const response = await axios.post(
         `http://127.0.0.1:8000/api/apprenant/register`,
@@ -514,10 +525,13 @@ export default {
         ]);
     },
   },
-  computed: {},
+  computed: {
+    ...mapGetters(["campus"]),
+  },
   created() {
-    this.uploadImg();
-    this.uploadCoverImg();
+    this.fetchCampus();
+    // this.uploadImg();
+    // this.uploadCoverImg();
   },
 };
 </script>

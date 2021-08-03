@@ -23,16 +23,12 @@ const actions = {
             }
         };
         await await axios.get(`http://127.0.0.1:8000/api/profile/post/${param[0]}`, config).
-        then(response => { commit('setPosts', response.data); state.loading = false; }).
-        catch(err => {
-            state.loading = false;
-            state.err = true;
-            console.log(err);
-        });;
-        // console.log(response)
-
-
-        commit('setPosts', response.data);
+            then(response => { commit('setPosts', response.data); state.loading = false; }).
+            catch(err => {
+                state.loading = false;
+                state.err = true;
+                console.log(err);
+            });
     },
 
     async newPost({ commit }, params) {
@@ -87,6 +83,7 @@ const actions = {
 
         data.append('title', params[1])
         data.append('description', params[2])
+        data.append('public', params[3])
 
         const response = await axios.post(`http://127.0.0.1:8000/api/profile/post/update/${params[0]}`, data, {
             headers: {

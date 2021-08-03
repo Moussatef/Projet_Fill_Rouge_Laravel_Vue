@@ -76,6 +76,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //get all posts
     Route::get('/home/post/all', [PostController::class, 'index']);
 
+    //get statistic
+    Route::get('/profile/static/{id}', [PostController::class, 'getTotals']);
 });
 
 

@@ -163,14 +163,37 @@ class PostController extends Controller
         $this->validate($request, [
             'title' => 'required|string',
             'description' => 'required|string',
+            'public' => 'required'
         ]);
         $post = Post::find($id);
         $post->titre = $request->title;
         $post->description = $request->description;
+        if ($request->public == 0 || $request->public == 1)
+            $post->public = $request->public;
+        else
+            $post->public = 0;
         if ($post->save()) {
             return $post;
         } else
             return response('noting do ');
+    }
+
+    public function getTotals($id)
+    {
+
+        $personne = Personne::find($id);
+
+        $Nb_Posts = $personne->post->count();
+        $Nb_Like = $personne->receivedLikes->count();
+        $Nb_Comment = $personne->receivedComments->count();
+
+        $response = [
+            'nb_Posts' => $Nb_Posts,
+            'nb_Like' => $Nb_Like,
+            'nb_Comment' => $Nb_Comment
+        ];
+
+        return $response;
     }
 
     /**

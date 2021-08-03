@@ -4,20 +4,16 @@
       class="relative h-96 rounded-xl flex justify-center sm:max-w-screen-sm     md:max-w-full"
     >
       <img
-        v-if="
-          cover != 'http://127.0.0.1:8000/storage/cover/' &&
-            cover != 'http://127.0.0.1:8000/storage/cover' &&
-            img_src == false
-        "
-        :src="cover"
+        v-if="img_src == false"
+        :src="'http://127.0.0.1:8000' + user_info.cover"
         class="object-cover w-full h-full rounded-3xl"
-        alt="cover"
+        alt=""
       />
       <img
         v-if="img_src == true"
         :src="imagepreview"
         class="object-cover w-full h-full rounded-3xl"
-        alt="cover need"
+        alt=""
         id="cover"
       />
       <label
@@ -49,17 +45,17 @@
       <!-- ../../../../PFA_Fill_Rouge/public/uploads/ot.jpg -->
       <div class="absolute -bottom-14">
         <img
-          v-if="!!profile && img_profil == false"
-          :src="profile"
-          class="object-cover border-2 border-blue-600   w-40 h-40 rounded-full"
-          alt="cover"
+          v-if="img_profil == false"
+          :src="'http://127.0.0.1:8000' + user_info.img"
+          class="object-fill bg-cover border-2 border-blue-600   w-40 h-40  rounded-full"
+          alt=""
           id="profile"
         />
         <img
           v-else
           :src="Profilepreview"
           class="object-cover border-2 border-blue-600   w-40 h-40 rounded-full"
-          alt="cover"
+          alt=""
         />
         <label class="cursor-pointer absolute left-36 bottom-2">
           <svg
@@ -86,7 +82,7 @@
     </div>
     <button
       v-if="img_src || img_profil"
-      @click="updateImage()"
+      @click="updateImage"
       class="my-2  h-9 w-20 inline-block float-right  bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
     >
       Save
@@ -98,7 +94,7 @@
       <p class="text-md">{{ bio }}</p>
       <p class="text-md">Apprenant</p>
       <p class="text-md">
-        <strong>2K</strong> followers <strong>120</strong> following
+        <!-- <strong>2K</strong> followers <strong>120</strong> following -->
       </p>
     </div>
 
@@ -212,10 +208,11 @@
             </svg>
           </div>
 
-          <div class="mx-5">
-            <h4 class="text-2xl font-semibold text-gray-700">8,282</h4>
+          <div class="mx-5" v-if="!loadingInfo">
+            <h4 class="text-2xl font-semibold text-gray-700">{{ nb_post }}</h4>
             <div class="text-gray-500">Total posts</div>
           </div>
+          <AppProfileLoad v-else />
         </div>
       </div>
 
@@ -254,10 +251,11 @@
             </svg>
           </div>
 
-          <div class="mx-5">
-            <h4 class="text-2xl font-semibold text-gray-700">200,521</h4>
+          <div class="mx-5" v-if="!loadingInfo">
+            <h4 class="text-2xl font-semibold text-gray-700">{{ nb_like }}</h4>
             <div class="text-gray-500">Total Likes</div>
           </div>
+          <AppProfileLoad v-else />
         </div>
       </div>
 
@@ -279,10 +277,13 @@
             </svg>
           </div>
 
-          <div class="mx-5">
-            <h4 class="text-2xl font-semibold text-gray-700">215,542</h4>
+          <div class="mx-5" v-if="!loadingInfo">
+            <h4 class="text-2xl font-semibold text-gray-700">
+              {{ nb_comment }}
+            </h4>
             <div class="text-gray-500">Total comments</div>
           </div>
+          <AppProfileLoad v-else />
         </div>
       </div>
     </div>
@@ -302,9 +303,15 @@
 
 <script>
 import axios from "axios";
+import AppProfileLoad from "@/components/dataload/AppProfilLoad";
+import { mapGetters, mapActions } from "vuex";
+import Swal from "sweetalert2";
 export default {
   props: ["nom", "prenom", "img", "imgCover", "bio"],
   name: "AppProfile",
+  components: {
+    AppProfileLoad,
+  },
   data() {
     return {
       profile: "http://127.0.0.1:8000" + this.img,
@@ -318,6 +325,8 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["updateImg", "getStatistics"]),
+
     imageSelected(e) {
       this.img_src = true;
       this.image = e.target.files[0];
@@ -346,6 +355,13 @@ export default {
         this.image
       ) {
         this.fetchdata(this.selectedProfile, this.image, "both");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Profile and cover has been saved",
+          showConfirmButton: false,
+          timer: 2000,
+        });
       } else if (
         this.img_src == true &&
         this.img_profil == false &&
@@ -353,6 +369,13 @@ export default {
         this.image
       ) {
         this.fetchdata(this.selectedProfile, this.image, "cover");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Image cover has been saved",
+          showConfirmButton: false,
+          timer: 2000,
+        });
       } else if (
         this.img_src == false &&
         this.img_profil == true &&
@@ -360,45 +383,30 @@ export default {
         !this.image
       ) {
         this.fetchdata(this.selectedProfile, this.image, "profile");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Update profile image has been saved",
+          showConfirmButton: false,
+          timer: 2000,
+        });
       }
     },
 
-    async fetchdata(imgP, imgC, api) {
-      var data = new FormData();
-
-      data.append("img", imgP);
-      data.append("cover", imgC);
-
-      const result = await axios.post(
-        "http://127.0.0.1:8000/api/personne/update/img/" +
-          api +
-          "/" +
-          localStorage.getItem("personne_id"),
-        data,
-        {
-          headers: {
-            Accept: "application/json",
-            Authorization: "Bearer " + localStorage.getItem("user_token"),
-          },
-        }
-      );
-
-      if (result.status === 200) {
-        console.log(result);
-        this.img_profil = false;
-        this.img_src = false;
-        this.profile = "http://127.0.0.1:8000" + result.data.img;
-        this.cover = "http://127.0.0.1:8000" + result.data.cover;
-      } else {
-        console.log(result);
-      }
+    fetchdata(imgP, imgC, api) {
+      this.updateImg([imgP, imgC, api]);
+      this.img_profil = false;
+      this.img_src = false;
+      // this.profile = "http://127.0.0.1:8000" + result.data.img;
+      // this.cover = "http://127.0.0.1:8000" + result.data.cover;
     },
   },
-  watch: {
-    selectedCover: function(value) {
-      if (value) {
-      }
-    },
+  watch: {},
+  created() {
+    this.getStatistics();
+  },
+  computed: {
+    ...mapGetters(["user_info", "nb_post", "nb_comment", "nb_like","loadingInfo"]),
   },
 };
 </script>

@@ -1,10 +1,12 @@
 <template>
- <div class="p-5 bg-white w-full rounded-lg flex items-center justify-between space-x-8">
-        <div class="flex-1 flex justify-between items-center">
-          <div class="h-4 w-48 bg-gray-300 rounded"></div>
-          <div class="w-24 h-6 rounded-lg bg-purple-300"></div>
-        </div>
-      </div>
+  <div
+    class="p-5 bg-white w-full rounded-lg flex items-center justify-between space-x-8"
+  >
+    <div class="flex-1 flex justify-between items-center">
+      <div class="h-4 w-48 bg-gray-300 rounded"></div>
+      <div class="w-24 h-6 rounded-lg bg-purple-300"></div>
+    </div>
+  </div>
 </template>
 
 <script>

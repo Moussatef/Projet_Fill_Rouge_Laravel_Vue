@@ -13,6 +13,7 @@ class Post extends Model
         'personne_id',
         'titre',
         'description',
+        'public',
     ];
 
     public function personne()

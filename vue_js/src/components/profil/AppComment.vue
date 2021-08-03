@@ -2,19 +2,26 @@
   <div
     class="inline-block w-4/5 text-justify overflow-hidden bg-gray-200  rounded-3xl px-3 py-1 text-sm  text-gray-800 ml-5 mb-1"
   >
-        <div class="flex items-center">
-          <img
-            :src="'http://127.0.0.1:8000' + img"
-            alt="img"
-            class="h-10 w-10 rounded-full border border-blue-500"
-          />
-          <div class="ml-4">
-            <span class="cursor-pointer font-bold"
-              >{{ user_name }} {{ lastname }}
-            </span>
-          </div>
-        </div>
-   
+    <div class="flex items-center">
+      <img
+        v-if="user_info.id == personne_id"
+        :src="'http://127.0.0.1:8000' + user_info.img"
+        alt="img"
+        class="h-10 w-10 rounded-full border border-blue-500"
+      />
+      <img
+       v-else
+        :src="'http://127.0.0.1:8000' + img"
+        alt="img"
+        class="h-10 w-10 rounded-full border border-blue-500"
+      />
+      <div class="ml-4">
+        <span class="cursor-pointer font-bold"
+          >{{ user_name }} {{ lastname }}
+        </span>
+      </div>
+    </div>
+
     <p
       class="leading-relaxed break-words  overflow-ellipsis overflow-y-auto x  md:mb-2 lg:mb-0 ml-14 w-96 md:truncate"
     >
@@ -79,7 +86,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["comments"]),
+    ...mapGetters(["comments", "user_info"]),
   },
   created() {
     this.fetchComments([this.id_personne, this.token]);

@@ -105,7 +105,7 @@
         <div v-if="title && description" class="w-full text-right ">
           <button
             @click="sendData"
-            class="bg-blue-500 text-white py-1 px-4 border-b-2 border-gray-800 rounded-lg w-20  m-3 hover:bg-gray-50 hover:text-gray-600 hover:border-blue-500 transition duration-500 ease-in-out"
+            class="bg-blue-600 text-white py-1 px-4 border-b border-gray-800 rounded-lg w-20  m-3 hover:bg-gray-200 hover:text-gray-600 hover:border-blue-500 transition duration-500 ease-in-out"
           >
             Post
           </button>

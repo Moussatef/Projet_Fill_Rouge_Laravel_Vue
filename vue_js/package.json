@@ -10,6 +10,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^29.0.0",
     "@ckeditor/ckeditor5-vue": "^2.0.1",
+    "animate.css": "^4.1.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "es6-promise": "^4.2.8",

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Like extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'personne_id',
@@ -18,10 +18,10 @@ class Like extends Model
 
     public function personne()
     {
-        return $this->hasOne(Personne::class );
+        return $this->belongsTo(Personne::class);
     }
     public function post()
     {
-        return $this->hasOne(Post::class );
+        return $this->hasOne(Post::class);
     }
 }

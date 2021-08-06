@@ -22,29 +22,6 @@ const actions = {
 
       commit('setComments', response.data);
    },
-   async postComment({ commit }, param) {
-      var raw = JSON.stringify({
-         personne_id: param[0],
-         post_id: param[1],
-         comment: param[2],
-      });
-      const response = await axios.post(`http://127.0.0.1:8000/api/comment/store`, {
-         personne_id: param[0],
-         post_id: param[1],
-         comment: param[2],
-      }, {
-         headers: {
-            Accept: "application/json",
-            Authorization: `Bearer ${param[3]}`
-         }
-
-      }).then(res => {
-         commit('newComment', raw)
-      }).catch(err => console.log(err));
-
-
-      // commit('newComment', response.data);
-   },
 }
 
 const mutations = {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostResource;
 use App\Models\Personne;
 use App\Models\Post;
 use App\Models\PostProfil;
@@ -18,13 +19,15 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts =  Post::orderByDesc('created_at')
-            ->get();
+        // $posts =  Post::orderByDesc('created_at')
+        //     ->get();
         // $like =  Personne::find($personne_id)->receivedLikes()->get();
 
-        $posts = $posts->fresh('postProfil', 'comment', 'like', 'imgPost');
+        // $posts = $posts->fresh('postProfil', 'comment', 'like', 'imgPost');
         // $test = $posts->fresh('personne');
         // $posts = Post::latest()->with(['like', 'comment'])->paginate(5);
+
+        $posts =  PostResource::collection(Post::orderByDesc('created_at')->get());
 
         if ($posts) {
 
@@ -40,12 +43,12 @@ class PostController extends Controller
      */
     public function getPostProfile($personne_id)
     {
-        $posts =  Personne::find($personne_id)->post()
+        $posts =  PostResource::collection(Personne::find($personne_id)->post()
             ->orderByDesc('created_at')
-            ->get();
+            ->get());
         // $like =  Personne::find($personne_id)->receivedLikes()->get();
 
-        $posts = $posts->fresh('postProfil', 'comment', 'like', 'imgPost');
+        // $posts = $posts->fresh('postProfil', 'comment', 'like', 'imgPost');
         // $test = $posts->fresh('personne');
         return $posts;
     }
@@ -104,7 +107,8 @@ class PostController extends Controller
                 ]);
                 $this->uploadsImg($request->img_fore, $post);
             }
-            return response($post->fresh('postProfil', 'comment', 'like', 'imgPost'), 200);
+            $post = PostResource::collection(Post::where('id', '=', $post->id)->get());
+            return $post;
         } else
             return response('Post profile is not created', 409);
     }
@@ -163,17 +167,17 @@ class PostController extends Controller
         $this->validate($request, [
             'title' => 'required|string',
             'description' => 'required|string',
-            // 'public' => 'required'
+            'public' => 'required'
         ]);
         $post = Post::find($id);
         $post->titre = $request->title;
         $post->description = $request->description;
-        // if ($request->public == 0 || $request->public == 1)
-        //     $post->public = $request->public;
-        // else
-        //     $post->public = 0;
+        if ($request->public == 0 || $request->public == 1)
+            $post->public = $request->public;
+        else
+            $post->public = 0;
         if ($post->save()) {
-            // $post = $post->fresh(['comment', 'like','imgPost']);
+            $post = PostResource::collection(Post::where('id', '=', $post->id)->get());
             return $post;
         } else
             return response('noting do ');
@@ -203,8 +207,15 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         //
+        $post = Post::find($id)->delete();
+        if ($post)
+            return response(
+                PostResource::collection(Post::where('personne_id', '=', $request->id)->orderByDesc('created_at')->get()),
+                200
+            );
+        else  response("filde deleted", 400);
     }
 }

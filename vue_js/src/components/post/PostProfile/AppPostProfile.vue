@@ -1,11 +1,14 @@
 <template>
   <div v-if="post.public == 0">
     <div
-      v-if="postProfile "
+      v-if="postProfile"
       class="w-full shadow-xl rounded-3xl border-r-2 border-l-2 border-blue-400 bg-white p-4 my-5"
     >
       <div class="flex justify-between items-center">
-        <AppAvatare :personne_id="post_p.personne_id" :date="date" />
+        <AppAvatare
+          :personne_id="post_p.personne_id"
+          :created_at="post.created_at"
+        />
 
         <div class="relative" v-if="checkEditPost">
           <button
@@ -50,7 +53,6 @@
               Edit
             </button>
 
-            
             <button
               class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
             >
@@ -157,8 +159,8 @@
           <g></g>
           <g></g>
           <g></g>
-          <g></g>
-        </svg>public
+          <g></g></svg
+        >public
       </div>
       <div v-if="post.public == 1" class="flex items-center">
         <svg
@@ -209,8 +211,8 @@
           <g></g>
           <g></g>
           <g></g>
-          <g></g>
-        </svg>private
+          <g></g></svg
+        >private
       </div>
       <div v-if="!editProc" class="w-full mt-4 text-justify">
         <p class="text-lg text-gray-900 ">{{ post.titre }}</p>
@@ -264,9 +266,9 @@
       <div
         class="flex justify-between mt-4 items-center text-fGrey text-opacity-50"
       >
-        <div class="flex items-center">
+        <div class="flex justify-center">
           <svg
-            class="h-6 w-6 mx-3"
+            class="h-6 w-6 mx-3 mt-1"
             id="Capa_1"
             enable-background="new 0 0 512 512"
             height="512"
@@ -295,7 +297,55 @@
               </g>
             </g>
           </svg>
-          {{ likess }} Likes
+          <label class="mt-1">{{ likess }}</label>
+
+          <div>
+            <!-- active & hover classes 'bg-indigo-100 dark:bg-indigo-600' -->
+            <a
+              href=""
+              @click="
+                $event.preventDefault();
+                showlike = !showlike;
+              "
+              class="flex justify-center p-2 mx-2 text-gray-800 transition-colors rounded-md dark:text-light hover:bg-indigo-100 dark:hover:bg-indigo-600"
+              :class="{ 'bg-indigo-100 dark:bg-indigo-600': showlike }"
+              role="button"
+            >
+              <span class="mx-2 text-sm"> Like </span>
+              <span class="ml-auto" aria-hidden="true">
+                <!-- active class 'rotate-180' -->
+                <svg
+                  class="w-4 h-4 transition-transform transform"
+                  :class="{ 'rotate-180': showlike }"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </span>
+            </a>
+            <div v-if="showlike" class="mt-2 space-y-2 px-7">
+              <label
+                v-for="item in like_id"
+                :key="item.id"
+                class="flex p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+              >
+                <img
+                  :src="'http://127.0.0.1:8000' + item.img"
+                  alt="hi"
+                  class="h-6 w-6 rounded-full mr-4"
+                />
+                {{ item.nom }} {{ item.prenom }}
+              </label>
+            </div>
+          </div>
         </div>
         <div>{{ comments_length }} Comment</div>
       </div>
@@ -439,6 +489,8 @@
             :personne_id="cmt.personne_id"
             :comment_id="cmt.id"
             :created_at="cmt.created_at"
+            :nom="cmt.nom"
+            :prenom="cmt.prenom"
           />
         </div>
       </div>
@@ -466,7 +518,6 @@ export default {
     return {
       loading: undefined,
       img_avatar: "http://127.0.0.1:8000",
-      date: moment(this.post.created_at, "YYYY-MM-DD HH:mm:ss"),
       likess: this.post.like.length,
       like_id: this.post.like,
       comments: this.post.comment,
@@ -486,6 +537,7 @@ export default {
       editProc: false,
       inp_title: this.post.titre,
       inp_description: this.post.description,
+      showlike: false,
     };
   },
   methods: {

@@ -15,9 +15,9 @@
             <span class="cursor-pointer font-bold"
               >{{ user_info.nom }} {{ user_info.prenom }}
             </span>
-            <span class="text-grey text-opacity-50 text-sm mx-3">{{
-              date.fromNow()
-            }}</span>
+            <span class="text-grey text-opacity-50 text-sm mx-3">
+              {{ created_at }}
+            </span>
           </div>
         </div>
 
@@ -64,6 +64,7 @@
               Edit
             </button>
             <button
+              @click="deletePost([post.id, post.personne_id])"
               class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
             >
               Delete
@@ -261,11 +262,7 @@
               </svg>
             </span>
           </a>
-          <div
-            v-if="open"
-            class="mt-2 space-y-2 px-7"
-          >
-            
+          <div v-if="open" class="mt-2 space-y-2 px-7">
             <label
               @click="$refs.inp_public.click()"
               class="flex p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
@@ -441,7 +438,6 @@
               private
             </label>
           </div>
-          
         </div>
         <input
           v-model="inp_title"
@@ -490,9 +486,12 @@
       <div
         class="flex justify-between mt-4 items-center text-fGrey text-opacity-50"
       >
-        <div class="flex items-center">
+        <div
+          class="flex justify-center  cursor-pointer"
+          @click="showLikePersonne"
+        >
           <svg
-            class="h-6 w-6 mx-3"
+            class="h-6 w-6 mx-3 mt-1"
             id="Capa_1"
             enable-background="new 0 0 512 512"
             height="512"
@@ -521,7 +520,55 @@
               </g>
             </g>
           </svg>
-          {{ likess }} Likes
+          <label class="mt-1">{{ like.length }}</label>
+
+          <div>
+            <!-- active & hover classes 'bg-indigo-100 dark:bg-indigo-600' -->
+            <a
+              href=""
+              @click="
+                $event.preventDefault();
+                showlike = !showlike;
+              "
+              class="flex justify-center p-2 mx-2 text-gray-800 transition-colors rounded-md dark:text-light hover:bg-indigo-100 dark:hover:bg-indigo-600"
+              :class="{ 'bg-indigo-100 dark:bg-indigo-600': showlike }"
+              role="button"
+            >
+              <span class="mx-2 text-sm"> Like </span>
+              <span class="ml-auto" aria-hidden="true">
+                <!-- active class 'rotate-180' -->
+                <svg
+                  class="w-4 h-4 transition-transform transform"
+                  :class="{ 'rotate-180': showlike }"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </span>
+            </a>
+            <div v-if="showlike" class="mt-2 space-y-2 px-7">
+              <label
+                v-for="item in like"
+                :key="item.id"
+                class="flex p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+              >
+                <img
+                  :src="'http://127.0.0.1:8000' + item.img"
+                  alt="hi"
+                  class="h-6 w-6 rounded-full mr-4"
+                />
+                {{ item.nom }} {{ item.prenom }}
+              </label>
+            </div>
+          </div>
         </div>
         <div>{{ comments.length }} Comment</div>
       </div>
@@ -627,7 +674,21 @@
         </button>
       </div>
       <div class="border border-gray-500 border-opacity-20 mt-4" />
-      <div class="flex space-x-2 my-4">
+
+      <div class="text-left max-h-96 overflow-y-scroll  my-4 ">
+        <AppComment
+          v-for="cmt in comment"
+          :key="cmt.id"
+          :postProfile="postProfile"
+          :comment_body="cmt.comment"
+          :personne_id="cmt.personne_id"
+          :comment_id="cmt.id"
+          :created_at="cmt.created_at"
+          :nom="cmt.nom"
+          :prenom="cmt.prenom"
+        />
+      </div>
+      <div class="flex space-x-2 my-4 py-2">
         <img
           :src="img_avatar + user_info.img"
           alt="img"
@@ -640,7 +701,10 @@
         />
         <button
           v-if="inp_cpmment"
-          @click="postComment([user_id, post_id, inp_cpmment, token])"
+          @click="
+            postComment([user_id, post_id, inp_cpmment, token]);
+            inp_cpmment = '';
+          "
         >
           <svg
             class="w-5 h-5 "
@@ -654,17 +718,6 @@
             />
           </svg>
         </button>
-      </div>
-      <div class="text-left max-h-96 overflow-y-scroll">
-        <AppComment
-          v-for="cmt in comments"
-          :key="cmt.id"
-          :postProfile="postProfile"
-          :comment_body="cmt.comment"
-          :personne_id="cmt.personne_id"
-          :comment_id="cmt.id"
-          :created_at="cmt.created_at"
-        />
       </div>
     </div>
   </div>
@@ -699,8 +752,7 @@ export default {
   data() {
     return {
       img_avatar: "http://127.0.0.1:8000",
-      date: moment(this.created_at, "YYYY-MM-DD HH:mm:ss"),
-      likess: this.post.like.length,
+      likess: this.like.length,
       like_id: this.like,
       comments: this.comment,
       inp_cpmment: "",
@@ -720,15 +772,28 @@ export default {
       open: false,
       publicPost: false,
       Audience: this.post.public,
+      showlike: false,
     };
   },
   methods: {
-    ...mapActions(["postComment", "addLike", "UnLike", "updatePost"]),
+    ...mapActions([
+      "postComment",
+      "addLike",
+      "UnLike",
+      "updatePost",
+      "getLikePost",
+      "deletePost",
+    ]),
 
     showAlert() {
       // Use sweetalert2
       if (this.inp_title.length > 3 && this.inp_description.length > 5) {
-        this.updatePost([this.post_p.id, this.inp_title, this.inp_description]);
+        this.updatePost([
+          this.post_p.id,
+          this.inp_title,
+          this.inp_description,
+          this.Audience,
+        ]);
         Swal.fire({
           position: "center",
           icon: "success",
@@ -744,6 +809,15 @@ export default {
           text: "check title or description is not enough !",
         });
       }
+    },
+
+    showLikePersonne() {
+      let box = "";
+      this.like.forEach((element) => {
+        box += `<span >
+          ${element.nom} ${element.prenom}
+        </span> <br />`;
+      });
     },
 
     edit() {
@@ -771,13 +845,11 @@ export default {
     clickLike(post_id, personne_id, token) {
       if (this.addLike([post_id, personne_id, token])) {
         this.checkLike = false;
-        this.likess++;
       }
     },
     clickUnLike(post_id, personne_id, token) {
       if (this.UnLike([post_id, personne_id, token])) {
         this.checkLike = true;
-        this.likess--;
       }
     },
     checkImg() {
@@ -787,11 +859,33 @@ export default {
         this.gridNumber = "grid-cols-2";
       }
     },
+
+    async getDataLike(post_id) {
+      var myHeaders = new Headers();
+      myHeaders.append(
+        "Authorization",
+        "Bearer 25|Kasg5hwkpmTKLz9k7je4PZTeSAexOxXrtMRdtY4v"
+      );
+
+      var requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+
+      fetch("http://127.0.0.1:8000/api/like/getInfo/" + post_id, requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result.like);
+          this.like = result.like;
+        })
+        .catch((error) => console.log("error", error));
+    },
   },
   computed: {
-    ...mapGetters(["user_token", "user_info", "posts_personne"]),
+    ...mapGetters(["user_info", "posts_personne"]),
   },
-  beforeMount() {
+  created() {
     this.checkLikesId(this.like_id);
     this.checkImg();
   },

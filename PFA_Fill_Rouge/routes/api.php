@@ -74,17 +74,24 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/comment/store', [CommentController::class, 'store']);
     //add like
     Route::post('/like/store', [PostLikeController::class, 'store']);
+    Route::get('/like/getInfo/{id}', [PostLikeController::class, 'getLikeInfo']);
+
+    Route::get('/like/getInfo', [PostLikeController::class, 'index']);
+
     //delete like
     Route::delete('/like/destroy', [PostLikeController::class, 'destroy']);
     //update post info
     Route::post('/profile/post/update/{id}', [PostController::class, 'update']);
+    //delete post
+    Route::post('/profile/post/delete/{id}', [PostController::class, 'destroy']);
+    //delete comment
+    Route::post('/profile/post/comment/delete', [CommentController::class, 'destroy']);
     //get all posts
     Route::get('/home/post/all', [PostController::class, 'index']);
 
     //get statistic
     Route::get('/profile/static/{id}', [PostController::class, 'getTotals']);
 });
-
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();

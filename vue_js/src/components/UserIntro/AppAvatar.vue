@@ -9,9 +9,7 @@
       <span class="cursor-pointer font-bold"
         >{{ user_info.nom }} {{ user_info.prenom }}
       </span>
-      <span class="text-grey text-opacity-50 text-sm mx-3">{{
-        date.fromNow()
-      }}</span>
+      <span class="text-grey text-opacity-50 text-sm mx-3">{{created_at}}</span>
     </div>
   </div>
   <AppProfileLoad v-else />
@@ -21,7 +19,7 @@
 import AppProfileLoad from "@/components/dataload/AppProfilLoad";
 export default {
   name: "AppAvatare",
-  props: ["personne_id", "date"],
+  props: ["personne_id", "created_at"],
   emits: ["loading"],
   components: {
     AppProfileLoad,

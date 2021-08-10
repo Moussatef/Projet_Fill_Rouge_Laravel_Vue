@@ -3,12 +3,19 @@ import Home from '../views/Home.vue'
 import Login from '../views/login.vue'
 import UserProfile from '../views/profile.vue'
 import Register from '../views/signup.vue'
+import AdminDash from '../views/AdminDash.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+
+  {
+    path: '/admin/dashbord',
+    name: 'AdminDashbord',
+    component: AdminDash
   },
 
   {

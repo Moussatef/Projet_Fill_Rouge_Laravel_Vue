@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PersonneController;
 use App\Http\Controllers\ApprenantController;
 use App\Http\Controllers\AuthController;
@@ -92,6 +93,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //get statistic
     Route::get('/profile/static/{id}', [PostController::class, 'getTotals']);
 });
+
+
+Route::get('/admin/apprenant', [AdminController::class, 'getApprenantInfo']);
+Route::get('/admin/statistic', [AdminController::class, 'statistic']);
+Route::post('/admin/validate', [AdminController::class, 'validateApprenant']);
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();

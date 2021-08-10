@@ -570,7 +570,7 @@
             </div>
           </div>
         </div>
-        <div>{{ comments.length }} Comment</div>
+        <div>{{ comment.length }} Comment</div>
       </div>
       <div class="border border-gray-500 border-opacity-10 mt-4" />
       <div class="flex justify-between items-center mt-4">
@@ -686,6 +686,7 @@
           :created_at="cmt.created_at"
           :nom="cmt.nom"
           :prenom="cmt.prenom"
+          :post_id="post.id"
         />
       </div>
       <div class="flex space-x-2 my-4 py-2">
@@ -752,9 +753,7 @@ export default {
   data() {
     return {
       img_avatar: "http://127.0.0.1:8000",
-      likess: this.like.length,
       like_id: this.like,
-      comments: this.comment,
       inp_cpmment: "",
       user_id: this.personne_id,
       data_post_id: this.post_id,

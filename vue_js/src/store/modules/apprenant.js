@@ -1,20 +1,22 @@
 import axios from "axios";
 
 const state = {
+   
     user_info: [],
     new_user: [],
     autrUser: [],
     nb_like: null,
     nb_comment: null,
     nb_post: null,
-    
+
 }
 
 const getters = {
     user_info: state => state.user_info,
     new_user: state => state.new_user,
     
-   
+
+
 
 
 
@@ -22,6 +24,11 @@ const getters = {
 }
 
 const actions = {
+
+
+    
+
+
     async fetchAllUser({ commit }, param) {
         const config = {
             headers: {
@@ -51,7 +58,7 @@ const actions = {
     },
 
 
-    
+
 
     async registerApprenant({ commit }, param) {
         const data = new FormData();
@@ -75,6 +82,7 @@ const actions = {
             img: param[12],
             cover: param[13],
             bio: param[14],
+            campus_id: param[15],
 
         }, {
             headers: {
@@ -83,15 +91,17 @@ const actions = {
         });
         if (response.status == 201) {
             const result = await response;
-            // console.log(result.data.apprenant)
-            commit('newUser', response.data);
-            localStorage.setItem("user_token", result.data.personne.token)
-            localStorage.setItem("user_id", result.data.apprenant)
-            localStorage.setItem("personne_id", response.data.personne_id)
+            // console.log(result.data[0])
+            // commit('newUser', response.data[0]);
             location.replace("/user/profile")
         } else {
             console.log(error);
         }
+
+    },
+
+    addApprenant({ commit }, apprenant) {
+        commit('setApprenant', apprenant);
 
     },
 
@@ -127,12 +137,14 @@ const actions = {
 }
 
 const mutations = {
+    
     setUser: (state, user_info) => (state.user_info = user_info),
     newUser: function (state, new_user) {
         state.new_user = new_user
+        // state.apprenant.unshift(new_user);
     },
 
-   
+
 
 }
 

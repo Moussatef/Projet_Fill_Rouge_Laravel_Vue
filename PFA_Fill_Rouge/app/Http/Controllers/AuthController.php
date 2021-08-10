@@ -53,11 +53,8 @@ class AuthController extends Controller
             'campus_id' => $fields['campus_id'],
         ]);
         // $token = $personne->createToken('moussatefToken')->plainTextToken;
-        $response = [
-            'personne_id' => $personne->id,
-            // 'token' => $token
-        ];
-        return response($response, 201);
+       
+        return $personne;
     }
 
     public function registerU(Request $request)

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthController;
+use App\Http\Resources\ApprenantResource;
 use App\Models\Apprenant;
 use App\Models\Personne;
 use Illuminate\Support\Facades\DB;
@@ -20,47 +21,23 @@ class ApprenantController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //register Personne
         $personne = AuthController::register($request);
-
-        $lastpersenne = DB::table('personnes')
-            ->selectRaw('id')
-            ->orderByRaw('id DESC')
-            ->first();
-        //register Apprenant
-        $apprenant = Apprenant::create([
-            'personne_id' => $lastpersenne->id
-        ]);
-        $res = array(
-            'personne' => $personne->original,
-            'apprenant' => $apprenant->id,
-            'personne_id' => $apprenant->personne_id,
-
-        );
+        $apprenant = Apprenant::create(['personne_id' => $personne->id]);
+        $res = ApprenantResource::collection(Apprenant::where('personne_id' ,'=', $personne->id)->get() );
         return response($res, 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
         return Apprenant::find($id)->personne()->first();
         // return 'SALAM';
     }
-    
+
 
     /**
      * Update the specified resource in storage.

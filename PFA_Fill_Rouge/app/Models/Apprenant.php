@@ -2,9 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Apprenant extends Model
 {
@@ -15,6 +19,6 @@ class Apprenant extends Model
 
     public function personne()
     {
-        return $this->belongsTo(Personne::class, 'personne_id');
+        return $this->belongsTo(Personne::class);
     }
 }

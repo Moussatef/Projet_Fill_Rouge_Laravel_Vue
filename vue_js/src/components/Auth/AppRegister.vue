@@ -408,7 +408,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["registerApprenant", "uploadfile", "fetchCampus"]),
+    ...mapActions(["registerApprenant", "uploadfile", "fetchCampus","addApprenant"]),
 
     
    imageSelected(e) {
@@ -479,12 +479,14 @@ export default {
         // localStorage.setItem("user_token", result.data.personne.token);
         // localStorage.setItem("user_id", result.data.apprenant);
         // localStorage.setItem("personne_id", result.data.personne_id);
+        this.addApprenant(result.data)
         location.replace("/login");
       } else {
         console.log(result);
       }
     },
     onUpload() {
+      var campus = document.getElementById("campus_form").value;
       if (this.selectedFile || this.selectedCover) {
         this.inp_img = this.selectedFile;
         this.inp_img_cover = this.selectedCover;
@@ -504,6 +506,7 @@ export default {
           this.inp_img,
           this.inp_img_cover,
           this.inp_bio,
+          campus
         ]);
       } else
         this.registerApprenant([
@@ -522,6 +525,7 @@ export default {
           this.inp_img,
           this.inp_img_cover,
           this.inp_bio,
+          campus
         ]);
     },
   },

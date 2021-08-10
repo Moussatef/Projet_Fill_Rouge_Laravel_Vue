@@ -186,42 +186,44 @@ const actions = {
 
     //Add comment to post
     async postComment({ commit }, param) {
-        
-        await axios.post(`http://127.0.0.1:8000/api/comment/store`, {
-           personne_id: param[0],
-           post_id: param[1],
-           comment: param[2],
-        }, {
-           headers: {
-              Accept: "application/json",
-              Authorization: `Bearer ${param[3]}`
-           }
-        }).then(res => {
-            // console.log(res.data.data[0]);
-            commit('updatePostData', res.data.data[0]);
-        }).catch(err => console.log(err));
-  
-  
-        // commit('newComment', response.data);
-     },
 
-      //Delete comment to post
-    async deleteComment({ commit }, param) {
-        
         await axios.post(`http://127.0.0.1:8000/api/comment/store`, {
-           personne_id: param[0],
-           post_id: param[1],
+            personne_id: param[0],
+            post_id: param[1],
+            comment: param[2],
         }, {
-           headers: {
-              Accept: "application/json",
-              Authorization: `Bearer ${param[3]}`
-           }
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${param[3]}`
+            }
+        }).then(res => {
+            // console.log(res.data.data[0]);
+            commit('updatePostData', res.data.data[0]);
+        }).catch(err => console.log(err));
+
+
+        // commit('newComment', response.data);
+    },
+
+    //Delete comment to post
+    async deleteComment({ commit }, param) {
+
+        await axios.post(`http://127.0.0.1:8000/api/profile/post/comment/delete`, {
+            personne_id: param[0],
+            post_id: param[1],
+            comment_id: param[2],
+            
+        }, {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem('user_token')}`
+            }
         }).then(res => {
             // console.log(res.data.data[0]);
             commit('updatePostData', res.data.data[0]);
         }).catch(err => console.log(err));
         // commit('newComment', response.data);
-     },
+    },
 }
 
 const mutations = {

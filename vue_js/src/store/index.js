@@ -7,6 +7,7 @@ import comments from './modules/comments';
 import likes from './modules/likes';
 import Image from './modules/image';
 import campus from './modules/campus';
+import admin from './modules/admin';
 
 
 // create store 
@@ -19,6 +20,7 @@ export default createStore({
         token,
         Image,
         campus,
+        admin,
     }
 
 })

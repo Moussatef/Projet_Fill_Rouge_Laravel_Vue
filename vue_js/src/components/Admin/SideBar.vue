@@ -18,11 +18,13 @@
               <span class="text-sm font-semibold text-gray-400"
                 >Total Apprenant</span
               >
-              <h1 class="text-2xl font-bold">{{admin_statistics.total_Apprenant}}</h1>
+              <h1 class="text-2xl font-bold">
+                {{ admin_statistics.total_Apprenant }}
+              </h1>
             </div>
             <div>
               <svg
-              class="h-8 w-8 text-indigo-600"
+                class="h-8 w-8 text-indigo-600"
                 id="Capa_1"
                 enable-background="new 0 0 512 512"
                 height="512"
@@ -51,7 +53,6 @@
                   </g>
                 </g>
               </svg>
-
             </div>
           </div>
           <div
@@ -61,7 +62,9 @@
               <span class="text-sm font-semibold text-gray-400"
                 >Total Responsable</span
               >
-              <h1 class="text-2xl font-bold">{{admin_statistics.total_Responsable}}</h1>
+              <h1 class="text-2xl font-bold">
+                {{ admin_statistics.total_Responsable }}
+              </h1>
             </div>
             <div>
               <svg
@@ -83,7 +86,9 @@
               <span class="text-sm font-semibold text-gray-400"
                 >Total Posts</span
               >
-              <h1 class="text-2xl font-bold">{{admin_statistics.total_posts}}</h1>
+              <h1 class="text-2xl font-bold">
+                {{ admin_statistics.total_posts }}
+              </h1>
             </div>
             <div>
               <svg
@@ -109,7 +114,9 @@
               <span class="text-sm font-semibold text-gray-400"
                 >Total Comments</span
               >
-              <h1 class="text-2xl font-bold">{{admin_statistics.total_comments}}</h1>
+              <h1 class="text-2xl font-bold">
+                {{ admin_statistics.total_comments }}
+              </h1>
             </div>
             <div>
               <svg
@@ -281,7 +288,9 @@
               <span class="text-sm font-semibold text-gray-400"
                 >Total Likes</span
               >
-              <h1 class="text-2xl font-bold">{{admin_statistics.total_Like}}</h1>
+              <h1 class="text-2xl font-bold">
+                {{ admin_statistics.total_Like }}
+              </h1>
             </div>
             <div>
               <svg
@@ -322,22 +331,24 @@
           class="border border-gray-700 transition duration-500
 				ease-in-out"
         ></div>
-        <div class="flex flex-col mt-2">
+        <AppShow v-if="showInfo == true" :apprenant="appr" />
+        <div v-if="showInfo == false" class="flex flex-col mt-2">
           <AppCardInfo
             v-for="appr in apprenant"
             :key="appr.id"
             :apprenant="appr"
+            @showApprenant="getApprenant"
           />
         </div>
       </div>
     </main>
   </div>
 </template>
-
 <script>
 import SideNav from "@/components/Admin/sideNav";
 import AppCardInfo from "@/components/Admin/AppCardInfo";
 import AppFilter from "@/components/Admin/AppFilter";
+import AppShow from "@/components/Admin/AppShow";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "SideBar",
@@ -345,12 +356,26 @@ export default {
     SideNav,
     AppCardInfo,
     AppFilter,
+    AppShow,
+  },
+  data(){
+    return{
+      showInfo : false,
+      appr : null,
+    }
   },
   methods: {
-    ...mapActions(["getAllApprenant","getStatisticsAdm"]),
+    ...mapActions(["getAllApprenant", "getStatisticsAdm"]),
+    getApprenant(param){
+      this.appr = param[0]
+      if(this.appr){
+        this.showInfo = true
+      }
+
+    }
   },
   computed: {
-    ...mapGetters(["apprenant","admin_statistics"]),
+    ...mapGetters(["apprenant", "admin_statistics"]),
   },
   created() {
     this.getStatisticsAdm();

@@ -7,13 +7,11 @@
       <div class="flex">
         <img
           class="h-12 w-12 rounded-full object-fill"
-          :src="'http://127.0.0.1:8000'+apprenant.img"
+          :src="'http://127.0.0.1:8000' + apprenant.img"
           alt=""
         />
-
         <div class="flex flex-col justify-center ml-6">
           <span class="text-lg font-bold">Apprenant Info</span>
-
           <div
             class=" mt-4 lg:grid lg:grid-cols-2 lg:gap-4 md:flex md:flex-wrap sm:flex sm:flex-wrap md:mt-5 sm:mt-4"
           >
@@ -27,10 +25,9 @@
                 ></path>
               </svg>
               <span class="ml-2 text-sm text-gray-600  capitalize">
-                {{apprenant.full_name}}
+                {{ apprenant.full_name }}
               </span>
             </div>
-
             <div class="flex ml-6">
               <svg
                 class="h-5 w-5"
@@ -71,10 +68,9 @@
                 <g></g>
               </svg>
               <span class="ml-2 text-sm text-gray-600  capitalize">
-                {{apprenant.campus}}
+                {{ apprenant.campus }}
               </span>
             </div>
-
             <div class="flex">
               <svg
                 class="h-5 w-5"
@@ -121,10 +117,9 @@
                 <g></g>
               </svg>
               <span class="ml-2 text-sm text-gray-600  capitalize">
-                {{apprenant.email}}
+                {{ apprenant.email }}
               </span>
             </div>
-
             <div class="flex ml-6">
               <svg
                 class="h-5 w-5 fill-current
@@ -140,17 +135,16 @@
                 ></path>
               </svg>
               <span class="ml-2 text-sm text-gray-600  capitalize">
-               {{apprenant.created_at}}
+                {{ apprenant.created_at }}
               </span>
             </div>
           </div>
         </div>
       </div>
-
       <div class="flex flex-col sm:flex-row sm:items-center   mr-20 ">
         <div class=" lg:inline-block mr-2 mt-2 ">
           <button
-          @click="validateApprenant(apprenant.personne_id)"
+            @click="validerApprenant(apprenant.personne_id)"
             type="button"
             class="focus:outline-none w-full  text-white text-sm py-2.5 px-5 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 transform hover:scale-110"
           >
@@ -159,6 +153,7 @@
         </div>
         <div class="inline-block mr-2 mt-2">
           <button
+            @click="$emit('showApprenant', [apprenant])"
             type="button"
             class="focus:outline-none  w-full text-white text-sm py-2.5 px-5 rounded-md bg-gradient-to-r from-gray-400 to-gray-600 transform hover:scale-110"
           >
@@ -175,7 +170,6 @@
         </div>
       </div>
     </div>
-
     <!-- <div
               class="text-center flex flex-col items-center
 						justify-center bg-white 					 ml-1 px-12 cursor-pointer
@@ -192,29 +186,24 @@
             </div> -->
   </div>
 </template>
-
 <script>
-import {mapGetters, mapActions} from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 import Swal from "sweetalert2";
 export default {
   name: "AppCardInfo",
   props: ["apprenant"],
-  methods:{
+  methods: {
     ...mapActions(["validateApprenant"]),
-
-    validerApprenant(apprenant_id){
-
-      this.validateApprenant(apprenant_id)
+    validerApprenant(apprenant_id) {
+      this.validateApprenant(apprenant_id);
       Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Your work has been saved",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-
-    }
+        position: "center",
+        icon: "success",
+        title: "Validation avec success ",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
   },
-
 };
 </script>

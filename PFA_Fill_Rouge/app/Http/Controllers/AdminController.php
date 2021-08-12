@@ -55,4 +55,23 @@ class AdminController extends Controller
 
         return $response;
     }
+
+    public function destroy(Request  $request)
+    {
+        $this->validate($request, [
+            'id_personne' => 'required|integer',
+        ]);
+        //
+        $personne = new PersonneController();
+
+        $stmt =  $personne->destroy($request);
+        $res = [];
+        if ($stmt) {
+            $res = ApprenantResource::collection(Apprenant::all());
+            return response(json_encode($res));
+        } else {
+            $res = ['message' => 'personne is not found'];
+            return response(json_encode($res));
+        }
+    }
 }

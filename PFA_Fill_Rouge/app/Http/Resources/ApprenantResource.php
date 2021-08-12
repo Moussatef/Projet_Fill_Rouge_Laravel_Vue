@@ -17,8 +17,9 @@ class ApprenantResource extends JsonResource
         return [
             'id' => $this->id,
             'personne_id' => $this->personne_id,
-            'full_name' => $this->personne->nom . $this->personne->prenom,
+            'full_name' => $this->personne->nom . ' ' . $this->personne->prenom,
             "created_at" => $this->personne->created_at->diffForHumans(),
+            "updated_at" => $this->personne->updated_at->diffForHumans(),
             'email' => $this->personne->email,
             'campus' => $this->personne->campus->campus_nom,
             'telephon' => $this->personne->telephon,

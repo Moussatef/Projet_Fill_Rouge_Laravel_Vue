@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen flex">
-    <SideNav />
+    <SideNav @open_valid_Apprenant="openExiste" @open_nv_Apprenant="openNv" />
 
     <main
       class="flex-1 bg-gray-200 dark:bg-gray-900 overflow-y-auto transition
@@ -331,8 +331,21 @@
           class="border border-gray-700 transition duration-500
 				ease-in-out"
         ></div>
-        <AppShow v-if="showInfo == true" :apprenant="appr" />
-        <div v-if="showInfo == false" class="flex flex-col mt-2">
+        <AppShow
+          v-if="showInfo == true"
+          :apprenant="appr"
+          @hiddenApprenant="hiddenCard"
+        />
+
+        <ApprenantValidCard
+          v-if="open_valid_Apprenant"
+          :apprenant="apprenant"
+          @showApprenant="getApprenant"
+        />
+        <div
+          v-if="showInfo == false && open_valid_Apprenant == false"
+          class="flex flex-col mt-2"
+        >
           <AppCardInfo
             v-for="appr in apprenant"
             :key="appr.id"
@@ -349,6 +362,7 @@ import SideNav from "@/components/Admin/sideNav";
 import AppCardInfo from "@/components/Admin/AppCardInfo";
 import AppFilter from "@/components/Admin/AppFilter";
 import AppShow from "@/components/Admin/AppShow";
+import ApprenantValidCard from "@/components/Admin/AppCardAprValid";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "SideBar",
@@ -357,21 +371,34 @@ export default {
     AppCardInfo,
     AppFilter,
     AppShow,
+    ApprenantValidCard,
   },
-  data(){
-    return{
-      showInfo : false,
-      appr : null,
-    }
+  data() {
+    return {
+      showInfo: false,
+      open_valid_Apprenant: false,
+      appr: null,
+    };
   },
   methods: {
     ...mapActions(["getAllApprenant", "getStatisticsAdm"]),
-    getApprenant(param){
-      this.appr = param[0]
-      if(this.appr){
-        this.showInfo = true
+    getApprenant(param) {
+      this.appr = param[0];
+      if (this.appr) {
+        this.showInfo = true;
       }
-
+    },
+    hiddenCard() {
+      this.showInfo = false;
+      this.open_valid_Apprenant = false;
+    },
+    openExiste() {
+      this.open_valid_Apprenant = true;
+      this.showInfo = false;
+    },
+    openNv(){
+      this.open_valid_Apprenant = false;
+      this.showInfo = false;
     }
   },
   computed: {

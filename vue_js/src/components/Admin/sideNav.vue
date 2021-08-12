@@ -80,8 +80,11 @@
         </a>
         <div v-if="open" class="mt-2 space-y-2 px-2">
           <button
+          @click="$emit('open_nv_Apprenant');focussed = true"
+          
             class="focus:text-blue-500
 					focus:outline-none w-full transition duration-500 ease-in-out"
+          :class="{'text-blue-500' : focussed}"
           >
             <span class="flex items-center">
               <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -92,6 +95,7 @@
             </span>
           </button>
           <button
+          @click="$emit('open_valid_Apprenant')"
             class="focus:text-blue-500
 					focus:outline-none w-full transition duration-500 ease-in-out"
           >
@@ -120,7 +124,7 @@
               <path d="M15 5v4h-4v4H7v4H3v3h7v-4h4v-4h4V8h4V5h-7z"></path>
             </svg>
 
-            <span class="ml-4 capitalize">expenses</span>
+            <span class="ml-4 capitalize">Gestion des posts</span>
           </span>
         </button>
       </li>
@@ -255,6 +259,7 @@ export default {
   data() {
     return {
       open: false,
+      focussed:false,
     };
   },
 };

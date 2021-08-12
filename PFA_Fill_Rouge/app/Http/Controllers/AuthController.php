@@ -53,63 +53,9 @@ class AuthController extends Controller
             'campus_id' => $fields['campus_id'],
         ]);
         // $token = $personne->createToken('moussatefToken')->plainTextToken;
-       
+
         return $personne;
     }
-
-    public function registerU(Request $request)
-    {
-
-        $fields = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|unique:users,email',
-            'password' => 'required|string|confirmed'
-        ]);
-
-        $user = User::create([
-            'name' => $fields['name'],
-            'email' => $fields['email'],
-            'password' => bcrypt($fields['password'])
-        ]);
-
-        $token = $user->createToken('moussatefTokenUser')->plainTextToken;
-
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
-
-        return response($response, 201);
-    }
-
-
-    public function loginU(Request $request)
-    {
-        $fields = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string'
-        ]);
-
-        // Check email
-        $user = User::where('email', $fields['email'])->first();
-
-        // Check password
-        if (!$user || !Hash::check($fields['password'], $user->password)) {
-            return response([
-                'message' => 'error in sign up'
-            ], 401);
-        }
-
-        $token = $user->createToken('moussatefTokenUser')->plainTextToken;
-
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
-
-        return response($response, 201);
-    }
-
     public function login(Request $request)
     {
         $fields = $request->validate([
@@ -134,7 +80,7 @@ class AuthController extends Controller
 
         }
 
-        $token = $personne->createToken('moussatefTokenUser@')->plainTextToken;
+        $token = $personne->createToken('moussatefTokenUser@', ['role:user'])->plainTextToken;
 
         $response = [
             'apprenant_id' => $personne->apprenant->id,

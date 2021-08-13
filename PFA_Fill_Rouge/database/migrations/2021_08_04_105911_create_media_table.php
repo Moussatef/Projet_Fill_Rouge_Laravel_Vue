@@ -21,7 +21,7 @@ class CreateMediaTable extends Migration
             $table->string('facebook')->nullable()->default('');
             $table->string('instagram')->nullable()->default('');
             $table->string('reddit')->nullable()->default('');
-            $table->foreignId('personal')->constrained()->onDelete('cascade');
+            $table->foreignId('personne_id')->constrained('personnes')->onDelete('cascade');
 
 
             $table->timestamps();

@@ -479,7 +479,7 @@
           </svg>
         </button>
       </div>
-      <div v-if="comments.length" class="text-left max-h-96 overflow-y-scroll ">
+      <div v-if="comments.length" class="text-left max-h-96 overflow-y-auto ">
         <div class="h-full">
           <AppComment
             v-for="cmt in post.comment"
@@ -525,7 +525,6 @@ export default {
       comments_length: this.post.comment.length,
       inp_cpmment: "",
       user_id: this.personne_id,
-      data_post_id: this.post_id,
       token: localStorage.getItem("user_token"),
       postProfile: this.post.post_profil,
       checkLike: true,

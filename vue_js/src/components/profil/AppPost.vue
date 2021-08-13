@@ -675,7 +675,7 @@
       </div>
       <div class="border border-gray-500 border-opacity-20 mt-4" />
 
-      <div class="text-left max-h-96 overflow-y-scroll  my-4 ">
+      <div class="text-left  overflow-y-auto  my-4 " style="min-height: 120px;">
         <AppComment
           v-for="cmt in comment"
           :key="cmt.id"
@@ -687,6 +687,7 @@
           :nom="cmt.nom"
           :prenom="cmt.prenom"
           :post_id="post.id"
+          :img="cmt.img"
         />
       </div>
       <div class="flex space-x-2 my-4 py-2">

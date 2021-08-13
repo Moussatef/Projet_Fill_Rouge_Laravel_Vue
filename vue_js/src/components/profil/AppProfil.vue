@@ -284,8 +284,6 @@
             <div class="text-gray-500">Total comments</div>
           </div>
           <AppProfileLoad v-else />
-
-         
         </div>
       </div>
     </div>
@@ -293,14 +291,44 @@
     <div class="border border-gray-400 mt-10 border-opacity-10" />
     <div class="flex justify-between px-8">
       <div class="flex items-center  mx-auto">
-        <div class="px-4 py-5 text-blue-500 border-b-4 border-blue-500">
+        <div
+          @click="
+            $emit('open_post');
+            op_post = true;
+            op_photo = false;
+            op_problem = false;
+          "
+          class="px-4 py-5  hover:text-blue-500 cursor-pointer"
+          :class="{ 'text-blue-500 border-b-4 border-blue-500': op_post }"
+        >
           Posts
         </div>
-        <div class="px-4 py-5 text-fGrey">Photos</div>
-        <div class="px-4 py-5 text-fGrey">My Post Problems</div>
+        <div
+          @click="
+            $emit('open_photo');
+            op_post = false;
+            op_photo = true;
+            op_problem = false;
+          "
+          class="px-4 py-5 text-gray-500 hover:text-blue-500 cursor-pointer"
+          :class="{ 'text-blue-500 border-b-4 border-blue-500': op_photo }"
+        >
+          Photos
+        </div>
+        <div
+          @click="
+            $emit('open_problem');
+            op_post = false;
+            op_photo = false;
+            op_problem = true;
+          "
+          class="px-4 py-5 text-gray-500 hover:text-blue-500 cursor-pointer"
+          :class="{ 'text-blue-500 border-b-4 border-blue-500': op_problem }"
+        >
+          My Post Problems
+        </div>
       </div>
     </div>
-      
   </div>
 </template>
 
@@ -317,8 +345,10 @@ export default {
   },
   data() {
     return {
-     
-    
+      op_post: true,
+      op_photo: false,
+      op_problem: false,
+
       profile: "http://127.0.0.1:8000" + this.img,
       cover: "http://127.0.0.1:8000" + this.imgCover,
       img_src: false,
@@ -411,7 +441,13 @@ export default {
     this.getStatistics();
   },
   computed: {
-    ...mapGetters(["user_info", "nb_post", "nb_comment", "nb_like","loadingInfo"]),
+    ...mapGetters([
+      "user_info",
+      "nb_post",
+      "nb_comment",
+      "nb_like",
+      "loadingInfo",
+    ]),
   },
 };
 </script>

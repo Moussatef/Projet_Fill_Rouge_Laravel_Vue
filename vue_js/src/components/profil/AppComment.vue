@@ -20,7 +20,7 @@
           <span class="cursor-pointer font-bold">{{ nom }} {{ prenom }} </span>
         </div>
       </div>
-      <div class="relative ">
+      <div v-if="user_info.id == personne_id " class="relative ">
         <button
           @click="dropdownOpen = !dropdownOpen"
           class="relative block  w-9 h-9 rounded-full bg-fill  items-center justify-center  focus:outline-none"

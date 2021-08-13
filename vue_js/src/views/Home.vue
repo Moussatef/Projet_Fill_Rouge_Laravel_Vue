@@ -1,7 +1,7 @@
 <template>
   <div class="home bg-gray-100 ">
     <AppCardOne />
-    <div class="w-3/6 mx-auto my-2">
+    <div class=" w-3/6 mx-auto my-2" style="min-width:375px">
    
       <AppCreatePost v-if="token" />
       <Appload v-if="loading" class="my-2" />

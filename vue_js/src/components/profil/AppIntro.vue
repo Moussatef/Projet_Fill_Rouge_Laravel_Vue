@@ -4,7 +4,7 @@
   >
     <div class="text-xl   font-bold text-black flex justify-between ">
       Intro
-      <button @click="$emit('editInfo')" class=" w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200">
+      <button @click="$emit('editInfo');$emit('fill_var',[user_info.adresse,user_info.email,user_info.github,user_info.facebook,user_info.instagram,user_info.linkedin])" class=" w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200">
 
       <svg
       class="h-5 w-5"
@@ -103,7 +103,7 @@
         <g></g>
         <g></g>
       </svg>
-      <span class="ml-2">
+      <span class="ml-2"> <a :href="'www.facebook'"></a>
         {{ user_info.email }}
       </span>
     </div>
@@ -121,7 +121,7 @@
           fill="#212121"
         />
       </svg>
-      <span class="ml-2">{{ user_info.github }}</span>
+      <span class="ml-2"> <a :href="'https://github.com/'+user_info.github" target="blank">{{ user_info.github }}</a></span>
     </div>
     <div class="mt-4 mx-auto w-4/5 flex items-center">
       <svg
@@ -143,7 +143,7 @@
         </g>
       </svg>
 
-      <span class="ml-2">{{ user_info.linkedin }} </span>
+      <span class="ml-2"> <a :href="'https://www.linkedin/'+user_info.linkedin" target="blank">{{ user_info.linkedin }}</a> </span>
     </div>
     <div class="mt-4 mx-auto w-4/5 flex items-center">
       <svg
@@ -184,7 +184,7 @@
         <g></g>
         <g></g>
       </svg>
-      <span class="ml-2"> {{ user_info.facebook }} </span>
+      <span class="ml-2"> <a :href="'https://www.facebook.com/'+user_info.facebook" target="blank"> {{ user_info.facebook }} </a></span>
     </div>
     <div class="mt-4 mx-auto w-4/5 flex items-center">
       <svg
@@ -268,7 +268,7 @@
         <g></g>
       </svg>
 
-      <span class="ml-2"> {{ user_info.instagram }} </span>
+      <span class="ml-2"><a :href="'https://www.instagram.com/'+user_info.instagram" target="blank"> {{ user_info.instagram }}</a> </span>
     </div>
     <div class="mt-4 mx-auto w-4/5 flex items-center">
       <svg

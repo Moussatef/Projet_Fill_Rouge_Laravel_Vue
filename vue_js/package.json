@@ -8,8 +8,6 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^29.0.0",
-    "@ckeditor/ckeditor5-vue": "^2.0.1",
     "animate.css": "^4.1.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
@@ -17,8 +15,6 @@
     "postcss-loader": "^3.0.0",
     "raw-loader": "^0.5.1",
     "vue": "^3.0.0",
-    "vue-carousel-3d": "^1.0.1",
-    "vue-carousel-card": "^2.0.0",
     "vue-router": "^4.0.0-0",
     "vue-slick-carousel": "^1.0.6",
     "vue-sweetalert2": "^5.0.2",

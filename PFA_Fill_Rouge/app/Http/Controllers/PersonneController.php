@@ -154,6 +154,28 @@ class PersonneController extends Controller
         return $personne;
     }
 
+    public function updateInfo(Request $request)
+    {
+
+        $this->validate($request, [
+            "id" => 'required',
+            "github" => 'nullable|string',
+            'facebook' => 'nullable|string',
+            'instagram' => 'nullable|string',
+            'linkedin' => 'nullable|string',
+            'adresse' => 'nullable|string',
+            'email' => 'required|email'
+        ]);
+
+       $personne = Personne::find($request->id)->update([
+            "github" => $request->github,
+            "facebook" => $request->facebook,
+            "instagram" => $request->instagram,
+            "linkedin" => $request->linkedin,
+            "email" => $request->email
+        ]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

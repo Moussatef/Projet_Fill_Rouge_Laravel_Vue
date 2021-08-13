@@ -80,11 +80,11 @@
         </a>
         <div v-if="open" class="mt-2 space-y-2 px-2">
           <button
-          @click="$emit('open_nv_Apprenant');focussed = true"
+          @click="$emit('open_nv_Apprenant');"
           
             class="focus:text-blue-500
 					focus:outline-none w-full transition duration-500 ease-in-out"
-          :class="{'text-blue-500' : focussed}"
+          
           >
             <span class="flex items-center">
               <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -116,13 +116,25 @@
 				duration-500 ease-in-out"
       >
         <button
+        @click="$emit('openPsts');"
           class="focus:text-blue-500
 					focus:outline-none w-full transition duration-500 ease-in-out"
         >
           <span class="flex items-center">
-            <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
-              <path d="M15 5v4h-4v4H7v4H3v3h7v-4h4v-4h4V8h4V5h-7z"></path>
-            </svg>
+           <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-gray-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+                />
+              </svg>
 
             <span class="ml-4 capitalize">Gestion des posts</span>
           </span>

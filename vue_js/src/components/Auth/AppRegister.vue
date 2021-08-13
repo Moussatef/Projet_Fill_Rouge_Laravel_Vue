@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-300 py-10">
+  <div class="bg-gray-100 py-10">
     <div
       class="w-2/4 mx-auto my-8  space-y-8 p-10 bg-white rounded-xl shadow-lg z-10   border-r-2 border-l-2 border-blue-500"
     >

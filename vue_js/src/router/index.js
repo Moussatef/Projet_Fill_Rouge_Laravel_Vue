@@ -4,7 +4,7 @@ import Login from '../views/login.vue'
 import UserProfile from '../views/profile.vue'
 import Register from '../views/signup.vue'
 import AdminDash from '../views/AdminDash.vue'
-
+import AdminLogin from '../views/AdminLogin.vue'
 const routes = [
   {
     path: '/',
@@ -15,7 +15,20 @@ const routes = [
   {
     path: '/admin/dashbord',
     name: 'AdminDashbord',
-    component: AdminDash
+    component: AdminDash,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('admin_token')) {
+        next();
+      } else {
+        next('/');
+      }
+    }
+
+  },
+  {
+    path: '/admin/login',
+    name: 'AdminLogin',
+    component: AdminLogin
   },
 
   {
@@ -34,13 +47,20 @@ const routes = [
         next('/login');
       }
 
-      next();
     }
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('user_token')) {
+        next('/user/profile');
+      } else {
+        next();
+      }
+      
+    }
   },
   {
     path: '/about',

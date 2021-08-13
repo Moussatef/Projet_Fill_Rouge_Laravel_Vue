@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ApprenantResource;
+use App\Http\Resources\PostResource;
 use App\Models\Apprenant;
 use App\Models\Commente;
 use App\Models\Like;
@@ -54,6 +55,9 @@ class AdminController extends Controller
         ];
 
         return $response;
+    }
+    public function getAllPosts(){
+        return PostResource::collection(Post::all());
     }
 
     public function destroy(Request  $request)

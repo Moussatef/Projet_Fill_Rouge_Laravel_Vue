@@ -1,5 +1,6 @@
 <template>
-    <div>
+<!-- v-if="admin_token" -->
+    <div >
         <SideBar/>
     </div>
 </template>
@@ -9,6 +10,11 @@ import SideBar from '@/components/Admin/SideBar'
 import { mapGetters, mapActions } from "vuex";
 export default {
     name: "AdminDash",
+    data(){
+      return{ 
+        admin_token : localStorage.getItem('admin_token'),
+      }
+    },
 
     components: {
         SideBar

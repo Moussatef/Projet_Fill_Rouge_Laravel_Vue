@@ -79,22 +79,23 @@
           <g></g>
           <g></g>
         </svg>
-
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Admin
         </h2>
-
-        <div class="bg-red-500 p-4 rounded-lg mb-6 text-white text-center">
-          {{  }}
+        <div
+          v-if="err != undefined"
+          class="bg-red-100 border border-red-400 text-red-700 p-2 rounded relative"
+          role="alert"
+        >
+          <span class="block sm:inline">{{ err }}</span>
         </div>
       </div>
-
       <input type="hidden" name="remember" value="true" />
       <div class="rounded-md shadow-sm -space-y-px">
         <div>
-          <label for="email-address" class="sr-only">User Name</label>
+          <label for="email-address" class="sr-only">Email</label>
           <input
-            value="{{ old('email') }}"
+            v-model="email"
             id="email-address"
             name="email"
             type="email"
@@ -107,6 +108,7 @@
         <div>
           <label for="password" class="sr-only">Password</label>
           <input
+            v-model="password"
             id="password"
             name="password"
             type="password"
@@ -117,7 +119,6 @@
           />
         </div>
       </div>
-
       <div class="flex items-center justify-between">
         <div class="flex items-center">
           <input
@@ -130,17 +131,15 @@
             Remember me
           </label>
         </div>
-
         <div class="text-sm">
           <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
             Forgot your password?
           </a>
         </div>
       </div>
-
       <div>
         <button
-          type="submit"
+          @click="authentAdmin([email, password])"
           class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           <span class="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -165,3 +164,60 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapActions, mapGetters } from "vuex";
+export default {
+  name: "AppAdminLogin",
+  data() {
+    return {
+      email: "",
+      password: "",
+      err: undefined,
+    };
+  },
+  methods: {
+    // ...mapActions(["authentAdmin"]),
+    async authentAdmin() {
+      var myHeaders = new Headers();
+      myHeaders.append("Accept", "application/json");
+      myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+      var urlencoded = new URLSearchParams();
+      urlencoded.append("email", this.email);
+      urlencoded.append("password", this.password);
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: urlencoded,
+        redirect: "follow",
+      };
+      var selfe = this;
+
+      fetch("http://127.0.0.1:8000/api/admin/login", requestOptions)
+        .then((response) => response.json())
+        .then(function(result) {
+          // console.log(result);
+          if (result.message) {
+            // localStorage.setItem("error", result.message);
+            selfe.err = result.message;
+            console.log(selfe.err);
+          }
+          // console.log(localStorage.getItem("user_token"));
+          else {
+            localStorage.removeItem("error");
+            selfe.err = undefined;
+            localStorage.setItem("admin_token", result.token);
+            localStorage.setItem("admin_id", result.admin_id);
+            // console.log("result",result.token);
+            location.replace("/admin/dashbord");
+          }
+        })
+        .catch(error => {
+          console.log("error",error);
+        });
+    },
+  },
+};
+</script>

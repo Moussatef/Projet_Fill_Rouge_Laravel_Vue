@@ -47,44 +47,44 @@ const getters = {
 //     });
 // },
 const actions = {
-    async authent({ commit }, param) {
+    // async authent({ commit }, param) {
 
-        var myHeaders = new Headers();
-        myHeaders.append("Accept", "application/json");
-        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+    //     var myHeaders = new Headers();
+    //     myHeaders.append("Accept", "application/json");
+    //     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-        var urlencoded = new URLSearchParams();
-        urlencoded.append("email", param[0]);
-        urlencoded.append("password", param[1]);
+    //     var urlencoded = new URLSearchParams();
+    //     urlencoded.append("email", param[0]);
+    //     urlencoded.append("password", param[1]);
 
-        var requestOptions = {
-            method: "POST",
-            headers: myHeaders,
-            body: urlencoded,
-            redirect: "follow",
-        };
+    //     var requestOptions = {
+    //         method: "POST",
+    //         headers: myHeaders,
+    //         body: urlencoded,
+    //         redirect: "follow",
+    //     };
 
-        const response = await fetch(`http://127.0.0.1:8000/api/personne/login`, requestOptions);
-        if (response.status == 201) {
-            var res = response.json()
+    //     const response = await fetch(`http://127.0.0.1:8000/api/personne/login`, requestOptions);
+    //     if (response.status == 201) {
+    //         var res = response.json()
 
-            // console.log(result);
-            if (result.message) {
-                localStorage.setItem("error", res.message);
-                console.log(res.message);
-            } else {
-                commit('setToken', response.data);
-                localStorage.setItem("user_token", response.data.token)
-                localStorage.setItem("user_id", response.data.apprenant_id)
-                localStorage.setItem("personne_id", response.data.id_personne)
-                location.replace("/user/profile")
-            }
-        } else {
-            var err = response.json()
-            console.log(err);
+    //         // console.log(result);
+    //         if (res.message) {
+    //             localStorage.setItem("error", res.message);
+    //             console.log(res.message);
+    //         } else {
+    //             commit('setToken', response.data);
+    //             localStorage.setItem("user_token", response.data.token)
+    //             localStorage.setItem("user_id", response.data.apprenant_id)
+    //             localStorage.setItem("personne_id", response.data.id_personne)
+    //             location.replace("/user/profile")
+    //         }
+    //     } else {
+    //         var err = response.json()
+    //         console.log(err);
 
-        }
-    },
+    //     }
+    // },
 }
 
 const mutations = {

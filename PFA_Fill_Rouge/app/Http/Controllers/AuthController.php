@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Personne;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -90,6 +91,33 @@ class AuthController extends Controller
         ];
 
         return response($response, 201);
+    }
+
+
+    public function adminLogin(Request $request)
+    {
+        $fields = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string'
+        ]);
+
+        // Check email
+        $admin = Admin::where('email', $fields['email'])->first();
+
+        // Check password
+        if (!$admin || !Hash::check($fields['password'], $admin->password)) {
+            return response([
+                'message' => 'Emial or password is incorrect'
+            ], 401);
+        }
+        $token = $admin->createToken('moussatefTokenAdmin@', ['role:admin'])->plainTextToken;
+
+        $response = [
+            'admin_id' => $admin->id,
+            'token' => $token
+        ];
+
+        return response($response, 200);
     }
 
     public function logout(Request $request)

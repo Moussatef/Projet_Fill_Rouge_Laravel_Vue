@@ -1,6 +1,10 @@
 <template>
   <div class="h-screen flex">
-    <SideNav @open_valid_Apprenant="openExiste" @open_nv_Apprenant="openNv" />
+    <SideNav
+      @open_valid_Apprenant="openExiste"
+      @open_nv_Apprenant="openNv"
+      @openPsts="openPsts"
+    />
 
     <main
       class="flex-1 bg-gray-200 dark:bg-gray-900 overflow-y-auto transition
@@ -342,10 +346,8 @@
           :apprenant="apprenant"
           @showApprenant="getApprenant"
         />
-        <div
-          v-if="showInfo == false && open_valid_Apprenant == false"
-          class="flex flex-col mt-2"
-        >
+        <AppPosts v-if="showPsts" />
+        <div v-if="showNvApp" class="flex flex-col mt-2">
           <AppCardInfo
             v-for="appr in apprenant"
             :key="appr.id"
@@ -363,6 +365,7 @@ import AppCardInfo from "@/components/Admin/AppCardInfo";
 import AppFilter from "@/components/Admin/AppFilter";
 import AppShow from "@/components/Admin/AppShow";
 import ApprenantValidCard from "@/components/Admin/AppCardAprValid";
+import AppPosts from "@/components/Admin/AppPosts";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "SideBar",
@@ -372,12 +375,15 @@ export default {
     AppFilter,
     AppShow,
     ApprenantValidCard,
+    AppPosts,
   },
   data() {
     return {
       showInfo: false,
       open_valid_Apprenant: false,
       appr: null,
+      showPsts: false,
+      showNvApp: false,
     };
   },
   methods: {
@@ -395,11 +401,21 @@ export default {
     openExiste() {
       this.open_valid_Apprenant = true;
       this.showInfo = false;
+      this.showPsts = false;
+      this.showNvApp = false;
     },
-    openNv(){
+    openNv() {
       this.open_valid_Apprenant = false;
       this.showInfo = false;
-    }
+      this.showPsts = false;
+      this.showNvApp = true;
+    },
+    openPsts() {
+      this.showPsts = true;
+      this.open_valid_Apprenant = false;
+      this.showInfo = false;
+      this.showNvApp = false;
+    },
   },
   computed: {
     ...mapGetters(["apprenant", "admin_statistics"]),

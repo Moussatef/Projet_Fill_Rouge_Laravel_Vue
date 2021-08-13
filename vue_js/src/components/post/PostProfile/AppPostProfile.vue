@@ -333,7 +333,7 @@
             </a>
             <div v-if="showlike" class="mt-2 space-y-2 px-7">
               <label
-                v-for="item in like_id"
+                v-for="item in post.like"
                 :key="item.id"
                 class="flex p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
               >
@@ -347,7 +347,7 @@
             </div>
           </div>
         </div>
-        <div>{{ comments_length }} Comment</div>
+        <div>{{ comments.length }} Comment</div>
       </div>
       <div class="border border-gray-500 border-opacity-10 mt-4" />
       <div class="flex justify-between items-center mt-4">
@@ -464,7 +464,7 @@
         />
         <button
           v-if="inp_cpmment"
-          @click="postComment([user_id, post.id, inp_cpmment, token])"
+          @click="postComment([user_id, post.id, inp_cpmment, token]); inp_cpmment= ''"
         >
           <svg
             class="w-5 h-5 "
@@ -479,10 +479,10 @@
           </svg>
         </button>
       </div>
-      <div v-if="comments_length" class="text-left max-h-96 overflow-y-scroll ">
+      <div v-if="comments.length" class="text-left max-h-96 overflow-y-scroll ">
         <div class="h-full">
           <AppComment
-            v-for="cmt in comments"
+            v-for="cmt in post.comment"
             :key="cmt.id"
             :postProfile="postProfile"
             :comment_body="cmt.comment"
@@ -491,6 +491,7 @@
             :created_at="cmt.created_at"
             :nom="cmt.nom"
             :prenom="cmt.prenom"
+            :img="cmt.img"
           />
         </div>
       </div>

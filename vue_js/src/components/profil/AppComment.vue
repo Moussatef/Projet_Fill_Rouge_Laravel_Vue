@@ -96,6 +96,7 @@ export default {
     "nom",
     "prenom",
     "post_id",
+    "img"
   ],
 
   data() {
@@ -108,7 +109,7 @@ export default {
       user_name: undefined,
       lastname: undefined,
       token: localStorage.getItem("user_token"),
-      img: null,
+      
     };
   },
   methods: {

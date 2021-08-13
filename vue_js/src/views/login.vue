@@ -349,7 +349,6 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 export default {
   name: "login",
   data() {
@@ -361,7 +360,6 @@ export default {
   },
 
   methods: {
-    // ...mapActions(["authent"]),
     register() {
       location.replace("/user/register");
     },

@@ -31,6 +31,8 @@ Route::post('/personne/login', [AuthController::class, 'login']);
 Route::post('/user/loginU', [AuthController::class, 'loginU']);
 Route::post('/apprenant/register', [ApprenantController::class, 'store']);
 
+//admin login
+Route::post('/admin/login', [AuthController::class, 'adminLogin']);
 //get campus
 Route::get('/campus', [CampusController::class, 'index']);
 
@@ -43,7 +45,7 @@ Route::post('/user/upload', [FileUploadController::class, 'upload']);
 
 
 // Protected routes
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum','type.user']], function () {
 
     Route::get('/personne/index', [PersonneController::class, 'index']);
     Route::get('/personne/id/{id}', [PersonneController::class, 'show'])->whereNumber('id');
@@ -93,12 +95,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //get statistic
     Route::get('/profile/static/{id}', [PostController::class, 'getTotals']);
 });
-
+Route::group(['middleware' => ['auth:sanctum','type.admin']], function () {
 Route::get('/admin/apprenant', [AdminController::class, 'getApprenantInfo']);
 Route::get('/admin/statistic', [AdminController::class, 'statistic']);
+Route::get('/admin/posts', [AdminController::class, 'getAllPosts']);
 Route::post('/admin/validate', [AdminController::class, 'validateApprenant']);
 Route::post('/admin/delete', [AdminController::class, 'destroy']);
-
+});
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();

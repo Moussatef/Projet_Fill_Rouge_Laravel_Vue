@@ -483,7 +483,8 @@
         </div>
         <div>
           <button
-            v-if="!ed_adresse"
+            v-if="inp_instagram != user_info.instagram || inp_facebook != user_info.facebook || inp_github != user_info.github || inp_linkedin != user_info.linkedin || inp_email != user_info.email || inp_adresse != user_info.adresse"
+            @click="updateInfoPersonne"
             class="ml-5 focus:outline-none   text-white text-sm py-1 px-4 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 transform hover:scale-110"
           >
             <svg
@@ -559,7 +560,12 @@ export default {
     Appload,
   },
   methods: {
-    ...mapActions(["fetchPosts", "fetchUser"]),
+    ...mapActions(["fetchPosts", "fetchUser","updatePersonne"]),
+
+    updateInfoPersonne(){
+      this.updatePersonne([this.u])
+    },
+
     fill_var(params) {
       this.inp_adresse = params[0];
       this.inp_email = params[1];
@@ -568,6 +574,7 @@ export default {
       this.inp_instagram = params[4];
       this.inp_linkedin = params[5];
     },
+
     open_photo() {
       this.op_post = false;
       this.op_photo = true;

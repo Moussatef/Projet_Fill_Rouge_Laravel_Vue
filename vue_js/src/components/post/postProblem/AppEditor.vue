@@ -4,17 +4,17 @@
       >Content <span class="text-red-500">*</span></label
     >
     <br />
-    <ckeditor
+    <!-- <ckeditor
       :editor="editor"
       v-model="editorData"
       :config="editorConfig"
-    ></ckeditor>
+    ></ckeditor> -->
   </div>
 </template>
 
 <script>
 // import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 // import EssentialsPlugin from "@ckeditor/ckeditor5-essentials/src/essentials";
 // import BoldPlugin from "@ckeditor/ckeditor5-basic-styles/src/bold";
 // import ItalicPlugin from "@ckeditor/ckeditor5-basic-styles/src/italic";
@@ -24,11 +24,11 @@ export default {
   name: "AppEditeur",
   data() {
     return {
-      editor: ClassicEditor,
-      editorData: "<p>Content of the editor.</p>",
-      editorConfig: {
-        // The configuration of the editor.
-      },
+      // editor: ClassicEditor,
+      // editorData: "<p>Content of the editor.</p>",
+      // editorConfig: {
+      //   // The configuration of the editor.
+      // },
     };
   },
 

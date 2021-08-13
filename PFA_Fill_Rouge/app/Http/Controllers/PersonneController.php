@@ -87,7 +87,15 @@ class PersonneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $this->validate($request, [
+        //     'github' => 'nullable|string',
+        //     'facebook' => 'nullable|string',
+        //     'instagram' => 'nullable|string',
+        //     'linkedin' => 'nullable|string',
+        //     'adresse' => 'nullable|string',
+        //     'email' => 'required|email'
+        // ]);
+
         $personne = Personne::find($id);
         $personne->update($request->all());
         return $personne;
@@ -167,13 +175,15 @@ class PersonneController extends Controller
             'email' => 'required|email'
         ]);
 
-       $personne = Personne::find($request->id)->update([
+        $personne = Personne::find($request->id)->update([
             "github" => $request->github,
             "facebook" => $request->facebook,
             "instagram" => $request->instagram,
             "linkedin" => $request->linkedin,
             "email" => $request->email
         ]);
+
+        return $personne;
     }
 
     /**

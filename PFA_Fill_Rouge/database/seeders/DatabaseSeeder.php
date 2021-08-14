@@ -17,7 +17,14 @@ class DatabaseSeeder extends Seeder
             adminSeeder::class,
             campusSeeder::class,
             personneSeeder::class,
-            apprenantSeeder::class
+            apprenantSeeder::class,
+            categorieSeeder::class,
+            postSeeder::class,
+            postProfilsSeeder::class,
+            postProblemSeeder::class,
+            imgPostsSeeder::class,
+            commenteSeeder::class,
+            likeSeeder::class,
         ]);
         // \App\Models\User::factory(10)->create();
     }

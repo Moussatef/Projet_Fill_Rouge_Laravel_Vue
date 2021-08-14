@@ -73,7 +73,7 @@
                 >{{ user_info.nom }} {{ user_info.prenom }}
               </span>
               <span class="text-grey text-opacity-50 text-sm mx-3">{{
-                date.fromNow()
+                postinfo.created_at
               }}</span>
             </div>
           </div>
@@ -118,7 +118,7 @@
                   </g>
                 </g>
               </svg>
-              {{ likein }}
+              {{ nblike }}
             </div>
             <div class="flex items-center  m-2">
               <svg
@@ -171,14 +171,13 @@ import AppComment from "@/components/profil/AppComment";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "AppShowPost",
-  props: ["postinfo", "likein"],
+  props: ["postinfo", "nblike"],
   data() {
     return {
       gridNumber: "grid-cols-1",
       image_post: this.postinfo.img_post,
       comments: this.postinfo.comment,
       like: this.postinfo.like,
-      date: moment(this.postinfo.created_at, "YYYY-MM-DD HH:mm:ss"),
     };
   },
   methods: {

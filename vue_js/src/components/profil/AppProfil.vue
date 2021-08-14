@@ -97,7 +97,7 @@
               user_info.prenom,
               user_info.telephon,
               user_info.bio,
-              user_info.data_N,
+              user_info.date_N,
             ]);
             clickModal();
           "
@@ -549,7 +549,7 @@
                 inp_telephon != user_info.telephon ||
                 (inp_date_n != undefined && inp_date_n != '')
             "
-            @click="updateInfoPersonne"
+            @click="updateInfoPersonne(user_info.id)"
             class="ml-5 focus:outline-none   text-white text-sm py-1 px-4 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 transform hover:scale-110"
           >
             <svg
@@ -616,9 +616,26 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["updateImg", "getStatistics"]),
+    ...mapActions(["updateImg", "getStatistics", "updatePersonneInfo"]),
 
-    updateInfoPersonne() {},
+    updateInfoPersonne(id) {
+      this.updatePersonneInfo([
+        id,
+        this.inp_nom,
+        this.inp_prenom,
+        this.inp_telephon,
+        this.inp_bio,
+        this.inp_date_n,
+      ]);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your changed has been saved",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      this.clickExit();
+    },
 
     fill_value(param) {
       this.inp_nom = param[0];

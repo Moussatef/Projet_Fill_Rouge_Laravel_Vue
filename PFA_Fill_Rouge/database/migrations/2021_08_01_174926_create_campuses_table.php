@@ -17,8 +17,19 @@ class CreateCampusesTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('campus_nom');
-            $table->softDeletes();
+            $table->string('ville');
+            $table->string('adresse');
+            $table->string('fex')->nullable();
+            $table->string('email');
+            $table->string('password');
+            $table->string('github')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('img')->nullable();
+            $table->string('cover')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

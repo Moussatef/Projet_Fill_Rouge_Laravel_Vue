@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->foreignId('personne_id')->constrained()->onDelete('cascade');
+            $table->foreignId('personne_id')->constrained('personnes')->onDelete('cascade');
             $table->string('titre');
             $table->text('description');
             $table->integer('public')->default(0);

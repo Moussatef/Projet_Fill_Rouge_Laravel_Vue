@@ -360,11 +360,13 @@
       <!-- Modal content -->
       <div class="modal-contentP">
         <span @click="clickExit()" class="close">&times;</span>
+
         <p class="text-2xl text-gray-500">{ Edit Information }</p>
-        <div class="flex flex-wrap justify-evenly my-10 ">
-          <div>
+
+        <div class="flex flex-wrap justify-evenly my-10 text-gray-500  ">
+          <div class="w-5/12 border rounded-lg mx-1 shadow-lg">
             <div class="flex ">
-              <label class="m-3 w-1/2" for="nom">Nom :</label>
+              <label class="m-3 w-40 text-left" for="nom">Nom :</label>
               <div v-if="!ed_nom" class="w-1/2   flex items-center">
                 <label class="m-3 " for="nom">{{ user_info.nom }}</label>
                 <button
@@ -393,11 +395,9 @@
               />
             </div>
             <div class="flex">
-              <label class="m-3 w-1/2" for="nom">Telephone :</label>
+              <p class="m-3 w-40 text-left" for="nom">Telephone :</p>
               <div v-if="!ed_telephon" class=" w-1/2  flex items-center">
-                <label class="m-3 " for="nom">{{
-                  user_info.telephon
-                }}</label>
+                <label class="m-3 " for="nom">{{ user_info.telephon }}</label>
                 <button
                   @click="ed_telephon = !ed_telephon"
                   class=" m-3 w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200"
@@ -423,9 +423,9 @@
               />
             </div>
             <div class="flex ">
-              <label class="m-3 w-1/2">Bio :</label>
-              <div v-if="!ed_bio" class="flex items-center">
-                <label class="m-3 w-1/2" for="nom">{{ user_info.bio }}</label>
+              <label class="m-3 w-40 text-left">Bio :</label>
+              <div v-if="!ed_bio" class="w-1/2 flex items-center">
+                <p class="m-3 text-justify ">{{ user_info.bio }}</p>
                 <button
                   @click="ed_bio = !ed_bio"
                   class=" m-3 w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200"
@@ -454,13 +454,11 @@
               ></textarea>
             </div>
           </div>
-          <div class=" mx-10">
+          <div class="w-5/12  border rounded-lg m-1 shadow-lg ">
             <div class="flex">
-              <label class="m-3 w-1/2" for="nom">Prenom :</label>
-              <div v-if="!ed_prenom" class="   flex items-center">
-                <label class="m-3 w-1/2" for="nom">{{
-                  user_info.prenom
-                }}</label>
+              <label class="m-3 w-40 text-left" for="nom">Prenom :</label>
+              <div v-if="!ed_prenom" class="w-1/2   flex items-center">
+                <label class="m-3 " for="nom">{{ user_info.prenom }}</label>
                 <button
                   @click="ed_prenom = !ed_prenom"
                   class=" m-3 w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200"
@@ -486,11 +484,11 @@
               />
             </div>
             <div class="flex">
-              <label class="m-3 w-1/2" for="nom">Date de naissance :</label>
-              <div v-if="!ed_date_n" class="   flex items-center">
-                <label class="m-3 w-1/2" for="nom">{{
-                  user_info.date_N
-                }}</label>
+              <label class="m-3 w-40 text-left" for="nom"
+                >Date de naissance :</label
+              >
+              <div v-if="!ed_date_n" class="w-1/2   flex items-center">
+                <label class="m-3 " for="nom">{{ user_info.date_N }}</label>
                 <button
                   @click="ed_date_n = !ed_date_n"
                   class=" m-3 w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200"
@@ -516,26 +514,98 @@
                 class=" m-3  w-1/2 border-b border-blue-500 focus:outline-none"
               />
             </div>
-            <div class="flex">
-              <label class="m-3 w-1/2" for="nom">Modifer mot de pass :</label>
-              <div v-if="!ed_password" class="   flex items-center">
-                <label class="m-3 w-1/2" for="nom"> ****************</label>
-                <button
-                  @click="ed_password = !ed_password"
-                  class=" m-3 w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200"
+            <div class="block">
+              <div class="flex">
+                <label class="m-3 w-40 text-left" for="nom"
+                  >Modifer mot de pass :</label
                 >
-                  <svg
-                    class="h-5 w-5"
-                    height="484pt"
-                    viewBox="-15 -15 484.00019 484"
-                    width="484pt"
-                    xmlns="http://www.w3.org/2000/svg"
+                <div v-if="!ed_password" class="w-1/2  flex items-center">
+                  <label class="m-3 " for="nom"> ****************</label>
+                  <button
+                    @click="ed_password = !ed_password"
+                    class=" m-3 w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200"
                   >
-                    <path
-                      d="m401.648438 18.234375c-24.394532-24.351563-63.898438-24.351563-88.292969 0l-22.101563 22.222656-235.269531 235.144531-.5.503907c-.121094.121093-.121094.25-.25.25-.25.375-.625.746093-.871094 1.121093 0 .125-.128906.125-.128906.25-.25.375-.371094.625-.625 1-.121094.125-.121094.246094-.246094.375-.125.375-.25.625-.378906 1 0 .121094-.121094.121094-.121094.25l-52.199219 156.96875c-1.53125 4.46875-.367187 9.417969 2.996094 12.734376 2.363282 2.332031 5.550782 3.636718 8.867188 3.625 1.355468-.023438 2.699218-.234376 3.996094-.625l156.847656-52.324219c.121094 0 .121094 0 .25-.121094.394531-.117187.773437-.285156 1.121094-.503906.097656-.011719.183593-.054688.253906-.121094.371094-.25.871094-.503906 1.246094-.753906.371093-.246094.75-.621094 1.125-.871094.125-.128906.246093-.128906.246093-.25.128907-.125.378907-.246094.503907-.5l257.371093-257.371094c24.351563-24.394531 24.351563-63.898437 0-88.289062zm-232.273438 353.148437-86.914062-86.910156 217.535156-217.535156 86.914062 86.910156zm-99.15625-63.808593 75.929688 75.925781-114.015626 37.960938zm347.664062-184.820313-13.238281 13.363282-86.917969-86.917969 13.367188-13.359375c14.621094-14.609375 38.320312-14.609375 52.945312 0l33.964844 33.964844c14.511719 14.6875 14.457032 38.332031-.121094 52.949218zm0 0"
+                    <svg
+                      class="h-5 w-5"
+                      height="484pt"
+                      viewBox="-15 -15 484.00019 484"
+                      width="484pt"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="m401.648438 18.234375c-24.394532-24.351563-63.898438-24.351563-88.292969 0l-22.101563 22.222656-235.269531 235.144531-.5.503907c-.121094.121093-.121094.25-.25.25-.25.375-.625.746093-.871094 1.121093 0 .125-.128906.125-.128906.25-.25.375-.371094.625-.625 1-.121094.125-.121094.246094-.246094.375-.125.375-.25.625-.378906 1 0 .121094-.121094.121094-.121094.25l-52.199219 156.96875c-1.53125 4.46875-.367187 9.417969 2.996094 12.734376 2.363282 2.332031 5.550782 3.636718 8.867188 3.625 1.355468-.023438 2.699218-.234376 3.996094-.625l156.847656-52.324219c.121094 0 .121094 0 .25-.121094.394531-.117187.773437-.285156 1.121094-.503906.097656-.011719.183593-.054688.253906-.121094.371094-.25.871094-.503906 1.246094-.753906.371093-.246094.75-.621094 1.125-.871094.125-.128906.246093-.128906.246093-.25.128907-.125.378907-.246094.503907-.5l257.371093-257.371094c24.351563-24.394531 24.351563-63.898437 0-88.289062zm-232.273438 353.148437-86.914062-86.910156 217.535156-217.535156 86.914062 86.910156zm-99.15625-63.808593 75.929688 75.925781-114.015626 37.960938zm347.664062-184.820313-13.238281 13.363282-86.917969-86.917969 13.367188-13.359375c14.621094-14.609375 38.320312-14.609375 52.945312 0l33.964844 33.964844c14.511719 14.6875 14.457032 38.332031-.121094 52.949218zm0 0"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                v-if="ed_password"
+                class=" w-11/12 bg-gray-50  rounded-lg border-blue-500 mx-auto p-1 my-2 shadow-lg"
+              >
+                <div class="flex">
+                  <label class="m-3 w-2/4 text-left" for="nom"
+                    >Mot de passe actuel
+                  </label>
+                  <div class="w-full  flex items-center">
+                    <label class="m-3 " for="nom"> </label>
+                    <input
+                      v-model="inp_password"
+                      type="password"
+                      class=" m-3 w-full border-b border-blue-500 focus:outline-none"
+                      placeholder="Tapez votre mot de passe actuel"
                     />
-                  </svg>
-                </button>
+                  </div>
+                </div>
+                <div class="flex">
+                  <label class="m-3 w-2/4 text-left" for="nom"
+                    >Nouveau mot de passe
+                  </label>
+                  <div class="w-full  flex items-center">
+                    <label class="m-3 " for="nom"> </label>
+                    <input
+                      v-model="inp_new_password"
+                      type="password"
+                      class=" m-3 w-full border-b border-blue-500 focus:outline-none"
+                      placeholder="Tapez votre nouveau mot de passe"
+                    />
+                  </div>
+                </div>
+                <div class="flex">
+                  <label class="m-3 w-2/4 text-left" for="nom"
+                    >Nouveau mot de passe
+                  </label>
+                  <div class="w-full  flex items-center">
+                    <label class="m-3 " for="nom"> </label>
+                    <input
+                      v-model="inp_conferm_password"
+                      type="password"
+                      class=" m-3 w-full border-b border-blue-500 focus:outline-none"
+                      placeholder="Tapez votre nouveau mot de passe encore "
+                    />
+                  </div>
+                </div>
+                <div class="flex justify-end">
+                  <button
+                    v-if="
+                      inp_conferm_password == inp_new_password &&
+                        inp_new_password.length > 5 &&
+                        inp_password.length > 5 &&
+                        inp_new_password != inp_password
+                    "
+                    @click="updatePassword(user_info.id)"
+                    class="ml-5 focus:outline-none   text-white text-sm py-1 px-4 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 transform hover:scale-110"
+                  >
+                    save
+                  </button>
+                  <button
+                    @click="ed_password = false"
+                    type="button"
+                    class="focus:outline-none  w-20 mx-2 text-white text-sm py-1.5 px-4 rounded-md bg-gradient-to-r from-gray-400 to-gray-600 transform hover:scale-110"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -547,7 +617,9 @@
                 inp_prenom != user_info.prenom ||
                 inp_bio != user_info.bio ||
                 inp_telephon != user_info.telephon ||
-                (inp_date_n != undefined && inp_date_n != '' && inp_date_n != user_info.date_N  )
+                (inp_date_n != undefined &&
+                  inp_date_n != '' &&
+                  inp_date_n != user_info.date_N)
             "
             @click="updateInfoPersonne(user_info.id)"
             class="ml-5 focus:outline-none   text-white text-sm py-1 px-4 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 transform hover:scale-110"
@@ -604,6 +676,8 @@ export default {
       inp_prenom: "",
       inp_date_n: "",
       inp_password: "",
+      inp_new_password: "",
+      inp_conferm_password: "",
 
       profile: "http://127.0.0.1:8000" + this.img,
       cover: "http://127.0.0.1:8000" + this.imgCover,
@@ -616,7 +690,21 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["updateImg", "getStatistics", "updatePersonneInfo"]),
+    ...mapActions([
+      "updateImg",
+      "getStatistics",
+      "updatePersonneInfo",
+      "updatePasswordPersonne",
+    ]),
+
+    updatePassword(id) {
+      this.updatePasswordPersonne([
+        id,
+        this.inp_new_password,
+        this.inp_conferm_password,
+        this.inp_password,
+      ]);
+    },
 
     updateInfoPersonne(id) {
       this.updatePersonneInfo([

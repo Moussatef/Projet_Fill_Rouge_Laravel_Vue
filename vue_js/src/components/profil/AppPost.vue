@@ -473,7 +473,7 @@
       <div
         class="grid  gap-4  w-full cursor-pointer "
         :class="gridNumber"
-        @click="$emit('showPost', [post_p, likess])"
+        @click="$emit('showPost', [post_p, like.length])"
       >
         <div v-for="img in image_post" :key="img.id" class="  ">
           <img

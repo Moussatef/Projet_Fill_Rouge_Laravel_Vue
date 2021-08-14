@@ -111,11 +111,6 @@ class PersonneController extends Controller
         $newnameProfile = !empty($fields['img']) ?  $fileUpload->upload($fields['img'], 'public/image') : '';
         $newnameCover = !empty($fields['cover']) ?  $fileUpload->upload($fields['cover'], 'public/cover') : '';
         $personne = Personne::find($id);
-        // $personne->update([
-        //     'img' => $newnameProfile,
-        //     'cover' => $newnameCover
-
-        // ]);
 
         $personne->img = $newnameProfile;
         $personne->cover = $newnameCover;
@@ -131,12 +126,6 @@ class PersonneController extends Controller
         $fileUpload = new FileUploadController;
         $newnameProfile = !empty($fields['img']) ?  $fileUpload->upload($fields['img'], 'public/image') : '';
         $personne = Personne::find($id);
-        // $personne->update([
-        //     'img' => $newnameProfile,
-        //     'cover' => $newnameCover
-
-        // ]);
-
         $personne->img = $newnameProfile;
         $personne->save();
 
@@ -150,21 +139,14 @@ class PersonneController extends Controller
         $fileUpload = new FileUploadController;
         $newnameCover = !empty($fields['cover']) ?  $fileUpload->upload($fields['cover'], 'public/cover') : '';
         $personne = Personne::find($id);
-        // $personne->update([
-        //     'img' => $newnameProfile,
-        //     'cover' => $newnameCover
-
-        // ]);
 
         $personne->cover = $newnameCover;
         $personne->save();
-
         return $personne;
     }
 
     public function updateInfo(Request $request)
     {
-
         $this->validate($request, [
             "id" => 'required',
             "nom" => 'required|string',

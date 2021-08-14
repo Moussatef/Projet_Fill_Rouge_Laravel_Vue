@@ -74,11 +74,10 @@ class AuthController extends Controller
             ], 401);
         }
 
-        if(!$personne->validation){
+        if (!$personne->validation) {
             return response([
                 'message' => 'You are not validate sorry !!!'
             ], 401);
-
         }
 
         $token = $personne->createToken('moussatefTokenUser@', ['role:user'])->plainTextToken;
@@ -86,7 +85,6 @@ class AuthController extends Controller
         $response = [
             'apprenant_id' => $personne->apprenant->id,
             'id_personne' => $personne->id,
-
             'token' => $token
         ];
 

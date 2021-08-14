@@ -65,7 +65,7 @@
     </div>
     <AppShowPost
       v-if="show_post"
-      :likein="like"
+      :nblike="like"
       :postinfo="post"
       @disablePost="disable"
     />
@@ -674,9 +674,6 @@ export default {
       "apprenant_id",
       "loading",
     ]),
-    test: function() {
-      this.inp_adresse = this.user_info.nom;
-    },
   },
   created() {
     // this.scrol();

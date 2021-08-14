@@ -18,15 +18,15 @@ class personneSeeder extends Seeder
     {
         $faker=\Faker\Factory::create();
         for($i=0;$i< 10;$i++){
-            $first_name=$faker->firstName;
-            $last_name=$faker->lastName;
+            $first_name=strtolower(rtrim($faker->firstName,"'"));
+            $last_name=strtolower(rtrim($faker->lastName,"'"));
             $personne=[
                 'prenom'=>$first_name,
                 'nom'=>$last_name,
                 'telephon'=>$faker->phoneNumber,
                 'date_N'=>$faker->date,
                 'adresse'=>$faker->address,
-                'email'=>$faker->email,
+                'email'=>$first_name.'_'.$last_name.'@youcode.yc',
                 'github'=>$first_name.' '.$last_name,
                 'linkedin'=>$first_name.' '.$last_name,
                 'facebook'=>$first_name.' '.$last_name,

@@ -1,54 +1,48 @@
 <template>
   <div class="mb-8">
     <label class="text-xl text-gray-600"
-      >Content <span class="text-red-500">*</span></label
+    >Content <span class="text-red-500">*</span></label
     >
-    <!--    <br />-->
-    <!--    <ckeditor-->
-    <!--      :editor="editor"-->
-    <!--      v-model="editorData"-->
-    <!--      :config="editorConfig"-->
-    <!--    ></ckeditor>-->
-    <VueEditor v-model="content" />
+    <quill-editor v-model:value="content" :options="options"></quill-editor>
+    <div v-html="content"></div>
   </div>
 </template>
 
 <script>
-// import ClassicEditor from "@ckeditor/ckeditor5-editor-classic/src/classiceditor";
-// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-// import EssentialsPlugin from "@ckeditor/ckeditor5-essentials/src/essentials";
-// import BoldPlugin from "@ckeditor/ckeditor5-basic-styles/src/bold";
-// import ItalicPlugin from "@ckeditor/ckeditor5-basic-styles/src/italic";
-// import LinkPlugin from "@ckeditor/ckeditor5-link/src/link";
-// import ParagraphPlugin from "@ckeditor/ckeditor5-paragraph/src/paragraph";
-import { VueEditor } from "vue2-editor";
+import {quillEditor} from 'vue3-quill'
+
 export default {
   name: "AppEditeur",
   data() {
     return {
-      // editor: ClassicEditor,
-      // editorData: "<p>Content of the editor.</p>",
-      // editorConfig: {
-      //   // The configuration of the editor.
-      // },
-      contant: "",
+      content: "",
+      options: {
+        modules: {
+          toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],
+            ['blockquote', 'code-block'],
+            [{ header: 1 }, { header: 2 }],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            [{ script: 'sub' }, { script: 'super' }],
+            [{ indent: '-1' }, { indent: '+1' }],
+            [{ direction: 'rtl' }],
+            [{ size: ['small', false, 'large', 'huge'] }],
+            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+            [{ color: [] }, { background: [] }],
+            [{ font: [] }],
+            [{ align: [] }],
+            ['clean'],
+            ['link', 'video']
+          ]
+        },
+      }
     };
   },
   components: {
-    VueEditor,
+    quillEditor,
   },
-
-  methods: {
-    // onReady(editor) {
-    //   // Insert the toolbar before the editable area.
-    //   editor.ui
-    //     .getEditableElement()
-    //     .parentElement.insertBefore(
-    //       editor.ui.view.toolbar.element,
-    //       editor.ui.getEditableElement()
-    //     );
-    // },
+  methods: {},
+  created() {
   },
-  created() {},
 };
 </script>

@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Campus;
 use App\Models\Personne;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Storage;
 
 class personneSeeder extends Seeder
 {
@@ -17,9 +16,43 @@ class personneSeeder extends Seeder
     public function run()
     {
         $faker=\Faker\Factory::create();
-        for($i=0;$i< 10;$i++){
-            $first_name=strtolower(rtrim($faker->firstName,"'"));
-            $last_name=strtolower(rtrim($faker->lastName,"'"));
+        $first_names = [
+            'hamza',
+            'khadija',
+            'fatima',
+            'simo',
+            'khaid',
+            'maggie',
+            'taddeo',
+            'loria',
+            'lyndsey',
+            'dall',
+            'leeanne',
+            'pamelina',
+            'opaline',
+            'keelia',
+            'fernando',
+        ];
+        $last_names = [
+            'troutbeck',
+            'scholling',
+            'gumery',
+            'bear',
+            'cogdon',
+            'croxford',
+            'haslen',
+            'bruineman',
+            'oppery',
+            'averill',
+            'geerdts',
+            'philpotts',
+            'gally',
+            'ible',
+            'das',
+        ];
+        for($i=0;$i< 15;$i++){
+            $first_name=$first_names[$i];
+            $last_name=$last_names[$i];
             $personne=[
                 'prenom'=>$first_name,
                 'nom'=>$last_name,
@@ -32,8 +65,8 @@ class personneSeeder extends Seeder
                 'facebook'=>$first_name.' '.$last_name,
                 'instagram'=>$first_name.' '.$last_name,
                 'password'=>bcrypt('azerty'),
-                'img'=>explode('/storage/image/',$faker->randomElement(glob(public_path().'/storage/image/personne_*')))[1],
-                'cover'=>null,
+                'img'=>explode('/storage/image/',$faker->unique()->randomElement(glob(public_path().'/storage/image/personne_*')))[1],
+                'cover'=>'cover.jpg',
                 'bio'=>$faker->paragraph(1),
                 'validation'=>$faker->randomElement([0,1]),
                 'campus_id'=>$faker->randomElement(Campus::pluck('id')->all()),

@@ -9,7 +9,7 @@ class Responsable extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id_personne'
+        'personne_id'
     ];
 
     public function personne()

@@ -3,12 +3,13 @@ import axios from "axios";
 const state = {
     postsProfile: [],
     allPostProfile: [],
-    loading: true,
+    loading: !!localStorage.getItem('user_token'),
     err: false,
     nb_like: null,
     nb_comment: null,
     nb_post: null,
     loadingInfo: true,
+    allPostsPages:1
 }
 
 const getters = {
@@ -19,6 +20,7 @@ const getters = {
     nb_comment: state => state.nb_comment,
     nb_post: state => state.nb_post,
     loadingInfo: state => state.loadingInfo,
+    allPostsPages:state=>state.allPostsPages
 }
 const actions = {
     async fetchPosts({ commit }, param) {
@@ -78,10 +80,10 @@ const actions = {
 
     },
 
-    async AllPost({ commit }) {
+    async AllPost({ commit },page=1) {
         let token = localStorage.getItem('user_token')
 
-        const response = await axios.get(`http://127.0.0.1:8000/api/home/post/all`, {
+        const response = await axios.get(`http://127.0.0.1:8000/api/home/post/all?page=${page}`, {
             headers: {
                 Accept: "application/json",
                 Authorization: `Bearer  ${token}`
@@ -90,6 +92,7 @@ const actions = {
         if (response.status === 200) {
             // console.log(response);
             commit('setAllPosts', response.data.data);
+            commit('setAllPostsPageLimit', response.data.meta.last_page);
             state.loading = false;
         } else {
             console.log(response);
@@ -254,7 +257,11 @@ const mutations = {
 
     setAllPosts: (state, allPostProfile) => {
         state.loading = false;
-        (state.allPostProfile = allPostProfile);
+        (state.allPostProfile.push(...allPostProfile));
+    },
+
+    setAllPostsPageLimit: (state, allPostsPages) => {
+        state.allPostsPages=allPostsPages;
     },
 
 

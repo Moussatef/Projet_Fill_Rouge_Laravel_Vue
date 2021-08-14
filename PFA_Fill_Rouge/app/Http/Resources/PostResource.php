@@ -28,7 +28,6 @@ class PostResource extends JsonResource
             "created_at" => $this->created_at->diffForHumans(),
             "updated_at" => $this->updated_at->diffForHumans(),
             "deleted_at" => $this->deleted_at,
-            "post_profil" => $this->postProfil,
             "img_post" => $this->imgPost,
             "like" => LikeResource::collection(Like::where('post_id', '=', $this->id)->get()),
             "comment" => CommentResource::collection(Commente::where('post_id', '=', $this->id)->get()),

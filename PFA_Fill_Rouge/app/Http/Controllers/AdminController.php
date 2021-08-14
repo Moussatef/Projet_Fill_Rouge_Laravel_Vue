@@ -57,7 +57,7 @@ class AdminController extends Controller
         return $response;
     }
     public function getAllPosts(){
-        return PostResource::collection(Post::all());
+        return PostResource::collection(Post::paginate(10));
     }
 
     public function destroy(Request  $request)

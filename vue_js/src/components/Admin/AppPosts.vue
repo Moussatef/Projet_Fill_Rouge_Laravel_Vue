@@ -368,6 +368,7 @@
                 </td>
               </tr>
             </tbody>
+            <div v-observe-visibility="handleScrolledToBottom"></div>
           </table>
         </div>
       </div>
@@ -378,11 +379,20 @@
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "AppPosts",
+  data:()=>{
+    return {
+      page:2
+    }
+  },
   methods: {
     ...mapActions(["getPostsAdm"]),
+    handleScrolledToBottom(isVisible){
+      if(!isVisible||this.allPostsAdmPages < this.page) return;
+      else this.getPostsAdm(this.page++);
+    }
   },
   computed: {
-    ...mapGetters(["admin_posts"]),
+    ...mapGetters(["admin_posts","allPostsAdmPages"]),
   },
   created() {
     this.getPostsAdm();

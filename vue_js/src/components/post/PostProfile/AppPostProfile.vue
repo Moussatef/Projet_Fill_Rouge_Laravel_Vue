@@ -1,12 +1,11 @@
 <template>
   <div v-if="post.public == 0">
     <div
-      v-if="postProfile"
       class="w-full shadow-xl rounded-3xl border-r-2 border-l-2 border-blue-400 bg-white p-4 my-5"
     >
       <div class="flex justify-between items-center">
         <AppAvatare
-          :personne_id="post_p.personne_id"
+          :post="post"
           :created_at="post.created_at"
         />
 
@@ -496,7 +495,7 @@
         </div>
       </div>
     </div>
-    <Appload v-else class="my-2" />
+<!--    <Appload v-else class="my-2" />-->
   </div>
 </template>
 <script>

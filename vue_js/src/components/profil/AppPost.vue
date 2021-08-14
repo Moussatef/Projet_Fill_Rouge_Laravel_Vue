@@ -1,7 +1,6 @@
 <template>
   <div>
     <div
-      v-if="postProfile"
       class="w-full shadow-xl rounded-3xl border-r-2 border-l-2 border-blue-400 bg-white p-4 my-5"
     >
       <div class="flex justify-between items-center">

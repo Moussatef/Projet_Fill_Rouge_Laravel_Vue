@@ -26,7 +26,7 @@ class AdminController extends Controller
 
         $personne = Personne::find($request->personne_id);
 
-        $personne->validation = 'true';
+        $personne->validation = true;
 
         $personne->save();
 

@@ -30,7 +30,7 @@ class CreatePersonnesTable extends Migration
             $table->string('img')->nullable();
             $table->string('cover')->nullable();
             $table->string('bio')->nullable();
-            $table->string('validation')->default('false');
+            $table->boolean('validation')->default(false);
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

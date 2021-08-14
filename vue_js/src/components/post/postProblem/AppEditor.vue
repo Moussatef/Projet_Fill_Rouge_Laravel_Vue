@@ -3,12 +3,12 @@
     <label class="text-xl text-gray-600"
       >Content <span class="text-red-500">*</span></label
     >
-    <br />
-    <!-- <ckeditor
-      :editor="editor"
-      v-model="editorData"
-      :config="editorConfig"
-    ></ckeditor> -->
+<!--    <br />-->
+<!--    <ckeditor-->
+<!--      :editor="editor"-->
+<!--      v-model="editorData"-->
+<!--      :config="editorConfig"-->
+<!--    ></ckeditor>-->
   </div>
 </template>
 

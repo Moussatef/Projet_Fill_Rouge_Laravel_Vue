@@ -50,12 +50,15 @@ Route::group(['middleware' => ['auth:sanctum','type.user']], function () {
     Route::get('/personne/index', [PersonneController::class, 'index']);
     Route::get('/personne/id/{id}', [PersonneController::class, 'show'])->whereNumber('id');
     Route::get('/personne/fullname/id/{id}', [PersonneController::class, 'show_n'])->whereNumber('id');
-    Route::put('/personne/update/{id}', [PersonneController::class, 'update'])->whereNumber('id');
+    Route::post('/personne/update/{id}', [PersonneController::class, 'update'])->whereNumber('id');
     Route::post('/personne/update/img/both/{id}', [PersonneController::class, 'updateImg'])->whereNumber('id');
     Route::post('/personne/update/img/profile/{id}', [PersonneController::class, 'updateImgProfile'])->whereNumber('id');
     Route::post('/personne/update/img/cover/{id}', [PersonneController::class, 'updateImgCover'])->whereNumber('id');
     Route::post('/personne/delete', [PersonneController::class, 'destroy'])->whereNumber('id');
     Route::post('/logout', [AuthController::class, 'logout']);
+    //update info personne
+    Route::post('/personne/update/info', [PersonneController::class, 'updateInfo'])->whereNumber('id');
+
     //test get personne with al info likes and also comments
     Route::get('/personne/test/id/{id}', [PersonneController::class, 'test'])->whereNumber('id');
 

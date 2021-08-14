@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const state = {
-   
+
     user_info: [],
     new_user: [],
     autrUser: [],
@@ -14,19 +14,11 @@ const state = {
 const getters = {
     user_info: state => state.user_info,
     new_user: state => state.new_user,
-    
-
-
-
-
 
 
 }
 
 const actions = {
-
-
-    
 
 
     async fetchAllUser({ commit }, param) {
@@ -57,6 +49,31 @@ const actions = {
         commit('setUser', response.data);
     },
 
+    async updatePersonne({ commit }, param) {
+
+
+
+        await axios.post(`http://127.0.0.1:8000/api/personne/update/info`, {
+            id: param[0],
+            email: param[1],
+            adresse: param[2],
+            github: param[3],
+            linkedin: param[4],
+            facebook: param[5],
+            instagram: param[6],
+        }, {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem('user_token')}`
+            }
+        }).then(result => {
+            // console.log(result.data);
+            commit('updatePersonne', result.data)
+
+        }).catch(error => { console.log(error); })
+
+
+    },
 
 
 
@@ -137,12 +154,14 @@ const actions = {
 }
 
 const mutations = {
-    
+
     setUser: (state, user_info) => (state.user_info = user_info),
     newUser: function (state, new_user) {
         state.new_user = new_user
         // state.apprenant.unshift(new_user);
     },
+    updatePersonne: (state, personne) => (state.user_info = personne)
+
 
 
 

@@ -5,13 +5,13 @@ import axios from "axios";
 const state = {
     apprenant: [],
     admin_statistics: [],
-    admin_posts:[],
+    admin_posts: [],
 }
 
 const getters = {
     apprenant: state => state.apprenant,
     admin_statistics: state => state.admin_statistics,
-    admin_posts:state => state.admin_posts,
+    admin_posts: state => state.admin_posts,
 }
 
 const actions = {
@@ -62,7 +62,7 @@ const actions = {
             }
         };
 
-        await axios.get(`http://127.0.0.1:8000/api/admin/apprenant`, config).then(response => { commit('setApprenant', response.data.data); }).catch(err => {console.log("error",err);});
+        await axios.get(`http://127.0.0.1:8000/api/admin/apprenant`, config).then(response => { commit('setApprenant', response.data.data); }).catch(err => { console.log("error", err); });
         // console.log(response)
 
     },
@@ -98,18 +98,22 @@ const actions = {
         const config = {
             headers: {
                 Accept: "application/json",
-                // Authorization: `Bearer ${param[1]}`
+                Authorization: `Bearer ${localStorage.getItem("admin_token")}`
             }
+
         };
-        await axios.post(`http://127.0.0.1:8000/api/admin/validate`, { 'personne_id': params, config })
+        await axios.post(`http://127.0.0.1:8000/api/admin/validate`, {
+            'personne_id': params
+        },
+            config
+
+        )
             .then(result => {
                 // console.log(result.data.data[0]);
                 commit('updateAprenantData', result.data.data[0])
             }
             )
             .catch(error => console.log('error', error));
-
-
 
     }
 
@@ -125,7 +129,7 @@ const mutations = {
     updateAprenantData: function (state, apprenant) {
         state.apprenant.splice(state.apprenant.findIndex(el => el.id == apprenant.id), 1, apprenant);
     },
-    setPostsAdm:(state, posts) => (state.admin_posts = posts.data),
+    setPostsAdm: (state, posts) => (state.admin_posts = posts.data),
 
 }
 

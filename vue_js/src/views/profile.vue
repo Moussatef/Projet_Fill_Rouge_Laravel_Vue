@@ -483,7 +483,15 @@
         </div>
         <div>
           <button
-            v-if="!ed_adresse"
+            v-if="
+              inp_instagram != user_info.instagram ||
+                inp_facebook != user_info.facebook ||
+                inp_github != user_info.github ||
+                inp_linkedin != user_info.linkedin ||
+                inp_email != user_info.email ||
+                inp_adresse != user_info.adresse
+            "
+            @click="updateInfoPersonne"
             class="ml-5 focus:outline-none   text-white text-sm py-1 px-4 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 transform hover:scale-110"
           >
             <svg
@@ -518,6 +526,7 @@ import AppPhoto from "@/components/profil/AppPhoto";
 import AppShowPost from "@/components/profil/AppShowPost";
 import Appload from "@/components/dataload/ApploadCard";
 // import AppEditeur from "@/components/post/appEditerText";
+import Swal from "sweetalert2";
 
 export default {
   name: "UserProfile",
@@ -559,7 +568,28 @@ export default {
     Appload,
   },
   methods: {
-    ...mapActions(["fetchPosts", "fetchUser"]),
+    ...mapActions(["fetchPosts", "fetchUser", "updatePersonne"]),
+
+    updateInfoPersonne() {
+      this.updatePersonne([
+        localStorage.getItem("personne_id"),
+        this.inp_email,
+        this.inp_adresse,
+        this.inp_github,
+        this.inp_linkedin,
+        this.inp_facebook,
+        this.inp_instagram,
+      ]);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your changed has been saved",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      this.clickExit();
+    },
+
     fill_var(params) {
       this.inp_adresse = params[0];
       this.inp_email = params[1];
@@ -568,6 +598,7 @@ export default {
       this.inp_instagram = params[4];
       this.inp_linkedin = params[5];
     },
+
     open_photo() {
       this.op_post = false;
       this.op_photo = true;

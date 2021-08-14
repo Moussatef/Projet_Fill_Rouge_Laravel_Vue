@@ -50,7 +50,7 @@ const actions = {
     },
 
     async updatePersonneInfo({ commit }, param) {
-        console.log(param);
+        // console.log(param);
         await axios.post(`http://127.0.0.1:8000/api/personne/update/info`, {
             id: param[0],
             nom: param[1],
@@ -68,6 +68,27 @@ const actions = {
             commit('updatePersonne', result.data)
 
         }).catch(error => { console.log(error); })
+
+
+    },
+    async updatePasswordPersonne({ commit }, param) {
+        // console.log(param);
+        await axios.post(`http://127.0.0.1:8000/api/personne/update/password`, {
+            id: param[0],
+            password: param[1],
+            password_confirmation: param[2],
+            old_password: param[3],
+            
+        }, {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem('user_token')}`
+            }
+        }).then(result => {
+            console.log(result.data);
+            commit('updatePersonne', result.data)
+
+        }).catch(error => { console.log(error); alert('Error updating password') })
 
 
     },

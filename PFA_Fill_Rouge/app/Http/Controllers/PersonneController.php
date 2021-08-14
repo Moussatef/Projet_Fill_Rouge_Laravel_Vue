@@ -170,6 +170,28 @@ class PersonneController extends Controller
             return response('Error', 420);
     }
 
+    public function updatePassword(Request $request)
+    {
+        $this->validate($request, [
+            "id" => 'required',
+            "password" => 'required|string|confirmed|min:6',
+            'old_password' => 'required|string',
+        ]);
+
+        $personne = Personne::find($request->id);
+
+        if (bcrypt($request->old_password) == $personne->password) {
+            $personne->password = $request->password;
+
+
+            if ($personne->save())
+                return $personne;
+            else
+                return response('Error', 420);
+        } else
+            return response(['error' => 'votre mot de passe actuel est incorrect'], 466);
+    }
+
     public function updateInfoSoc(Request $request)
     {
 

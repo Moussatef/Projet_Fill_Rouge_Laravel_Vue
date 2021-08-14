@@ -57,8 +57,10 @@ Route::group(['middleware' => ['auth:sanctum', 'type.user']], function () {
     Route::post('/personne/delete', [PersonneController::class, 'destroy'])->whereNumber('id');
     Route::post('/logout', [AuthController::class, 'logout']);
     //update info personne
-    Route::post('/personne/update/infoSoc', [PersonneController::class, 'updateInfoSoc'])->whereNumber('id');
-    Route::post('/personne/update/info', [PersonneController::class, 'updateInfo'])->whereNumber('id');
+    Route::post('/personne/update/infoSoc', [PersonneController::class, 'updateInfoSoc']);
+    Route::post('/personne/update/info', [PersonneController::class, 'updateInfo']);
+    Route::post('/personne/update/password', [PersonneController::class, 'updatePassword']);
+
 
     //test get personne with al info likes and also comments
     Route::get('/personne/test/id/{id}', [PersonneController::class, 'test'])->whereNumber('id');

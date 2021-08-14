@@ -29,7 +29,9 @@ const actions = {
             }
         };
         await axios.get(`http://127.0.0.1:8000/api/profile/post/${param[0]}`, config).
-            then(response => { commit('setPosts', response.data.data); state.loading = false; console.log(response.data.data); }).
+            then(response => { commit('setPosts', response.data.data); state.loading = false;
+            //  console.log(response.data.data); 
+            }).
             catch(err => {
                 state.loading = false;
                 state.err = true;
@@ -63,7 +65,11 @@ const actions = {
                 Accept: "application/json",
                 Authorization: `Bearer  ${token}`
             }
-        }).then(response => { commit('addPosts', response.data.data); state.loading = false; console.log(response.data.data); }).
+        }).then(response => {
+            commit('addPosts', response.data.data);
+             state.loading = false;
+            // console.log(response.data.data); 
+        }).
             catch(err => {
                 state.loading = false;
                 state.err = true;
@@ -212,7 +218,7 @@ const actions = {
             personne_id: param[0],
             post_id: param[1],
             comment_id: param[2],
-            
+
         }, {
             headers: {
                 Accept: "application/json",
@@ -254,7 +260,7 @@ const mutations = {
 
 
     setStatistic: (state, Statistic) => {
-        console.log(Statistic);
+        // console.log(Statistic);
 
         (state.nb_like = Statistic.nb_Like);
         (state.nb_comment = Statistic.nb_Comment);

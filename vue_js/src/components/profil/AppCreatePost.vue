@@ -176,9 +176,7 @@ export default {
     onlivein() {
       this.addImg = false;
     },
-    test() {
-      CKEDITOR.replace("description");
-    },
+    
   },
   components: {},
   computed: {

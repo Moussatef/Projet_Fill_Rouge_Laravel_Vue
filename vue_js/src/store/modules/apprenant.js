@@ -66,7 +66,11 @@ const actions = {
                 Accept: "application/json",
                 Authorization: `Bearer ${localStorage.getItem('user_token')}`
             }
-        }).then(result => { console.log(result); }).catch(error => { console.log(error); })
+        }).then(result => {
+            // console.log(result.data);
+            commit('updatePersonne', result.data)
+
+        }).catch(error => { console.log(error); })
 
 
     },
@@ -156,6 +160,8 @@ const mutations = {
         state.new_user = new_user
         // state.apprenant.unshift(new_user);
     },
+    updatePersonne: (state, personne) => (state.user_info = personne)
+
 
 
 

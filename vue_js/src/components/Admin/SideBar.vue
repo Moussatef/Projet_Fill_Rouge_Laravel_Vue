@@ -383,7 +383,7 @@ export default {
       open_valid_Apprenant: false,
       appr: null,
       showPsts: false,
-      showNvApp: false,
+      showNvApp: true,
     };
   },
   methods: {

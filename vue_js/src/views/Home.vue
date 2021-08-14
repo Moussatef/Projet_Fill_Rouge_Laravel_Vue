@@ -14,7 +14,7 @@
         :storcomment="commentPost"
         @showPost="getPost"
       />
-
+      <div v-observe-visibility="handleScrolledToBottom"></div>
     </div>
     <AppShowPost
       v-if="show_post"
@@ -38,6 +38,7 @@ export default {
   name: "Home",
   data() {
     return {
+      page:2,
       token: localStorage.getItem("user_token"),
       id_apprenant: localStorage.getItem("user_id"),
       show_post: false,
@@ -63,13 +64,19 @@ export default {
     disable() {
       this.show_post = false;
     },
+    handleScrolledToBottom(isVisible){
+      if(!isVisible||this.allPostsPages < this.page) return;
+      else this.AllPost(this.page++);
+    }
   },
   computed: {
-    ...mapGetters(["allPostProfile", "user_info", "loading"]),
+    ...mapGetters(["allPostProfile", "user_info", "loading","allPostsPages"]),
   },
   created() {
-    this.fetchUser([this.id_apprenant, this.token]);
-    this.AllPost();
+    if(localStorage.getItem('user_token')) {
+      this.fetchUser([this.id_apprenant, this.token]);
+      this.AllPost();
+    }
   },
 };
 </script>

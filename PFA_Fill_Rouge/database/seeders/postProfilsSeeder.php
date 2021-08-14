@@ -16,7 +16,7 @@ class postProfilsSeeder extends Seeder
     public function run()
     {
         $faker=\Faker\Factory::create();
-        $posts=Post::limit(70)->get();
+        $posts=Post::limit(400)->get();
         $postProfils=[];
         foreach ($posts as $post)  {
             array_push($postProfils, [

@@ -6,12 +6,14 @@ const state = {
     apprenant: [],
     admin_statistics: [],
     admin_posts: [],
+    allPostsAdmPages:1
 }
 
 const getters = {
     apprenant: state => state.apprenant,
     admin_statistics: state => state.admin_statistics,
     admin_posts: state => state.admin_posts,
+    allPostsAdmPages:state=>state.allPostsAdmPages
 }
 
 const actions = {
@@ -80,7 +82,7 @@ const actions = {
 
         commit('setStatistics', response.data);
     },
-    async getPostsAdm({ commit }) {
+    async getPostsAdm({ commit },page=1) {
         const config = {
             headers: {
                 Accept: "application/json",
@@ -88,7 +90,7 @@ const actions = {
             }
         };
 
-        const response = await axios.get(`http://127.0.0.1:8000/api/admin/posts`, config);
+        const response = await axios.get(`http://127.0.0.1:8000/api/admin/posts?page=${page}`, config);
         // console.log(response.data)
 
         commit('setPostsAdm', response.data);
@@ -129,7 +131,10 @@ const mutations = {
     updateAprenantData: function (state, apprenant) {
         state.apprenant.splice(state.apprenant.findIndex(el => el.id == apprenant.id), 1, apprenant);
     },
-    setPostsAdm: (state, posts) => (state.admin_posts = posts.data),
+    setPostsAdm: (state, posts) => {
+        state.admin_posts.push(...posts.data);
+        state.allPostsAdmPages=posts.meta.last_page;
+    },
 
 }
 

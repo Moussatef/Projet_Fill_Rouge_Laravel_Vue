@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             imgPostsSeeder::class,
             commenteSeeder::class,
             likeSeeder::class,
+            responsableSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
     }

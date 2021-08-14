@@ -26,11 +26,9 @@ class PostController extends Controller
         // $posts = $posts->fresh('postProfil', 'comment', 'like', 'imgPost');
         // $test = $posts->fresh('personne');
         // $posts = Post::latest()->with(['like', 'comment'])->paginate(5);
-
-        $posts =  PostResource::collection(Post::orderByDesc('created_at')->get());
+        $posts =  PostResource::collection(Post::orderByDesc('created_at')->whereIn('id',PostProfil::pluck('post_id')->all())->where('public',0)->paginate(10));
 
         if ($posts) {
-
             return  $posts;
         } else
             return response('No posts found', 440);

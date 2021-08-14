@@ -17,7 +17,7 @@ class postSeeder extends Seeder
     {
         $faker=\Faker\Factory::create();
         $posts=[];
-        for ($i=0;$i<100;$i++){
+        for ($i=0;$i<500;$i++){
             array_push( $posts,[
                 'personne_id'=>$faker->randomElement(Personne::pluck('id')->all()),
                 'titre'=>join(' ',$faker->words(2)),

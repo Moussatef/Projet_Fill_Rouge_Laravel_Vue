@@ -17,12 +17,11 @@ class commenteSeeder extends Seeder
     public function run()
     {
         $faker=\Faker\Factory::create();
-        $posts=Post::all();
         $commentes=[];
-        foreach ($posts as $post){
+        for ($i=0;$i<1937;$i++){
             array_push( $commentes,[
                 'personne_id'=>$faker->randomElement(Personne::pluck('id')->all()),
-                'post_id'=>$post->id,
+                'post_id'=>$faker->randomElement(Post::pluck('id')->all()),
                 'comment'=>$faker->paragraph(1),
                 'created_at'=>now(),
                 'updated_at'=>now(),

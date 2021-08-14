@@ -15,7 +15,7 @@ class apprenantSeeder extends Seeder
      */
     public function run()
     {
-        $personnes=Personne::all();
+        $personnes=Personne::limit(10)->get();
         $apprenants=[];
         foreach ($personnes as $personne)
             array_push($apprenants,['personne_id'=>$personne->id]);

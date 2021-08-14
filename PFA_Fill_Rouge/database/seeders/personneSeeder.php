@@ -26,7 +26,12 @@ class personneSeeder extends Seeder
             'taddeo',
             'loria',
             'lyndsey',
-            'dall'
+            'dall',
+            'leeanne',
+            'pamelina',
+            'opaline',
+            'keelia',
+            'fernando',
         ];
         $last_names = [
             'troutbeck',
@@ -38,9 +43,14 @@ class personneSeeder extends Seeder
             'haslen',
             'bruineman',
             'oppery',
-            'averill'
+            'averill',
+            'geerdts',
+            'philpotts',
+            'gally',
+            'ible',
+            'das',
         ];
-        for($i=0;$i< 10;$i++){
+        for($i=0;$i< 15;$i++){
             $first_name=$first_names[$i];
             $last_name=$last_names[$i];
             $personne=[

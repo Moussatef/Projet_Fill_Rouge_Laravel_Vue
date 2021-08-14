@@ -18,7 +18,7 @@ class postProblemSeeder extends Seeder
     public function run()
     {
         $faker=\Faker\Factory::create();
-        $posts=Post::where('id','>',70)->get();
+        $posts=Post::where('id','>',400)->get();
         $postProblems=[];
         foreach ($posts as $post)  {
             array_push($postProblems, [

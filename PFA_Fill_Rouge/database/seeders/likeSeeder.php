@@ -18,7 +18,7 @@ class likeSeeder extends Seeder
     {
         $faker=\Faker\Factory::create();
         $likes=[];
-        for ($i=0;$i<800;$i++){
+        for ($i=0;$i<5000;$i++){
             array_push($likes,[
                 'personne_id'=>$faker->randomElement(Personne::pluck('id')->all()),
                 'post_id'=>$faker->randomElement(Post::pluck('id')->all())

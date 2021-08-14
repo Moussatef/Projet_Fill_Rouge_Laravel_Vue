@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ApprenantResource;
 use App\Http\Resources\PostResource;
+use App\Models\Admin;
 use App\Models\Apprenant;
 use App\Models\Commente;
 use App\Models\Like;
@@ -14,6 +15,12 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+
+    public function updateInfoAdmin(request $request){
+        $admin = Admin::all();
+
+        return $admin;
+    }
     public function getApprenantInfo()
     {
         $apprenant = ApprenantResource::collection(Apprenant::all());

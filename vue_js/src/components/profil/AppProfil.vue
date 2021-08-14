@@ -365,8 +365,8 @@
           <div>
             <div class="flex ">
               <label class="m-3 w-1/2" for="nom">Nom :</label>
-              <div v-if="!ed_nom" class="   flex items-center">
-                <label class="m-3 w-1/2" for="nom">{{ user_info.nom }}</label>
+              <div v-if="!ed_nom" class="w-1/2   flex items-center">
+                <label class="m-3 " for="nom">{{ user_info.nom }}</label>
                 <button
                   @click="ed_nom = !ed_nom"
                   class=" ml-5 w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200"
@@ -394,8 +394,8 @@
             </div>
             <div class="flex">
               <label class="m-3 w-1/2" for="nom">Telephone :</label>
-              <div v-if="!ed_telephon" class="   flex items-center">
-                <label class="m-3 w-1/2" for="nom">{{
+              <div v-if="!ed_telephon" class=" w-1/2  flex items-center">
+                <label class="m-3 " for="nom">{{
                   user_info.telephon
                 }}</label>
                 <button
@@ -547,7 +547,7 @@
                 inp_prenom != user_info.prenom ||
                 inp_bio != user_info.bio ||
                 inp_telephon != user_info.telephon ||
-                (inp_date_n != undefined && inp_date_n != '')
+                (inp_date_n != undefined && inp_date_n != '' && inp_date_n != user_info.date_N  )
             "
             @click="updateInfoPersonne(user_info.id)"
             class="ml-5 focus:outline-none   text-white text-sm py-1 px-4 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 transform hover:scale-110"

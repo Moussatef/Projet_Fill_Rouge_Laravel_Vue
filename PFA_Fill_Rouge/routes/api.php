@@ -105,6 +105,7 @@ Route::group(['middleware' => ['auth:sanctum', 'type.admin']], function () {
     Route::get('/admin/posts', [AdminController::class, 'getAllPosts']);
     Route::post('/admin/validate', [AdminController::class, 'validateApprenant']);
     Route::post('/admin/delete', [AdminController::class, 'destroy']);
+    Route::post('/admin/update', [AdminController::class, 'updateInfoAdmin']);
 });
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

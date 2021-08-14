@@ -9,7 +9,7 @@
           alt="img"
           class="h-10 w-10 rounded-full border  border-blue-500"
         />
-        <AppEditeur />
+
         <input
           @focus="onfocusin"
           @blur="onlivein"

@@ -167,6 +167,32 @@ class PersonneController extends Controller
 
         $this->validate($request, [
             "id" => 'required',
+            "nom" => 'required|string',
+            'prenom' => 'required|string',
+            'telephon' => 'nullable|string',
+            'date_N' => 'required|string',
+            'bio' => 'nullable|string',
+        ]);
+
+        $personne = Personne::find($request->id);
+
+        $personne->nom = $request->nom;
+        $personne->prenom = $request->prenom;
+        $personne->telephon = $request->telephon;
+        $personne->date_N = $request->date_N;
+        $personne->bio = $request->bio;
+
+        if ($personne->save())
+            return $personne;
+        else
+            return response('Error', 420);
+    }
+
+    public function updateInfoSoc(Request $request)
+    {
+
+        $this->validate($request, [
+            "id" => 'required',
             "github" => 'nullable|string',
             'facebook' => 'nullable|string',
             'instagram' => 'nullable|string',

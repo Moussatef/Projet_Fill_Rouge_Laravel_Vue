@@ -45,7 +45,7 @@ Route::post('/user/upload', [FileUploadController::class, 'upload']);
 
 
 // Protected routes
-Route::group(['middleware' => ['auth:sanctum','type.user']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'type.user']], function () {
 
     Route::get('/personne/index', [PersonneController::class, 'index']);
     Route::get('/personne/id/{id}', [PersonneController::class, 'show'])->whereNumber('id');
@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth:sanctum','type.user']], function () {
     Route::post('/personne/delete', [PersonneController::class, 'destroy'])->whereNumber('id');
     Route::post('/logout', [AuthController::class, 'logout']);
     //update info personne
-    Route::post('/personne/update/info', [PersonneController::class, 'updateInfo'])->whereNumber('id');
+    Route::post('/personne/update/info', [PersonneController::class, 'updateInfoSoc'])->whereNumber('id');
 
     //test get personne with al info likes and also comments
     Route::get('/personne/test/id/{id}', [PersonneController::class, 'test'])->whereNumber('id');
@@ -98,12 +98,12 @@ Route::group(['middleware' => ['auth:sanctum','type.user']], function () {
     //get statistic
     Route::get('/profile/static/{id}', [PostController::class, 'getTotals']);
 });
-Route::group(['middleware' => ['auth:sanctum','type.admin']], function () {
-Route::get('/admin/apprenant', [AdminController::class, 'getApprenantInfo']);
-Route::get('/admin/statistic', [AdminController::class, 'statistic']);
-Route::get('/admin/posts', [AdminController::class, 'getAllPosts']);
-Route::post('/admin/validate', [AdminController::class, 'validateApprenant']);
-Route::post('/admin/delete', [AdminController::class, 'destroy']);
+Route::group(['middleware' => ['auth:sanctum', 'type.admin']], function () {
+    Route::get('/admin/apprenant', [AdminController::class, 'getApprenantInfo']);
+    Route::get('/admin/statistic', [AdminController::class, 'statistic']);
+    Route::get('/admin/posts', [AdminController::class, 'getAllPosts']);
+    Route::post('/admin/validate', [AdminController::class, 'validateApprenant']);
+    Route::post('/admin/delete', [AdminController::class, 'destroy']);
 });
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

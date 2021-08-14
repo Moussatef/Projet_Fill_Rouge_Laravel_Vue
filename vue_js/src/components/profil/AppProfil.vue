@@ -91,7 +91,16 @@
       <div class="flex justify-center items-center">
         {{ nom }} {{ prenom }}
         <button
-        @click="clickModal()"
+          @click="
+            fill_value([
+              user_info.nom,
+              user_info.prenom,
+              user_info.telephon,
+              user_info.bio,
+              user_info.data_N,
+            ]);
+            clickModal();
+          "
         >
           <svg
             class="h-5 w-5 mx-2"
@@ -346,31 +355,220 @@
         </div>
       </div>
     </div>
-    <button id="myBtn">Open Modal</button>
-
     <!-- The Modal -->
-    <div id="myModal" @click="exitModal()" class="modal">
+    <div id="myModalP" @click="exitModal()" class="modalP">
       <!-- Modal content -->
-      <div class="modal-content">
+      <div class="modal-contentP">
         <span @click="clickExit()" class="close">&times;</span>
         <p class="text-2xl text-gray-500">{ Edit Information }</p>
-        <div class="flex flex-wrap justify-evenly">
+        <div class="flex flex-wrap justify-evenly my-10 ">
           <div>
-            <div class="flex">
-              <label class="mx-3" for="nom">Nom :</label>
-              <label class="mx-3" for="nom">{{ user_info.nom}}</label>
+            <div class="flex ">
+              <label class="m-3 w-1/2" for="nom">Nom :</label>
+              <div v-if="!ed_nom" class="   flex items-center">
+                <label class="m-3 w-1/2" for="nom">{{ user_info.nom }}</label>
+                <button
+                  @click="ed_nom = !ed_nom"
+                  class=" ml-5 w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200"
+                >
+                  <svg
+                    class="h-5 w-5"
+                    height="484pt"
+                    viewBox="-15 -15 484.00019 484"
+                    width="484pt"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m401.648438 18.234375c-24.394532-24.351563-63.898438-24.351563-88.292969 0l-22.101563 22.222656-235.269531 235.144531-.5.503907c-.121094.121093-.121094.25-.25.25-.25.375-.625.746093-.871094 1.121093 0 .125-.128906.125-.128906.25-.25.375-.371094.625-.625 1-.121094.125-.121094.246094-.246094.375-.125.375-.25.625-.378906 1 0 .121094-.121094.121094-.121094.25l-52.199219 156.96875c-1.53125 4.46875-.367187 9.417969 2.996094 12.734376 2.363282 2.332031 5.550782 3.636718 8.867188 3.625 1.355468-.023438 2.699218-.234376 3.996094-.625l156.847656-52.324219c.121094 0 .121094 0 .25-.121094.394531-.117187.773437-.285156 1.121094-.503906.097656-.011719.183593-.054688.253906-.121094.371094-.25.871094-.503906 1.246094-.753906.371093-.246094.75-.621094 1.125-.871094.125-.128906.246093-.128906.246093-.25.128907-.125.378907-.246094.503907-.5l257.371093-257.371094c24.351563-24.394531 24.351563-63.898437 0-88.289062zm-232.273438 353.148437-86.914062-86.910156 217.535156-217.535156 86.914062 86.910156zm-99.15625-63.808593 75.929688 75.925781-114.015626 37.960938zm347.664062-184.820313-13.238281 13.363282-86.917969-86.917969 13.367188-13.359375c14.621094-14.609375 38.320312-14.609375 52.945312 0l33.964844 33.964844c14.511719 14.6875 14.457032 38.332031-.121094 52.949218zm0 0"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <input
+                v-if="ed_nom"
+                type="text"
+                class=" m-3 w-1/2  border-b border-blue-500 focus:outline-none"
+                v-model="inp_nom"
+              />
             </div>
-            
+            <div class="flex">
+              <label class="m-3 w-1/2" for="nom">Telephone :</label>
+              <div v-if="!ed_telephon" class="   flex items-center">
+                <label class="m-3 w-1/2" for="nom">{{
+                  user_info.telephon
+                }}</label>
+                <button
+                  @click="ed_telephon = !ed_telephon"
+                  class=" m-3 w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200"
+                >
+                  <svg
+                    class="h-5 w-5"
+                    height="484pt"
+                    viewBox="-15 -15 484.00019 484"
+                    width="484pt"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m401.648438 18.234375c-24.394532-24.351563-63.898438-24.351563-88.292969 0l-22.101563 22.222656-235.269531 235.144531-.5.503907c-.121094.121093-.121094.25-.25.25-.25.375-.625.746093-.871094 1.121093 0 .125-.128906.125-.128906.25-.25.375-.371094.625-.625 1-.121094.125-.121094.246094-.246094.375-.125.375-.25.625-.378906 1 0 .121094-.121094.121094-.121094.25l-52.199219 156.96875c-1.53125 4.46875-.367187 9.417969 2.996094 12.734376 2.363282 2.332031 5.550782 3.636718 8.867188 3.625 1.355468-.023438 2.699218-.234376 3.996094-.625l156.847656-52.324219c.121094 0 .121094 0 .25-.121094.394531-.117187.773437-.285156 1.121094-.503906.097656-.011719.183593-.054688.253906-.121094.371094-.25.871094-.503906 1.246094-.753906.371093-.246094.75-.621094 1.125-.871094.125-.128906.246093-.128906.246093-.25.128907-.125.378907-.246094.503907-.5l257.371093-257.371094c24.351563-24.394531 24.351563-63.898437 0-88.289062zm-232.273438 353.148437-86.914062-86.910156 217.535156-217.535156 86.914062 86.910156zm-99.15625-63.808593 75.929688 75.925781-114.015626 37.960938zm347.664062-184.820313-13.238281 13.363282-86.917969-86.917969 13.367188-13.359375c14.621094-14.609375 38.320312-14.609375 52.945312 0l33.964844 33.964844c14.511719 14.6875 14.457032 38.332031-.121094 52.949218zm0 0"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <input
+                v-if="ed_telephon"
+                type="text"
+                class=" m-3 w-1/2 border-b border-blue-500 focus:outline-none"
+                v-model="inp_telephon"
+              />
+            </div>
+            <div class="flex ">
+              <label class="m-3 w-1/2">Bio :</label>
+              <div v-if="!ed_bio" class="flex items-center">
+                <label class="m-3 w-1/2" for="nom">{{ user_info.bio }}</label>
+                <button
+                  @click="ed_bio = !ed_bio"
+                  class=" m-3 w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200"
+                >
+                  <svg
+                    class="h-5 w-5"
+                    height="484pt"
+                    viewBox="-15 -15 484.00019 484"
+                    width="484pt"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m401.648438 18.234375c-24.394532-24.351563-63.898438-24.351563-88.292969 0l-22.101563 22.222656-235.269531 235.144531-.5.503907c-.121094.121093-.121094.25-.25.25-.25.375-.625.746093-.871094 1.121093 0 .125-.128906.125-.128906.25-.25.375-.371094.625-.625 1-.121094.125-.121094.246094-.246094.375-.125.375-.25.625-.378906 1 0 .121094-.121094.121094-.121094.25l-52.199219 156.96875c-1.53125 4.46875-.367187 9.417969 2.996094 12.734376 2.363282 2.332031 5.550782 3.636718 8.867188 3.625 1.355468-.023438 2.699218-.234376 3.996094-.625l156.847656-52.324219c.121094 0 .121094 0 .25-.121094.394531-.117187.773437-.285156 1.121094-.503906.097656-.011719.183593-.054688.253906-.121094.371094-.25.871094-.503906 1.246094-.753906.371093-.246094.75-.621094 1.125-.871094.125-.128906.246093-.128906.246093-.25.128907-.125.378907-.246094.503907-.5l257.371093-257.371094c24.351563-24.394531 24.351563-63.898437 0-88.289062zm-232.273438 353.148437-86.914062-86.910156 217.535156-217.535156 86.914062 86.910156zm-99.15625-63.808593 75.929688 75.925781-114.015626 37.960938zm347.664062-184.820313-13.238281 13.363282-86.917969-86.917969 13.367188-13.359375c14.621094-14.609375 38.320312-14.609375 52.945312 0l33.964844 33.964844c14.511719 14.6875 14.457032 38.332031-.121094 52.949218zm0 0"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <textarea
+                name=""
+                v-if="ed_bio"
+                v-model="inp_bio"
+                class=" m-3  w-1/2 border-b border-blue-500 focus:outline-none"
+                id=""
+                cols="30"
+                rows="4"
+              ></textarea>
+            </div>
           </div>
           <div class=" mx-10">
             <div class="flex">
-              <label class="mx-3" for="nom">Prenom :</label>
-              <label class="mx-3" for="nom">{{ user_info.prenom}}</label>
+              <label class="m-3 w-1/2" for="nom">Prenom :</label>
+              <div v-if="!ed_prenom" class="   flex items-center">
+                <label class="m-3 w-1/2" for="nom">{{
+                  user_info.prenom
+                }}</label>
+                <button
+                  @click="ed_prenom = !ed_prenom"
+                  class=" m-3 w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200"
+                >
+                  <svg
+                    class="h-5 w-5"
+                    height="484pt"
+                    viewBox="-15 -15 484.00019 484"
+                    width="484pt"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m401.648438 18.234375c-24.394532-24.351563-63.898438-24.351563-88.292969 0l-22.101563 22.222656-235.269531 235.144531-.5.503907c-.121094.121093-.121094.25-.25.25-.25.375-.625.746093-.871094 1.121093 0 .125-.128906.125-.128906.25-.25.375-.371094.625-.625 1-.121094.125-.121094.246094-.246094.375-.125.375-.25.625-.378906 1 0 .121094-.121094.121094-.121094.25l-52.199219 156.96875c-1.53125 4.46875-.367187 9.417969 2.996094 12.734376 2.363282 2.332031 5.550782 3.636718 8.867188 3.625 1.355468-.023438 2.699218-.234376 3.996094-.625l156.847656-52.324219c.121094 0 .121094 0 .25-.121094.394531-.117187.773437-.285156 1.121094-.503906.097656-.011719.183593-.054688.253906-.121094.371094-.25.871094-.503906 1.246094-.753906.371093-.246094.75-.621094 1.125-.871094.125-.128906.246093-.128906.246093-.25.128907-.125.378907-.246094.503907-.5l257.371093-257.371094c24.351563-24.394531 24.351563-63.898437 0-88.289062zm-232.273438 353.148437-86.914062-86.910156 217.535156-217.535156 86.914062 86.910156zm-99.15625-63.808593 75.929688 75.925781-114.015626 37.960938zm347.664062-184.820313-13.238281 13.363282-86.917969-86.917969 13.367188-13.359375c14.621094-14.609375 38.320312-14.609375 52.945312 0l33.964844 33.964844c14.511719 14.6875 14.457032 38.332031-.121094 52.949218zm0 0"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <input
+                v-if="ed_prenom"
+                type="text"
+                class=" m-3  w-1/2 border-b border-blue-500 focus:outline-none"
+                v-model="inp_prenom"
+              />
+            </div>
+            <div class="flex">
+              <label class="m-3 w-1/2" for="nom">Date de naissance :</label>
+              <div v-if="!ed_date_n" class="   flex items-center">
+                <label class="m-3 w-1/2" for="nom">{{
+                  user_info.date_N
+                }}</label>
+                <button
+                  @click="ed_date_n = !ed_date_n"
+                  class=" m-3 w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200"
+                >
+                  <svg
+                    class="h-5 w-5"
+                    height="484pt"
+                    viewBox="-15 -15 484.00019 484"
+                    width="484pt"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m401.648438 18.234375c-24.394532-24.351563-63.898438-24.351563-88.292969 0l-22.101563 22.222656-235.269531 235.144531-.5.503907c-.121094.121093-.121094.25-.25.25-.25.375-.625.746093-.871094 1.121093 0 .125-.128906.125-.128906.25-.25.375-.371094.625-.625 1-.121094.125-.121094.246094-.246094.375-.125.375-.25.625-.378906 1 0 .121094-.121094.121094-.121094.25l-52.199219 156.96875c-1.53125 4.46875-.367187 9.417969 2.996094 12.734376 2.363282 2.332031 5.550782 3.636718 8.867188 3.625 1.355468-.023438 2.699218-.234376 3.996094-.625l156.847656-52.324219c.121094 0 .121094 0 .25-.121094.394531-.117187.773437-.285156 1.121094-.503906.097656-.011719.183593-.054688.253906-.121094.371094-.25.871094-.503906 1.246094-.753906.371093-.246094.75-.621094 1.125-.871094.125-.128906.246093-.128906.246093-.25.128907-.125.378907-.246094.503907-.5l257.371093-257.371094c24.351563-24.394531 24.351563-63.898437 0-88.289062zm-232.273438 353.148437-86.914062-86.910156 217.535156-217.535156 86.914062 86.910156zm-99.15625-63.808593 75.929688 75.925781-114.015626 37.960938zm347.664062-184.820313-13.238281 13.363282-86.917969-86.917969 13.367188-13.359375c14.621094-14.609375 38.320312-14.609375 52.945312 0l33.964844 33.964844c14.511719 14.6875 14.457032 38.332031-.121094 52.949218zm0 0"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <input
+                v-if="ed_date_n"
+                v-model="inp_date_n"
+                type="date"
+                class=" m-3  w-1/2 border-b border-blue-500 focus:outline-none"
+              />
+            </div>
+            <div class="flex">
+              <label class="m-3 w-1/2" for="nom">Modifer mot de pass :</label>
+              <div v-if="!ed_password" class="   flex items-center">
+                <label class="m-3 w-1/2" for="nom"> ****************</label>
+                <button
+                  @click="ed_password = !ed_password"
+                  class=" m-3 w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200"
+                >
+                  <svg
+                    class="h-5 w-5"
+                    height="484pt"
+                    viewBox="-15 -15 484.00019 484"
+                    width="484pt"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="m401.648438 18.234375c-24.394532-24.351563-63.898438-24.351563-88.292969 0l-22.101563 22.222656-235.269531 235.144531-.5.503907c-.121094.121093-.121094.25-.25.25-.25.375-.625.746093-.871094 1.121093 0 .125-.128906.125-.128906.25-.25.375-.371094.625-.625 1-.121094.125-.121094.246094-.246094.375-.125.375-.25.625-.378906 1 0 .121094-.121094.121094-.121094.25l-52.199219 156.96875c-1.53125 4.46875-.367187 9.417969 2.996094 12.734376 2.363282 2.332031 5.550782 3.636718 8.867188 3.625 1.355468-.023438 2.699218-.234376 3.996094-.625l156.847656-52.324219c.121094 0 .121094 0 .25-.121094.394531-.117187.773437-.285156 1.121094-.503906.097656-.011719.183593-.054688.253906-.121094.371094-.25.871094-.503906 1.246094-.753906.371093-.246094.75-.621094 1.125-.871094.125-.128906.246093-.128906.246093-.25.128907-.125.378907-.246094.503907-.5l257.371093-257.371094c24.351563-24.394531 24.351563-63.898437 0-88.289062zm-232.273438 353.148437-86.914062-86.910156 217.535156-217.535156 86.914062 86.910156zm-99.15625-63.808593 75.929688 75.925781-114.015626 37.960938zm347.664062-184.820313-13.238281 13.363282-86.917969-86.917969 13.367188-13.359375c14.621094-14.609375 38.320312-14.609375 52.945312 0l33.964844 33.964844c14.511719 14.6875 14.457032 38.332031-.121094 52.949218zm0 0"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
-         
         </div>
-        
+        <div>
+          <button
+            v-if="
+              inp_nom != user_info.nom ||
+                inp_prenom != user_info.prenom ||
+                inp_bio != user_info.bio ||
+                inp_telephon != user_info.telephon ||
+                (inp_date_n != undefined && inp_date_n != '')
+            "
+            @click="updateInfoPersonne"
+            class="ml-5 focus:outline-none   text-white text-sm py-1 px-4 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 transform hover:scale-110"
+          >
+            <svg
+              class="h-5 w-5 "
+              id="bold"
+              enable-background="new 0 0 24 24"
+              height="512"
+              viewBox="0 0 24 24"
+              width="512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path
+                  d="m9.707 19.121c-.187.188-.442.293-.707.293s-.52-.105-.707-.293l-5.646-5.647c-.586-.586-.586-1.536 0-2.121l.707-.707c.586-.586 1.535-.586 2.121 0l3.525 3.525 9.525-9.525c.586-.586 1.536-.586 2.121 0l.707.707c.586.586.586 1.536 0 2.121z"
+                />
+              </g>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -393,6 +591,20 @@ export default {
       op_photo: false,
       op_problem: false,
 
+      ed_nom: false,
+      ed_telephon: false,
+      ed_bio: false,
+      ed_prenom: false,
+      ed_date_n: false,
+      ed_password: false,
+
+      inp_nom: "",
+      inp_telephon: "",
+      inp_bio: "",
+      inp_prenom: "",
+      inp_date_n: "",
+      inp_password: "",
+
       profile: "http://127.0.0.1:8000" + this.img,
       cover: "http://127.0.0.1:8000" + this.imgCover,
       img_src: false,
@@ -405,6 +617,17 @@ export default {
   },
   methods: {
     ...mapActions(["updateImg", "getStatistics"]),
+
+    updateInfoPersonne() {},
+
+    fill_value(param) {
+      this.inp_nom = param[0];
+      this.inp_prenom = param[1];
+      this.inp_telephon = param[2];
+      this.inp_bio = param[3];
+      this.inp_date_n = param[4];
+      this.inp_password = param[5];
+    },
 
     imageSelected(e) {
       this.img_src = true;
@@ -480,22 +703,21 @@ export default {
 
     clickExit() {
       // Get the modal
-      var modal = document.getElementById("myModal");
+      var modal = document.getElementById("myModalP");
       // Get the <span> element that closes the modal
-     
+
       modal.style.display = "none";
-      
     },
     clickModal() {
       // Get the modal
-      var modal = document.getElementById("myModal");
+      var modal = document.getElementById("myModalP");
       // When the user clicks the button, open the modal
       modal.style.display = "block";
     },
 
     exitModal() {
       // Get the modal
-      var modal = document.getElementById("myModal");
+      var modal = document.getElementById("myModalP");
       // When the user clicks anywhere outside of the modal, close it
       window.onclick = function(event) {
         if (event.target == modal) {
@@ -503,7 +725,6 @@ export default {
         }
       };
     },
-    
   },
   created() {
     this.getStatistics();
@@ -521,7 +742,7 @@ export default {
 </script>
 
 <style scoped>
-.modal {
+.modalP {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -535,12 +756,12 @@ export default {
 }
 
 /* Modal Content/Box */
-.modal-content {
+.modal-contentP {
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
-  border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 15px;
 }
 
 /* The Close Button */

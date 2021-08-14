@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!apprenant.validation" class="flex flex-row mt-2">
+  <div v-if="!apprenant.validation || apprenant.validation == 'false' " class="flex flex-row mt-2">
     <div
       class="flex md:flex md:flex-wrap sm:flex sm:flex-wrap md:mt-5 sm:mt-4 w-full items-center justify-between bg-white px-8 py-6 border-l-4 border-blue-500 "
     >

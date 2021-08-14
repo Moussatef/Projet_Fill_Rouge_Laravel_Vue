@@ -246,7 +246,6 @@ const mutations = {
         state.postsProfile.unshift(addPost[0]);
         // console.log(addPost[0]);
         state.allPostProfile.unshift(addPost[0]);
-        state.nb_post += state.nb_post;
     },
 
     updatePostData: function (state, putPost) {

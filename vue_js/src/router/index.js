@@ -28,7 +28,14 @@ const routes = [
   {
     path: '/admin/login',
     name: 'AdminLogin',
-    component: AdminLogin
+    component: AdminLogin,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('user_token') || localStorage.getItem('admin_token')) {
+        next('/');
+      } else {
+        next();
+      }
+    },
   },
 
   {
@@ -54,12 +61,12 @@ const routes = [
     name: 'Login',
     component: Login,
     beforeEnter: (to, from, next) => {
-      if (localStorage.getItem('user_token')) {
-        next('/user/profile');
+      if (localStorage.getItem('user_token') || localStorage.getItem('admin_token')) {
+        next('/');
       } else {
         next();
       }
-      
+
     }
   },
   {

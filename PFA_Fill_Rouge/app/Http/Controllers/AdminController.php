@@ -12,12 +12,31 @@ use App\Models\Personne;
 use App\Models\Post;
 use App\Models\Responsable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
 
-    public function updateInfoAdmin(request $request){
-        $admin = Admin::all();
+    public function getAdminInfo(){
+        return Auth::user();
+    }
+    public function updateAdminInfo(Request $request){
+        $this->validate($request,[
+            "admin_name"  => "required",
+            "email"=>"required",
+            "old_password"=>"required",
+            "new_password"=>"required"
+        ]);
+
+        $admin = Admin::find(1);
+        if(!Hash::check($request->input('old_password'),$admin->password))
+            return response(["message"=>"old password is incorrect"]);
+        $admin->admin_name = $request->input('admin_name');
+        $admin->email = $request->input('email');
+        $admin->password = bcrypt($request->input('new_password'));
+
+        $admin->save();
 
         return $admin;
     }
@@ -39,7 +58,6 @@ class AdminController extends Controller
 
         $apprenant = ApprenantResource::collection(Apprenant::where('personne_id' ,'=', $personne->id)->get());
         return $apprenant;
-
     }
 
     public function statistic()

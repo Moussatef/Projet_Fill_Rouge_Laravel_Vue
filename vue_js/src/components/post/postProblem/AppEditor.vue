@@ -3,12 +3,13 @@
     <label class="text-xl text-gray-600"
       >Content <span class="text-red-500">*</span></label
     >
-<!--    <br />-->
-<!--    <ckeditor-->
-<!--      :editor="editor"-->
-<!--      v-model="editorData"-->
-<!--      :config="editorConfig"-->
-<!--    ></ckeditor>-->
+    <!--    <br />-->
+    <!--    <ckeditor-->
+    <!--      :editor="editor"-->
+    <!--      v-model="editorData"-->
+    <!--      :config="editorConfig"-->
+    <!--    ></ckeditor>-->
+    <VueEditor v-model="content" />
   </div>
 </template>
 
@@ -20,6 +21,7 @@
 // import ItalicPlugin from "@ckeditor/ckeditor5-basic-styles/src/italic";
 // import LinkPlugin from "@ckeditor/ckeditor5-link/src/link";
 // import ParagraphPlugin from "@ckeditor/ckeditor5-paragraph/src/paragraph";
+import { VueEditor } from "vue2-editor";
 export default {
   name: "AppEditeur",
   data() {
@@ -29,7 +31,11 @@ export default {
       // editorConfig: {
       //   // The configuration of the editor.
       // },
+      contant: "",
     };
+  },
+  components: {
+    VueEditor,
   },
 
   methods: {

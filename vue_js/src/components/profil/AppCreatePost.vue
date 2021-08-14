@@ -18,7 +18,6 @@
           placeholder="Write something to Roland…"
         />
         <hr />
-        
       </div>
       <div v-if="addImg || title" class="w-full post-div">
         <textarea
@@ -139,6 +138,9 @@ export default {
       },
     };
   },
+  components: {
+    AppEditeur,
+  },
   methods: {
     ...mapActions(["newPost"]),
     sendData() {
@@ -176,9 +178,8 @@ export default {
     onlivein() {
       this.addImg = false;
     },
-    
   },
-  components: {},
+
   computed: {
     ...mapGetters(["user_info"]),
   },

@@ -18,6 +18,7 @@
           placeholder="Write something to Roland…"
         />
         <hr />
+        
       </div>
       <div v-if="addImg || title" class="w-full post-div">
         <textarea
@@ -104,7 +105,7 @@
         <div v-if="title && description" class="w-full text-right ">
           <button
             @click="sendData"
-            class="bg-blue-600 text-white py-1 px-4 border-b border-gray-800 rounded-lg w-20  m-3 hover:bg-gray-200 hover:text-gray-600 hover:border-blue-500 transition duration-500 ease-in-out"
+            class="ml-5 focus:outline-none   text-white text-sm py-1 px-7 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 transform hover:scale-110"
           >
             Post
           </button>
@@ -135,10 +136,9 @@ export default {
   },
   
   methods: {
-    ...mapActions(["newPost"]),
+    ...mapActions(["newPostProblem"]),
     sendData() {
       let data = {
-        personne_id: localStorage.getItem("personne_id"),
         titre: this.title,
         description: this.description,
         img_one: this.image[0],
@@ -146,7 +146,7 @@ export default {
         img_three: this.image[2],
         img_fore: this.image[3],
       };
-      this.newPost(data);
+      this.newPostProblem(data);
       this.imagepreview[0] = null;
       this.title = "";
       this.description = "";

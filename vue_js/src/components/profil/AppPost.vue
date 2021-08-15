@@ -224,7 +224,7 @@
       </div>
       <div v-if="!editProc" class="w-full mt-4 text-justify">
         <p class="text-lg text-gray-900 ">{{ title }}</p>
-        <p class=" text-gray-900 ">{{ description }}</p>
+        <p class=" text-gray-900 text-left ">{{ description }}</p>
       </div>
       <div v-else class="w-full mt-4 text-justify">
         <div>
@@ -470,10 +470,7 @@
       <div
         class="grid  gap-4  w-full cursor-pointer "
         :class="gridNumber"
-        @click="
-          $emit('sendPost',[post]);
-          
-        "
+        @click="$emit('sendPost', [post])"
       >
         <div v-for="img in post.img_post" :key="img.id" class="  ">
           <img
@@ -675,7 +672,10 @@
       </div>
       <div class="border border-gray-500 border-opacity-20 mt-4" />
 
-      <div class="text-left  overflow-y-auto  my-4 " style="min-height: 120px;">
+      <div
+        class="text-left  overflow-y-auto  my-4 "
+        style="min-height: 120px; max-height : 400px;"
+      >
         <AppComment
           v-for="cmt in comment"
           :key="cmt.id"
@@ -684,8 +684,7 @@
           :personne_id="cmt.personne_id"
           :comment_id="cmt.id"
           :created_at="cmt.created_at"
-          :nom="cmt.nom"
-          :prenom="cmt.prenom"
+          :full_name="cmt.full_name"
           :post_id="post.id"
           :img="cmt.img"
         />
@@ -722,7 +721,6 @@
         </button>
       </div>
     </div>
-   
   </div>
 </template>
 
@@ -737,7 +735,6 @@ export default {
     "post_id",
     "title",
     "description",
-    "path",
     "created_at",
     "like",
     "comment",
@@ -747,7 +744,7 @@ export default {
   emits: ["showPost"],
   components: {
     AppComment,
-    AppImage
+    AppImage,
   },
   name: "AppPost",
   data() {
@@ -774,9 +771,7 @@ export default {
       showlike: false,
     };
   },
-  watch:{
-    
-  },
+  watch: {},
   methods: {
     ...mapActions([
       "postComment",
@@ -786,8 +781,6 @@ export default {
       "getLikePost",
       "deletePost",
     ]),
-
-    
 
     showAlert() {
       // Use sweetalert2
@@ -823,7 +816,6 @@ export default {
         </span> <br />`;
       });
     },
-
     edit() {
       this.editProc = true;
       this.dropdownOpen = false;
@@ -841,11 +833,6 @@ export default {
         }
       });
     },
-    convertTime(time) {
-      let res = moment(time, "YYYY-MM-DD HH:mm:ss");
-      return res.fromNow();
-    },
-
     clickLike(post_id, personne_id, token) {
       if (this.addLike([post_id, personne_id, token])) {
         this.checkLike = false;
@@ -863,28 +850,6 @@ export default {
         this.gridNumber = "grid-cols-2";
       }
     },
-
-    async getDataLike(post_id) {
-      var myHeaders = new Headers();
-      myHeaders.append(
-        "Authorization",
-        "Bearer 25|Kasg5hwkpmTKLz9k7je4PZTeSAexOxXrtMRdtY4v"
-      );
-
-      var requestOptions = {
-        method: "GET",
-        headers: myHeaders,
-        redirect: "follow",
-      };
-
-      fetch("http://127.0.0.1:8000/api/like/getInfo/" + post_id, requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          console.log(result.like);
-          this.like = result.like;
-        })
-        .catch((error) => console.log("error", error));
-    },
   },
   computed: {
     ...mapGetters(["user_info", "posts_personne"]),
@@ -898,5 +863,4 @@ export default {
 
 <style scoped>
 /* The Modal (background) */
-
 </style>

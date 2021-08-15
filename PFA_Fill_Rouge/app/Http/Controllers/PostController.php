@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\PostResource;
 use App\Models\Personne;
 use App\Models\Post;
+use App\Models\PostProblem;
 use App\Models\PostProfil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,14 +20,18 @@ class PostController extends Controller
      */
     public function index()
     {
-        // $posts =  Post::orderByDesc('created_at')
-        //     ->get();
-        // $like =  Personne::find($personne_id)->receivedLikes()->get();
+        $posts =  PostResource::collection(Post::orderByDesc('created_at')->whereIn('id', PostProfil::pluck('post_id')->all())->where('public', 0)->paginate(10));
 
-        // $posts = $posts->fresh('postProfil', 'comment', 'like', 'imgPost');
-        // $test = $posts->fresh('personne');
-        // $posts = Post::latest()->with(['like', 'comment'])->paginate(5);
-        $posts =  PostResource::collection(Post::orderByDesc('created_at')->whereIn('id',PostProfil::pluck('post_id')->all())->where('public',0)->paginate(10));
+        if ($posts) {
+            return  $posts;
+        } else
+            return response('No posts found', 440);
+    }
+
+    public function indexProblem()
+    {
+
+        $posts =  PostResource::collection(Post::orderByDesc('created_at')->whereIn('id', PostProblem::pluck('post_id')->all())->where('public', 0)->paginate(10));
 
         if ($posts) {
             return  $posts;
@@ -39,15 +44,23 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getPostProfile($personne_id)
+    public function getPostProfile()
     {
-        $posts =  PostResource::collection(Personne::find($personne_id)->post()
+        $posts =  PostResource::collection(Personne::find(auth()->id())->post()
+            ->whereIn('id', PostProfil::pluck('post_id')->all())
             ->orderByDesc('created_at')
-            ->get());
-        // $like =  Personne::find($personne_id)->receivedLikes()->get();
+            ->paginate(10));
 
-        // $posts = $posts->fresh('postProfil', 'comment', 'like', 'imgPost');
-        // $test = $posts->fresh('personne');
+        return $posts;
+    }
+
+    public function getPostProblem()
+    {
+        $posts =  PostResource::collection(Personne::find(auth()->id())->post()
+            ->whereIn('id', PostProblem::pluck('post_id')->all())
+            ->orderByDesc('created_at')
+            ->paginate(10));
+
         return $posts;
     }
 
@@ -122,25 +135,44 @@ class PostController extends Controller
         //Add new post
         $this->validate($request, [
             'titre' => 'required|string|max:60',
-            'description' => 'required|string|max:500',
-            'personne_id' => 'required',
+            'description' => 'required|string',
             'categorie_id' => 'required',
         ]);
         $post = new Post;
         $post->titre = $request->titre;
         $post->description = $request->description;
-        $post->personne_id = $request->personne_id;
+        $post->personne_id = auth()->id();
 
         if ($post->save()) {
-            if ($request->img_one) {
-                $fileUpload = new FileUploadController;
-                $newnamePost =  $fileUpload->upload($request->img_one, 'public/postImage');
-                $post->imgPost()->create(['path' => $newnamePost]);
-            }
             $post->postProblem()->create(['categorie_id' => $request->categorie_id]);
-            return response($post->fresh('postProfil', 'comment', 'like', 'imgPost'), 200);
+            if (strcmp($request->img_one, "undefined") != 0) {
+                $this->validate($request, [
+                    'img_one' => ' nullable|image|mimes:jpeg,png,jpg,gif,svg,JPG,PNG,JPEG,GIF,SVG',
+                ]);
+                $this->uploadsImg($request->img_one, $post);
+            }
+            if (strcmp($request->img_two, "undefined") != 0) {
+                $this->validate($request, [
+                    'img_two' => ' nullable|image|mimes:jpeg,png,jpg,gif,svg,JPG,PNG,JPEG,GIF,SVG',
+                ]);
+                $this->uploadsImg($request->img_two, $post);
+            }
+            if (strcmp($request->img_three, "undefined") != 0) {
+                $this->validate($request, [
+                    'img_three' => ' nullable|image|mimes:jpeg,png,jpg,gif,svg,JPG,PNG,JPEG,GIF,SVG',
+                ]);
+                $this->uploadsImg($request->img_three, $post);
+            }
+            if (strcmp($request->img_fore, "undefined") != 0) {
+                $this->validate($request, [
+                    'img_fore' => ' nullable|image|mimes:jpeg,png,jpg,gif,svg,JPG,PNG,JPEG,GIF,SVG',
+                ]);
+                $this->uploadsImg($request->img_fore, $post);
+            }
+            $post = PostResource::collection(Post::where('id', '=', $post->id)->get());
+            return $post;
         } else
-            return response('Post problem is not created', 409);
+            return response('Post profile is not created', 409);
     }
 
     /**

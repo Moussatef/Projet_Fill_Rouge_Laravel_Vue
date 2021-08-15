@@ -5,6 +5,7 @@ import UserProfile from '../views/profile.vue'
 import Register from '../views/signup.vue'
 import AdminDash from '../views/AdminDash.vue'
 import AdminLogin from '../views/AdminLogin.vue'
+import ProblemPost from '../views/ProblemPost.vue'
 const routes = [
   {
     path: '/',
@@ -12,6 +13,19 @@ const routes = [
     component: Home
   },
 
+  {
+    path: '/problem/post',
+    name: 'ProblemPost',
+    component: ProblemPost,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem('user_token')) {
+        next();
+      } else {
+        next('/');
+      }
+    }
+
+  },
   {
     path: '/admin/dashbord',
     name: 'AdminDashbord',

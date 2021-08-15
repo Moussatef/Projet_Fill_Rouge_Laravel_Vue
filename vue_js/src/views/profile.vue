@@ -21,7 +21,7 @@
     >
       <div class=" mb-5 space-y-4 col-span-1  sticky ">
         <AppIntro
-          v-if="op_post"
+          v-if="op_intro"
           :key="user_info.id"
           :github="user_info.github"
           :email="user_info.email"
@@ -49,18 +49,32 @@
             :personne_id="user_info.id"
             :title="post.titre"
             :description="post.description"
-            :path="post.path"
             :created_at="post.created_at"
             :like="post.like"
             :comment="post.comment"
-            :post_profil="post.post_profil"
             :image="post.img_post"
             @sendPost="getPost"
           />
+          <div v-observe-visibility="handleScrolledToBottomProfile"></div>
         </div>
-          <div v-if="op_problem">
-            <AppEditeur />
-          </div>
+        <div v-if="op_problem">
+          <AppEditeur />
+          <AppPostProblem
+            v-for="post in postsProblem"
+            :key="post.id"
+            :post="post"
+            :post_id="post.id"
+            :personne_id="user_info.id"
+            :title="post.titre"
+            :description="post.description"
+            :created_at="post.created_at"
+            :like="post.like"
+            :comment="post.comment"
+            :image="post.img_post"
+            @sendPost="getPost"
+          />
+          <div v-observe-visibility="handleScrolledToBottom"></div>
+        </div>
       </div>
     </div>
     <!-- The Modal -->
@@ -89,9 +103,7 @@
               <h2 class="text-2xl text-gray-900">
                 {{ post.titre }}
               </h2>
-              <p>
-                {{ post.description }}
-              </p>
+              <div class=" text-gray-900 text-left " v-html="post.description"></div>
               <hr />
             </div>
             <div class="flex border-b-2 mx-3 rounded-lg  border-blue-300 my-4">
@@ -179,6 +191,7 @@ import Appload from "@/components/dataload/ApploadCard";
 import AppComment from "@/components/profil/AppComment";
 import AppImage from "@/components/profil/AppImage";
 import AppEditeur from "@/components/post/postProblem/AppEditor";
+import AppPostProblem from "@/components/post/postProblem/AppPostProblem";
 import Swal from "sweetalert2";
 
 export default {
@@ -191,6 +204,9 @@ export default {
       show_post: false,
       post: null,
       like: null,
+      pageProfile:2,
+      pageProblem:2,
+
 
       inp_adresse: "",
       inp_email: "",
@@ -207,6 +223,7 @@ export default {
       ed_linkedin: false,
 
       op_post: true,
+      op_intro: true,
       op_photo: false,
       op_problem: false,
     };
@@ -221,9 +238,15 @@ export default {
     AppComment,
     AppImage,
     AppEditeur,
+    AppPostProblem,
   },
   methods: {
-    ...mapActions(["fetchPosts", "fetchUser", "updatePersonne"]),
+    ...mapActions([
+      "fetchPosts",
+      "fetchUser",
+      "updatePersonne",
+      "fetchPostsProblem",
+    ]),
 
     clickPostExit() {
       // Get the modal
@@ -283,15 +306,18 @@ export default {
       this.op_post = false;
       this.op_photo = true;
       this.op_problem = false;
+      this.op_intro = false;
     },
     open_post() {
       this.op_post = true;
+      this.op_intro = true;
       this.op_photo = false;
       this.op_problem = false;
     },
     open_problem() {
       this.op_post = false;
       this.op_photo = false;
+      this.op_intro = true;
       this.op_problem = true;
     },
     getPost(param) {
@@ -344,20 +370,36 @@ export default {
         }
       };
     },
+    handleScrolledToBottom(isVisible) {
+      if (!isVisible || this.allPostsProblemPages < this.pageProblem) return;
+      else this.fetchPostsProblem(this.pageProblem++);
+      // console.log(this.allPostsProfilePages +' / '+ this.page );
+    },
+
+    handleScrolledToBottomProfile(isVisible) {
+      if (!isVisible || this.allPostsProfilePages < this.pageProfile) return;
+      else this.fetchPosts(this.pageProfile++);
+      // console.log(this.allPostsProfilePages +' / '+ this.page );
+    },
+    
   },
   computed: {
     ...mapGetters([
       "posts_personne",
+      "postsProblem",
       "user_info",
       "user_token",
       "apprenant_id",
       "loading",
+      "allPostsProblemPages",
+      "allPostsProfilePages",
     ]),
   },
   created() {
     // this.scrol();
     this.fetchUser([this.id_apprenant, this.token]);
-    this.fetchPosts([this.personne_id, this.token]);
+    this.fetchPosts();
+    this.fetchPostsProblem();
   },
   beforeMount() {},
 };

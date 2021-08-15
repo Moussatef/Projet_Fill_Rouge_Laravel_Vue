@@ -48,7 +48,7 @@
 
         <div
           v-if="dropdownOpen"
-          class="absolute right-0 -mt-20 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10 border border-gray-200"
+          class="absolute right-0 -mt-10 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10 border border-gray-200"
         >
           <button
             class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"

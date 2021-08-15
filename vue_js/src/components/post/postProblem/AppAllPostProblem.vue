@@ -57,6 +57,9 @@
           </div>
         </div>
       </div>
+      <div class="flex">
+
+      
       <div v-if="post.public == 0" class="flex items-center">
         <svg
           class="h-5 w-5 ml-14 opacity-60 mr-2"
@@ -210,9 +213,11 @@
           <g></g></svg
         >private
       </div>
+      <p class=" text-gray-900 text-left mx-3 ">/ categorie : {{ post.categorie.libelle }}</p>
+      </div>
       <div v-if="!editProc" class="w-full mt-4 text-justify">
         <p class="text-lg text-gray-900 ">{{ post.titre }}</p>
-        <p class=" text-gray-900 text-left ">{{ post.description }}</p>
+       <div class=" text-gray-900 text-left " v-html="post.description"></div>
       </div>
       <div v-else class="w-full mt-4 text-justify">
         <div>
@@ -552,7 +557,7 @@
             </div>
           </div>
         </div>
-        <div>{{ comments.length }} Comment</div>
+        <div>{{ post.comment.length }} Comment</div>
       </div>
       <div class="border border-gray-500 border-opacity-10 mt-4" />
       <div class="flex justify-between items-center mt-4">
@@ -687,7 +692,7 @@
           </svg>
         </button>
       </div>
-      <div v-if="comments.length" class="text-left max-h-96 overflow-y-auto ">
+      <div v-if="post.comment" class="text-left max-h-96 overflow-y-auto ">
         <div class="h-full">
           <AppComment
             v-for="cmt in post.comment"
@@ -711,6 +716,7 @@ import AppComment from "@/components/profil/AppComment";
 import AppAvatare from "@/components/UserIntro/AppAvatar";
 import AppProfileLoad from "@/components/dataload/AppProfilLoad";
 import Appload from "@/components/dataload/ApploadCard";
+import Swal from "sweetalert2";
 import { mapActions, mapGetters } from "vuex";
 export default {
   props: ["personne_id", "post"],
@@ -721,24 +727,20 @@ export default {
     AppProfileLoad,
     Appload,
   },
-  name: "AppPostProfile",
+  name: "AppPostProblem",
   data() {
     return {
       loading: undefined,
       img_avatar: "http://127.0.0.1:8000",
       likess: this.post.like.length,
       like_id: this.post.like,
-      comments: this.post.comment,
-      comments_length: this.post.comment.length,
       inp_cpmment: "",
       user_id: this.personne_id,
       token: localStorage.getItem("user_token"),
-      postProfile: this.post.post_profil,
       checkLike: true,
       post_p: this.post,
       image_post: this.post.img_post,
       gridNumber: "grid-cols-1",
-      Allpost: this.posts,
       dropdownOpen: false,
       checkEditPost: false,
       editProc: false,
@@ -757,7 +759,7 @@ export default {
     showAlert() {
       // Use sweetalert2
       if (this.inp_title.length > 3 && this.inp_description.length > 5) {
-        this.updatePost([this.post_p.id, this.inp_title, this.inp_description]);
+        this.updatePost([this.post_p.id, this.inp_title, this.inp_description,this.Audience,]);
         Swal.fire({
           position: "center",
           icon: "success",
@@ -821,7 +823,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["user_token", "user_info", "posts_personne"]),
+    ...mapGetters(["user_info"]),
   },
   beforeMount() {
     this.checkEdit(this.post_p);

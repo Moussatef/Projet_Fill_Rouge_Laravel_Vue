@@ -31,6 +31,7 @@ class PostResource extends JsonResource
             "img_post" => $this->imgPost,
             "like" => LikeResource::collection(Like::where('post_id', '=', $this->id)->get()),
             "comment" => CommentResource::collection(Commente::where('post_id', '=', $this->id)->get()),
+            'categorie' => $this->postProblem? $this->postProblem->categorie : null
 
         ];
     }

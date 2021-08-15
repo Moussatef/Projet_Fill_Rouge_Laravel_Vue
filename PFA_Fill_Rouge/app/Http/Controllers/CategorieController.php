@@ -18,7 +18,7 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        return Categorie::orderBy("created_at","DESC")->get();
+        return Categorie::orderBy("created_at", "DESC")->get();
     }
 
     /**
@@ -30,11 +30,11 @@ class CategorieController extends Controller
 
     public function store(Request $request): Response
     {
-        $this->validate($request,[
-            "libelle"=>"required"
+        $this->validate($request, [
+            "libelle" => "required"
         ]);
-        $categorie=New Categorie();
-        $categorie->libelle=$request->input('libelle');
+        $categorie = new Categorie();
+        $categorie->libelle = $request->input('libelle');
         $categorie->save();
         return response($categorie);
     }
@@ -59,11 +59,11 @@ class CategorieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            "libelle"=>"required"
+        $this->validate($request, [
+            "libelle" => "required"
         ]);
-        $categorie=Categorie::find($id);
-        $categorie->libelle=$request->input('libelle');
+        $categorie = Categorie::find($id);
+        $categorie->libelle = $request->input('libelle');
         $categorie->save();
 
         return response($categorie);
@@ -77,10 +77,10 @@ class CategorieController extends Controller
      */
     public function destroy($id)
     {
-        $categorie=Categorie::find($id);
+        $categorie = Categorie::find($id);
 
         $categorie->delete();
 
-        return response(["message"=>"Categorie deleted"]);
+        return response(["message" => "Categorie deleted"]);
     }
 }

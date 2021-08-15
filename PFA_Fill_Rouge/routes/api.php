@@ -100,16 +100,24 @@ Route::group(['middleware' => ['auth:sanctum', 'type.user']], function () {
 
     //get statistic
     Route::get('/profile/static/{id}', [PostController::class, 'getTotals']);
+
+    Route::get('/categories', [\App\Http\Controllers\CategorieController::class, 'index']);
 });
 Route::group(['middleware' => ['auth:sanctum', 'type.admin']], function () {
-    Route::get('/admin/info', [AdminController::class, 'getAdminInfo']);
-    Route::post('/admin/update', [AdminController::class, 'updateAdminInfo']);
-    Route::post('/admin/update_password', [AdminController::class, 'updateAdminPassword']);
-    Route::get('/admin/apprenant', [AdminController::class, 'getApprenantInfo']);
-    Route::get('/admin/statistic', [AdminController::class, 'statistic']);
-    Route::get('/admin/posts', [AdminController::class, 'getAllPosts']);
-    Route::post('/admin/validate', [AdminController::class, 'validateApprenant']);
-    Route::post('/admin/delete', [AdminController::class, 'destroy']);
+    Route::prefix('admin')->group(function(){
+        Route::get('info', [AdminController::class, 'getAdminInfo']);
+        Route::post('update', [AdminController::class, 'updateAdminInfo']);
+        Route::post('update_password', [AdminController::class, 'updateAdminPassword']);
+        Route::get('apprenant', [AdminController::class, 'getApprenantInfo']);
+        Route::get('statistic', [AdminController::class, 'statistic']);
+        Route::get('posts', [AdminController::class, 'getAllPosts']);
+        Route::post('validate', [AdminController::class, 'validateApprenant']);
+        Route::post('delete', [AdminController::class, 'destroy']);
+        Route::get('/categories', [\App\Http\Controllers\CategorieController::class, 'index']);
+        Route::post('/categorie', [\App\Http\Controllers\CategorieController::class, 'store']);
+        Route::post('/categorie/{id}', [\App\Http\Controllers\CategorieController::class, 'update']);
+        Route::delete('/categorie/{id}', [\App\Http\Controllers\CategorieController::class, 'destroy']);
+    });
 });
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

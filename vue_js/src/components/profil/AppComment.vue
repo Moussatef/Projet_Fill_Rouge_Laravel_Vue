@@ -4,23 +4,17 @@
   >
     <div class="flex justify-between items-center ">
       <div class="flex justify-center items-center ">
+       
         <img
-          v-if="user_info.id == personne_id"
-          :src="'http://127.0.0.1:8000' + user_info.img"
-          alt="img"
-          class="h-10 w-10 rounded-full border border-blue-500"
-        />
-        <img
-          v-else
           :src="'http://127.0.0.1:8000' + img"
           alt="img"
           class="h-10 w-10 rounded-full border border-blue-500"
         />
         <div class="ml-4">
-          <span class="cursor-pointer font-bold">{{ nom }} {{ prenom }} </span>
+          <span class="cursor-pointer font-bold">{{ full_name }} </span>
         </div>
       </div>
-      <div v-if="user_info.id == personne_id " class="relative z-1 ">
+      <div v-if="user_info.id == personne_id " class="relative z-1  ">
         <button
           @click="dropdownOpen = !dropdownOpen"
           class="relative block  w-9 h-9 rounded-full bg-fill  items-center justify-center  focus:outline-none"
@@ -49,12 +43,12 @@
         <div
           v-if="dropdownOpen"
           @click="dropdownOpen = false"
-          class="fixed inset-0 h-full w-full p-4 z-10 border border-gray-500"
+          class="fixed inset-0 h-full w-full p-4 z-10  border border-gray-500"
         ></div>
 
         <div
           v-if="dropdownOpen"
-          class="absolute right-0 mt-1 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10 border border-gray-200"
+          class="absolute right-0 -mt-20 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10 border border-gray-200"
         >
           <button
             class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
@@ -71,9 +65,9 @@
       </div>
     </div>
     <!-- sm:truncate -->
-
-    <p
-      class="leading-relaxed break-words  overflow-ellipsis overflow-y-auto   md:mb-2 lg:mb-0 ml-14 w-96 "
+<div class="w-full overflow-hidden relative ">
+  <p
+      class="leading-relaxed break-words text-left   overflow-auto  md:mb-2  ml-14   "
     >
       {{ comment_body }}
     </p>
@@ -81,6 +75,8 @@
       {{ created_at }}
     </p>
   </div>
+</div>
+    
 </template>
 
 <script>
@@ -93,8 +89,7 @@ export default {
     "personne_id",
     "comment_id",
     "created_at",
-    "nom",
-    "prenom",
+    "full_name",
     "post_id",
     "img"
   ],

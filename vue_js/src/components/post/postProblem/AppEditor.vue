@@ -1,11 +1,5 @@
 <template>
-  <div class="mb-8">
-    <label class="text-xl text-gray-600"
-    >Content <span class="text-red-500">*</span></label
-    >
-    <quill-editor v-model:value="content" :options="options"></quill-editor>
-    <div v-html="content"></div>
-  </div>
+ 
 
 
    <div
@@ -16,13 +10,13 @@
         <img
           :src="img_avatar + user_info.img"
           alt="img"
-          class="h-10 w-10 rounded-full border  border-blue-500"
+          class="h-10 w-10 rounded-full border mb-4  border-blue-500"
         />
         <hr />
       </div>
       <div  class="w-full post-div">
         
-        <quill-editor class="border-b-2 w-full my-3 focus:outline-none rounded-md" v-model:value="content" :options="options"></quill-editor>
+        <quill-editor   v-model:value="content" :options="options"></quill-editor>
 
         <div class="flex items-center  h-46 w-full">
           <div v-if="imagepreview[0]" class="w-30 h-40 overflow-hidden m-1">

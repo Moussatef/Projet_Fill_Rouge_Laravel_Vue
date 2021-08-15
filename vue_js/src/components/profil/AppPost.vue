@@ -6,14 +6,12 @@
       <div class="flex justify-between items-center">
         <div class="flex items-center">
           <img
-            :src="img_avatar + user_info.img"
+            :src="img_avatar + post.img"
             alt="img"
             class="h-10 w-10 rounded-full border  border-blue-500"
           />
           <div class="ml-4">
-            <span class="cursor-pointer font-bold"
-              >{{ user_info.nom }} {{ user_info.prenom }}
-            </span>
+            <span class="cursor-pointer font-bold">{{ post.full_name }} </span>
             <span class="text-grey text-opacity-50 text-sm mx-3">
               {{ created_at }}
             </span>
@@ -472,9 +470,12 @@
       <div
         class="grid  gap-4  w-full cursor-pointer "
         :class="gridNumber"
-        @click="$emit('showPost', [post_p, like.length])"
+        @click="
+          $emit('sendPost',[post]);
+          
+        "
       >
-        <div v-for="img in image_post" :key="img.id" class="  ">
+        <div v-for="img in post.img_post" :key="img.id" class="  ">
           <img
             :src="'http://127.0.0.1:8000' + img.path"
             alt="img"
@@ -721,12 +722,14 @@
         </button>
       </div>
     </div>
+   
   </div>
 </template>
 
 <script>
 import Swal from "sweetalert2";
 import AppComment from "@/components/profil/AppComment";
+import AppImage from "@/components/profil/AppImage";
 import { mapActions, mapGetters } from "vuex";
 export default {
   props: [
@@ -736,18 +739,15 @@ export default {
     "description",
     "path",
     "created_at",
-    "nom",
-    "prenom",
     "like",
     "comment",
-    "post_profil",
-    "storcomment",
     "post",
     "image",
   ],
   emits: ["showPost"],
   components: {
     AppComment,
+    AppImage
   },
   name: "AppPost",
   data() {
@@ -774,6 +774,9 @@ export default {
       showlike: false,
     };
   },
+  watch:{
+    
+  },
   methods: {
     ...mapActions([
       "postComment",
@@ -783,6 +786,8 @@ export default {
       "getLikePost",
       "deletePost",
     ]),
+
+    
 
     showAlert() {
       // Use sweetalert2
@@ -890,3 +895,8 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* The Modal (background) */
+
+</style>

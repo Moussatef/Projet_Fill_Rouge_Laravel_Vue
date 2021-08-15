@@ -185,15 +185,9 @@ class PersonneController extends Controller
             if ($personne->save())
                 return $personne;
             else
-                return ([
-                    'error' => 'Erreur d\'enregistrement du mot de passe ',
-                    'response' => '466'
-                ]);
+                return response('error',500);
         } else
-            return ([
-                'error' => 'votre mot de passe actuel est incorrect',
-                'response' => '466'
-            ]);
+            return response('error',401);
     }
 
     public function updateInfoSoc(Request $request)

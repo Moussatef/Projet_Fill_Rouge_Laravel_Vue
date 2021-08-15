@@ -86,21 +86,7 @@ const actions = {
                 Accept: "application/json",
                 Authorization: `Bearer ${localStorage.getItem('user_token')}`
             }
-        }).then(result => {
-
-
-            console.log(result);
-
-            if (result.data.response == 466) {
-                commit('setErrorPassword', result.data.error)
-                state.passwordErr = result.data.error
-            }
-            else {
-                commit('updatePersonne', result.data)
-                state.passwordErr = null
-            }
-
-        }).catch(error => { console.log(error); });
+        })
 
 
     },

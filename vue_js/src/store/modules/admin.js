@@ -1,13 +1,12 @@
 import axios from "axios";
 
-
-
 const state = {
     apprenant: [],
     admin_statistics: [],
     admin_posts: [],
     admin_info:null,
-    allPostsAdmPages:1
+    allPostsAdmPages:1,
+    categories:[]
 }
 
 const getters = {
@@ -15,7 +14,8 @@ const getters = {
     admin_statistics: state => state.admin_statistics,
     admin_posts: state => state.admin_posts,
     admin_info: state=>state.admin_info,
-    allPostsAdmPages:state=>state.allPostsAdmPages
+    allPostsAdmPages:state=>state.allPostsAdmPages,
+    categories:state=>state.categories
 }
 
 const actions = {
@@ -160,8 +160,52 @@ const actions = {
             )
             .catch(error => console.log('error', error));
 
-    }
+    },
 
+    async getCategories({ commit }) {
+        const config = {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem("admin_token")}`
+            }
+        };
+        const response = await axios.get(`http://127.0.0.1:8000/api/admin/categories`, config)
+            .then(res => commit('set_categories',res.data))
+            .catch(err => console.log(err));
+    },
+    async addCategorie({ commit },categorie) {
+        const config = {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem("admin_token")}`
+            }
+        };
+        const response = await axios.post(`http://127.0.0.1:8000/api/admin/categorie`,categorie, config)
+            .then(res => commit('add_categorie',res.data))
+            .catch(err => console.log(err));
+    },
+    async editCategorie({ commit },categorie) {
+        const config = {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem("admin_token")}`
+            }
+        };
+        const response = await axios.post(`http://127.0.0.1:8000/api/admin/categorie/${categorie.id}`,categorie, config)
+            .then(res => commit('edit_categorie',res.data))
+            .catch(err => console.log(err));
+    },
+    async deleteCategorie({ commit },categorie) {
+        const config = {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem("admin_token")}`
+            }
+        };
+        const response = await axios.delete(`http://127.0.0.1:8000/api/admin/categorie/${categorie.id}`, config)
+            .then(res => commit('delete_categorie',categorie))
+            .catch(err => console.log(err));
+    },
 }
 
 
@@ -180,10 +224,20 @@ const mutations = {
     },
     setAdminInfo: (state, admin_info) => {
         state.admin_info = admin_info
-    }
+    },
+    set_categories:(state,categories)=>{
+        state.categories=categories;
+    },
+    add_categorie:(state,categorie)=>{
+        state.categories.unshift(categorie);
+    },
+    edit_categorie:(state,categorie)=>{
+        state.categories.splice(state.categories.findIndex(el => el.id === categorie.id), 1, categorie);
+    },
+    delete_categorie:(state,categorie)=>{
+        state.categories.splice(state.categories.findIndex(el => el.id === categorie.id), 1);
+    },
 }
-
-
 
 export default {
     state,

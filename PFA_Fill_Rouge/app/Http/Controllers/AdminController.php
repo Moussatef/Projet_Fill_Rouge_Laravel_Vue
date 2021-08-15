@@ -11,6 +11,7 @@ use App\Models\Like;
 use App\Models\Personne;
 use App\Models\Post;
 use App\Models\Responsable;
+use App\Models\Campus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -79,6 +80,7 @@ class AdminController extends Controller
         $total_posts = Post::count();
         $total_Like = Like::count();
         $total_comments = Commente::count();
+        $total_compus = Campus::count();
 
 
 
@@ -87,7 +89,8 @@ class AdminController extends Controller
             'total_Responsable' => $total_Responsable,
             'total_posts' => $total_posts,
             'total_Like' => $total_Like,
-            'total_comments' => $total_comments
+            'total_comments' => $total_comments,
+            'total_compus' => $total_compus,
 
         ];
 

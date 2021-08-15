@@ -1,17 +1,41 @@
 <template>
   <nav
-    class="w-56 bg-white dark:bg-gray-800 select-none overflow-y-auto
-		transition duration-500 ease-in-out"
+    class="
+      mr-6
+      w-56
+      bg-white
+      dark:bg-gray-800
+      select-none
+      overflow-y-auto
+      transition
+      duration-500
+      ease-in-out
+    "
   >
-    <div class="flex flex-col items-center ">
+    <div class="flex flex-col items-center">
       <h1
-        class="text-3xl font-light text-gray-600  mt-0
-				transition duration-500 ease-in-out"
+        class="
+          text-3xl
+          font-light
+          text-gray-600
+          mt-0
+          transition
+          duration-500
+          ease-in-out
+        "
       >
         You
         <span
-          class="text-3xl font-light text-blue-600 dark:text-blue-400 mt-0
-				transition duration-500 ease-in-out"
+          class="
+            text-3xl
+            font-light
+            text-blue-600
+            dark:text-blue-400
+            mt-0
+            transition
+            duration-500
+            ease-in-out
+          "
           >Code</span
         >
       </h1>
@@ -21,19 +45,22 @@
         src="http://127.0.0.1:8000/storage/image/ycc.jpg"
         alt="Admin Profile"
       />
-      <span
-        class="capitalize mt-2 mb-6  transition
-				duration-500 ease-in-out"
-      >
+      <span class="capitalize mt-2 mb-6 transition duration-500 ease-in-out">
         Admin
       </span>
     </div>
 
     <ul>
       <li
-        class="pl-8 py-2  focus:text-blue-500 
-				 mb-2 transition
-				duration-500 ease-in-out"
+        class="
+          pl-8
+          py-2
+          focus:text-blue-500
+          mb-2
+          transition
+          duration-500
+          ease-in-out
+        "
       >
         <!-- active & hover classes 'bg-indigo-100 dark:bg-indigo-600' -->
         <a
@@ -42,12 +69,18 @@
             $event.preventDefault();
             open = !open;
           "
-          class="flex items-center  focus:text-blue-500 transition-colors rounded-md  "
+          class="
+            flex
+            items-center
+            focus:text-blue-500
+            transition-colors
+            rounded-md
+          "
           role="button"
         >
-        <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
-              <path
-                d="M16 9c6 0 6 4 6
+          <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
+            <path
+              d="M16 9c6 0 6 4 6
 								4v2h-6v-2s0-1.69-1.15-3.2c-.17-.23-.38-.45-.6-.66C14.77
 								9.06 15.34 9 16 9m-8 2c3.5 0 3.94 1.56 4
 								2H4c.06-.44.5-2 4-2m0-2c-6 0-6 4-6
@@ -56,8 +89,8 @@
 								.45-1 1-1m0-2C6.34 1 5 2.34 5 4s1.34 3 3 3 3-1.34
 								3-3-1.34-3-3-3m8 0c-1.66 0-3 1.34-3 3s1.34 3 3 3
 								3-1.34 3-3-1.34-3-3-3z"
-              ></path>
-            </svg>
+            ></path>
+          </svg>
           <span class="ml-4 text-sm"> Apprenant </span>
           <span class="ml-auto" aria-hidden="true">
             <!-- active class 'rotate-180' -->
@@ -80,11 +113,15 @@
         </a>
         <div v-if="open" class="mt-2 space-y-2 px-2">
           <button
-          @click="$emit('open_nv_Apprenant');"
-          
-            class="focus:text-blue-500
-					focus:outline-none w-full transition duration-500 ease-in-out"
-          
+            @click="$emit('open_nv_Apprenant')"
+            class="
+              focus:text-blue-500
+              focus:outline-none
+              w-full
+              transition
+              duration-500
+              ease-in-out
+            "
           >
             <span class="flex items-center">
               <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -95,9 +132,15 @@
             </span>
           </button>
           <button
-          @click="$emit('open_valid_Apprenant')"
-            class="focus:text-blue-500
-					focus:outline-none w-full transition duration-500 ease-in-out"
+            @click="$emit('open_valid_Apprenant')"
+            class="
+              focus:text-blue-500
+              focus:outline-none
+              w-full
+              transition
+              duration-500
+              ease-in-out
+            "
           >
             <span class="flex items-center">
               <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -109,48 +152,76 @@
           </button>
         </div>
       </li>
-<!-- border-l-2 border-blue-500 -->
+      <!-- border-l-2 border-blue-500 -->
       <li
-        class="pl-8 py-2 font-semibold focus:text-blue-500 dark:text-blue-400
-				 hover:bg-blue-200 mb-2 transition
-				duration-500 ease-in-out"
+        class="
+          pl-8
+          py-2
+          font-semibold
+          focus:text-blue-500
+          dark:text-blue-400
+          hover:bg-blue-200
+          mb-2
+          transition
+          duration-500
+          ease-in-out
+        "
       >
         <button
-        @click="$emit('openPsts');"
-          class="focus:text-blue-500
-					focus:outline-none w-full transition duration-500 ease-in-out"
+          @click="$emit('openPsts')"
+          class="
+            focus:text-blue-500
+            focus:outline-none
+            w-full
+            transition
+            duration-500
+            ease-in-out
+          "
         >
           <span class="flex items-center">
-           <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 text-gray-600"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
-                />
-              </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-gray-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 13v-1m4 1v-3m4 3V8M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+              />
+            </svg>
 
             <span class="ml-4 capitalize">Gestion des posts</span>
           </span>
         </button>
       </li>
 
-      
-
       <li
-        class="pl-8 py-2 font-semibold text-gray-700 
-				hover:bg-blue-200 dark-hover:bg-blue-500 mb-2 transition
-				duration-500 ease-in-out"
+        class="
+          pl-8
+          py-2
+          font-semibold
+          text-gray-700
+          hover:bg-blue-200
+          dark-hover:bg-blue-500
+          mb-2
+          transition
+          duration-500
+          ease-in-out
+        "
       >
         <button
-          class="focus:text-blue-500
-					focus:outline-none w-full transition duration-500 ease-in-out"
+          class="
+            focus:text-blue-500
+            focus:outline-none
+            w-full
+            transition
+            duration-500
+            ease-in-out
+          "
         >
           <span class="flex items-center">
             <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -171,16 +242,30 @@
         </button>
       </li>
 
- 
-
       <li
-        class="pl-8 py-2 font-semibold text-gray-700 
-				hover:bg-blue-200 dark-hover:bg-blue-500 mb-2 transition
-				duration-500 ease-in-out"
+        class="
+          pl-8
+          py-2
+          font-semibold
+          text-gray-700
+          hover:bg-blue-200
+          dark-hover:bg-blue-500
+          mb-2
+          transition
+          duration-500
+          ease-in-out
+        "
       >
         <button
-          class="focus:text-blue-500
-					focus:outline-none w-full transition duration-500 ease-in-out"
+          class="
+            focus:text-blue-500
+            focus:outline-none
+            w-full
+            transition
+            duration-500
+            ease-in-out
+          "
+          @click="$emit('open_campus')"
         >
           <span class="flex items-center">
             <svg class="h-4 w-4 fill-current" viewBox="0 0 448 512">
@@ -212,13 +297,29 @@
       </li>
 
       <li
-        class="pl-8 py-2 font-semibold text-gray-700 
-				hover:bg-blue-200 dark-hover:bg-blue-500 mb-2 transition
-				duration-500 ease-in-out"
+        class="
+          pl-8
+          py-2
+          font-semibold
+          text-gray-700
+          hover:bg-blue-200
+          dark-hover:bg-blue-500
+          mb-2
+          transition
+          duration-500
+          ease-in-out
+        "
       >
         <button
-          class="focus:text-blue-500
-					focus:outline-none w-full transition duration-500 ease-in-out"
+          @click="$emit('open_categories')"
+          class="
+            focus:text-blue-500
+            focus:outline-none
+            w-full
+            transition
+            duration-500
+            ease-in-out
+          "
         >
           <span class="flex items-center">
             <svg class="h-4 w-4 fill-current" viewBox="0 0 24 24">
@@ -230,13 +331,27 @@
       </li>
 
       <li
-        class="pl-8 py-2 font-semibold text-gray-700 
-				hover:bg-blue-200 dark-hover:bg-blue-500 transition duration-500
-				ease-in-out"
+        class="
+          pl-8
+          py-2
+          font-semibold
+          text-gray-700
+          hover:bg-blue-200
+          dark-hover:bg-blue-500
+          transition
+          duration-500
+          ease-in-out
+        "
       >
         <button
-          class="focus:text-blue-500
-					focus:outline-none w-full transition duration-500 ease-in-out"
+          class="
+            focus:text-blue-500
+            focus:outline-none
+            w-full
+            transition
+            duration-500
+            ease-in-out
+          "
         >
           <span class="flex items-center">
             <svg class="h-4 w-4 fill-current" viewBox="0 0 496 512">
@@ -257,7 +372,9 @@
 								43.2-13.9 83.2-37.3 115.9z"
               ></path>
             </svg>
-            <span class="ml-4 capitalize" @click="$emit('open_app_profile')">mon profil</span>
+            <span class="ml-4 capitalize" @click="$emit('open_app_profile')"
+              >mon profil</span
+            >
           </span>
         </button>
       </li>
@@ -271,7 +388,7 @@ export default {
   data() {
     return {
       open: false,
-      focussed:false,
+      focussed: false,
     };
   },
 };

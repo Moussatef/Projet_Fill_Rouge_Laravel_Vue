@@ -8,12 +8,14 @@ const state = {
     nb_like: null,
     nb_comment: null,
     nb_post: null,
+    passwordErr: null,
 
 }
 
 const getters = {
     user_info: state => state.user_info,
     new_user: state => state.new_user,
+    passwordErr: state => state.passwordErr
 
 
 }
@@ -78,17 +80,27 @@ const actions = {
             password: param[1],
             password_confirmation: param[2],
             old_password: param[3],
-            
+
         }, {
             headers: {
                 Accept: "application/json",
                 Authorization: `Bearer ${localStorage.getItem('user_token')}`
             }
         }).then(result => {
-            console.log(result.data);
-            commit('updatePersonne', result.data)
 
-        }).catch(error => { console.log(error); alert('Error updating password') })
+
+            console.log(result);
+
+            if (result.data.response == 466) {
+                commit('setErrorPassword', result.data.error)
+                state.passwordErr = result.data.error
+            }
+            else {
+                commit('updatePersonne', result.data)
+                state.passwordErr = null
+            }
+
+        }).catch(error => { console.log(error); });
 
 
     },
@@ -204,7 +216,13 @@ const mutations = {
         state.new_user = new_user
         // state.apprenant.unshift(new_user);
     },
-    updatePersonne: (state, personne) => (state.user_info = personne)
+    updatePersonne: (state, personne) => {
+        (state.user_info = personne);
+        state.passwordErr = null
+    },
+    setErrorPassword: (state, error) => state.passwordErr = error,
+
+
 
 
 

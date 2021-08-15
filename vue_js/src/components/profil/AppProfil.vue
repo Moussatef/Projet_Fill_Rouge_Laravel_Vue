@@ -543,6 +543,7 @@
                 v-if="ed_password"
                 class=" w-11/12 bg-gray-50  rounded-lg border-blue-500 mx-auto p-1 my-2 shadow-lg"
               >
+              <p class="text-red-500">{{passwordErr}}</p>
                 <div class="flex">
                   <label class="m-3 w-2/4 text-left" for="nom"
                     >Mot de passe actuel
@@ -704,6 +705,7 @@ export default {
         this.inp_conferm_password,
         this.inp_password,
       ]);
+      
     },
 
     updateInfoPersonne(id) {
@@ -841,6 +843,7 @@ export default {
       "nb_comment",
       "nb_like",
       "loadingInfo",
+      "passwordErr"
     ]),
   },
 };

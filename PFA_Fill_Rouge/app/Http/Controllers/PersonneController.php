@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Apprenant;
 use App\Models\Personne;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Hash;
 
 class PersonneController extends Controller
 {
@@ -180,16 +180,20 @@ class PersonneController extends Controller
 
         $personne = Personne::find($request->id);
 
-        if (bcrypt($request->old_password) == $personne->password) {
-            $personne->password = $request->password;
-
-
+        if ( Hash::check($request->old_password, $personne->password) ) {
+            $personne->password = bcrypt($request->password);
             if ($personne->save())
                 return $personne;
             else
-                return response('Error', 420);
+                return ([
+                    'error' => 'Erreur d\'enregistrement du mot de passe ',
+                    'response' => '466'
+                ]);
         } else
-            return response(['error' => 'votre mot de passe actuel est incorrect'], 466);
+            return ([
+                'error' => 'votre mot de passe actuel est incorrect',
+                'response' => '466'
+            ]);
     }
 
     public function updateInfoSoc(Request $request)

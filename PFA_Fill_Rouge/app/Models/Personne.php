@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Personne extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens,SoftDeletes;
+    use HasFactory, Notifiable, HasApiTokens;
 
     protected $fillable = [
         'prenom',

@@ -56,7 +56,6 @@ Route::group(['middleware' => ['auth:sanctum', 'type.user']], function () {
     Route::post('/personne/update/img/both/{id}', [PersonneController::class, 'updateImg'])->whereNumber('id');
     Route::post('/personne/update/img/profile/{id}', [PersonneController::class, 'updateImgProfile'])->whereNumber('id');
     Route::post('/personne/update/img/cover/{id}', [PersonneController::class, 'updateImgCover'])->whereNumber('id');
-    Route::post('/personne/delete', [PersonneController::class, 'destroy'])->whereNumber('id');
     Route::post('/logout', [AuthController::class, 'logout']);
     //update info personne
     Route::post('/personne/update/infoSoc', [PersonneController::class, 'updateInfoSoc']);
@@ -108,7 +107,7 @@ Route::group(['middleware' => ['auth:sanctum', 'type.user']], function () {
     Route::get('/categories', [\App\Http\Controllers\CategorieController::class, 'index']);
 });
 Route::group(['middleware' => ['auth:sanctum', 'type.admin']], function () {
-    Route::prefix('admin')->group(function(){
+    Route::prefix('admin')->group(function () {
         Route::get('info', [AdminController::class, 'getAdminInfo']);
         Route::post('update', [AdminController::class, 'updateAdminInfo']);
         Route::post('update_password', [AdminController::class, 'updateAdminPassword']);
@@ -121,6 +120,8 @@ Route::group(['middleware' => ['auth:sanctum', 'type.admin']], function () {
         Route::post('/categorie', [\App\Http\Controllers\CategorieController::class, 'store']);
         Route::post('/categorie/{id}', [\App\Http\Controllers\CategorieController::class, 'update']);
         Route::delete('/categorie/{id}', [\App\Http\Controllers\CategorieController::class, 'destroy']);
+        Route::delete('/personne/delete/{id}', [PersonneController::class, 'destroy'])->whereNumber('id');
+        Route::post('/personne/block/{id}', [AdminController::class, 'block_apprenant'])->whereNumber('id');
     });
 });
 

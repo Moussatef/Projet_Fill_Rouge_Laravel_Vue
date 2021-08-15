@@ -486,11 +486,12 @@
           v-if="showInfo == true"
           :apprenant="appr"
           @hiddenApprenant="hiddenCard"
+          :open_apprenant_delete="open_apprenant_delete"
         />
 
         <ApprenantValidCard
           v-if="open_valid_Apprenant"
-          :apprenant="apprenant"
+          :open_apprenant_delete="open_apprenant_delete"
           @showApprenant="getApprenant"
         />
         <AppPosts v-if="showPsts" />
@@ -500,11 +501,58 @@
             :key="appr.id"
             :apprenant="appr"
             @showApprenant="getApprenant"
+            :open_apprenant_delete="open_apprenant_delete"
           />
         </div>
         <AppProfile v-if="showProfile" />
         <Categories v-if="showCategories" />
         <Campus v-if="showCampus" />
+        <div
+          id="delete_apprenant_model"
+          class="delete_apprenant_modal"
+          @click="exit_model"
+        >
+          <div class="delete_apprenant_modal_content">
+            <span class="close_apprenant_delete" @click="close_apprenant_delete"
+              >&times;</span
+            >
+            <p class="text-2xl bold mb-5">Supprimer apprenant</p>
+            <p>Êtes-vous sûr de vouloir supprimer ce Apprenant</p>
+            <div class="mt-6">
+              <button
+                @click="delete_apprenant"
+                class="
+                  focus:outline-none
+                  text-white text-sm
+                  py-1
+                  px-4
+                  rounded-md
+                  bg-gradient-to-r
+                  from-blue-400
+                  to-blue-600
+                  transform
+                  hover:scale-110
+                "
+              >
+                <svg
+                  class="h-5 w-5"
+                  id="bold"
+                  enable-background="new 0 0 24 24"
+                  height="512"
+                  viewBox="0 0 24 24"
+                  width="512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g>
+                    <path
+                      d="m9.707 19.121c-.187.188-.442.293-.707.293s-.52-.105-.707-.293l-5.646-5.647c-.586-.586-.586-1.536 0-2.121l.707-.707c.586-.586 1.535-.586 2.121 0l3.525 3.525 9.525-9.525c.586-.586 1.536-.586 2.121 0l.707.707c.586.586.586 1.536 0 2.121z"
+                    />
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </div>
@@ -519,6 +567,7 @@ import AppPosts from "@/components/Admin/AppPosts";
 import AppProfile from "@/components/Admin/AppProfile";
 import Categories from "./Categories";
 import Campus from "./Campus";
+import Swal from "sweetalert2";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "SideBar",
@@ -543,10 +592,11 @@ export default {
       showCategories: false,
       showCampus: false,
       showNvApp: true,
+      apprenant_id: null,
     };
   },
   methods: {
-    ...mapActions(["getAllApprenant", "getStatisticsAdm"]),
+    ...mapActions(["getAllApprenant", "getStatisticsAdm", "deleteApprenant"]),
     getApprenant(param) {
       this.appr = param[0];
       if (this.appr) {
@@ -611,6 +661,47 @@ export default {
       this.showCategories = false;
       this.showCampus = true;
     },
+    open_apprenant_delete(apprenant_id) {
+      const delete_apprenant_model = document.getElementById(
+        "delete_apprenant_model"
+      );
+      delete_apprenant_model.style.display = "block";
+      this.apprenant_id = apprenant_id;
+    },
+    close_apprenant_delete() {
+      const delete_apprenant_model = document.getElementById(
+        "delete_apprenant_model"
+      );
+      delete_apprenant_model.style.display = "none";
+      this.apprenant_id = null;
+    },
+    exit_model() {
+      window.onclick = function (event) {
+        const delete_apprenant_model = document.getElementById(
+          "delete_apprenant_model"
+        );
+        if (event.target == delete_apprenant_model) {
+          delete_apprenant_model.style.display = "none";
+          this.apprenant_id = null;
+        }
+      };
+    },
+    delete_apprenant() {
+      if (this.apprenant_id) {
+        this.deleteApprenant(this.apprenant_id).then(() => {
+          this.apprenant_id = null;
+          this.close_apprenant_delete();
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Apprenant supprimé avec succès",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          this.showInfo = false;
+        });
+      }
+    },
   },
   computed: {
     ...mapGetters(["apprenant", "admin_statistics"]),
@@ -621,3 +712,43 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+/* The Modal (background) */
+.delete_apprenant_modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.delete_apprenant_modal_content {
+  background-color: #fefefe;
+  margin: 20% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close_apprenant_delete {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close_apprenant_delete:hover,
+.close_apprenant_delete:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>

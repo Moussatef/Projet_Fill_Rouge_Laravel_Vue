@@ -1,7 +1,23 @@
 <template>
-  <div v-if="!apprenant.validation || apprenant.validation == 'false' " class="flex flex-row mt-2">
+  <div
+    v-if="!apprenant.validation || apprenant.validation == 'false'"
+    class="flex flex-row mt-2"
+  >
     <div
-      class="flex md:flex md:flex-wrap sm:flex sm:flex-wrap md:mt-5 sm:mt-4 w-full items-center justify-between bg-white px-8 py-6 border-l-4 border-blue-500 "
+      class="
+        flex
+        md:flex md:flex-wrap
+        sm:flex sm:flex-wrap
+        md:mt-5
+        sm:mt-4
+        w-full
+        items-center
+        justify-between
+        bg-white
+        px-8
+        py-6
+        border-l-4 border-blue-500
+      "
     >
       <!-- card -->
       <div class="flex">
@@ -13,10 +29,18 @@
         <div class="flex flex-col justify-center ml-6">
           <span class="text-lg font-bold">Apprenant Info</span>
           <div
-            class=" mt-4 lg:grid lg:grid-cols-2 lg:gap-4 md:flex md:flex-wrap sm:flex sm:flex-wrap md:mt-5 sm:mt-4"
+            class="
+              mt-4
+              lg:grid lg:grid-cols-2
+              lg:gap-4
+              md:flex md:flex-wrap
+              sm:flex sm:flex-wrap
+              md:mt-5
+              sm:mt-4
+            "
           >
             <div class="flex">
-              <svg class="h-5 w-5 fill-current " viewBox="0 0 24 24">
+              <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24">
                 <path
                   d="M12 4a4 4 0 014 4 4 4 0 01-4 4
                     4 4 0 01-4-4 4 4 0 014-4m0
@@ -24,7 +48,7 @@
                     4v2H4v-2c0-2.21 3.58-4 8-4z"
                 ></path>
               </svg>
-              <span class="ml-2 text-sm text-gray-600  capitalize">
+              <span class="ml-2 text-sm text-gray-600 capitalize">
                 {{ apprenant.full_name }}
               </span>
             </div>
@@ -38,7 +62,7 @@
                 x="0px"
                 y="0px"
                 viewBox="0 0 512 512"
-                style="enable-background:new 0 0 512 512;"
+                style="enable-background: new 0 0 512 512"
                 xml:space="preserve"
               >
                 <g>
@@ -67,7 +91,7 @@
                 <g></g>
                 <g></g>
               </svg>
-              <span class="ml-2 text-sm text-gray-600  capitalize">
+              <span class="ml-2 text-sm text-gray-600 capitalize">
                 {{ apprenant.campus }}
               </span>
             </div>
@@ -81,22 +105,22 @@
                 x="0px"
                 y="0px"
                 viewBox="0 0 512 512"
-                style="enable-background:new 0 0 512 512;"
+                style="enable-background: new 0 0 512 512"
                 xml:space="preserve"
               >
                 <rect
                   x="64"
                   y="64"
-                  style="fill:#ECEFF1;"
+                  style="fill: #eceff1"
                   width="384"
                   height="384"
                 />
                 <polygon
-                  style="fill:#CFD8DC;"
+                  style="fill: #cfd8dc"
                   points="256,296.384 448,448 448,148.672 "
                 />
                 <path
-                  style="fill:#F44336;"
+                  style="fill: #f44336"
                   d="M464,64h-16L256,215.616L64,64H48C21.504,64,0,85.504,0,112v288c0,26.496,21.504,48,48,48h16V148.672
 	l192,147.68L448,148.64V448h16c26.496,0,48-21.504,48-48V112C512,85.504,490.496,64,464,64z"
                 />
@@ -116,16 +140,12 @@
                 <g></g>
                 <g></g>
               </svg>
-              <span class="ml-2 text-sm text-gray-600  capitalize">
+              <span class="ml-2 text-sm text-gray-600 capitalize">
                 {{ apprenant.email }}
               </span>
             </div>
             <div class="flex ml-6">
-              <svg
-                class="h-5 w-5 fill-current
-											"
-                viewBox="0 0 24 24"
-              >
+              <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24">
                 <path
                   d="M19
                     19H5V8h14m-3-7v2H8V1H6v2H5c-1.11
@@ -134,19 +154,31 @@
                     11h-5v5h5v-5z"
                 ></path>
               </svg>
-              <span class="ml-2 text-sm text-gray-600  capitalize">
+              <span class="ml-2 text-sm text-gray-600 capitalize">
                 {{ apprenant.created_at }}
               </span>
             </div>
           </div>
         </div>
       </div>
-      <div class="flex flex-col sm:flex-row sm:items-center   mr-20 ">
-        <div class=" lg:inline-block mr-2 mt-2 ">
+      <div class="flex flex-col sm:flex-row sm:items-center mr-20">
+        <div class="lg:inline-block mr-2 mt-2">
           <button
             @click="validerApprenant(apprenant.personne_id)"
             type="button"
-            class="focus:outline-none w-full  text-white text-sm py-2.5 px-5 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 transform hover:scale-110"
+            class="
+              focus:outline-none
+              w-full
+              text-white text-sm
+              py-2.5
+              px-5
+              rounded-md
+              bg-gradient-to-r
+              from-blue-400
+              to-blue-600
+              transform
+              hover:scale-110
+            "
           >
             Valide
           </button>
@@ -155,15 +187,40 @@
           <button
             @click="$emit('showApprenant', [apprenant])"
             type="button"
-            class="focus:outline-none  w-full text-white text-sm py-2.5 px-5 rounded-md bg-gradient-to-r from-gray-400 to-gray-600 transform hover:scale-110"
+            class="
+              focus:outline-none
+              w-full
+              text-white text-sm
+              py-2.5
+              px-5
+              rounded-md
+              bg-gradient-to-r
+              from-gray-400
+              to-gray-600
+              transform
+              hover:scale-110
+            "
           >
             Montre
           </button>
         </div>
         <div class="inline-block mr-2 mt-2">
           <button
+            @click="open_apprenant_delete(apprenant.id)"
             type="button"
-            class="focus:outline-none w-full text-white text-sm py-2.5 px-5 rounded-md bg-gradient-to-r from-yellow-400 to-yellow-600 transform hover:scale-110"
+            class="
+              focus:outline-none
+              w-full
+              text-white text-sm
+              py-2.5
+              px-5
+              rounded-md
+              bg-gradient-to-r
+              from-yellow-400
+              to-yellow-600
+              transform
+              hover:scale-110
+            "
           >
             Supprimer
           </button>
@@ -191,7 +248,7 @@ import { mapGetters, mapActions } from "vuex";
 import Swal from "sweetalert2";
 export default {
   name: "AppCardInfo",
-  props: ["apprenant"],
+  props: ["apprenant", "open_apprenant_delete"],
   methods: {
     ...mapActions(["validateApprenant"]),
     validerApprenant(apprenant_id) {

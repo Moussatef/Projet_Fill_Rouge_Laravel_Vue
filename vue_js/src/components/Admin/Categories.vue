@@ -260,7 +260,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-
+import Swal from "sweetalert2";
 export default {
   name: "Categories",
   data: function () {
@@ -307,6 +307,13 @@ export default {
       this.deleteCategorie(this.categorie).then((res) => {
         this.close_delete();
         this.categorie.id = "";
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Catégorie supprimé avec succès",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
     },
     open_edit(categorie) {

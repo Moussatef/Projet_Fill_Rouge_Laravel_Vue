@@ -1,98 +1,285 @@
 <template>
-  <div class=" mt-2" @click="exitModal">
-    <div class="w-full mx-auto ">
+  <div class="mt-2" @click="exitModal">
+    <div class="w-full mx-auto">
       <div class="-mx-2 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
         <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
           <table class="min-w-full leading-normal">
             <thead>
               <tr>
                 <th
-                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-5
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   Apprenant
                 </th>
                 <th
-                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-5
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   Nom et prenom
                 </th>
                 <th
-                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-5
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   campus
                 </th>
                 <th
-                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-5
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   email
                 </th>
                 <th
-                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-5
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   date de naissance
                 </th>
                 <th
-                  class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-6
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   telephon
                 </th>
                 <th
-                  class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-6
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   Nb_Post
                 </th>
                 <th
-                  class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-6
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   NB_Likes
                 </th>
                 <th
-                  class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-6
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   NB_Comments
                 </th>
                 <th
-                  class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-6
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   github
                 </th>
                 <th
-                  class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-6
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   linkedin
                 </th>
                 <th
-                  class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-6
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   facebook
                 </th>
                 <th
-                  class="px-6 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-6
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   instagram
                 </th>
                 <th
-                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-5
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   Created at
                 </th>
                 <th
-                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-5
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   Last Update in
                 </th>
                 <th
-                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+                  class="
+                    px-5
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
                 >
                   Vesit Apprenant
                 </th>
                 <th
-                  class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                ></th>
+                  class="
+                    px-5
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
+                >
+                  Supprimer
+                </th>
+                <th
+                  class="
+                    px-5
+                    py-3
+                    border-b-2 border-gray-200
+                    bg-gray-100
+                    text-left text-xs
+                    font-semibold
+                    text-gray-600
+                    uppercase
+                    tracking-wider
+                  "
+                >
+                  bloquer
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="appr in apprenant" :key="appr.id">
+              <tr v-for="appr in apprenant_validated" :key="appr.id">
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <div class="flex-shrink-0 w-12 h-12">
                     <img
@@ -112,9 +299,7 @@
                     {{ appr.campus }}
                   </p>
                 </td>
-                <td
-                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm  "
-                >
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   {{ appr.email }}
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -130,14 +315,18 @@
                     {{ appr.nb_Post }}
                   </p>
                 </td>
-                <td
-                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm  "
-                >
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <span
-                    class="text-gray-400 inline-flex items-center leading-none text-sm"
+                    class="
+                      text-gray-400
+                      inline-flex
+                      items-center
+                      leading-none
+                      text-sm
+                    "
                   >
                     <svg
-                      class="w-4 h-4 mr-1 "
+                      class="w-4 h-4 mr-1"
                       viewBox="0 0 511 511.99962"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -151,14 +340,18 @@
                     {{ appr.nb_like }}
                   </span>
                 </td>
-                <td
-                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm  "
-                >
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <span
-                    class="text-gray-400 inline-flex items-center leading-none text-sm"
+                    class="
+                      text-gray-400
+                      inline-flex
+                      items-center
+                      leading-none
+                      text-sm
+                    "
                   >
                     <svg
-                      class="w-4 h-4 mr-1 "
+                      class="w-4 h-4 mr-1"
                       stroke="currentColor"
                       stroke-width="2"
                       fill="none"
@@ -172,43 +365,45 @@
                     >{{ appr.nb_comment }}
                   </span>
                 </td>
-                <td
-                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm  "
-                >
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   {{ appr.github }}
                 </td>
-                <td
-                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm  "
-                >
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   {{ appr.linkedin }}
                 </td>
-                <td
-                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm  "
-                >
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   {{ appr.facebook }}
                 </td>
-                <td
-                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm  "
-                >
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   {{ appr.instagram }}
                 </td>
-                <td
-                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm  "
-                >
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   {{ appr.created_at }}
                 </td>
-                <td
-                  class="px-5 py-5 border-b border-gray-200 bg-white text-sm  "
-                >
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   {{ appr.updated_at }}
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <span
-                    class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
+                    class="
+                      relative
+                      inline-block
+                      px-3
+                      py-1
+                      font-semibold
+                      text-green-900
+                      leading-tight
+                    "
                   >
                     <span
                       aria-hidden
-                      class="absolute inset-0 bg-green-200 opacity-50 rounded-full"
+                      class="
+                        absolute
+                        inset-0
+                        bg-green-200
+                        opacity-50
+                        rounded-full
+                      "
                     ></span>
                     <span class="relative">
                       <button
@@ -217,7 +412,7 @@
                           apprenat_affch = appr;
                         "
                         type="submit"
-                        class=" inline-flex items-center md:mb-2 lg:mb-0 "
+                        class="inline-flex items-center md:mb-2 lg:mb-0"
                       >
                         Montre apprenant
                         <svg
@@ -238,16 +433,31 @@
                 </td>
                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <span
-                    class="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
+                    @click="open_apprenant_delete(appr.id)"
+                    class="
+                      relative
+                      inline-block
+                      px-3
+                      py-1
+                      font-semibold
+                      text-green-900
+                      leading-tight
+                    "
                   >
                     <span
                       aria-hidden
-                      class="absolute inset-0 bg-red-400 opacity-50 rounded-full"
+                      class="
+                        absolute
+                        inset-0
+                        bg-red-400
+                        opacity-50
+                        rounded-full
+                      "
                     ></span>
                     <span class="relative">
                       <button type="submit" class="text-blue-500">
                         <svg
-                          class="w-5 h-5 "
+                          class="w-5 h-5"
                           id="Capa_1"
                           enable-background="new 0 0 512 512"
                           height="512"
@@ -274,6 +484,70 @@
                     </span>
                   </span>
                 </td>
+                <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                  <span
+                    @click="open_apprenant_block(appr.id)"
+                    class="
+                      relative
+                      inline-block
+                      px-3
+                      py-1
+                      font-semibold
+                      text-green-900
+                      leading-tight
+                    "
+                  >
+                    <span
+                      aria-hidden
+                      class="
+                        absolute
+                        inset-0
+                        bg-red-400
+                        opacity-50
+                        rounded-full
+                      "
+                    ></span>
+                    <span class="relative">
+                      <button type="submit" class="text-blue-500">
+                        <svg
+                          class="w-5 h-5"
+                          id="Capa_1"
+                          enable-background="new 0 0 512 512"
+                          height="512"
+                          viewBox="0 0 512 512"
+                          width="512"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g>
+                            <path
+                              style="fill: #d15241"
+                              d="M234.146,0C104.898,0,0,104.898,0,234.146s104.898,234.146,234.146,234.146
+                                s234.146-104.898,234.146-234.146S363.395,0,234.146,0z M66.185,234.146c0-93.034,75.551-168.585,167.961-168.585
+                                c34.966,0,68.059,10.615,94.907,29.346L95.532,329.054C76.8,302.205,66.185,269.112,66.185,234.146z M234.146,402.107
+                                c-34.966,0-68.059-10.615-94.907-29.346l233.522-233.522c18.732,26.849,29.346,59.941,29.346,94.907
+                                C402.107,327.18,327.18,402.107,234.146,402.107z"
+                            />
+                          </g>
+                          <g></g>
+                          <g></g>
+                          <g></g>
+                          <g></g>
+                          <g></g>
+                          <g></g>
+                          <g></g>
+                          <g></g>
+                          <g></g>
+                          <g></g>
+                          <g></g>
+                          <g></g>
+                          <g></g>
+                          <g></g>
+                          <g></g>
+                        </svg>
+                      </button>
+                    </span>
+                  </span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -283,10 +557,10 @@
     <!-- The Modal -->
     <div id="myModal" @click="exitModal" class="modal">
       <!-- Modal content -->
-      <div class="modal-content" v-if="apprenat_affch != null" >
+      <div class="modal-content" v-if="apprenat_affch != null">
         <span @click="clickExet" class="close">&times;</span>
-        <p>Card Info </p>
-        <div class="intro" >
+        <p>Card Info</p>
+        <div class="intro">
           <img
             class="h-12 w-12 rounded-full object-fill"
             :src="'http://127.0.0.1:8000' + apprenat_affch.img"
@@ -309,7 +583,7 @@
                     x="0px"
                     y="0px"
                     viewBox="0 0 512 512"
-                    style="enable-background:new 0 0 512 512;"
+                    style="enable-background: new 0 0 512 512"
                     xml:space="preserve"
                   >
                     <g>
@@ -370,7 +644,7 @@
                     x="0px"
                     y="0px"
                     viewBox="0 0 31.685 31.685"
-                    style="enable-background:new 0 0 31.685 31.685;"
+                    style="enable-background: new 0 0 31.685 31.685"
                     xml:space="preserve"
                   >
                     <g>
@@ -450,7 +724,7 @@
                     x="0px"
                     y="0px"
                     viewBox="0 0 512 512"
-                    style="enable-background:new 0 0 512 512;"
+                    style="enable-background: new 0 0 512 512"
                     xml:space="preserve"
                   >
                     <g>
@@ -540,16 +814,16 @@
                     x="0px"
                     y="0px"
                     viewBox="0 0 512 512"
-                    style="enable-background:new 0 0 512 512;"
+                    style="enable-background: new 0 0 512 512"
                     xml:space="preserve"
                   >
                     <path
-                      style="fill:#1976D2;"
+                      style="fill: #1976d2"
                       d="M448,0H64C28.704,0,0,28.704,0,64v384c0,35.296,28.704,64,64,64h384c35.296,0,64-28.704,64-64V64
 	C512,28.704,483.296,0,448,0z"
                     />
                     <path
-                      style="fill:#FAFAFA;"
+                      style="fill: #fafafa"
                       d="M432,256h-80v-64c0-17.664,14.336-16,32-16h32V96h-64l0,0c-53.024,0-96,42.976-96,96v64h-64v80h64
 	v176h96V336h48L432,256z"
                     />
@@ -585,7 +859,7 @@
                     x="0px"
                     y="0px"
                     viewBox="0 0 512 512"
-                    style="enable-background:new 0 0 512 512;"
+                    style="enable-background: new 0 0 512 512"
                     xml:space="preserve"
                   >
                     <linearGradient
@@ -597,12 +871,12 @@
                       y2="647.1917"
                       gradientTransform="matrix(32 0 0 -32 1519 20757)"
                     >
-                      <stop offset="0" style="stop-color:#FFC107" />
-                      <stop offset="0.507" style="stop-color:#F44336" />
-                      <stop offset="0.99" style="stop-color:#9C27B0" />
+                      <stop offset="0" style="stop-color: #ffc107" />
+                      <stop offset="0.507" style="stop-color: #f44336" />
+                      <stop offset="0.99" style="stop-color: #9c27b0" />
                     </linearGradient>
                     <path
-                      style="fill:url(#SVGID_1_);"
+                      style="fill: url(#SVGID_1_)"
                       d="M352,0H160C71.648,0,0,71.648,0,160v192c0,88.352,71.648,160,160,160h192
 	c88.352,0,160-71.648,160-160V160C512,71.648,440.352,0,352,0z M464,352c0,61.76-50.24,112-112,112H160c-61.76,0-112-50.24-112-112
 	V160C48,98.24,98.24,48,160,48h192c61.76,0,112,50.24,112,112V352z"
@@ -616,12 +890,12 @@
                       y2="643.4846"
                       gradientTransform="matrix(32 0 0 -32 1519 20757)"
                     >
-                      <stop offset="0" style="stop-color:#FFC107" />
-                      <stop offset="0.507" style="stop-color:#F44336" />
-                      <stop offset="0.99" style="stop-color:#9C27B0" />
+                      <stop offset="0" style="stop-color: #ffc107" />
+                      <stop offset="0.507" style="stop-color: #f44336" />
+                      <stop offset="0.99" style="stop-color: #9c27b0" />
                     </linearGradient>
                     <path
-                      style="fill:url(#SVGID_2_);"
+                      style="fill: url(#SVGID_2_)"
                       d="M256,128c-70.688,0-128,57.312-128,128s57.312,128,128,128s128-57.312,128-128
 	S326.688,128,256,128z M256,336c-44.096,0-80-35.904-80-80c0-44.128,35.904-80,80-80s80,35.872,80,80
 	C336,300.096,300.096,336,256,336z"
@@ -635,12 +909,12 @@
                       y2="645.3331"
                       gradientTransform="matrix(32 0 0 -32 1519 20757)"
                     >
-                      <stop offset="0" style="stop-color:#FFC107" />
-                      <stop offset="0.507" style="stop-color:#F44336" />
-                      <stop offset="0.99" style="stop-color:#9C27B0" />
+                      <stop offset="0" style="stop-color: #ffc107" />
+                      <stop offset="0.507" style="stop-color: #f44336" />
+                      <stop offset="0.99" style="stop-color: #9c27b0" />
                     </linearGradient>
                     <circle
-                      style="fill:url(#SVGID_3_);"
+                      style="fill: url(#SVGID_3_)"
                       cx="393.6"
                       cy="118.4"
                       r="17.056"
@@ -667,12 +941,24 @@
                 </td>
               </tr>
               <tr>
-               
                 <td>
                   <div class="inline-block mr-2 mt-2">
                     <button
+                      @click="open_apprenant_delete_and_exit(apprenat_affch.id)"
                       type="button"
-                      class="focus:outline-none w-full text-white text-sm py-2.5 px-5 rounded-md bg-gradient-to-r from-yellow-400 to-yellow-600 transform hover:scale-110"
+                      class="
+                        focus:outline-none
+                        w-full
+                        text-white text-sm
+                        py-2.5
+                        px-5
+                        rounded-md
+                        bg-gradient-to-r
+                        from-yellow-400
+                        to-yellow-600
+                        transform
+                        hover:scale-110
+                      "
                     >
                       Supprimer
                     </button>
@@ -684,55 +970,134 @@
         </div>
       </div>
     </div>
+    <div
+      id="block_apprenant_model"
+      class="block_apprenant_modal"
+      @click="exit_block_model"
+    >
+      <div class="block_apprenant_modal_content">
+        <span class="close_apprenant_block" @click="close_apprenant_block"
+          >&times;</span
+        >
+        <p class="text-2xl bold mb-5">bloquer apprenant</p>
+        <p>Êtes-vous sûr de vouloir bloquer ce Apprenant</p>
+        <div class="mt-6">
+          <button
+            @click="block_apprenant"
+            class="
+              focus:outline-none
+              text-white text-sm
+              py-1
+              px-4
+              rounded-md
+              bg-gradient-to-r
+              from-blue-400
+              to-blue-600
+              transform
+              hover:scale-110
+            "
+          >
+            <svg
+              class="h-5 w-5"
+              id="bold"
+              enable-background="new 0 0 24 24"
+              height="512"
+              viewBox="0 0 24 24"
+              width="512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path
+                  d="m9.707 19.121c-.187.188-.442.293-.707.293s-.52-.105-.707-.293l-5.646-5.647c-.586-.586-.586-1.536 0-2.121l.707-.707c.586-.586 1.535-.586 2.121 0l3.525 3.525 9.525-9.525c.586-.586 1.536-.586 2.121 0l.707.707c.586.586.586 1.536 0 2.121z"
+                />
+              </g>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 import Swal from "sweetalert2";
-
 export default {
   name: "ApprenantValidCard",
-  props: ["apprenant"],
+  props: ["open_apprenant_delete"],
   data() {
     return {
       apprenat_affch: null,
+      apprenant_id: null,
     };
   },
   methods: {
-    ...mapActions(["validateApprenant"]),
-
+    ...mapActions(["validateApprenant", "blockApprenant"]),
+    open_apprenant_delete_and_exit(apprenat_id) {
+      this.clickExet();
+      this.open_apprenant_delete(apprenat_id);
+    },
     clickExet() {
-      // Get the modal
       var modal = document.getElementById("myModal");
-      // Get the <span> element that closes the modal
-      //   var span = document.getElementsByClassName("close")[0];
-      // When the user clicks on <span> (x), close the modal
-      //   span.onclick = function() {
       modal.style.display = "none";
-      //   };
     },
 
     clickModal() {
-      // Get the modal
       var modal = document.getElementById("myModal");
-      // Get the button that opens the modal
-      // When the user clicks the button, open the modal
       modal.style.display = "block";
     },
 
     exitModal() {
-      // Get the modal
       var modal = document.getElementById("myModal");
-      // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function(event) {
+      window.onclick = function (event) {
         if (event.target == modal) {
           modal.style.display = "none";
         }
       };
     },
+    open_apprenant_block(apprenant_id) {
+      const block_apprenant_model = document.getElementById(
+        "block_apprenant_model"
+      );
+      block_apprenant_model.style.display = "block";
+      this.apprenant_id = apprenant_id;
+    },
+    close_apprenant_block() {
+      const block_apprenant_model = document.getElementById(
+        "block_apprenant_model"
+      );
+      block_apprenant_model.style.display = "none";
+      this.apprenant_id = null;
+    },
+    exit_block_model() {
+      window.onclick = function (event) {
+        const block_apprenant_model = document.getElementById(
+          "block_apprenant_model"
+        );
+        if (event.target == block_apprenant_model) {
+          block_apprenant_model.style.display = "none";
+          this.apprenant_id = null;
+        }
+      };
+    },
+    block_apprenant() {
+      if (this.apprenant_id) {
+        this.blockApprenant(this.apprenant_id).then(() => {
+          this.apprenant_id = null;
+          this.close_apprenant_block();
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Apprenant bloquer avec succès",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          this.showInfo = false;
+        });
+      }
+    },
   },
   computed: {
-    // ...mapGetters(["apprenant"]),
+    ...mapGetters(["apprenant_validated"]),
   },
   create() {
     this.exitModal();
@@ -753,7 +1118,6 @@ export default {
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-  
 }
 
 /* Modal Content */
@@ -806,11 +1170,48 @@ export default {
     overflow: hidden;
   }
   .modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  width: 100%;
-  border-radius: 15px;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    width: 100%;
+    border-radius: 15px;
+  }
 }
+/* The Modal (background) */
+.block_apprenant_modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.block_apprenant_modal_content {
+  background-color: #fefefe;
+  margin: 20% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close_apprenant_block {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close_apprenant_block:hover,
+.close_apprenant_block:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>

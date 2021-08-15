@@ -252,7 +252,7 @@
       <div
         class="grid  gap-4  w-full cursor-pointer "
         :class="gridNumber"
-        @click="$emit('showPost', [post_p, likess])"
+        @click="$emit('sendPost', [post])"
       >
         <div v-for="img in image_post" :key="img.id" class="  ">
           <img
@@ -506,7 +506,7 @@ import Appload from "@/components/dataload/ApploadCard";
 import { mapActions, mapGetters } from "vuex";
 export default {
   props: ["personne_id", "storcomment", "post", "posts"],
-  emits: ["showPost"],
+  emits: ["sendPost"],
   components: {
     AppComment,
     AppAvatare,

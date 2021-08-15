@@ -361,10 +361,14 @@
       <div class="modal-contentP">
         <span @click="clickExit()" class="close">&times;</span>
 
-        <p class="text-2xl text-gray-500">{ Edit Information }</p>
+        <p class="text-2xl text-gray-500">
+          { Edit <span class="text-blue-500">Information</span> }
+        </p>
 
         <div class="flex flex-wrap justify-evenly my-10 text-gray-500  ">
-          <div class="w-5/12 border rounded-lg mx-1 shadow-lg">
+          <div
+            class="w-5/12 border-b-2 border-blue-500 rounded-lg mx-1 shadow-lg"
+          >
             <div class="flex ">
               <label class="m-3 w-40 text-left" for="nom">Nom :</label>
               <div v-if="!ed_nom" class="w-1/2   flex items-center">
@@ -425,7 +429,7 @@
             <div class="flex ">
               <label class="m-3 w-40 text-left">Bio :</label>
               <div v-if="!ed_bio" class="w-1/2 flex items-center">
-                <p class="m-3 text-justify ">{{ user_info.bio }}</p>
+                <p class="m-3 text-left ">{{ user_info.bio }}</p>
                 <button
                   @click="ed_bio = !ed_bio"
                   class=" m-3 w-7 h-7 p-1 text-center rounded-full hover:bg-gray-200"
@@ -454,7 +458,9 @@
               ></textarea>
             </div>
           </div>
-          <div class="w-5/12  border rounded-lg m-1 shadow-lg ">
+          <div
+            class="w-5/12  border-b-2 border-blue-500 rounded-lg m-1 shadow-lg "
+          >
             <div class="flex">
               <label class="m-3 w-40 text-left" for="nom">Prenom :</label>
               <div v-if="!ed_prenom" class="w-1/2   flex items-center">
@@ -543,6 +549,9 @@
                 v-if="ed_password"
                 class=" w-11/12 bg-gray-50  rounded-lg border-blue-500 mx-auto p-1 my-2 shadow-lg"
               >
+                <p class="text-red-500" v-if="error">
+                  {{ error }}
+                </p>
                 <div class="flex">
                   <label class="m-3 w-2/4 text-left" for="nom"
                     >Mot de passe actuel
@@ -670,6 +679,8 @@ export default {
       ed_date_n: false,
       ed_password: false,
 
+      error: null,
+
       inp_nom: "",
       inp_telephon: "",
       inp_bio: "",
@@ -678,6 +689,8 @@ export default {
       inp_password: "",
       inp_new_password: "",
       inp_conferm_password: "",
+
+      checkErr: null,
 
       profile: "http://127.0.0.1:8000" + this.img,
       cover: "http://127.0.0.1:8000" + this.imgCover,
@@ -698,12 +711,37 @@ export default {
     ]),
 
     updatePassword(id) {
-      this.updatePasswordPersonne([
-        id,
-        this.inp_new_password,
-        this.inp_conferm_password,
-        this.inp_password,
-      ]);
+      this.$store
+        .dispatch("updatePasswordPersonne", [
+          id,
+          this.inp_new_password,
+          this.inp_conferm_password,
+          this.inp_password,
+        ])
+        .then((result) => {
+          this.ed_password = false;
+          this.inp_new_password = "";
+          this.inp_conferm_password = "";
+          this.inp_password = "";
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Votre mot de passe a été enregistré avec succès",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          this.error = null;
+        })
+        .catch((error) => {
+          if (error.response.status === 401) {
+            this.error = "votre mot de passe actuel est incorrect";
+          }
+        });
+
+      this.updatePasswordPersonne();
+
+      if (!this.checkErr) {
+      }
     },
 
     updateInfoPersonne(id) {
@@ -718,7 +756,7 @@ export default {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "Your changed has been saved",
+        title: "Votre modification a été enregistrée",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -765,7 +803,7 @@ export default {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Profile and cover has been saved",
+          title: "Le profil et la couverture ont été enregistrés",
           showConfirmButton: false,
           timer: 2000,
         });
@@ -779,7 +817,7 @@ export default {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Image cover has been saved",
+          title: "La couverture de l'image a été enregistrée",
           showConfirmButton: false,
           timer: 2000,
         });
@@ -793,7 +831,7 @@ export default {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Update profile image has been saved",
+          title: "La mise à jour de l'image de profil a été enregistrée",
           showConfirmButton: false,
           timer: 2000,
         });
@@ -841,6 +879,7 @@ export default {
       "nb_comment",
       "nb_like",
       "loadingInfo",
+      "passwordErr",
     ]),
   },
 };

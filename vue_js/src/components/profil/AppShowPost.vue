@@ -7,56 +7,7 @@
     <div
       class="justify-between fixed  top-0 left-auto right-auto   z-50  w-full mt-40    overflow-hidden "
     >
-      <div
-        class="bg-white w-10 h-9  float-right mr-10 rounded-full cursor-pointer p-1 hover:bg-gray-300 hover:text-white"
-        @click="$emit('disablePost')"
-      >
-        <svg
-          class="h-7 w-7 mx-auto "
-          version="1.1"
-          id="Capa_1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px"
-          y="0px"
-          viewBox="0 0 340.8 340.8"
-          style="enable-background:new 0 0 340.8 340.8;"
-          xml:space="preserve"
-        >
-          <g>
-            <g>
-              <path
-                d="M170.4,0C76.4,0,0,76.4,0,170.4s76.4,170.4,170.4,170.4s170.4-76.4,170.4-170.4S264.4,0,170.4,0z M170.4,323.6
-			c-84.4,0-153.2-68.8-153.2-153.2S86,17.2,170.4,17.2S323.6,86,323.6,170.4S254.8,323.6,170.4,323.6z"
-              />
-            </g>
-          </g>
-          <g>
-            <g>
-              <path
-                d="M182.4,169.6l50-50c3.2-3.2,3.2-8.8,0-12c-3.2-3.2-8.8-3.2-12,0l-50,50l-50-50c-3.2-3.2-8.8-3.2-12,0
-			c-3.2,3.2-3.2,8.8,0,12l50,50l-50,49.6c-3.2,3.2-3.2,8.8,0,12c1.6,1.6,4,2.4,6,2.4s4.4-0.8,6-2.4l50-50l50,50c1.6,1.6,4,2.4,6,2.4
-			s4.4-0.8,6-2.4c3.2-3.2,3.2-8.8,0-12L182.4,169.6z"
-              />
-            </g>
-          </g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-        </svg>
-      </div>
+      
       <div
         class="max-w-7xl  flex mx-auto  bg-gradient-to-r from-white via-gray-200 to-gray-200"
         style=" max-height:850px;  "
@@ -138,7 +89,7 @@
             </div>
             <div></div>
           </div>
-          <div class="text-left h-full overflow-scroll ">
+          <div class="">
             <AppComment
               v-for="cmt in comments"
               :key="cmt.id"
@@ -146,11 +97,12 @@
               :personne_id="cmt.personne_id"
               :comment_id="cmt.id"
               :created_at="cmt.created_at"
+              :img="cmt.img"
             />
           </div>
         </div>
         <div
-          class=" w-full  grid  gap-4   p-2 mx-auto h-full  "
+          class=" w-full p-2 mx-auto h-full  "
           :class="gridNumber"
         >
           <img

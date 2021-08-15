@@ -116,12 +116,10 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import AppEditeur from "@/components/post/postProblem/AppEditor";
+
 export default {
   name: "AppCreatePost",
-  components: {
-    AppEditeur,
-  },
+  
   data() {
     return {
       title: "",
@@ -135,9 +133,7 @@ export default {
       
     };
   },
-  components: {
-    AppEditeur,
-  },
+  
   methods: {
     ...mapActions(["newPost"]),
     sendData() {

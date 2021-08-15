@@ -104,6 +104,7 @@ Route::group(['middleware' => ['auth:sanctum', 'type.user']], function () {
 Route::group(['middleware' => ['auth:sanctum', 'type.admin']], function () {
     Route::get('/admin/info', [AdminController::class, 'getAdminInfo']);
     Route::post('/admin/update', [AdminController::class, 'updateAdminInfo']);
+    Route::post('/admin/update_password', [AdminController::class, 'updateAdminPassword']);
     Route::get('/admin/apprenant', [AdminController::class, 'getApprenantInfo']);
     Route::get('/admin/statistic', [AdminController::class, 'statistic']);
     Route::get('/admin/posts', [AdminController::class, 'getAllPosts']);

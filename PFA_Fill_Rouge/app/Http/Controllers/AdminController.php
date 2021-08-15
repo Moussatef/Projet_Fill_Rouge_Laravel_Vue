@@ -24,16 +24,28 @@ class AdminController extends Controller
     public function updateAdminInfo(Request $request){
         $this->validate($request,[
             "admin_name"  => "required",
-            "email"=>"required",
+            "email"=>"required|email",
+        ]);
+
+        $admin = Admin::find(1);
+
+        $admin->admin_name = $request->input('admin_name');
+        $admin->email = $request->input('email');
+
+        $admin->save();
+
+        return $admin;
+    }
+    public function updateAdminPassword(Request $request){
+        $this->validate($request,[
             "old_password"=>"required",
             "new_password"=>"required"
         ]);
 
         $admin = Admin::find(1);
         if(!Hash::check($request->input('old_password'),$admin->password))
-            return response(["message"=>"old password is incorrect"]);
-        $admin->admin_name = $request->input('admin_name');
-        $admin->email = $request->input('email');
+            return response(["message"=>"old password is incorrect"],401);
+
         $admin->password = bcrypt($request->input('new_password'));
 
         $admin->save();

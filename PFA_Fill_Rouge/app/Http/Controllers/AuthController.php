@@ -105,7 +105,7 @@ class AuthController extends Controller
         // Check password
         if (!$admin || !Hash::check($fields['password'], $admin->password)) {
             return response([
-                'message' => 'Emial or password is incorrect'
+                'message' => 'Email or password is incorrect'
             ], 401);
         }
         $token = $admin->createToken('moussatefTokenAdmin@', ['role:admin'])->plainTextToken;

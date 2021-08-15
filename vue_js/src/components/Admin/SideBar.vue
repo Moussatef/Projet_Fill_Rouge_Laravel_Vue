@@ -4,6 +4,7 @@
       @open_valid_Apprenant="openExiste"
       @open_nv_Apprenant="openNv"
       @openPsts="openPsts"
+      @open_app_profile="open_app_profile"
     />
 
     <main
@@ -355,6 +356,7 @@
             @showApprenant="getApprenant"
           />
         </div>
+        <AppProfile v-if="showProfile"/>
       </div>
     </main>
   </div>
@@ -366,10 +368,12 @@ import AppFilter from "@/components/Admin/AppFilter";
 import AppShow from "@/components/Admin/AppShow";
 import ApprenantValidCard from "@/components/Admin/AppCardAprValid";
 import AppPosts from "@/components/Admin/AppPosts";
+import AppProfile from "@/components/Admin/AppProfile";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "SideBar",
   components: {
+    AppProfile,
     SideNav,
     AppCardInfo,
     AppFilter,
@@ -383,6 +387,7 @@ export default {
       open_valid_Apprenant: false,
       appr: null,
       showPsts: false,
+      showProfile:false,
       showNvApp: true,
     };
   },
@@ -403,19 +408,29 @@ export default {
       this.showInfo = false;
       this.showPsts = false;
       this.showNvApp = false;
+      this.showProfile=false;
     },
     openNv() {
       this.open_valid_Apprenant = false;
       this.showInfo = false;
       this.showPsts = false;
       this.showNvApp = true;
+      this.showProfile=false;
     },
     openPsts() {
       this.showPsts = true;
       this.open_valid_Apprenant = false;
       this.showInfo = false;
       this.showNvApp = false;
+      this.showProfile=false;
     },
+    open_app_profile(){
+      this.showPsts = false;
+      this.open_valid_Apprenant = false;
+      this.showInfo = false;
+      this.showNvApp = false;
+      this.showProfile=true;
+    }
   },
   computed: {
     ...mapGetters(["apprenant", "admin_statistics"]),

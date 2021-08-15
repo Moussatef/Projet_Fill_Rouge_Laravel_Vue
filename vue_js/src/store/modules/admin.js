@@ -6,6 +6,7 @@ const state = {
     apprenant: [],
     admin_statistics: [],
     admin_posts: [],
+    admin_info:null,
     allPostsAdmPages:1
 }
 
@@ -13,6 +14,7 @@ const getters = {
     apprenant: state => state.apprenant,
     admin_statistics: state => state.admin_statistics,
     admin_posts: state => state.admin_posts,
+    admin_info: state=>state.admin_info,
     allPostsAdmPages:state=>state.allPostsAdmPages
 }
 
@@ -54,6 +56,47 @@ const actions = {
             console.log(err);
 
         }
+    },
+
+    async getAdminInfo({ commit }) {
+        const config = {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem("admin_token")}`
+            }
+        };
+
+        await axios.get(`http://127.0.0.1:8000/api/admin/info`, config).then(response => {
+            commit('setAdminInfo', response.data);
+        }).catch(err => {
+            console.log("error", err);
+        });
+    },
+
+    async updateAdminInfo({ commit },admin_info) {
+        const config = {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem("admin_token")}`
+            }
+        };
+
+        await axios.post(`http://127.0.0.1:8000/api/admin/update`,admin_info, config).then(response => {
+            commit('setAdminInfo', response.data);
+        }).catch(err => {
+            console.log("error", err);
+        });
+    },
+
+    async updateAdminPassword({ commit },password_data) {
+        const config = {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem("admin_token")}`
+            }
+        };
+
+        await axios.post(`http://127.0.0.1:8000/api/admin/update_password`, password_data, config);
     },
 
     async getAllApprenant({ commit }) {
@@ -135,7 +178,9 @@ const mutations = {
         state.admin_posts.push(...posts.data);
         state.allPostsAdmPages=posts.meta.last_page;
     },
-
+    setAdminInfo: (state, admin_info) => {
+        state.admin_info = admin_info
+    }
 }
 
 

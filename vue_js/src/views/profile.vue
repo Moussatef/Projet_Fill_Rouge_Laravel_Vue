@@ -21,7 +21,7 @@
     >
       <div class=" mb-5 space-y-4 col-span-1  sticky ">
         <AppIntro
-          v-if="op_post"
+          v-if="op_intro"
           :key="user_info.id"
           :github="user_info.github"
           :email="user_info.email"
@@ -58,9 +58,9 @@
             @sendPost="getPost"
           />
         </div>
-          <div v-if="op_problem">
-            <AppEditeur />
-          </div>
+        <div v-if="op_problem">
+          <AppEditeur />
+        </div>
       </div>
     </div>
     <!-- The Modal -->
@@ -207,6 +207,7 @@ export default {
       ed_linkedin: false,
 
       op_post: true,
+      op_intro: true,
       op_photo: false,
       op_problem: false,
     };
@@ -283,15 +284,18 @@ export default {
       this.op_post = false;
       this.op_photo = true;
       this.op_problem = false;
+      this.op_intro = false;
     },
     open_post() {
       this.op_post = true;
+      this.op_intro = true;
       this.op_photo = false;
       this.op_problem = false;
     },
     open_problem() {
       this.op_post = false;
       this.op_photo = false;
+      this.op_intro = true;
       this.op_problem = true;
     },
     getPost(param) {

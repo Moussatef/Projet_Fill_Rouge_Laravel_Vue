@@ -1,14 +1,22 @@
 <template>
   <div>
     <div
-      class="w-full shadow-xl rounded-3xl border-r-2 border-l-2 border-blue-400 bg-white p-4 my-5"
+      class="
+        w-full
+        shadow-xl
+        rounded-3xl
+        border-r-2 border-l-2 border-blue-400
+        bg-white
+        p-4
+        my-5
+      "
     >
       <div class="flex justify-between items-center">
         <div class="flex items-center">
           <img
             :src="img_avatar + post.img"
             alt="img"
-            class="h-10 w-10 rounded-full border  border-blue-500"
+            class="h-10 w-10 rounded-full border border-blue-500"
           />
           <div class="ml-4">
             <span class="cursor-pointer font-bold">{{ post.full_name }} </span>
@@ -21,7 +29,17 @@
         <div class="relative">
           <button
             @click="dropdownOpen = !dropdownOpen"
-            class="relative block  w-9 h-9 rounded-full bg-fill  items-center justify-center  focus:outline-none"
+            class="
+              relative
+              block
+              w-9
+              h-9
+              rounded-full
+              bg-fill
+              items-center
+              justify-center
+              focus:outline-none
+            "
           >
             <svg
               class="w-6 h-6"
@@ -52,17 +70,44 @@
 
           <div
             v-if="dropdownOpen"
-            class="absolute right-0 mt-1 w-48 bg-white rounded-md overflow-hidden shadow-xl z-10 border border-gray-200"
+            class="
+              absolute
+              right-0
+              mt-1
+              w-48
+              bg-white
+              rounded-md
+              overflow-hidden
+              shadow-xl
+              z-10
+              border border-gray-200
+            "
           >
             <button
               @click="edit"
-              class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+              class="
+                w-full
+                block
+                px-4
+                py-2
+                text-sm text-gray-700
+                hover:bg-indigo-600
+                hover:text-white
+              "
             >
               Edit
             </button>
             <button
               @click="deletePost([post.id, post.personne_id])"
-              class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+              class="
+                w-full
+                block
+                px-4
+                py-2
+                text-sm text-gray-700
+                hover:bg-indigo-600
+                hover:text-white
+              "
             >
               Delete
             </button>
@@ -70,40 +115,39 @@
         </div>
       </div>
       <div class="flex">
-
-      <div v-if="post.public == 0" class="flex items-center">
-        <svg
-          class="h-5 w-5 ml-14 opacity-60 mr-2"
-          version="1.1"
-          id="Capa_1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px"
-          y="0px"
-          width="48.625px"
-          height="48.625px"
-          viewBox="0 0 48.625 48.625"
-          style="enable-background:new 0 0 48.625 48.625;"
-          xml:space="preserve"
-        >
-          <g>
+        <div v-if="post.public == 0" class="flex items-center">
+          <svg
+            class="h-5 w-5 ml-14 opacity-60 mr-2"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            width="48.625px"
+            height="48.625px"
+            viewBox="0 0 48.625 48.625"
+            style="enable-background: new 0 0 48.625 48.625"
+            xml:space="preserve"
+          >
             <g>
-              <polygon
-                points="35.432,10.815 35.479,11.176 34.938,11.288 34.866,12.057 35.514,12.057 36.376,11.974 36.821,11.445 
+              <g>
+                <polygon
+                  points="35.432,10.815 35.479,11.176 34.938,11.288 34.866,12.057 35.514,12.057 36.376,11.974 36.821,11.445 
 			36.348,11.261 36.089,10.963 35.7,10.333 35.514,9.442 34.783,9.591 34.578,9.905 34.578,10.259 34.93,10.5 		"
-              />
-              <polygon
-                points="34.809,11.111 34.848,10.629 34.419,10.444 33.819,10.583 33.374,11.297 33.374,11.76 33.893,11.76 		"
-              />
-              <path
-                d="M22.459,13.158l-0.132,0.34h-0.639v0.33h0.152c0,0,0.009,0.07,0.022,0.162l0.392-0.033l0.245-0.152l0.064-0.307
+                />
+                <polygon
+                  points="34.809,11.111 34.848,10.629 34.419,10.444 33.819,10.583 33.374,11.297 33.374,11.76 33.893,11.76 		"
+                />
+                <path
+                  d="M22.459,13.158l-0.132,0.34h-0.639v0.33h0.152c0,0,0.009,0.07,0.022,0.162l0.392-0.033l0.245-0.152l0.064-0.307
 			l0.317-0.027l0.125-0.258l-0.291-0.06L22.459,13.158z"
-              />
-              <polygon
-                points="20.812,13.757 20.787,14.08 21.25,14.041 21.298,13.717 21.02,13.498 		"
-              />
-              <path
-                d="M48.619,24.061c-0.007-0.711-0.043-1.417-0.11-2.112c-0.225-2.317-0.779-4.538-1.609-6.62
+                />
+                <polygon
+                  points="20.812,13.757 20.787,14.08 21.25,14.041 21.298,13.717 21.02,13.498 		"
+                />
+                <path
+                  d="M48.619,24.061c-0.007-0.711-0.043-1.417-0.11-2.112c-0.225-2.317-0.779-4.538-1.609-6.62
 			c-0.062-0.155-0.119-0.312-0.185-0.465c-1.106-2.613-2.659-4.992-4.56-7.045c-0.125-0.134-0.252-0.266-0.379-0.396
 			c-0.359-0.373-0.728-0.737-1.11-1.086C36.344,2.402,30.604,0,24.312,0C17.967,0,12.186,2.445,7.852,6.44
 			C6.842,7.371,5.914,8.387,5.072,9.475C1.896,13.583,0,18.729,0,24.312c0,13.407,10.907,24.313,24.313,24.313
@@ -149,86 +193,88 @@
 			l0.069-0.167L16.807,14.244z M15.041,13.355h0.737l-0.945,1.321l-0.39-0.209l0.084-0.556L15.041,13.355z M18.059,14.092v0.432
 			H17.35l-0.194-0.28v-0.402h0.056L18.059,14.092z M17.404,13.498l0.202-0.212l0.341,0.212l-0.273,0.225L17.404,13.498z
 			 M45.954,19.265l0.07-0.082c0.029,0.126,0.06,0.252,0.088,0.38L45.954,19.265z"
-              />
-              <path
-                d="M3.782,14.884v0.696c0.243-0.568,0.511-1.122,0.798-1.665L3.782,14.884z"
-              />
+                />
+                <path
+                  d="M3.782,14.884v0.696c0.243-0.568,0.511-1.122,0.798-1.665L3.782,14.884z"
+                />
+              </g>
             </g>
-          </g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g></svg
-        >public
-      </div>
-      <div v-if="post.public == 1" class="flex items-center">
-        <svg
-          class="h-5 w-5 ml-14 opacity-60 mr-2"
-          version="1.1"
-          id="Capa_1"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
-          x="0px"
-          y="0px"
-          viewBox="0 0 471.7 471.7"
-          style="enable-background:new 0 0 471.7 471.7;"
-          xml:space="preserve"
-        >
-          <g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g></svg
+          >public
+        </div>
+        <div v-if="post.public == 1" class="flex items-center">
+          <svg
+            class="h-5 w-5 ml-14 opacity-60 mr-2"
+            version="1.1"
+            id="Capa_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 471.7 471.7"
+            style="enable-background: new 0 0 471.7 471.7"
+            xml:space="preserve"
+          >
             <g>
-              <path
-                d="M360.8,200.6v-74.7c0.2-33.8-13.3-66.3-37.4-90C300.1,12.7,269.6,0,237.3,0c-0.5,0-1.1,0-1.6,0
+              <g>
+                <path
+                  d="M360.8,200.6v-74.7c0.2-33.8-13.3-66.3-37.4-90C300.1,12.7,269.6,0,237.3,0c-0.5,0-1.1,0-1.6,0
 			c-68.9,0.1-124.9,56.5-124.9,125.9v74.7c-26,3.1-45,24.9-45,51.3v167.8c0,28.5,22.8,52,51.3,52h237.5c28.5,0,51.3-23.5,51.3-52
 			V251.9C405.8,225.6,386.8,203.7,360.8,200.6z M130.7,125.9h0.1c0-58.4,47.1-106.2,105-106.2h0.1c27.5-0.1,53.9,10.8,73.4,30.2
 			c20.3,20.1,31.6,47.5,31.4,76v74.8h-22v-74.8c0.2-22.7-8.8-44.5-24.9-60.5c-15.2-15.2-35.8-23.8-57.3-23.8h-0.6
 			c-46,0-83.2,37.8-83.2,84.2v74.9h-22V125.9z M298.8,125.9v74.8h-126v-74.8c0-35.4,28.2-64.2,63.2-64.2h0.6
 			c16.2,0,31.8,6.5,43.3,18C292.1,91.9,299,108.6,298.8,125.9z M386.8,420L386.8,420c0,17.5-14.2,31.7-31.7,31.7H117.5
 			c-17.5,0-31.7-14.2-31.7-31.7V252.4c0-17.5,14.2-31.7,31.7-31.7h237.6c17.5,0,31.7,14.2,31.7,31.7V420z"
-              />
+                />
+              </g>
             </g>
-          </g>
-          <g>
             <g>
-              <path
-                d="M270.4,330c-4.4-15.5-18.5-26.1-34.6-26.1c-19.9,0-36.1,16.1-36.1,36.1c0,16.1,10.6,30.2,26.1,34.6v28c0,5.5,4.5,10,10,10
+              <g>
+                <path
+                  d="M270.4,330c-4.4-15.5-18.5-26.1-34.6-26.1c-19.9,0-36.1,16.1-36.1,36.1c0,16.1,10.6,30.2,26.1,34.6v28c0,5.5,4.5,10,10,10
 			s10-4.5,10-10v-28C264.9,369.1,276,349.1,270.4,330z M235.8,356c-8.9,0-16.1-7.2-16.1-16.1c0-8.9,7.2-16.1,16.1-16.1
 			c8.9,0,16.1,7.2,16.1,16.1C251.9,348.8,244.7,356,235.8,356z"
-              />
+                />
+              </g>
             </g>
-          </g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g>
-          <g></g></svg
-        >private
-      </div>
-      <p class=" text-gray-900 text-left mx-3 ">/ categorie : {{ post.categorie.libelle }}</p>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g></svg
+          >private
+        </div>
+        <p class="text-gray-900 text-left mx-3" v-if="post.categorie">
+          / categorie : {{ post.categorie.libelle }}
+        </p>
       </div>
       <div v-if="!editProc" class="w-full mt-4 text-justify">
-        <p class="text-lg text-gray-900 ">{{ title }}</p>
-        <div class=" text-gray-900 text-left " v-html="description"></div>
+        <p class="text-lg text-gray-900">{{ title }}</p>
+        <div class="text-gray-900 text-left" v-html="description"></div>
       </div>
       <div v-else class="w-full mt-4 text-justify">
         <div>
@@ -239,7 +285,17 @@
               $event.preventDefault();
               open = !open;
             "
-            class="flex items-center p-2 text-gray-800 transition-colors rounded-md dark:text-light hover:bg-indigo-100 dark:hover:bg-indigo-600"
+            class="
+              flex
+              items-center
+              p-2
+              text-gray-800
+              transition-colors
+              rounded-md
+              dark:text-light
+              hover:bg-indigo-100
+              dark:hover:bg-indigo-600
+            "
             :class="{ 'bg-indigo-100 dark:bg-indigo-600': open }"
             role="button"
           >
@@ -266,7 +322,17 @@
           <div v-if="open" class="mt-2 space-y-2 px-7">
             <label
               @click="$refs.inp_public.click()"
-              class="flex p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+              class="
+                flex
+                p-2
+                text-sm text-gray-400
+                transition-colors
+                duration-200
+                rounded-md
+                dark:text-gray-400
+                dark:hover:text-light
+                hover:text-gray-700
+              "
             >
               <input
                 type="radio"
@@ -276,7 +342,7 @@
                 @click="Audience = 0"
               />
               <svg
-                class="h-5 w-5  opacity-60 mr-2"
+                class="h-5 w-5 opacity-60 mr-2"
                 version="1.1"
                 id="Capa_1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -286,7 +352,7 @@
                 width="48.625px"
                 height="48.625px"
                 viewBox="0 0 48.625 48.625"
-                style="enable-background:new 0 0 48.625 48.625;"
+                style="enable-background: new 0 0 48.625 48.625"
                 xml:space="preserve"
               >
                 <g>
@@ -377,7 +443,16 @@
             </label>
             <label
               @click="$refs.inp_private.click()"
-              class="flex p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:hover:text-light hover:text-gray-700"
+              class="
+                flex
+                p-2
+                text-sm text-gray-400
+                transition-colors
+                duration-200
+                rounded-md
+                dark:hover:text-light
+                hover:text-gray-700
+              "
             >
               <input
                 type="radio"
@@ -387,7 +462,7 @@
                 @click="Audience = 1"
               />
               <svg
-                class="h-5 w-5  opacity-60 mr-2"
+                class="h-5 w-5 opacity-60 mr-2"
                 version="1.1"
                 id="Capa_1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -395,7 +470,7 @@
                 x="0px"
                 y="0px"
                 viewBox="0 0 471.7 471.7"
-                style="enable-background:new 0 0 471.7 471.7;"
+                style="enable-background: new 0 0 471.7 471.7"
                 xml:space="preserve"
               >
                 <g>
@@ -442,7 +517,7 @@
         </div>
         <input
           v-model="inp_title"
-          class="bg-fFill px-4 py-4 w-full border-b-2 my-2 focus:outline-none "
+          class="bg-fFill px-4 py-4 w-full border-b-2 my-2 focus:outline-none"
           placeholder="Write something to Roland…"
         />
         <hr />
@@ -459,36 +534,77 @@
           ></textarea>
           <button
             @click="showAlert"
-            class="my-2  h-9 w-20 inline-block float-right  bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
+            class="
+              my-2
+              h-9
+              w-20
+              inline-block
+              float-right
+              bg-blue-400
+              px-5
+              py-2
+              text-sm
+              shadow-sm
+              font-medium
+              tracking-wider
+              text-white
+              rounded-full
+              hover:shadow-lg
+              hover:bg-green-500
+            "
           >
             Save
           </button>
           <button
             @click="editCancel"
-            class="my-2  h-9 w-20 inline-block float-right  bg-gray-300 px-5 py-2 mx-2 text-sm shadow-sm font-medium tracking-wider text-gray-800 rounded-full hover:shadow-lg hover:bg-yellow-400"
+            class="
+              my-2
+              h-9
+              w-20
+              inline-block
+              float-right
+              bg-gray-300
+              px-5
+              py-2
+              mx-2
+              text-sm
+              shadow-sm
+              font-medium
+              tracking-wider
+              text-gray-800
+              rounded-full
+              hover:shadow-lg
+              hover:bg-yellow-400
+            "
           >
             cancel
           </button>
         </div>
       </div>
       <div
-        class="grid  gap-4  w-full cursor-pointer "
+        class="grid gap-4 w-full cursor-pointer"
         :class="gridNumber"
         @click="$emit('sendPost', [post])"
       >
-        <div v-for="img in post.img_post" :key="img.id" class="  ">
+        <div v-for="img in post.img_post" :key="img.id" class="">
           <img
             :src="'http://127.0.0.1:8000' + img.path"
             alt="img"
-            class="object-cover h-96 w-full  mx-auto my-4 rounded"
+            class="object-cover h-96 w-full mx-auto my-4 rounded"
           />
         </div>
       </div>
       <div
-        class="flex justify-between mt-4 items-center text-fGrey text-opacity-50"
+        class="
+          flex
+          justify-between
+          mt-4
+          items-center
+          text-fGrey text-opacity-50
+        "
       >
         <div
-          class="flex justify-center  cursor-pointer"
+          class="flex justify-center cursor-pointer"
           @click="showLikePersonne"
         >
           <svg
@@ -531,7 +647,18 @@
                 $event.preventDefault();
                 showlike = !showlike;
               "
-              class="flex justify-center p-2 mx-2 text-gray-800 transition-colors rounded-md dark:text-light hover:bg-indigo-100 dark:hover:bg-indigo-600"
+              class="
+                flex
+                justify-center
+                p-2
+                mx-2
+                text-gray-800
+                transition-colors
+                rounded-md
+                dark:text-light
+                hover:bg-indigo-100
+                dark:hover:bg-indigo-600
+              "
               :class="{ 'bg-indigo-100 dark:bg-indigo-600': showlike }"
               role="button"
             >
@@ -559,7 +686,17 @@
               <label
                 v-for="item in like"
                 :key="item.id"
-                class="flex p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
+                class="
+                  flex
+                  p-2
+                  text-sm text-gray-400
+                  transition-colors
+                  duration-200
+                  rounded-md
+                  dark:text-gray-400
+                  dark:hover:text-light
+                  hover:text-gray-700
+                "
               >
                 <img
                   :src="'http://127.0.0.1:8000' + item.img"
@@ -577,7 +714,14 @@
       <div class="flex justify-between items-center mt-4">
         <button
           @click="clickLike(post_id, user_id, token)"
-          class="w-1/2 flex items-center justify-center border-r-2 focus:outline-none"
+          class="
+            w-1/2
+            flex
+            items-center
+            justify-center
+            border-r-2
+            focus:outline-none
+          "
           v-if="checkLike"
         >
           <svg
@@ -597,7 +741,14 @@
         </button>
         <button
           @click="clickUnLike(post_id, user_id, token)"
-          class="w-1/2 flex items-center justify-center border-r-2 focus:outline-none"
+          class="
+            w-1/2
+            flex
+            items-center
+            justify-center
+            border-r-2
+            focus:outline-none
+          "
           v-else
         >
           <svg
@@ -646,7 +797,7 @@
             x="0px"
             y="0px"
             viewBox="0 0 60 60"
-            style="enable-background:new 0 0 60 60;"
+            style="enable-background: new 0 0 60 60"
             xml:space="preserve"
           >
             <path
@@ -676,7 +827,7 @@
       </div>
       <div class="border border-gray-500 border-opacity-20 mt-4" />
 
-      <div class="text-left  overflow-y-auto  my-4 " style=" max-height : 400px;">
+      <div class="text-left overflow-y-auto my-4" style="max-height: 400px">
         <AppComment
           v-for="cmt in comment"
           :key="cmt.id"
@@ -694,7 +845,7 @@
         <img
           :src="img_avatar + user_info.img"
           alt="img"
-          class="h-10 w-10 mt-2 rounded-full border  border-blue-500"
+          class="h-10 w-10 mt-2 rounded-full border border-blue-500"
         />
         <input
           class="border-2 px-4 py-3 w-full focus:outline-none rounded-full"
@@ -709,7 +860,7 @@
           "
         >
           <svg
-            class="w-5 h-5 "
+            class="w-5 h-5"
             height="512pt"
             viewBox="0 -16 512 512"
             width="512pt"
@@ -830,7 +981,7 @@ export default {
     },
     checkLikesId(likes) {
       var selfe = this;
-      likes.forEach(function(element) {
+      likes.forEach(function (element) {
         if (element.personne_id == selfe.user_id) {
           selfe.checkLike = false;
         }

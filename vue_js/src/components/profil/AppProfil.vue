@@ -47,7 +47,7 @@
         <img
           v-if="img_profil == false"
           :src="'http://127.0.0.1:8000' + user_info.img"
-          class="object-fill bg-cover border-2 border-blue-600   w-40 h-40  rounded-full"
+          class="object-cover bg-cover border-2 border-blue-600   w-40 h-40  rounded-full"
           alt=""
           id="profile"
         />

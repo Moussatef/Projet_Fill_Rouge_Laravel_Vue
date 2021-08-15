@@ -5,6 +5,7 @@ use App\Http\Controllers\PersonneController;
 use App\Http\Controllers\ApprenantController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CampusController;
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\ImageController;
@@ -35,6 +36,7 @@ Route::post('/apprenant/register', [ApprenantController::class, 'store']);
 Route::post('/admin/login', [AuthController::class, 'adminLogin']);
 //get campus
 Route::get('/campus', [CampusController::class, 'index']);
+Route::get('/categorie', [CategorieController::class, 'index']);
 
 
 // Check posts
@@ -72,7 +74,8 @@ Route::group(['middleware' => ['auth:sanctum', 'type.user']], function () {
 
 
     //get posts personne authenticate
-    Route::get('/profile/post/{id}', [PostController::class, 'getPostProfile']);
+    Route::get('/profile/post', [PostController::class, 'getPostProfile']);
+    Route::get('/problem/post', [PostController::class, 'getPostProblem']);
     //add new post profile
     Route::post('/profile/post/add', [PostController::class, 'storeProfile']);
     //add new post problem
@@ -97,6 +100,7 @@ Route::group(['middleware' => ['auth:sanctum', 'type.user']], function () {
     Route::post('/profile/post/comment/delete', [CommentController::class, 'destroy']);
     //get all posts
     Route::get('/home/post/all', [PostController::class, 'index']);
+    Route::get('/problem/post/all', [PostController::class, 'indexProblem']);
 
     //get statistic
     Route::get('/profile/static/{id}', [PostController::class, 'getTotals']);

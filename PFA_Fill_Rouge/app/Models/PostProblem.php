@@ -18,7 +18,7 @@ class PostProblem extends Model
         return $this->belongsTo(Post::class);
     }
 
-    public function category()
+    public function categorie()
     {
         return $this->belongsTo(Categorie::class);
     }

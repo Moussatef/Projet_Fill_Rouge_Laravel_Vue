@@ -1,12 +1,24 @@
 <template>
-  <div v-if="post.public == 0">
+  <div>
     <div
       class="w-full shadow-xl rounded-3xl border-r-2 border-l-2 border-blue-400 bg-white p-4 my-5"
     >
       <div class="flex justify-between items-center">
-        <AppAvatare :post="post" :created_at="post.created_at" />
+        <div class="flex items-center">
+          <img
+            :src="img_avatar + post.img"
+            alt="img"
+            class="h-10 w-10 rounded-full border  border-blue-500"
+          />
+          <div class="ml-4">
+            <span class="cursor-pointer font-bold">{{ post.full_name }} </span>
+            <span class="text-grey text-opacity-50 text-sm mx-3">
+              {{ created_at }}
+            </span>
+          </div>
+        </div>
 
-        <div class="relative" v-if="checkEditPost">
+        <div class="relative">
           <button
             @click="dropdownOpen = !dropdownOpen"
             class="relative block  w-9 h-9 rounded-full bg-fill  items-center justify-center  focus:outline-none"
@@ -48,8 +60,8 @@
             >
               Edit
             </button>
-
             <button
+              @click="deletePost([post.id, post.personne_id])"
               class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
             >
               Delete
@@ -57,6 +69,8 @@
           </div>
         </div>
       </div>
+      <div class="flex">
+
       <div v-if="post.public == 0" class="flex items-center">
         <svg
           class="h-5 w-5 ml-14 opacity-60 mr-2"
@@ -210,9 +224,11 @@
           <g></g></svg
         >private
       </div>
+      <p class=" text-gray-900 text-left mx-3 ">/ categorie : {{ post.categorie.libelle }}</p>
+      </div>
       <div v-if="!editProc" class="w-full mt-4 text-justify">
-        <p class="text-lg text-gray-900 ">{{ post.titre }}</p>
-        <p class=" text-gray-900 text-left ">{{ post.description }}</p>
+        <p class="text-lg text-gray-900 ">{{ title }}</p>
+        <div class=" text-gray-900 text-left " v-html="description"></div>
       </div>
       <div v-else class="w-full mt-4 text-justify">
         <div>
@@ -460,7 +476,7 @@
         :class="gridNumber"
         @click="$emit('sendPost', [post])"
       >
-        <div v-for="img in image_post" :key="img.id" class="  ">
+        <div v-for="img in post.img_post" :key="img.id" class="  ">
           <img
             :src="'http://127.0.0.1:8000' + img.path"
             alt="img"
@@ -471,7 +487,10 @@
       <div
         class="flex justify-between mt-4 items-center text-fGrey text-opacity-50"
       >
-        <div class="flex justify-center">
+        <div
+          class="flex justify-center  cursor-pointer"
+          @click="showLikePersonne"
+        >
           <svg
             class="h-6 w-6 mx-3 mt-1"
             id="Capa_1"
@@ -502,7 +521,7 @@
               </g>
             </g>
           </svg>
-          <label class="mt-1">{{ likess }}</label>
+          <label class="mt-1">{{ like.length }}</label>
 
           <div>
             <!-- active & hover classes 'bg-indigo-100 dark:bg-indigo-600' -->
@@ -538,7 +557,7 @@
             </a>
             <div v-if="showlike" class="mt-2 space-y-2 px-7">
               <label
-                v-for="item in post.like"
+                v-for="item in like"
                 :key="item.id"
                 class="flex p-2 text-sm text-gray-400 transition-colors duration-200 rounded-md dark:text-gray-400 dark:hover:text-light hover:text-gray-700"
               >
@@ -552,12 +571,12 @@
             </div>
           </div>
         </div>
-        <div>{{ comments.length }} Comment</div>
+        <div>{{ comment.length }} Comment</div>
       </div>
       <div class="border border-gray-500 border-opacity-10 mt-4" />
       <div class="flex justify-between items-center mt-4">
         <button
-          @click="clickLike(post.id, user_id, token)"
+          @click="clickLike(post_id, user_id, token)"
           class="w-1/2 flex items-center justify-center border-r-2 focus:outline-none"
           v-if="checkLike"
         >
@@ -656,7 +675,22 @@
         </button>
       </div>
       <div class="border border-gray-500 border-opacity-20 mt-4" />
-      <div class="flex space-x-2 my-4">
+
+      <div class="text-left  overflow-y-auto  my-4 " style=" max-height : 400px;">
+        <AppComment
+          v-for="cmt in comment"
+          :key="cmt.id"
+          :postProfile="postProfile"
+          :comment_body="cmt.comment"
+          :personne_id="cmt.personne_id"
+          :comment_id="cmt.id"
+          :created_at="cmt.created_at"
+          :full_name="cmt.full_name"
+          :post_id="post.id"
+          :img="cmt.img"
+        />
+      </div>
+      <div class="flex space-x-2 my-4 py-2">
         <img
           :src="img_avatar + user_info.img"
           alt="img"
@@ -670,7 +704,7 @@
         <button
           v-if="inp_cpmment"
           @click="
-            postComment([user_id, post.id, inp_cpmment, token]);
+            postComment([user_id, post_id, inp_cpmment, token]);
             inp_cpmment = '';
           "
         >
@@ -687,63 +721,51 @@
           </svg>
         </button>
       </div>
-      <div v-if="comments.length" class="text-left max-h-96 overflow-y-auto ">
-        <div class="h-full">
-          <AppComment
-            v-for="cmt in post.comment"
-            :key="cmt.id"
-            :post_id="post.id"
-            :comment_body="cmt.comment"
-            :personne_id="cmt.personne_id"
-            :comment_id="cmt.id"
-            :created_at="cmt.created_at"
-            :full_name="cmt.full_name"
-            :img="cmt.img"
-          />
-        </div>
-      </div>
     </div>
-    <!--    <Appload v-else class="my-2" />-->
   </div>
 </template>
+
 <script>
+import Swal from "sweetalert2";
 import AppComment from "@/components/profil/AppComment";
-import AppAvatare from "@/components/UserIntro/AppAvatar";
-import AppProfileLoad from "@/components/dataload/AppProfilLoad";
-import Appload from "@/components/dataload/ApploadCard";
+import AppImage from "@/components/profil/AppImage";
 import { mapActions, mapGetters } from "vuex";
 export default {
-  props: ["personne_id", "post"],
-  emits: ["sendPost"],
+  name: "AppPostProblem",
+  props: [
+    "personne_id",
+    "post_id",
+    "title",
+    "description",
+    "created_at",
+    "like",
+    "comment",
+    "post",
+    "image",
+  ],
+  emits: ["showPost"],
   components: {
     AppComment,
-    AppAvatare,
-    AppProfileLoad,
-    Appload,
+    AppImage,
   },
-  name: "AppPostProfile",
+
   data() {
     return {
-      loading: undefined,
       img_avatar: "http://127.0.0.1:8000",
-      likess: this.post.like.length,
-      like_id: this.post.like,
-      comments: this.post.comment,
-      comments_length: this.post.comment.length,
+      like_id: this.like,
       inp_cpmment: "",
       user_id: this.personne_id,
+      data_post_id: this.post_id,
       token: localStorage.getItem("user_token"),
-      postProfile: this.post.post_profil,
+      postProfile: this.post_profil,
       checkLike: true,
       post_p: this.post,
-      image_post: this.post.img_post,
+      image_post: this.image,
       gridNumber: "grid-cols-1",
-      Allpost: this.posts,
       dropdownOpen: false,
-      checkEditPost: false,
       editProc: false,
-      inp_title: this.post.titre,
-      inp_description: this.post.description,
+      inp_title: this.title,
+      inp_description: this.description,
       editPublic: false,
       open: false,
       publicPost: false,
@@ -751,13 +773,26 @@ export default {
       showlike: false,
     };
   },
+  watch: {},
   methods: {
-    ...mapActions(["postComment", "addLike", "UnLike", "updatePost"]),
+    ...mapActions([
+      "postComment",
+      "addLike",
+      "UnLike",
+      "updatePost",
+      "getLikePost",
+      "deletePost",
+    ]),
 
     showAlert() {
       // Use sweetalert2
       if (this.inp_title.length > 3 && this.inp_description.length > 5) {
-        this.updatePost([this.post_p.id, this.inp_title, this.inp_description]);
+        this.updatePost([
+          this.post_p.id,
+          this.inp_title,
+          this.inp_description,
+          this.Audience,
+        ]);
         Swal.fire({
           position: "center",
           icon: "success",
@@ -774,14 +809,24 @@ export default {
         });
       }
     },
+
+    showLikePersonne() {
+      let box = "";
+      this.like.forEach((element) => {
+        box += `<span >
+          ${element.nom} ${element.prenom}
+        </span> <br />`;
+      });
+    },
+
     edit() {
       this.editProc = true;
       this.dropdownOpen = false;
     },
     editCancel() {
       this.editProc = false;
-      this.inp_title = this.title;
-      this.inp_description = this.description;
+      inp_title = this.title;
+      inp_description = this.description;
     },
     checkLikesId(likes) {
       var selfe = this;
@@ -791,25 +836,19 @@ export default {
         }
       });
     },
-    checkEdit(post) {
-      var selfe = this;
-      if (post.personne_id == selfe.user_id) {
-        selfe.checkEditPost = true;
-      } else {
-        selfe.checkEditPost = false;
-      }
+    convertTime(time) {
+      let res = moment(time, "YYYY-MM-DD HH:mm:ss");
+      return res.fromNow();
     },
 
     clickLike(post_id, personne_id, token) {
       if (this.addLike([post_id, personne_id, token])) {
         this.checkLike = false;
-        this.likess++;
       }
     },
     clickUnLike(post_id, personne_id, token) {
       if (this.UnLike([post_id, personne_id, token])) {
         this.checkLike = true;
-        this.likess--;
       }
     },
     checkImg() {
@@ -821,13 +860,15 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["user_token", "user_info", "posts_personne"]),
+    ...mapGetters(["user_info", "postsProblem"]),
   },
-  beforeMount() {
-    this.checkEdit(this.post_p);
+  created() {
     this.checkLikesId(this.like_id);
     this.checkImg();
   },
-  created() {},
 };
 </script>
+
+<style scoped>
+/* The Modal (background) */
+</style>

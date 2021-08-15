@@ -1,12 +1,11 @@
 <template>
-  <div class="home bg-gray-100 ">
-    
-    <AppCardOne />
-    <div class=" w-3/6 mx-auto my-2" style="min-width:375px">
-      <AppCreatePost v-if="token" />
+  <div class=" bg-gray-100 mt-3 py-4 ">
+    <div class=" w-3/6 mx-auto my-2" style="min-width:390px">
+      <AppEditeur v-if="token"  />
       <Appload v-if="loading" class="my-2" />
-      <AppPostProfile
-        v-for="post in allPostProfile"
+
+      <AppPostProblem
+        v-for="post in allPostProblem"
         :key="post.id"
         :post="post"
         :personne_id="user_info.id"
@@ -117,7 +116,6 @@
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -125,14 +123,16 @@
 // @ is an alias to /src
 import AppCardOne from "@/components/cards/appCardOne";
 import AppCreatePost from "@/components/profil/AppCreatePost";
-import AppPostProfile from "@/components/post/PostProfile/AppPostProfile";
+import AppPostProblem from "@/components/post/postProblem/AppAllPostProblem";
 import Appload from "@/components/dataload/ApploadCard";
 import AppComment from "@/components/profil/AppComment";
 import AppImage from "@/components/profil/AppImage";
+import AppEditeur from "@/components/post/postProblem/AppEditor";
+import Swal from "sweetalert2";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "Home",
+  name: "ProblemPost",
   data() {
     return {
       page: 2,
@@ -145,13 +145,14 @@ export default {
   components: {
     AppCardOne,
     AppCreatePost,
-    AppPostProfile,
+    AppPostProblem,
     Appload,
     AppImage,
     AppComment,
+    AppEditeur,
   },
   methods: {
-    ...mapActions(["AllPost", "fetchUser"]),
+    ...mapActions(["fetchAllPostProblem", "fetchUser"]),
 
     clickPostExit() {
       // Get the modal
@@ -189,17 +190,22 @@ export default {
       this.show_post = false;
     },
     handleScrolledToBottom(isVisible) {
-      if (!isVisible || this.allPostsPages < this.page) return;
-      else this.AllPost(this.page++);
+      if (!isVisible || this.allPostsProblemHomePages < this.page) return;
+      else this.fetchAllPostProblem(this.page++);
     },
   },
   computed: {
-    ...mapGetters(["allPostProfile", "user_info", "loading", "allPostsPages"]),
+    ...mapGetters([
+      "allPostProblem",
+      "user_info",
+      "loading",
+      "allPostsProblemHomePages",
+    ]),
   },
   created() {
     if (localStorage.getItem("user_token")) {
       this.fetchUser([this.id_apprenant, this.token]);
-      this.AllPost();
+      this.fetchAllPostProblem();
     }
   },
 };

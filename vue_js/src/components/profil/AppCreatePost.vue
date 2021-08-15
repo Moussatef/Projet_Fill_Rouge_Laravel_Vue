@@ -18,6 +18,7 @@
           placeholder="Write something to Roland…"
         />
         <hr />
+        
       </div>
       <div v-if="addImg || title" class="w-full post-div">
         <textarea
@@ -135,10 +136,9 @@ export default {
   },
   
   methods: {
-    ...mapActions(["newPost"]),
+    ...mapActions(["newPostProblem"]),
     sendData() {
       let data = {
-        personne_id: localStorage.getItem("personne_id"),
         titre: this.title,
         description: this.description,
         img_one: this.image[0],
@@ -146,7 +146,7 @@ export default {
         img_three: this.image[2],
         img_fore: this.image[3],
       };
-      this.newPost(data);
+      this.newPostProblem(data);
       this.imagepreview[0] = null;
       this.title = "";
       this.description = "";

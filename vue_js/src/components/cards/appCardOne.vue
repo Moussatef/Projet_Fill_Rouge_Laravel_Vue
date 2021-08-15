@@ -6,10 +6,10 @@
       >
         <div>
            
-          <h1 class="text-4xl mb-5 font-bold">
+          <p  class=" sm:text-md md:text-md lg:text-4xl mb-5 font-bold">
             Formation  en programmation informatique <span class="text-gray-800">100%</span>  Gratuite.
-          </h1>
-          <h2 class="text-sm mb-12">
+          </p>
+          <p class="text-sm mb-12">
             Le numérique et les nouvelles technologies sont partout autour de
             nous, mais leurs codes et leurs langages ne sont pas toujours
             naturels et innés pour tous. La fracture entre ceux qui parlent le «
@@ -17,7 +17,7 @@
             très grande. C’est pourquoi YouCode veut mettre le code entre toutes
             les mains pour réduire les inégalités numériques et donner sa chance
             à tout un chacun.
-          </h2>
+          </p>
           <div class="flex">
             <div class="mr-8">
               <p class="text-2xl font-bold">10k+</p>

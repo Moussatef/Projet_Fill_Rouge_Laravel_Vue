@@ -2,37 +2,53 @@ import axios from "axios";
 
 const state = {
     postsProfile: [],
+    postsProblem: [],
     allPostProfile: [],
+    allPostProblem: [],
+    categorie: [],
     loading: !!localStorage.getItem('user_token'),
     err: false,
     nb_like: null,
     nb_comment: null,
     nb_post: null,
     loadingInfo: true,
-    allPostsPages:1
+    allPostsPages: 1,
+    allPostsProfilePages: 1,
+    allPostsProblemPages: 1,
+    allPostsProblemHomePages: 1,
 }
 
 const getters = {
     posts_personne: state => state.postsProfile,
+    postsProblem: state => state.postsProblem,
     allPostProfile: state => state.allPostProfile,
+    allPostProblem: state => state.allPostProblem,
     loading: state => state.loading,
     nb_like: state => state.nb_like,
     nb_comment: state => state.nb_comment,
     nb_post: state => state.nb_post,
     loadingInfo: state => state.loadingInfo,
-    allPostsPages:state=>state.allPostsPages
+    allPostsPages: state => state.allPostsPages,
+    allPostsProfilePages: state => state.allPostsProfilePages,
+    allPostsProblemPages: state => state.allPostsProblemPages,
+    allPostsProblemHomePages: state => state.allPostsProblemHomePages,
+    categorie: state => state.categorie,
 }
 const actions = {
-    async fetchPosts({ commit }, param) {
+    async fetchPosts({ commit }, page = 1) {
         const config = {
             headers: {
                 Accept: "application/json",
-                Authorization: `Bearer ${param[1]}`
+                Authorization: `Bearer ${localStorage.getItem('user_token')}`
             }
         };
-        await axios.get(`http://127.0.0.1:8000/api/profile/post/${param[0]}`, config).
-            then(response => { commit('setPosts', response.data.data); state.loading = false;
-            //  console.log(response.data.data); 
+        await axios.get(`http://127.0.0.1:8000/api/profile/post?page=${page}`, config).
+            then(response => {
+                commit('setPosts', response.data.data);
+                commit('setallPostsProfilePages', response.data.meta.last_page);
+
+                state.loading = false;
+                //  console.log(response.data.data); 
             }).
             catch(err => {
                 state.loading = false;
@@ -41,46 +57,31 @@ const actions = {
             });
     },
 
-    async getStatistics({ commit }) {
+
+    async fetchPostsProblem({ commit }, page = 1) {
         const config = {
             headers: {
                 Accept: "application/json",
                 Authorization: `Bearer ${localStorage.getItem('user_token')}`
             }
         };
+        await axios.get(`http://127.0.0.1:8000/api/problem/post?page=${page}`, config).
+            then(response => {
+                commit('setPostsProblem', response.data.data);
 
-        const response = await axios.get(`http://127.0.0.1:8000/api/profile/static/${localStorage.getItem('personne_id')}`, config);
-        // console.log(response)
-        commit('setStatistic', response.data);
-        state.loadingInfo = false;
+                commit('setPostsProblemPage', response.data.meta.last_page);
 
-    },
-
-    async newPost({ commit }, params) {
-        let token = localStorage.getItem('user_token')
-        var data = new FormData()
-        for (let param in params) {
-            data.append(param, params[param])
-        }
-        await axios.post(`http://127.0.0.1:8000/api/profile/post/add`, data, {
-            headers: {
-                Accept: "application/json",
-                Authorization: `Bearer  ${token}`
-            }
-        }).then(response => {
-            commit('addPosts', response.data.data);
-             state.loading = false;
-            // console.log(response.data.data); 
-        }).
+                state.loading = false;
+                console.log(response.data.data);
+            }).
             catch(err => {
                 state.loading = false;
                 state.err = true;
                 console.log(err);
-            })
-
+            });
     },
 
-    async AllPost({ commit },page=1) {
+    async AllPost({ commit }, page = 1) {
         let token = localStorage.getItem('user_token')
 
         const response = await axios.get(`http://127.0.0.1:8000/api/home/post/all?page=${page}`, {
@@ -98,6 +99,102 @@ const actions = {
             console.log(response);
         }
     },
+
+    async fetchAllPostProblem({ commit }, page = 1) {
+        let token = localStorage.getItem('user_token')
+        const response = await axios.get(`http://127.0.0.1:8000/api/problem/post/all?page=${page}`, {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer  ${token}`
+            }
+        });
+        if (response.status === 200) {
+            // console.log(response);
+            commit('setAllPostsProblem', response.data.data);
+            commit('setAllPostsProblemPageLimit', response.data.meta.last_page);
+            state.loading = false;
+        } else {
+            console.log(response);
+        }
+    },
+
+    async getStatistics({ commit }) {
+        const config = {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem('user_token')}`
+            }
+        };
+
+        const response = await axios.get(`http://127.0.0.1:8000/api/profile/static/${localStorage.getItem('personne_id')}`, config);
+        // console.log(response)
+        commit('setStatistic', response.data);
+        state.loadingInfo = false;
+
+    },
+
+    async getCategorie({ commit }) {
+        const config = {
+            headers: {
+                Accept: "application/json",
+            }
+        };
+
+        const response = await axios.get(`http://127.0.0.1:8000/api/categorie`, config);
+        // console.log(response)
+        commit('setCategorie', response.data);
+
+    },
+
+    async newPost({ commit }, params) {
+        let token = localStorage.getItem('user_token')
+        var data = new FormData()
+        for (let param in params) {
+            data.append(param, params[param])
+        }
+        await axios.post(`http://127.0.0.1:8000/api/profile/post/add`, data, {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer  ${token}`
+            }
+        }).then(response => {
+
+            commit('addPosts', response.data.data);
+
+            // console.log(response.data.data); 
+        }).
+            catch(err => {
+                state.loading = false;
+                state.err = true;
+                console.log(err);
+            })
+
+    },
+    async newPostProblem({ commit }, params) {
+        let token = localStorage.getItem('user_token')
+        var data = new FormData()
+        for (let param in params) {
+            data.append(param, params[param])
+        }
+        await axios.post(`http://127.0.0.1:8000/api/problem/post/add`, data, {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer  ${token}`
+            }
+        }).then(response => {
+            commit('addPostProblem', response.data.data);
+            state.loading = false;
+            // console.log(response.data.data); 
+        }).
+            catch(err => {
+                state.loading = false;
+                state.err = true;
+                console.log(err);
+            })
+
+    },
+
+
 
     async updatePost({ commit }, params) {
         let token = localStorage.getItem('user_token')
@@ -238,7 +335,17 @@ const actions = {
 const mutations = {
     setPosts: (state, postsProfile) => {
         state.loading = false;
-        (state.postsProfile = postsProfile)
+        (state.postsProfile.push(...postsProfile))
+
+    },
+    setPostsProblem: (state, postsProblem) => {
+        state.loading = false;
+        (state.postsProblem.push(...postsProblem))
+
+    },
+    setAllPostsProblem: (state, postsProblem) => {
+        state.loading = false;
+        (state.allPostProblem.push(...postsProblem))
 
     },
 
@@ -248,9 +355,16 @@ const mutations = {
         state.allPostProfile.unshift(addPost[0]);
     },
 
+    addPostProblem: function (state, addPost) {
+        state.postsProblem.unshift(addPost[0]);
+    },
+
     updatePostData: function (state, putPost) {
         state.postsProfile.splice(state.postsProfile.findIndex(el => el.id == putPost.id), 1, putPost);
         state.allPostProfile.splice(state.allPostProfile.findIndex(el => el.id == putPost.id), 1, putPost);
+        state.postsProblem.splice(state.postsProblem.findIndex(el => el.id == putPost.id), 1, putPost);
+        state.postsProblem.splice(state.postsProblem.findIndex(el => el.id == putPost.id), 1, putPost);
+        
     },
 
 
@@ -261,7 +375,25 @@ const mutations = {
     },
 
     setAllPostsPageLimit: (state, allPostsPages) => {
-        state.allPostsPages=allPostsPages;
+        state.allPostsPages = allPostsPages;
+    },
+
+    setPostsProblemPage: (state, allPostsProblemPages) => {
+        state.allPostsProblemPages = allPostsProblemPages;
+    },
+
+    setallPostsProfilePages: (state, allPostsProfilePages) => {
+        state.allPostsProfilePages = allPostsProfilePages;
+    },
+
+    setAllPostsProblemPageLimit: (state, allPostsProblemHomePages) => {
+        state.allPostsProblemHomePages = allPostsProblemHomePages;
+    },
+
+
+
+    setCategorie: (state, categorie) => {
+        state.categorie = categorie;
     },
 
 

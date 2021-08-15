@@ -19,13 +19,15 @@ use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
 
-    public function getAdminInfo(){
+    public function getAdminInfo()
+    {
         return Auth::user();
     }
-    public function updateAdminInfo(Request $request){
-        $this->validate($request,[
+    public function updateAdminInfo(Request $request)
+    {
+        $this->validate($request, [
             "admin_name"  => "required",
-            "email"=>"required|email",
+            "email" => "required|email",
         ]);
 
         $admin = Admin::find(1);
@@ -37,15 +39,16 @@ class AdminController extends Controller
 
         return $admin;
     }
-    public function updateAdminPassword(Request $request){
-        $this->validate($request,[
-            "old_password"=>"required",
-            "new_password"=>"required"
+    public function updateAdminPassword(Request $request)
+    {
+        $this->validate($request, [
+            "old_password" => "required",
+            "new_password" => "required"
         ]);
 
         $admin = Admin::find(1);
-        if(!Hash::check($request->input('old_password'),$admin->password))
-            return response(["message"=>"old password is incorrect"],401);
+        if (!Hash::check($request->input('old_password'), $admin->password))
+            return response(["message" => "old password is incorrect"], 401);
 
         $admin->password = bcrypt($request->input('new_password'));
 
@@ -58,8 +61,9 @@ class AdminController extends Controller
         $apprenant = ApprenantResource::collection(Apprenant::all());
         return $apprenant;
     }
-    public function validateApprenant(Request $request){
-        $this->validate($request,[
+    public function validateApprenant(Request $request)
+    {
+        $this->validate($request, [
             "personne_id"  => "required"
         ]);
 
@@ -69,7 +73,7 @@ class AdminController extends Controller
 
         $personne->save();
 
-        $apprenant = ApprenantResource::collection(Apprenant::where('personne_id' ,'=', $personne->id)->get());
+        $apprenant = ApprenantResource::collection(Apprenant::where('personne_id', '=', $personne->id)->get());
         return $apprenant;
     }
 
@@ -96,8 +100,17 @@ class AdminController extends Controller
 
         return $response;
     }
-    public function getAllPosts(){
+    public function getAllPosts()
+    {
         return PostResource::collection(Post::paginate(10));
+    }
+
+    public function block_apprenant($id)
+    {
+        $personne = Personne::find($id);
+        $personne->validation = 0;
+        $personne->save();
+        return response($personne);
     }
 
     public function destroy(Request  $request)

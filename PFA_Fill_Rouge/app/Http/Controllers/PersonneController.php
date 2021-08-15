@@ -180,14 +180,14 @@ class PersonneController extends Controller
 
         $personne = Personne::find($request->id);
 
-        if ( Hash::check($request->old_password, $personne->password) ) {
+        if (Hash::check($request->old_password, $personne->password)) {
             $personne->password = bcrypt($request->password);
             if ($personne->save())
                 return $personne;
             else
-                return response('error',500);
+                return response('error', 500);
         } else
-            return response('error',401);
+            return response('error', 401);
     }
 
     public function updateInfoSoc(Request $request)
@@ -226,15 +226,13 @@ class PersonneController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request  $request)
+    public function destroy($id)
     {
-        $fields = $request->validate([
-            'id_personne' => 'required|integer',
-        ]);
         //Delete personne from data base
-        if (personne::destroy($fields['id_personne']))
-            return "Perssone successfuly deleted";
-        else
-            "persson not found";
+        $personne = Personne::find($id);
+
+        $personne->delete();
+
+        return "Perssone successfuly deleted";
     }
 }

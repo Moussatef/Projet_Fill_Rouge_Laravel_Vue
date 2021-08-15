@@ -257,7 +257,7 @@
 								43.2-13.9 83.2-37.3 115.9z"
               ></path>
             </svg>
-            <span class="ml-4 capitalize">mon profil</span>
+            <span class="ml-4 capitalize" @click="$emit('open_app_profile')">mon profil</span>
           </span>
         </button>
       </li>

@@ -523,15 +523,7 @@
         <hr />
 
         <div class="w-full post-div">
-          <textarea
-            v-model="inp_description"
-            class="border-b-2 w-full my-3 focus:outline-none rounded-md"
-            name="description"
-            id=""
-            cols="30"
-            rows="10"
-            placeholder="Write description"
-          ></textarea>
+          <AppQuile :desc="inp_description" @content='fill_desc' />
           <button
             @click="showAlert"
             class="
@@ -880,6 +872,7 @@
 import Swal from "sweetalert2";
 import AppComment from "@/components/profil/AppComment";
 import AppImage from "@/components/profil/AppImage";
+import AppQuile from "@/components/post/postProblem/AppQuile";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "AppPostProblem",
@@ -898,6 +891,7 @@ export default {
   components: {
     AppComment,
     AppImage,
+    AppQuile
   },
 
   data() {
@@ -934,6 +928,12 @@ export default {
       "getLikePost",
       "deletePost",
     ]),
+
+    fill_desc(param){
+      if(param){
+        this.inp_description = param[0]
+      }
+    },
 
     showAlert() {
       // Use sweetalert2
@@ -987,11 +987,6 @@ export default {
         }
       });
     },
-    convertTime(time) {
-      let res = moment(time, "YYYY-MM-DD HH:mm:ss");
-      return res.fromNow();
-    },
-
     clickLike(post_id, personne_id, token) {
       if (this.addLike([post_id, personne_id, token])) {
         this.checkLike = false;

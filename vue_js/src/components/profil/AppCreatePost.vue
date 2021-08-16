@@ -18,7 +18,6 @@
           placeholder="Write something to Roland…"
         />
         <hr />
-        
       </div>
       <div v-if="addImg || title" class="w-full post-div">
         <textarea
@@ -120,7 +119,7 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "AppCreatePost",
-  
+
   data() {
     return {
       title: "",
@@ -131,12 +130,11 @@ export default {
       image: [],
       cmp: 0,
       addImg: false,
-      
     };
   },
-  
+
   methods: {
-    ...mapActions(["newPostProblem"]),
+    ...mapActions(["newPost"]),
     sendData() {
       let data = {
         titre: this.title,
@@ -146,7 +144,7 @@ export default {
         img_three: this.image[2],
         img_fore: this.image[3],
       };
-      this.newPostProblem(data);
+      this.newPost(data);
       this.imagepreview[0] = null;
       this.title = "";
       this.description = "";

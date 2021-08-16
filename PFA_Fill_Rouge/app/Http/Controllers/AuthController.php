@@ -76,7 +76,7 @@ class AuthController extends Controller
 
         if (!$personne->validation) {
             return response([
-                'message' => 'You are not validate sorry !!!'
+                'message' => "votre compte n'est pas valide !!!"
             ], 401);
         }
 

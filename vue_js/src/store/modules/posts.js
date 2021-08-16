@@ -212,7 +212,7 @@ const actions = {
         });
         if (response.status === 200) {
             // console.log(response);
-            commit('updatePostData', response.data);
+            commit('updatePostData', response.data.data[0]);
         } else {
             console.log(response);
         }
@@ -360,11 +360,16 @@ const mutations = {
     },
 
     updatePostData: function (state, putPost) {
-        state.postsProfile.splice(state.postsProfile.findIndex(el => el.id == putPost.id), 1, putPost);
-        state.allPostProfile.splice(state.allPostProfile.findIndex(el => el.id == putPost.id), 1, putPost);
-        state.postsProblem.splice(state.postsProblem.findIndex(el => el.id == putPost.id), 1, putPost);
-        state.postsProblem.splice(state.postsProblem.findIndex(el => el.id == putPost.id), 1, putPost);
-        
+        if (!putPost.categorie) {
+            state.postsProfile.splice(state.postsProfile.findIndex(el => el.id == putPost.id), 1, putPost);
+            state.allPostProfile.splice(state.allPostProfile.findIndex(el => el.id == putPost.id), 1, putPost);
+        } else {
+            state.postsProblem.splice(state.postsProblem.findIndex(el => el.id == putPost.id), 1, putPost);
+            state.allPostProblem.splice(state.allPostProblem.findIndex(el => el.id == putPost.id), 1, putPost);
+        }
+
+        // console.log(putPost.categorie);
+
     },
 
 

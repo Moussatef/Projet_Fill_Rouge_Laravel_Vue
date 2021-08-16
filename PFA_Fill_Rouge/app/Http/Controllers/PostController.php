@@ -83,14 +83,14 @@ class PostController extends Controller
         $this->validate($request, [
             'titre' => 'required|string|max:60',
             'description' => 'required|string|max:500',
-            'personne_id' => 'required',
+
 
         ]);
 
         $post = new Post;
         $post->titre = $request->titre;
         $post->description = $request->description;
-        $post->personne_id = $request->personne_id;
+        $post->personne_id = auth()->id();
 
         if ($post->save()) {
             $post->postProfil()->create();
@@ -207,10 +207,10 @@ class PostController extends Controller
         else
             $post->public = 0;
         if ($post->save()) {
-            $post = PostResource::collection(Post::where('id', '=', $post->id)->get());
+            $post = PostResource::collection(Post::where('id', '=', $post->id)->paginate(10));
             return $post;
         } else
-            return response('noting do ');
+            return response('noting do ', 500);
     }
 
     public function getTotals($id)

@@ -16,7 +16,7 @@ export default {
 };
 </script>
 
-<style >
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -27,15 +27,13 @@ export default {
 
 #nav {
   padding: 30px;
-
 }
- #nav  a {
-    font-weight: bold;
-
-  }
-   #nav a.router-link-exact-active {
-      color: #ffffff;
-      background: #0864ee;
-      box-shadow: 3px 4px 10px 2px rgb(165, 165, 165);
-    }
+#nav a {
+  font-weight: bold;
+}
+#nav a.router-link-exact-active {
+  color: #ffffff;
+  /* background: #0864ee; */
+  /* box-shadow: 3px 4px 10px 2px rgb(165, 165, 165); */
+}
 </style>

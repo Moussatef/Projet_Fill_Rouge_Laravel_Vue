@@ -67,7 +67,7 @@
     <!-- sm:truncate -->
 <div class="w-full overflow-hidden relative ">
   <p
-      class="leading-relaxed break-words text-left   overflow-auto  md:mb-2  ml-14   "
+      class="leading-relaxed break-words text-left   overflow-auto  md:mb-2  ml-14  text-gray-600 "
     >
       {{ comment_body }}
     </p>

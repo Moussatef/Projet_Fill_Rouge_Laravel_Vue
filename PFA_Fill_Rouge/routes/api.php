@@ -95,6 +95,7 @@ Route::group(['middleware' => ['auth:sanctum', 'type.user']], function () {
     Route::post('/profile/post/update/{id}', [PostController::class, 'update']);
     //delete post
     Route::post('/profile/post/delete/{id}', [PostController::class, 'destroy']);
+    Route::post('/problem/post/delete/{id}', [PostController::class, 'destroyProblem']);
     //delete comment
     Route::post('/profile/post/comment/delete', [CommentController::class, 'destroy']);
     //get all posts
@@ -106,6 +107,10 @@ Route::group(['middleware' => ['auth:sanctum', 'type.user']], function () {
 
     Route::get('/categories', [\App\Http\Controllers\CategorieController::class, 'index']);
 });
+
+
+
+//Admin route
 Route::group(['middleware' => ['auth:sanctum', 'type.admin']], function () {
     Route::prefix('admin')->group(function () {
         Route::get('info', [AdminController::class, 'getAdminInfo']);

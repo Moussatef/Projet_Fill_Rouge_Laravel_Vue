@@ -6,12 +6,12 @@
       <div class="flex justify-between items-center">
         <div class="flex items-center">
           <img
-            :src="img_avatar + post.img"
+            :src="img_avatar + user_info.img"
             alt="img"
             class="h-10 w-10 rounded-full border  border-blue-500"
           />
           <div class="ml-4">
-            <span class="cursor-pointer font-bold">{{ post.full_name }} </span>
+            <span class="cursor-pointer font-bold">{{ user_info.nom }} {{ user_info.prenom}} </span>
             <span class="text-grey text-opacity-50 text-sm mx-3">
               {{ created_at }}
             </span>

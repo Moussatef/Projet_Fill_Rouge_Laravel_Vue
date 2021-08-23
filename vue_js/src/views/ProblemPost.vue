@@ -20,7 +20,7 @@
       <div class="modal-contentPost shadow-lg">
         <span @click="clickPostExit()" class="closePost">&times;</span>
         <div v-if="post" class="flex justify-center">
-          <div class=" w-3/6">
+          <div class=" w-3/6 border border-gray-200 rounded-2xl shadow-2xl ">
             <div class="flex items-center m-4">
               <img
                 :src="'http://127.0.0.1:8000' + post.img"
@@ -40,9 +40,7 @@
               <h2 class="text-2xl text-gray-900">
                 {{ post.titre }}
               </h2>
-              <p>
-                {{ post.description }}
-              </p>
+              <div class="text-gray-900 text-left my-8 mx-3" v-html="post.description"></div>
               <hr />
             </div>
             <div class="flex border-b-2 mx-3 rounded-lg  border-blue-300 my-4">
@@ -110,7 +108,7 @@
               />
             </div>
           </div>
-          <div class="w-full p-2 mx-auto ">
+          <div class="w-full my-auto p-2 mx-auto ">
             <AppImage v-for="img in post.img_post" :key="img.id" :image="img" />
           </div>
         </div>

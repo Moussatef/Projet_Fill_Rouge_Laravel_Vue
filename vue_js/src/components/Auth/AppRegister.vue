@@ -115,32 +115,32 @@
                   </div>
                 </div>
               </div>
+
               <div class="md:flex flex-row md:space-x-4 w-full text-xs">
                 <div class="mb-3 space-y-2 w-full text-xs">
-                  <label class="font-semibold text-gray-600 py-2"
-                    >Name <abbr title="required">*</abbr></label
-                  >
                   <input
                     v-model="inp_nom"
-                    placeholder="Name"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
+                    placeholder="Nom"
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                     required="required"
                     type="text"
                     name="name"
                     id="name"
                   />
+                  <label
+                    for="name"
+                    class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500 "
+                    >Enter name</label
+                  >
                   <p class="text-red text-xs hidden">
                     Please fill out this field.
                   </p>
                 </div>
                 <div class="mb-3 space-y-2 w-full text-xs">
-                  <label class="font-semibold text-gray-600 py-2"
-                    >Last Name <abbr title="required">*</abbr></label
-                  >
                   <input
                     v-model="inp_prenom"
-                    placeholder="last Name"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
+                    placeholder="Prenom"
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                     required="required"
                     type="text"
                     name="lastname"
@@ -153,14 +153,11 @@
               </div>
 
               <div class="md:flex flex-row md:space-x-4 w-full text-xs">
-                <div class="mb-3 space-y-2 w-1/2 text-xs">
-                  <label class="font-semibold text-gray-600 py-2"
-                    >Email <abbr title="required">*</abbr></label
-                  >
+                <div class="mb-3 space-y-2 lg:w-1/2 sm:w-full text-xs">
                   <input
                     v-model="inp_email"
                     placeholder="Email "
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                     required="required"
                     type="email"
                     name="email"
@@ -170,13 +167,10 @@
                     Please fill out this field.
                   </p>
                 </div>
-                <div class="mb-3 space-y-2 w-1/2 text-xs">
-                  <label class="font-semibold text-gray-600 py-2"
-                    >Campus <abbr title="required">*</abbr></label
-                  >
+                <div class="mb-3 space-y-2 lg:w-1/2 sm:w-full text-xs">
                   <select
                     id="campus_form"
-                    class="form-select  block w-full border border-gray-400 rounded-lg  h-10 px-4"
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-blue-500 border-gray-200"
                   >
                     <option
                       v-for="cmp in campus"
@@ -190,13 +184,10 @@
 
               <div class="md:flex flex-row md:space-x-4 w-full text-xs">
                 <div class="mb-3 space-y-2 w-full text-xs">
-                  <label class="font-semibold text-gray-600 py-2"
-                    >Password <abbr title="required">*</abbr></label
-                  >
                   <input
                     v-model="inp_password"
-                    placeholder="Email "
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
+                    placeholder="Password "
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                     required="required"
                     type="password"
                     name="password"
@@ -207,14 +198,10 @@
                   </p>
                 </div>
                 <div class="mb-3 space-y-2 w-full text-xs">
-                  <label class="font-semibold text-gray-600 py-2"
-                    >Password Confirmation
-                    <abbr title="required">*</abbr></label
-                  >
                   <input
                     v-model="inp_password_confirmation"
                     placeholder="Password Confirmation "
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                     required="required"
                     type="password"
                     name="password_confirmation"
@@ -228,17 +215,14 @@
 
               <div>
                 <div class="mb-3 space-y-2 w-full text-xs">
-                  <label class="font-semibold text-gray-600 py-2"
-                    >Telephone <abbr title="required">*</abbr></label
-                  >
                   <input
                     v-model="inp_telephon"
                     placeholder="Telephon +212..."
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                     required="required"
                     type="text"
-                    name="tele"
-                    id="tele"
+                    name="phone"
+                    id="phone"
                   />
                   <p class="text-red text-xs hidden">
                     Please fill out this field.
@@ -250,7 +234,7 @@
                   >
                   <input
                     v-model="inp_date_N"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                     required="required"
                     type="date"
                     name="dateBirth"
@@ -261,18 +245,15 @@
                   </p>
                 </div>
               </div>
-              <div>
-                <label for="">Info Optionile</label>
+              <div class="my-6 py-2 border-b-2 rounded-lg border-blue-500">
+                <label for="">Infomation Optionile</label>
               </div>
               <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
                 <div class="w-full flex flex-col mb-3">
-                  <label class="font-semibold text-gray-600 py-2"
-                    >Address</label
-                  >
                   <input
                     v-model="inp_adresse"
                     placeholder="Address"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                     type="text"
                     name="integration[street_address]"
                     id="integration_street_address"
@@ -281,11 +262,10 @@
               </div>
               <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
                 <div class="w-full flex flex-col mb-3">
-                  <label class="font-semibold text-gray-600 py-2">GitHub</label>
                   <input
                     v-model="inp_github"
                     placeholder="GitHub"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                     type="text"
                     name="link_Git"
                     id="integration_street_address"
@@ -293,13 +273,10 @@
                 </div>
 
                 <div class="w-full flex flex-col mb-3">
-                  <label class="font-semibold text-gray-600 py-2"
-                    >LinkedIn</label
-                  >
                   <input
                     v-model="inp_linkedin"
                     placeholder="LinkedIn"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                     type="text"
                     name="link_linkedin"
                     id="integration_street_address"
@@ -309,13 +286,10 @@
 
               <div class="md:flex md:flex-row md:space-x-4 w-full text-xs">
                 <div class="w-full flex flex-col mb-3">
-                  <label class="font-semibold text-gray-600 py-2"
-                    >Facebook</label
-                  >
                   <input
                     v-model="inp_facebook"
                     placeholder="Facebook"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                     type="text"
                     name="link_face"
                     id="integration_street_address"
@@ -323,13 +297,10 @@
                 </div>
 
                 <div class="w-full flex flex-col mb-3">
-                  <label class="font-semibold text-gray-600 py-2"
-                    >Instagram</label
-                  >
                   <input
                     v-model="inp_instagram"
                     placeholder="Instagram"
-                    class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg  h-10 px-4"
+                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
                     type="text"
                     name="link_insta"
                     id="integration_street_address"
@@ -337,22 +308,18 @@
                 </div>
               </div>
 
-              <div class="flex-auto w-full mb-1 text-xs space-y-2">
-                <label class="font-semibold text-gray-600 py-2">Bio</label>
+              <div class="flex-auto w-full my-4 text-xs space-y-2">
                 <textarea
                   v-model="inp_bio"
                   required=""
                   name="bio"
                   id="bio"
-                  class="w-full min-h-[100px] max-h-[300px] h-28 appearance-none block  bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg   p74 px-4"
-                  placeholder="Enter your comapny info"
+                  class="w-full min-h-[100px] max-h-[300px] h-28 p-4 appearance-none block  bg-grey-lighter text-grey-darker border border-gray-400 rounded-lg   p74 px-4 focus:outline-none"
+                  placeholder="ecrer votre bio"
                   spellcheck="false"
                 ></textarea>
               </div>
-              <p class="text-xs text-red-500 text-right my-3">
-                Required fields are marked with an asterisk
-                <abbr title="Required field">*</abbr>
-              </p>
+
               <div
                 class="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse"
               >
@@ -363,7 +330,7 @@
                 </button>
                 <button
                   @click="onUpload()"
-                  class="mb-2 md:mb-0 bg-green-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500"
+                  class="mb-2 md:mb-0 bg-blue-400 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-blue-500"
                 >
                   Save
                 </button>
@@ -385,11 +352,11 @@ export default {
     return {
       img_src: false,
       hidden: "hidden",
-      inp_nom: "",
-      inp_prenom: "",
+      inp_nom: null,
+      inp_prenom: null,
       inp_email: "",
-      inp_password: "",
-      inp_password_confirmation: "",
+      inp_password: null,
+      inp_password_confirmation: null,
       inp_telephon: "",
       inp_date_N: "",
       inp_adresse: "",
@@ -403,15 +370,19 @@ export default {
       selectedFile: null,
       selectedCover: null,
       inp_compus: "YouCode Safi",
-      imagepreview : null,
-      coverpreview : null,
+      imagepreview: null,
+      coverpreview: null,
     };
   },
   methods: {
-    ...mapActions(["registerApprenant", "uploadfile", "fetchCampus","addApprenant"]),
+    ...mapActions([
+      "registerApprenant",
+      "uploadfile",
+      "fetchCampus",
+      "addApprenant",
+    ]),
 
-    
-   imageSelected(e) {
+    imageSelected(e) {
       this.img_src = true;
       this.image = e.target.files[0];
 
@@ -423,7 +394,7 @@ export default {
     },
 
     onfileSelected(event) {
-      let selfe = this
+      let selfe = this;
       this.selectedFile = event.target.files[0];
 
       let reader = new FileReader();
@@ -434,13 +405,13 @@ export default {
       };
     },
     onCoverImgSelected(event) {
-      let selfe = this
+      let selfe = this;
       this.selectedCover = event.target.files[0];
 
       let reader = new FileReader();
       reader.readAsDataURL(this.selectedCover);
       reader.onload = (event) => {
-        selfe.hidden = 'bloc'
+        selfe.hidden = "bloc";
         this.coverpreview = event.target.result;
       };
     },
@@ -476,10 +447,6 @@ export default {
       if (response.status == 201) {
         const result = await response;
         // console.log(result.data);
-        // localStorage.setItem("user_token", result.data.personne.token);
-        // localStorage.setItem("user_id", result.data.apprenant);
-        // localStorage.setItem("personne_id", result.data.personne_id);
-        this.addApprenant(result.data)
         location.replace("/login");
       } else {
         console.log(result);
@@ -506,7 +473,7 @@ export default {
           this.inp_img,
           this.inp_img_cover,
           this.inp_bio,
-          campus
+          campus,
         ]);
       } else
         this.registerApprenant([
@@ -525,7 +492,7 @@ export default {
           this.inp_img,
           this.inp_img_cover,
           this.inp_bio,
-          campus
+          campus,
         ]);
     },
   },
@@ -539,3 +506,41 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.-z-1 {
+  z-index: -1;
+}
+
+.origin-0 {
+  transform-origin: 0%;
+}
+
+input:focus ~ label,
+input:not(:placeholder-shown) ~ label,
+textarea:focus ~ label,
+textarea:not(:placeholder-shown) ~ label,
+select:focus ~ label,
+select:not([value=""]):valid ~ label {
+  /* @apply transform; scale-75; -translate-y-6; */
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y))
+    rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y))
+    scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  --tw-scale-x: 0.75;
+  --tw-scale-y: 0.75;
+  --tw-translate-y: -1.5rem;
+}
+
+input:focus ~ label,
+select:focus ~ label {
+  /* @apply text-black; left-0; */
+  --tw-text-opacity: 1;
+  color: rgba(0, 0, 0, var(--tw-text-opacity));
+  left: 0px;
+}
+</style>

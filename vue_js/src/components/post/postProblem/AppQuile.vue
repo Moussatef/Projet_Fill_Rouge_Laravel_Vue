@@ -1,6 +1,7 @@
 <template>
   <div>
-    <quill-editor v-model:value="content" @input="$emit('content',[content])" :options="options"></quill-editor>
+    <quill-editor v-model:value="content"  @change="$emit('sendData',[content])" :options="options"></quill-editor>
+    {{content}}
   </div>
 </template>
 

@@ -243,8 +243,19 @@ class PostController extends Controller
         $post = Post::find($id)->delete();
         if ($post)
             return response(
-                PostResource::collection(Post::where('personne_id', '=', $request->id)->orderByDesc('created_at')->get()),
+                'delete successfuly',
                 200
+            );
+        else  response("filde deleted", 400);
+    }
+
+    public function destroyProblem(Request $request, $id)
+    {
+        //
+        $post = Post::find($id)->delete();
+        if ($post)
+            return response(
+                'delete successfuly',200
             );
         else  response("filde deleted", 400);
     }

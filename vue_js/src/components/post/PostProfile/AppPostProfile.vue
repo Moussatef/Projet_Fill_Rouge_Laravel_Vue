@@ -50,6 +50,7 @@
             </button>
 
             <button
+              @click="deletePost([post.id, post.personne_id])"
               class="w-full block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
             >
               Delete
@@ -469,7 +470,7 @@
         </div>
       </div>
       <div
-        class="flex justify-between mt-4 items-center text-fGrey text-opacity-50"
+        class="flex justify-between mt-4  text-fGrey text-opacity-50"
       >
         <div class="flex justify-center">
           <svg
@@ -502,7 +503,7 @@
               </g>
             </g>
           </svg>
-          <label class="mt-1">{{ likess }}</label>
+          <label class="mt-1 text-gray-500">{{ likess }}</label>
 
           <div>
             <!-- active & hover classes 'bg-indigo-100 dark:bg-indigo-600' -->
@@ -516,7 +517,7 @@
               :class="{ 'bg-indigo-100 dark:bg-indigo-600': showlike }"
               role="button"
             >
-              <span class="mx-2 text-sm"> Like </span>
+              <span class="mx-2 text-sm text-gray-500"> Like </span>
               <span class="ml-auto" aria-hidden="true">
                 <!-- active class 'rotate-180' -->
                 <svg
@@ -552,7 +553,7 @@
             </div>
           </div>
         </div>
-        <div>{{ comments.length }} Comment</div>
+        <div class="mt-1 text-gray-400">{{ comments.length }} Comment</div>
       </div>
       <div class="border border-gray-500 border-opacity-10 mt-4" />
       <div class="flex justify-between items-center mt-4">
@@ -752,7 +753,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["postComment", "addLike", "UnLike", "updatePost"]),
+    ...mapActions([
+      "postComment",
+      "addLike",
+      "UnLike",
+      "updatePost",
+      "deletePost",
+    ]),
 
     showAlert() {
       // Use sweetalert2

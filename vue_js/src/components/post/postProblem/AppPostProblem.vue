@@ -98,7 +98,7 @@
               Edit
             </button>
             <button
-              @click="deletePost([post.id, post.personne_id])"
+              @click="deletePostProblem([post.id, post.personne_id])"
               class="
                 w-full
                 block
@@ -523,7 +523,7 @@
         <hr />
 
         <div class="w-full post-div">
-          <AppQuile :desc="inp_description" @content='fill_desc' />
+          <AppQuile :desc="description" @sendData='fill_desc' />
           <button
             @click="showAlert"
             class="
@@ -910,7 +910,7 @@ export default {
       dropdownOpen: false,
       editProc: false,
       inp_title: this.title,
-      inp_description: this.description,
+      inp_description: '',
       editPublic: false,
       open: false,
       publicPost: false,
@@ -926,7 +926,7 @@ export default {
       "UnLike",
       "updatePost",
       "getLikePost",
-      "deletePost",
+      "deletePostProblem",
     ]),
 
     fill_desc(param){

@@ -213,9 +213,9 @@
       </router-link>
       <router-link
         v-if="!token && !adminToken"
-        class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
+        class="hidden lg:inline-block py-2 px-6 bg-blue-600 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
         to="/user/register"
-        >Sign up</router-link
+        >Register</router-link
       >
       <div class="flex">
         <router-link v-if="token " to="/user/profile">

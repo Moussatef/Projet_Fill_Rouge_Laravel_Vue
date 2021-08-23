@@ -87,6 +87,7 @@
             </button>
 
             <button
+              @click="deletePostProblem([post.id, post.personne_id])"
               class="
                 w-full
                 block
@@ -904,7 +905,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["postComment", "addLike", "UnLike", "updatePost"]),
+    ...mapActions([
+      "postComment",
+      "addLike",
+      "UnLike",
+      "updatePost",
+      "deletePostProblem",
+    ]),
 
     showAlert() {
       // Use sweetalert2
@@ -942,7 +949,7 @@ export default {
     },
     checkLikesId(likes) {
       var selfe = this;
-      likes.forEach(function (element) {
+      likes.forEach(function(element) {
         if (element.personne_id == selfe.user_id) {
           selfe.checkLike = false;
         }

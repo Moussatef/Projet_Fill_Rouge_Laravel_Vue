@@ -143,7 +143,7 @@
         </g>
       </svg>
 
-      <span class="ml-2"> <a :href="'https://www.linkedin/'+user_info.linkedin" target="blank">{{ user_info.linkedin }}</a> </span>
+      <span class="ml-2"> <a :href="'https://www.linkedin.com/in/'+user_info.linkedin" target="blank">{{ user_info.linkedin }}</a> </span>
     </div>
     <div class="mt-4 mx-auto w-4/5 flex items-center">
       <svg

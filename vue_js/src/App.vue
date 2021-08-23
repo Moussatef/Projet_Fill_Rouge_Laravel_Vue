@@ -1,8 +1,8 @@
 <template>
-  <div id="nav">
+  <div id="nav" class="mb-10">
     <!-- <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> -->
-    <Nav />
+    <Nav class=" fixed w-full top-0  right-0 z-50 " />
   </div>
   <router-view />
 </template>
@@ -31,10 +31,11 @@ export default {
 }
  #nav  a {
     font-weight: bold;
-    color: #2c3e50;
 
   }
    #nav a.router-link-exact-active {
-      color: #42b983;
+      color: #ffffff;
+      background: #0864ee;
+      box-shadow: 3px 4px 10px 2px rgb(165, 165, 165);
     }
 </style>

@@ -229,8 +229,27 @@ const actions = {
             }
 
         }).then(res => {
-            commit('setPosts', res.data);
-            // console.log(res.data)
+
+            commit('removePostProfile',param[0]);
+            console.log(res.data)
+        }).catch(err => console.log(err));
+        // commit('newComment', response.data);
+    },
+
+    async deletePostProblem({ commit }, param) {
+
+        await axios.post(`http://127.0.0.1:8000/api/problem/post/delete/${param[0]}`, {
+            id: param[1],
+        }, {
+            headers: {
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem('user_token')}`
+            }
+
+        }).then(res => {
+
+            commit('removePostProblem', param[0]);
+            console.log(res.data)
         }).catch(err => console.log(err));
         // commit('newComment', response.data);
     },
@@ -361,6 +380,7 @@ const mutations = {
 
     updatePostData: function (state, putPost) {
         if (!putPost.categorie) {
+            // console.log(state.postsProfile.findIndex(el => el.id == putPost.id));
             state.postsProfile.splice(state.postsProfile.findIndex(el => el.id == putPost.id), 1, putPost);
             state.allPostProfile.splice(state.allPostProfile.findIndex(el => el.id == putPost.id), 1, putPost);
         } else {
@@ -369,6 +389,24 @@ const mutations = {
         }
 
         // console.log(putPost.categorie);
+
+    },
+
+    removePostProfile : function (state,id_post){
+        // console.log('mn bara',state.postsProfile.findIndex(el => el.id == id_post));
+       
+        state.postsProfile.splice(state.postsProfile.findIndex(el => el.id == id_post), 1);
+        state.allPostProfile.splice(state.allPostProfile.findIndex(el => el.id == id_post), 1);
+       
+
+    },
+
+    removePostProblem : function (state,id_post){
+        // console.log('mn bara',state.postsProfile.findIndex(el => el.id == id_post));
+       
+        state.postsProblem.splice(state.postsProfile.findIndex(el => el.id == id_post), 1);
+        state.allPostProblem.splice(state.allPostProfile.findIndex(el => el.id == id_post), 1);
+       
 
     },
 

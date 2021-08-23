@@ -22,4 +22,10 @@
 - Backend : PHP/POO/MVC ou utiliser le framework Laravel
 
 ## image site qui contient:
+### Register page: 
 ![Front-end-project](https://github.com/Moussatef/Projet_Fill_Rouge_Laravel_Vue/blob/main/Maquet/profileApprenant.png)
+### Login page :
+![Front-end-project](https://github.com/Moussatef/Projet_Fill_Rouge_Laravel_Vue/blob/main/Maquet/loginpage.png)
+### Profil Page : 
+![Front-end-project](https://github.com/Moussatef/Projet_Fill_Rouge_Laravel_Vue/blob/main/Maquet/page_profile.png)
+

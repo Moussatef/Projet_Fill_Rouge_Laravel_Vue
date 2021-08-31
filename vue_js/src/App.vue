@@ -32,7 +32,7 @@ export default {
   font-weight: bold;
 }
 #nav a.router-link-exact-active {
-  color: #ffffff;
+  /* color: #ffffff; */
   /* background: #0864ee; */
   /* box-shadow: 3px 4px 10px 2px rgb(165, 165, 165); */
 }

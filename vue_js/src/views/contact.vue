@@ -1,51 +1,31 @@
 <template>
   <div id="Model" class="modal">
     <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <div class="flex justify-center">
-        <div class="flex items-center min-h-screen bg-gray-50 dark:bg-gray-900">
-          <div class="container mx-auto">
+    <div class="modal-content ">
+      <div class="flex justify-center items-center">
+        <div class=" w-1/2  flex items-center">
+        <div class="shadow-lg">
+          <img src="../assets/ycm.jpg" class=" object-cover " alt="" />
+        </div>
+        </div>
+        <div class="flex items-center my-20 w-1/2  ">
+          <div class="container mx-auto py-14 shadow-lg">
             <div
-              class="max-w-md mx-auto my-10 bg-white p-5 rounded-md shadow-sm"
+              class="max-w-md mx-auto my-10 bg-white px-5  rounded-md shadow-sm"
             >
               <div class="text-center">
-                <h1
-                  class="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200"
-                >
+                <h1 class="my-3 text-3xl font-semibold text-gray-700 ">
                   Contact Us
                 </h1>
-                <p class="text-gray-400 dark:text-gray-400">
+                <p class="text-gray-400 ">
                   Fill up the form below to send us a message.
                 </p>
               </div>
               <div class="m-7">
-                <form
-                  action="https://api.web3forms.com/submit"
-                  method="POST"
-                  id="form"
-                >
-                  <input
-                    type="hidden"
-                    name="apikey"
-                    value="YOUR_ACCESS_KEY_HERE"
-                  />
-                  <input
-                    type="hidden"
-                    name="subject"
-                    value="New Submission from Web3Forms"
-                  />
-                  <input
-                    type="checkbox"
-                    name="botcheck"
-                    id=""
-                    style="display: none;"
-                  />
+                
 
                   <div class="mb-6">
-                    <label
-                      for="name"
-                      class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
+                    <label for="name" class="block mb-2 text-sm text-gray-600 "
                       >Full Name</label
                     >
                     <input
@@ -58,39 +38,23 @@
                     />
                   </div>
                   <div class="mb-6">
-                    <label
-                      for="email"
-                      class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
+                    <label for="email" class="block mb-2 text-sm text-gray-600 "
                       >Email Address</label
                     >
                     <input
                       type="email"
                       name="email"
                       id="email"
-                      placeholder="you@company.com"
+                      placeholder="you@email.com"
                       required
                       class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
                     />
                   </div>
-                  <div class="mb-6">
-                    <label
-                      for="phone"
-                      class="text-sm text-gray-600 dark:text-gray-400"
-                      >Phone Number</label
-                    >
-                    <input
-                      type="text"
-                      name="phone"
-                      id="phone"
-                      placeholder="+1 (555) 1234-567"
-                      required
-                      class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
-                    />
-                  </div>
+                  
                   <div class="mb-6">
                     <label
                       for="message"
-                      class="block mb-2 text-sm text-gray-600 dark:text-gray-400"
+                      class="block mb-2 text-sm text-gray-600 "
                       >Your Message</label
                     >
 
@@ -111,11 +75,6 @@
                       Send Message
                     </button>
                   </div>
-                  <p
-                    class="text-base text-center text-gray-400"
-                    id="result"
-                  ></p>
-                </form>
               </div>
             </div>
           </div>
@@ -132,8 +91,20 @@ export default {
 </script>
 
 <style scoped>
+.gradient {
+  background: rgb(0, 68, 168);
+  background: linear-gradient(
+    153deg,
+    rgba(0, 67, 168, 0.61) 5%,
+    rgba(0, 55, 184, 0.575) 17%,
+    rgba(0, 80, 184, 1) 30%,
+    rgba(3, 104, 199, 1) 41%,
+    rgba(3, 144, 244, 0.582) 75%,
+    rgba(0, 170, 255, 0.466) 100%
+  );
+}
 .modal {
-  display: none; /* Hidden by default */
+  display: block; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   padding-top: 100px; /* Location of the box */
@@ -142,15 +113,16 @@ export default {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  background-color: rgb(212, 212, 212); /* Fallback color */
+  background-color: rgba(236, 236, 236, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
   margin: auto;
-  padding: 20px;
+  margin-bottom: 10%;
+  padding: 15px;
   width: 60%;
   border-radius: 15px;
 }

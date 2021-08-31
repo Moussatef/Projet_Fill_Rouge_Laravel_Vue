@@ -6,11 +6,17 @@ import Register from '../views/signup.vue'
 import AdminDash from '../views/AdminDash.vue'
 import AdminLogin from '../views/AdminLogin.vue'
 import ProblemPost from '../views/ProblemPost.vue'
+import Contact from '../views/contact.vue'
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: Contact
   },
 
   {

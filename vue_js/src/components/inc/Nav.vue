@@ -186,7 +186,7 @@
         </li>
         <li>
            <!-- Contact Us Linke -->
-          <router-link class="text-sm text-gray-400 hover:text-gray-500" to="/">
+          <router-link class="text-sm text-gray-400 hover:text-gray-500" to="/contact">
             <svg
               class="h-6 w-6"
               enable-background="new 0 0 24 24"
